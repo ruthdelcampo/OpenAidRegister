@@ -58,4 +58,6 @@ OpenAidRegister::Application.routes.draw do
   
   root :to => "home#show"
   
+  match 'about' => 'about#show'
+  
 end
