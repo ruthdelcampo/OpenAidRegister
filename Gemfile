@@ -9,6 +9,8 @@ gem 'sqlite3'
 
 gem 'cartodb-rb-client', :git => 'git@github.com:Vizzuality/cartodb-rb-client.git'
 
+gem 'heroku'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

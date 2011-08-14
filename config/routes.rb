@@ -59,5 +59,9 @@ OpenAidRegister::Application.routes.draw do
   root :to => "home#show"
   
   match 'about' => 'about#show'
+  match 'signup' => 'signup#signup'
+  match 'signup_complete' => 'signup#signup_complete'
+  match 'login' => 'signup#login' 
+  
   
 end
