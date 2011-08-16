@@ -8,7 +8,29 @@
 </head>
 <body>
 
+	<div id="main_container">
+
+	        <div class="menu">
+	        	<ul>                                                                         
+	        		<li class="selected"><a href="/">home</a></li>
+	                <li><a href="/about">about</a></li>
+	        	</ul>
+	        </div>
+	
 <%= yield %>
+
+
+
+	</div>
+	<!-- end of main_container -->
+	
+	<div id="footer">                                              
+        <div class="left_footer"><a href="/">home</a> <a href="/about">about</a> 
+			<a href="mailto:ruthdelcampo@gmail.com">contact</a></div>
+        <div class="right_footer">
+        </div>   
+
+    </div>
 
 </body>
 </html>

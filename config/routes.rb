@@ -62,6 +62,13 @@ OpenAidRegister::Application.routes.draw do
   match 'signup' => 'signup#signup'
   match 'signup_complete' => 'signup#signup_complete'
   match 'login' => 'signup#login' 
+  match 'forgot_password' => 'signup#forgot_password'
+  match 'conditions' => 'conditions#show'
+  match 'dashboard' => 'dashboard#show'
+  match 'project_form' => 'project_form#show'
+  match 'upload' => 'project_form#upload'
+  
+  
   
   
 end

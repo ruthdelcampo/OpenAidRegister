@@ -1,19 +1,38 @@
-
+<div class="center_content">
+   
         
-    <div class="center_content">
-    
-         
-		<h1> Sign Up </h1>
-         
-		Sign up to have an account for your organization!
-		We understand this is annoying, but we need some information about you and your organization before approving your account. We will also use the organization info for the publishing process so you won't need to write this again.
+		<h1> Register </h1>
+        
+		We need this project information to get an idea of your aid project. 
+		The most accurate data you can fill in, the better donors and general public will know about your project.
 		<br>
 		You can always <a HREF="mailto:ruthdelcampo@gmail.com">contact us</A> if you have troubles on this step.
-         
-        <br>
+        
+       <br>
 		<br>
 		
-        <%= form_tag( :method => "post") do %>
+       	<%= form_tag( :method => "post") do %>
+
+			<%= radio_button_tag(:input, "file") %>
+			<%= label_tag(:input_file, "Import from file") %>
+			
+			
+			<%= form_tag({:action => :upload}, :multipart => true) do %>
+			  <%= file_field_tag 'picture' %>
+			<% end %>
+			
+			<%= radio_button_tag(:input, "form") %>
+			<%= label_tag(:input_form, "Fill in the form") %>
+		
+		<br>
+		<br>
+		<%= submit_tag("Submit") %>
+		<br>
+		
+	<% end %>
+	
+	<!--
+	<%= form_tag( :method => "post") do %>
 			<%= label_tag(:email, "Email:") %>
 		  	<%= text_field_tag(:email) %>
 		
@@ -81,14 +100,13 @@
 		Already registered? 
 		<a href="/login">Sign In</a>
 		<% end %>
-    
-
-
-
-    </div>    
-
-    
    
-    
-    </div>
-    
+	-->
+
+
+   </div>    
+
+   
+  
+   
+ 

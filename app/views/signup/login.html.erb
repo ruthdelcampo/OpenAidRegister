@@ -1,4 +1,30 @@
+ <div class="center_content">
 
+		<h1> Login</h1>
+		<h3>Sign in for publishing new projects</h3>
+		<br>
+		  <br>
+		
+	
+		<%= form_tag( :method => "post") do %>
+			<%= label_tag(:email, "Email:") %>
+		  	<%= text_field_tag(:email) %>
+		
+			<br>
+			  <br>
+		
+		
+		  	<%= label_tag(:password, "Password:") %>
+		  	<%= password_field_tag(:password) %>	
+		
+		<br>
+		  <br>
+		<%= submit_tag("Login") %> or <a href="/signup">Sign Up for an account</a>
+		<br>
+		
+		<a href="/forgot_password">Forgot your password?</a>
+	<% end %>
+	
+	</div>
+	
 
-
-please login
