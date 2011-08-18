@@ -12,20 +12,38 @@
 		<br>
 		
        	<%= form_tag( :method => "post") do %>
-
-			<%= radio_button_tag(:input, "file") %>
-			<%= label_tag(:input_file, "Import from file") %>
-			
 			
 			<%= form_tag({:action => :upload}, :multipart => true) do %>
 			  <%= file_field_tag 'picture' %>
 			<% end %>
+			<%= radio_button_tag(:input, "file") %>
+			<%= label_tag(:input_file, "Import from file") %>
 			
 			<%= radio_button_tag(:input, "form") %>
 			<%= label_tag(:input_form, "Fill in the form") %>
+		<br>
+		<br>
+			<%= label_tag(:title, "Project Title:") %>
+		  	<%= text_field_tag(:title) %>
+		
+			<%= label_tag(:description, "Project Description:") %>
+		  	<%= text_area_tag(:description, "Enter the description here", :size => "30x16") %>
+		<br>
+		<br>	
+			<%= label_tag(:sector_type, "Sector:") %>
+		<%= select_tag(:sector_type, options_for_select([['EDUCATION', 1],['HEALTH', 2], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 3], ['WATER AND SANITATION', 4], ['COMMUNICATION', 8],['ENERGY GENERATION AND SUPPLY', 9], ['BANKING AND FINANCIAL SERVICES', 10], ['BUSINESS AND OTHER SERVICES', 11], ['AGRICULTURE', 12], ['INDUSTRY', 13], ['MINERAL RESOURCES AND MINING', 14], ['CONSTRUCTION', 15], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 16], ['TOURISM', 17], ['MULTISECTOR/CROSS', 18], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 19], ['ACTION RELATING TO DEBT', 20], ['HUMANITARIAN AID', 21], ['UNALLOCATED/ UNSPECIFIED', 22]]))%>
 		
 		<br>
 		<br>
+		<%= label_tag(:project_id, "Project's ID:") %>
+		<%= text_field_tag(:project_id) %>
+		<br>
+		Project's internal identifier Eg: 1256FB
+		<br>
+		<br>
+		
+	
+		
 		<%= submit_tag("Submit") %>
 		<br>
 		
