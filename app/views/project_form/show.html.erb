@@ -41,85 +41,49 @@
 		Project's internal identifier Eg: 1256FB
 		<br>
 		<br>
+		<br>
+		<br>
+		CALENDAR
 		
-	
-		
+			<%= check_box_tag(:permanent) %>
+			<%= label_tag(:permanent, "or Permanent") %>
+		<br>
+		<br>
+		<br>
+		<br>
+		GOOGLE MAPS
+		<br>
+		<br>
+		<br>
+		<br>
+		<%= label_tag(:budget, "Budget:") %>
+		<%= text_field_tag(:budget) %>
+		in <%= select_tag(:currency, options_for_select([['US dollars', 1],['euros', 2],['Pound Sterling', 3],['Indian Rupee', 4],['Australian Dollar', 5], ['Yen', 6],['Canadian Dollar', 7]]))%>
+		<br>
+		<br>
+		<%= label_tag(:program_id, "Program's ID:") %>
+	  	<%= text_field_tag(:program_id) %>
+		<br>
+		Is this project funded by a program already in IATI?Introduce the IATI Identifier of the master program
+			<br>
+			<br>
+			<%= label_tag(:donors, "Donors:") %>
+		  	<%= text_field_tag(:donors) %>	
+			<br>
+			<br>
+			
+			<%= label_tag(:result_type, "Target:") %>
+			<%= select_tag(:result_type, options_for_select([['Output', 1],['Outcome', 2],['Impact', 3]]))%>
+			
+			<%= label_tag(:results, "Results:") %>
+			<%= text_area_tag(:results, "Enter the results here", :size => "30x16") %>
+			<br>
+			<br>
 		<%= submit_tag("Submit") %>
 		<br>
 		
 	<% end %>
 	
-	<!--
-	<%= form_tag( :method => "post") do %>
-			<%= label_tag(:email, "Email:") %>
-		  	<%= text_field_tag(:email) %>
-		
-		  	<%= label_tag(:password, "Password:") %>
-		  	<%= password_field_tag(:password) %>	
-		
-		<br>
-		  <br>
-		
-		  	<%= label_tag(:name, "Your name:") %>
-		  	<%= text_field_tag(:name) %>
-		  
-		  	<%= label_tag(:position, "Your position:") %>
-			<%= text_field_tag(:position) %>
-			
-			<br>
-			  <br>
-			
-			<%= label_tag(:telephone, "Your telephone:") %>
-			<%= text_field_tag(:telephone) %>
-			<br>
-			We need it to check you belong to this organization, but we will only contact you once.  
-		<br>
-		  <br>
-			
-			<%= label_tag(:organization, "Organization's name:") %>
-		  	<%= text_field_tag(:organization) %>
-		
-			<%= label_tag(:org_type, "Organization's type:") %>
-			<%= select_tag(:org_type, options_for_select([['International NGO', 1], ['National NGO', 2], ['Regional NGO', 3]]))%>
-			
-		<br>
-		  <br>
-			
-			<%= label_tag(:org_country, "Organization's country:") %>
-			<%= select_tag(:org_country, options_for_select([['Spain', 1], ['United States', 2], ['Venezuela', 3]]))%>
-
-			
-			<%= label_tag(:org_website, "Organization's website:") %>
-			<%= text_field_tag(:org_website) %>
-			
-			<br>
-		Where is your organization's based? 
-		<br>
-		You can also answer international  
-		<br>
-		<br>
-			<%= label_tag(:government_id, "Government's ID:") %>
-			<%= text_field_tag(:government_id) %>
-			<br>
-			This is the Government ID Number. For example, in the US this wold be the EIN.
-			<br> 
-			If you don't know it, leave it blank.
-		<br>  
-		<br>
-		<%= check_box_tag(:conditions) %>
-		<%= label_tag(:conditions, "I accept the ") %>
-		<a href="/conditions">terms and conditions</a>
-		<br>
-		  <br>
-		<%= submit_tag("Register") %>
-		
-		<br>
-		
-		Already registered? 
-		<a href="/login">Sign In</a>
-		<% end %>
-   
-	-->
 
 
    </div>    
