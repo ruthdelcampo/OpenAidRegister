@@ -7,7 +7,7 @@ gem 'rails', '3.0.5'
 
 gem 'sqlite3'
 
-#gem 'cartodb-rb-client', :git => 'git@github.com:Vizzuality/cartodb-rb-client.git'
+gem 'cartodb-rb-client', :git => 'git@github.com:Vizzuality/cartodb-rb-client.git'
 
 gem 'heroku'
 

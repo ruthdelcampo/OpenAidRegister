@@ -4,6 +4,15 @@
     
          
 		<h1> Sign Up </h1>
+		
+		<% if @errors %>
+		<p>
+			<b>Errors:</b><br>
+			<%@errors.each do |error|%>
+			* <%=error%><br>
+			<%end%>
+		</p>
+		<%end%>
          
 		Sign up to have an account for your organization!
 		We understand this is annoying, but we need some information about you and your organization before approving your account. We will also use the organization info for the publishing process so you won't need to write this again.
