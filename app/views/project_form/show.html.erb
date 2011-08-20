@@ -77,8 +77,33 @@
 			
 			<%= label_tag(:results, "Results:") %>
 			<%= text_area_tag(:results, "Enter the results here", :size => "30x16") %>
+			
+			<br>
+			<br>	
+			<%= check_box_tag(:same_person) %>
+			<%= label_tag(:same_person, "Check this option if you are the contact person") %>
+		
+			
 			<br>
 			<br>
+				<%= label_tag(:name, "Contact name:") %>
+			  	<%= text_field_tag(:name) %>
+			
+			<%= label_tag(:email, "Contact Email:") %>
+		  	<%= text_field_tag(:email) %>
+			
+			<br>
+			<br>
+		
+			<%= label_tag(:position, "Contact position:") %>
+			<%= text_field_tag(:position) %>
+		
+			
+		  
+		  	
+			
+				<br>
+				  <br>
 		<%= submit_tag("Submit") %>
 		<br>
 		

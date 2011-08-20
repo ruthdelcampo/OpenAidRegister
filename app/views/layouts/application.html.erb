@@ -12,9 +12,16 @@
 
 	        <div class="menu">
 	        	<ul>                                                                         
-	        		<li class="selected"><a href="/">home</a></li>
-	                <li><a href="/about">about</a></li>
-					<li><a href="/project_form">enter projects</a></li>
+	        		<li class="selected">
+					
+					<%= link_to "home", root_path %>
+					</li> 
+					
+	                <li>
+							<%= link_to "about", about_path %>
+						
+						</li>
+					<li><%= link_to "enter projects", project_form_path %></li>
 	        	</ul>
 	        </div>
 	
@@ -24,14 +31,13 @@
 
 	</div>
 	<!-- end of main_container -->
-	
+	 
 	<div id="footer">                                              
-        <div class="left_footer"><a href="/">home</a> <a href="/about">about</a> <a href="mailto:ruthdelcampo@gmail.com">contact</a> <a href="/conditions">terms and conditions</a> </div>
-        <div class="right_footer">
-	
-        </div>   
+        <div class="right_footer"><%= link_to "home", root_path %> 	<%= link_to "about", about_path %> <a href="mailto:ruthdelcampo@gmail.com">contact</a> 	<%= link_to "terms and conditions", conditions_path %> </div>
+        
+	</div>   
 
-    </div>
+
 
 </body>
 </html>
