@@ -14,6 +14,8 @@
 		</p>
 		<%end%>
          
+		<br>
+		  <br>
 		Sign up to have an account for your organization!
 		We understand this is annoying, but we need some information about you and your organization before approving your account. We will also use the organization info for the publishing process so you won't need to write this again.
 		<br>
@@ -52,13 +54,13 @@
 		  	<%= text_field_tag(:organization) %>
 		
 			<%= label_tag(:org_type, "Organization's type:") %>
-			<%= select_tag(:org_type, options_for_select([['International NGO', 1], ['National NGO', 2], ['Regional NGO', 3]]))%>
+			<%= select_tag(:org_type, options_for_select([['', 1],['International NGO', 2], ['National NGO', 3], ['Regional NGO', 4]]))%>
 			
 		<br>
 		  <br>
 			
 			<%= label_tag(:org_country, "Organization's country:") %>
-			<%= select_tag(:org_country, options_for_select([['Spain', 1], ['United States', 2], ['Venezuela', 3]]))%>
+			<%= select_tag(:org_country, options_for_select([['', 1],['International', 2],['Spain', 3], ['United States', 4], ['United Kingdom', 5]]))%>
 
 			
 			<%= label_tag(:org_website, "Organization's website:") %>

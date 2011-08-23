@@ -10,17 +10,37 @@
         
        <br>
 		<br>
-		
+			<br>
+			  <br>
+				<% if @errors %>
+				<p>
+					<b>Errors:</b><br>
+					<%@errors.each do |error|%>
+					* <%=error%><br>
+					<%end%>
+				</p>
+				<%end%>
+
+				<br>
+				  <br>
        	<%= form_tag( :method => "post") do %>
 			
+			<!--
 			<%= form_tag({:action => :upload}, :multipart => true) do %>
 			  <%= file_field_tag 'picture' %>
 			<% end %>
+			
+			<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
+			  <%= f.file_field :my_file %>
+			<%= f.submit "Upload" %>
+			<% end %>
+			-->
 			<%= radio_button_tag(:input, "file") %>
 			<%= label_tag(:input_file, "Import from file") %>
 			
-			<%= radio_button_tag(:input, "form") %>
-			<%= label_tag(:input_form, "Fill in the form") %>
+			
+			<%= radio_button_tag(:input, "form", :enabled => true) %>
+			<%= label_tag(:input_form, "Fill in the form") %> 
 		<br>
 		<br>
 			<%= label_tag(:title, "Project Title:") %>
@@ -99,12 +119,10 @@
 			<%= text_field_tag(:position) %>
 		
 			
-		  
-		  	
 			
 				<br>
 				  <br>
-		<%= submit_tag("Submit") %>
+		<%= submit_tag("Submit")  %>
 		<br>
 		
 	<% end %>

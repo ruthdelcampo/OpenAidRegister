@@ -4,7 +4,17 @@
 		<h3>Sign in for publishing new projects</h3>
 		<br>
 		  <br>
-		
+			<% if @errors %>
+			<p>
+				<b>Errors:</b><br>
+				<%@errors.each do |error|%>
+				* <%=error%><br>
+				<%end%>
+			</p>
+			<%end%>
+			
+			<br>
+			  <br>
 	
 		<%= form_tag( :method => "post") do %>
 			<%= label_tag(:email, "Email:") %>
