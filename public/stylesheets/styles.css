@@ -1,6 +1,6 @@
 body
 {
-background:url(images/bg.gif) repeat #000000;
+background:url(/images/bg.gif) repeat #000000;
 padding:0; font-family:arial, sans-serif; font-size:12px;
 margin:0px auto auto auto;
 color:#36322b;
@@ -36,7 +36,7 @@ margin:10px 40px 0 0;
 padding:0 0 0 17px;
 text-decoration:none;
 font-size:12px;
-background:url(images/read_more_bg.gif) no-repeat center;
+background:url(/images/read_more_bg.gif) no-repeat center;
 }
 a:hover.read_more{
 text-decoration:underline;
@@ -57,7 +57,7 @@ width:821px;
 height:135px;
 margin:0px;
 padding:0px;
-background:url(images/header_bg.gif) no-repeat center top;
+background:url(/images/header_bg.gif) no-repeat center top;
 }
 .logo{
 padding:30px 0 0 0px;
@@ -74,7 +74,7 @@ width: auto;
 padding:0 0 0 35px;
 font-size:22px;
 color:#4E4E4E;
-background:url(images/checked.gif) no-repeat left top;
+background:url(/images/checked.gif) no-repeat left top;
 margin:0 0 10px 25px;
 }
 span.red{
@@ -91,7 +91,7 @@ color:#da5b23;
 width:821px;
 height:42px;
 margin:0px;
-background:url(images/menu_bg.gif) no-repeat left;
+background:url(/images/menu_bg.gif) no-repeat left;
 }
 .menu ul{
 list-style:none;
@@ -120,17 +120,17 @@ text-decoration:none;
 color:#fff;
 line-height:42px;
 font-size:14px;
-background:url(images/menu_bullet.gif) no-repeat bottom center;
+background:url(/images/menu_bullet.gif) no-repeat bottom center;
 }
 .menu ul li a:hover{
-background:url(images/menu_bullet.gif) no-repeat bottom center;
+background:url(/images/menu_bullet.gif) no-repeat bottom center;
 }
 
 /*-------------welcome_box------------*/
 .welcome_box{
 width:496px;
 height:202px;
-background:url(images/welcome_box.gif) no-repeat center;
+background:url(/images/welcome_box.gif) no-repeat center;
 padding:0px;
 }
 /*---------------center_content-------*/
@@ -169,7 +169,7 @@ padding:10px 0 8px 0;
 width:30px;
 height:33px;
 float:left;
-background:url(images/news_icon.gif) no-repeat center;
+background:url(/images/news_icon.gif) no-repeat center;
 }
 .news_content{
 width:400px;
@@ -183,7 +183,7 @@ padding:0 0 0 10px;
 width:278px;
 height:144px;
 padding:15px 0 0 10px;
-background:url(images/text_box.gif) no-repeat center;
+background:url(/images/text_box.gif) no-repeat center;
 background-position:0px 0px;
 }
 .login_form_row{
@@ -222,7 +222,7 @@ text-decoration:none;
 }
 ul.list li span{
 height:24px; width:24px; display:block;padding:0px; margin:0px;color:#000;text-align:center; float:left; float:left; line-height:24px;
-background:url(images/bullet_list.gif) no-repeat left;
+background:url(/images/bullet_list.gif) no-repeat left;
 }
 ul.list li a:hover{
 text-decoration:underline;

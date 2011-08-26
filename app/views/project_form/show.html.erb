@@ -25,16 +25,7 @@
 				  <br>
        	<%= form_tag( :method => "post") do %>
 			
-			<!--
-			<%= form_tag({:action => :upload}, :multipart => true) do %>
-			  <%= file_field_tag 'picture' %>
-			<% end %>
 			
-			<%= form_for :file_upload, :html => {:multipart => true} do |f| %>
-			  <%= f.file_field :my_file %>
-			<%= f.submit "Upload" %>
-			<% end %>
-			-->
 			<%= radio_button_tag(:input, "file") %>
 			<%= label_tag(:input_file, "Import from file") %>
 			
@@ -42,6 +33,8 @@
 			<%= radio_button_tag(:input, "form", :enabled => true) %>
 			<%= label_tag(:input_form, "Fill in the form") %> 
 		<br>
+		
+		
 		<br>
 			<%= label_tag(:title, "Project Title:") %>
 		  	<%= text_field_tag(:title) %>
@@ -51,7 +44,7 @@
 		<br>
 		<br>	
 			<%= label_tag(:sector_type, "Sector:") %>
-		<%= select_tag(:sector_type, options_for_select([['EDUCATION', 1],['HEALTH', 2], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 3], ['WATER AND SANITATION', 4], ['COMMUNICATION', 8],['ENERGY GENERATION AND SUPPLY', 9], ['BANKING AND FINANCIAL SERVICES', 10], ['BUSINESS AND OTHER SERVICES', 11], ['AGRICULTURE', 12], ['INDUSTRY', 13], ['MINERAL RESOURCES AND MINING', 14], ['CONSTRUCTION', 15], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 16], ['TOURISM', 17], ['MULTISECTOR/CROSS', 18], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 19], ['ACTION RELATING TO DEBT', 20], ['HUMANITARIAN AID', 21], ['UNALLOCATED/ UNSPECIFIED', 22]]))%>
+		<%= select_tag(:sector_type, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]]))%>
 		
 		<br>
 		<br>
@@ -78,7 +71,7 @@
 		<br>
 		<%= label_tag(:budget, "Budget:") %>
 		<%= text_field_tag(:budget) %>
-		in <%= select_tag(:currency, options_for_select([['US dollars', 1],['euros', 2],['Pound Sterling', 3],['Indian Rupee', 4],['Australian Dollar', 5], ['Yen', 6],['Canadian Dollar', 7]]))%>
+		in <%= select_tag(:currency, options_for_select([['', 1], ['US dollars', 2],['euros', 3],['Pound Sterling', 4],['Indian Rupee', 5],['Australian Dollar', 6], ['Yen', 7],['Canadian Dollar', 8]]))%>
 		<br>
 		<br>
 		<%= label_tag(:program_id, "Program's ID:") %>
@@ -123,6 +116,20 @@
 				<br>
 				  <br>
 		<%= submit_tag("Submit")  %>
+		
+
+		
+		<script>
+			/* $("input[@name='input']").change(function(){
+			    if ($("input[@name='input']:checked").val() == 'file'){
+			 // Code for handling value 'file'        
+			  $("#method").attr('disabled', 'disabled');
+			  }else {
+			 	$("title", this).attr('disabled', 'disabled');
+				}});
+				*/
+		</script>
+	
 		<br>
 		
 	<% end %>

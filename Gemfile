@@ -11,6 +11,8 @@ gem 'cartodb-rb-client', :git => 'git@github.com:Vizzuality/cartodb-rb-client.gi
 
 gem 'heroku'
 
+gem 'jquery-rails'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

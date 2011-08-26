@@ -2,6 +2,8 @@ class ProjectFormController < ApplicationController
   
   def show
 
+
+
   end
   
   def file_upload
@@ -15,12 +17,16 @@ class ProjectFormController < ApplicationController
   def form_validation
     
     @errors = Array.new
-      # validation
+      # Title validation
       if params[:title].blank?
        @errors.push("You need to enter a project title")
       end
-      
-      
+      if params[:sector_type].match("1")
+       @errors.push("You need to select a sector")
+      end
+      if params[:currency].match("1")
+       @errors.push("You need to select a currency")
+      end
       
       if @errors.count==0
            #no errors, save the data and redirect to dashboard

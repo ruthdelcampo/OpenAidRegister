@@ -1,0 +1,28 @@
+<div class="center_content">
+
+	<h1> <%= @fake_org_name %> </h1>
+
+<p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
+
+<%= button_to "Add project", :action => "new_project" %>
+
+
+
+<h2> <%= @fake_total_projects %> projects published</h2>
+<h3> <%= @fake_current_projects %> ongoing projects </h3>
+<h3> <%= @fake_past_projects %> past projects</h3>
+
+<%= button_to "Download XML", :action => "download" %>
+
+
+
+	<!--
+@fake_project_list
+@fake_current_projects
+@fake_past_projects
+@fake_sector_distribution = [12, 0, 0, 0, 0, 0, 84, 4]
+
+-->
+
+
+</div>
