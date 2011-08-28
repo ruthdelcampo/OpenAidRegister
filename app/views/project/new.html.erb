@@ -26,39 +26,36 @@
        	<%= form_tag( :method => "post") do %>
 			
 			
-			<%= radio_button_tag(:input, "file") %>
-			<%= label_tag(:input_file, "Import from file") %>
-			
-			
-			<%= radio_button_tag(:input, "form", :enabled => true) %>
-			<%= label_tag(:input_form, "Fill in the form") %> 
-		<br>
+		
 		
 		
 		<br>
 			<%= label_tag(:title, "Project Title:") %>
-		  	<%= text_field_tag(:title) %>
+		  	<%= text_field_tag(:title, params[:title]) %>
 		
 			<%= label_tag(:description, "Project Description:") %>
-		  	<%= text_area_tag(:description, "Enter the description here", :size => "30x16") %>
+		  	<%= text_area_tag(:description, params[:description], :size => "30x16") %>
 		<br>
 		<br>	
 			<%= label_tag(:sector_type, "Sector:") %>
-		<%= select_tag(:sector_type, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]]))%>
+		<%= select_tag(:sector_type, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]], :selected => params[:sector_type]), :multiple => true ) %>
 		
 		<br>
 		<br>
 		<%= label_tag(:project_id, "Project's ID:") %>
-		<%= text_field_tag(:project_id) %>
+		<%= text_field_tag(:project_id, params[:project_id]) %>
 		<br>
 		Project's internal identifier Eg: 1256FB
 		<br>
 		<br>
-		<br>
-		<br>
-		CALENDAR
+		Start Date 
+		<%= text_field_tag(:start_date, params[:start_date], ) %>
 		
-			<%= check_box_tag(:permanent) %>
+		<br>
+		<br>
+
+		
+			<%= check_box_tag(:permanent, 1, params[:permanent]=="1") %>
 			<%= label_tag(:permanent, "or Permanent") %>
 		<br>
 		<br>
@@ -70,46 +67,46 @@
 		<br>
 		<br>
 		<%= label_tag(:budget, "Budget:") %>
-		<%= text_field_tag(:budget) %>
-		in <%= select_tag(:currency, options_for_select([['', 1], ['US dollars', 2],['euros', 3],['Pound Sterling', 4],['Indian Rupee', 5],['Australian Dollar', 6], ['Yen', 7],['Canadian Dollar', 8]]))%>
+		<%= text_field_tag(:budget, params[:budget]) %>
+		in <%= select_tag(:currency, options_for_select([['', 1], ['US dollars', 2],['euros', 3],['Pound Sterling', 4],['Indian Rupee', 5],['Australian Dollar', 6], ['Yen', 7],['Canadian Dollar', 8]], :selected => params[:currency]))%>
 		<br>
 		<br>
 		<%= label_tag(:program_id, "Program's ID:") %>
-	  	<%= text_field_tag(:program_id) %>
+	  	<%= text_field_tag(:program_id, params[:program_id]) %>
 		<br>
 		Is this project funded by a program already in IATI?Introduce the IATI Identifier of the master program
 			<br>
 			<br>
 			<%= label_tag(:donors, "Donors:") %>
-		  	<%= text_field_tag(:donors) %>	
+		  	<%= text_field_tag(:donors, params[:donors]) %>	
 			<br>
 			<br>
 			
 			<%= label_tag(:result_type, "Target:") %>
-			<%= select_tag(:result_type, options_for_select([['Output', 1],['Outcome', 2],['Impact', 3]]))%>
+			<%= select_tag(:result_type, options_for_select([['Output', 1],['Outcome', 2],['Impact', 3]], :selected => params[:result_type]))%>
 			
 			<%= label_tag(:results, "Results:") %>
-			<%= text_area_tag(:results, "Enter the results here", :size => "30x16") %>
+			<%= text_area_tag(:results, params[:results], :size => "30x16") %>
 			
 			<br>
 			<br>	
-			<%= check_box_tag(:same_person) %>
+			<%= check_box_tag(:same_person, 1, params[:same_person]=="1") %>
 			<%= label_tag(:same_person, "Check this option if you are the contact person") %>
 		
 			
 			<br>
 			<br>
 				<%= label_tag(:name, "Contact name:") %>
-			  	<%= text_field_tag(:name) %>
+			  	<%= text_field_tag(:name, params[:name]) %>
 			
 			<%= label_tag(:email, "Contact Email:") %>
-		  	<%= text_field_tag(:email) %>
+		  	<%= text_field_tag(:email, params[:email]) %>
 			
 			<br>
 			<br>
 		
 			<%= label_tag(:position, "Contact position:") %>
-			<%= text_field_tag(:position) %>
+			<%= text_field_tag(:position, params[:position]) %>
 		
 			
 			

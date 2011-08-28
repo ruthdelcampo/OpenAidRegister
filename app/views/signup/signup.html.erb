@@ -29,42 +29,47 @@
 		  	<%= text_field_tag(:email, params[:email]) %>
 		
 		  	<%= label_tag(:password, "Password:") %>
-		  	<%= password_field_tag(:password) %>	
+		  	<%= password_field_tag(:password) %>
+		
+				<%= label_tag(:password_confirm, "Repeat Password:") %>
+			  	<%= password_field_tag(:password_confirm) %>
 		
 		<br>
 		  <br>
 		
 		  	<%= label_tag(:name, "Your name:") %>
-		  	<%= text_field_tag(:name) %>
+		  	<%= text_field_tag(:name, params[:name]) %>
+	
 		  
 		  	<%= label_tag(:position, "Your position:") %>
-			<%= text_field_tag(:position) %>
-			
+			<%= text_field_tag(:position, params[:position]) %>
 			<br>
 			  <br>
 			
 			<%= label_tag(:telephone, "Your telephone:") %>
-			<%= text_field_tag(:telephone) %>
+			<%= text_field_tag(:telephone, params[:telephone]) %>
 			<br>
 			We need it to check you belong to this organization, but we will only contact you once.  
 		<br>
 		  <br>
 			
 			<%= label_tag(:organization, "Organization's name:") %>
-		  	<%= text_field_tag(:organization) %>
+		<%= text_field_tag(:organization, params[:organization]) %>
 		
 			<%= label_tag(:org_type, "Organization's type:") %>
-			<%= select_tag(:org_type, options_for_select([['', 1],['International NGO', 2], ['National NGO', 3], ['Regional NGO', 4]]))%>
+			<%= select_tag(:org_type, options_for_select([['', 1],['International NGO', 2], ['National NGO', 3], ['Regional NGO', 4]], :selected => params[:org_type])) %>
+			
 			
 		<br>
 		  <br>
 			
 			<%= label_tag(:org_country, "Organization's country:") %>
-			<%= select_tag(:org_country, options_for_select([['', 1],['International', 2],['Spain', 3], ['United States', 4], ['United Kingdom', 5]]))%>
+			<%= select_tag(:org_country, options_for_select([['', 1],['International', 2],['Spain', 3], ['United States', 4], ['United Kingdom', 5]], :selected => params[:org_country]))%>
 
 			
 			<%= label_tag(:org_website, "Organization's website:") %>
-			<%= text_field_tag(:org_website) %>
+				<%= text_field_tag(:org_website, params[:org_website]) %>
+				
 			
 			<br>
 		Where is your organization's based? 
@@ -73,7 +78,8 @@
 		<br>
 		<br>
 			<%= label_tag(:government_id, "Government's ID:") %>
-			<%= text_field_tag(:government_id) %>
+				<%= text_field_tag(:government_id, params[:government_id]) %>
+			
 			<br>
 			This is the Government ID Number. For example, in the US this wold be the EIN.
 			<br> 
