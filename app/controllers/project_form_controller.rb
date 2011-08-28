@@ -24,7 +24,7 @@ class ProjectFormController < ApplicationController
       if params[:sector_type].match("1")
        @errors.push("You need to select a sector")
       end
-      if params[:currency].match("1")
+      if !params[:budget].blank? && params[:currency].match("1")
        @errors.push("You need to select a currency")
       end
       
