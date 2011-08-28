@@ -2,7 +2,10 @@ class DashboardController < ApplicationController
   def show
        
        @fake_org_name= "Fake Organization Name"
-       @fake_project_list = {:project => {:name => 'first project from this organization', :ID =>'orgID'}}
+       
+       @fake_project_1 ={:name => 'first project from this organization', :ID =>'orgID1', :url => 'www.foo2.com'}
+       @fake_project_2 ={:name => 'second project from this organization', :ID =>'orgID2', :url => 'www.foo2.com'}
+       @fake_project_list = [@fake_project_1, @fake_project_2]
        @fake_current_projects = 2
        @fake_past_projects = 3
         @fake_total_projects = @fake_current_projects + @fake_past_projects
@@ -15,6 +18,11 @@ class DashboardController < ApplicationController
   
    def download
     send_file '#{RAILS_ROOT}/images/bg.gif', :type => "image/gif"
-    redirect_to  'dashboard'
+    redirect_to  '/dashboard'
+   end
+   
+   def delete
+     
+   redirect_to  '/dashboard'
    end
 end

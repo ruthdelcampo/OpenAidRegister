@@ -13,10 +13,25 @@
 <h3> <%= @fake_past_projects %> past projects</h3>
 
 <%= button_to "Download XML", :action => "download" %>
+<% if @fake_project_list %>
+<% @fake_project_list.each do |i| %>
+	<!-- Here we could do this as a list, but I dont really know how to do this
+	-->
+	<% flag_check = i[:name] %>
+	<%= check_box_tag :project_check, i[:name] %>
+	<%= link_to i[:name], i[:url]%>
+	<br>
+<% end%>
+<% end%>
+
+<%= button_to "Delete projects", :action => "delete", :method => "post" %>
+
+
 
 
 
 	<!--
+	 <a href="#" class="read_more">read more</a> 
 @fake_project_list
 @fake_current_projects
 @fake_past_projects

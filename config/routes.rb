@@ -69,6 +69,7 @@ OpenAidRegister::Application.routes.draw do
   match 'dashboard' => 'dashboard#show', :via => :get
   match 'new_project' => 'dashboard#new_project'
   match 'download' => 'dashboard#download'
+  match 'dashboard' => 'dashboard#delete', :via => :post
   
   match 'project_form' => 'project_form#show', :via => :get
   match 'project_form' => 'project_form#form_validation', :via => :post
