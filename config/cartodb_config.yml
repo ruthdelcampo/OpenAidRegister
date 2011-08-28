@@ -1,3 +1,6 @@
-host: 'https://api.cartodb.com'
-oauth_key: '2fAR7e9u9eKSvwOTPIo1uGdEhugg2kvKiIuYw6gy'
-oauth_secret: 'EUPeFY2Mu0n9j7d66Y1IhfmeVzrMN4W4QpwKMUEu'
+development:
+  host: https://whs.cartodb.com
+  oauth_key: Yu6NoImrTU9jCyvDrR0SYfURbIvyLvZEu7gXisED
+  oauth_secret: bgntchDURNj5kYZFVfwbZrdnpXLTZZDrPvQ45f8E
+  username: whs@cartodb.com
+  password: vizzualejo
