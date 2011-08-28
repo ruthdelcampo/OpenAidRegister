@@ -21,39 +21,42 @@ class SignupController < ApplicationController
     #password length Validation. 
     if params[:password].empty?
        @errors.push("Password is empty")
-    else params[:password].length < 3
+    elsif params[:password].length < 3
       @errors.push("Insufficient password's length")
+    end
+    #password_confirm Validation. 
+    if params[:password_confirm].empty?
+       @errors.push("You need to repeat the password")
+    else 
+      unless params[:password_confirm].match(params[:password])
+      @errors.push("Password's don't match")
+      end
     end
     
     #Name length Validation. 
     if params[:name].empty?
       @errors.push("Your name is empty")
-    else params[:name].length < 3
+    elsif params[:name].length < 3
       @errors.push("Please enter name and surname. It should be longer than 2 characters")
     end
     
     #Position length Validation. 
     if params[:position].empty?
       @errors.push("Your position is empty")
-    else params[:position].length < 3
+    elsif params[:position].length < 3
       @errors.push("Insufficient length of your position")
     end
     
     #Phone Validation. 
-    format_phone = (/^[+\/\-() 0-9]+$/)
+   
     if params[:telephone].length < 4
         @errors.push("Your telephone is empty or too short")
-    else
-        unless 
-         params[:telephone].match (format_phone) 
-        @errors.push("Please enter a valid phone number")
-        end
     end
     
     #Organization length Validation. 
     if params[:organization].empty?
       @errors.push("Your organization is empty")
-    else params[:organization].length < 3
+    elsif params[:organization].length < 3
       @errors.push("The organization name should be longer than 2 characters")
     end
     
@@ -119,5 +122,6 @@ class SignupController < ApplicationController
   
   def forgot_password
   end
+  
   
 end
