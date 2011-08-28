@@ -107,6 +107,8 @@ class SignupController < ApplicationController
       @errors.push("Login incorrect")
       render :template => 'signup/login'
     else
+      session[:organization] = result.rows.first
+      
       redirect_to '/dashboard'
     end
     

@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
   def show
        
-       @fake_org_name= "Fake Organization Name"
        
        @fake_project_1 ={:name => 'first project from this organization', :ID =>'orgID1', :url => 'www.foo2.com'}
        @fake_project_2 ={:name => 'second project from this organization', :ID =>'orgID2', :url => 'www.foo2.com'}
