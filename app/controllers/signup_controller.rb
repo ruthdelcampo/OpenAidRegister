@@ -79,7 +79,7 @@ class SignupController < ApplicationController
       
       
       #save to CartoDB
-      sql="INSERT INTO organizations(organization_name) VALUES(#{params[:organization]})"
+      sql="INSERT INTO organizations(organization_name) VALUES('#{params[:organization]}')"
       CartoDB::Connection.query(sql)
       
       
@@ -99,28 +99,26 @@ class SignupController < ApplicationController
   
   def login_validation
     
-     @errors = Array.new
-      #email validation
-      if params[:email].blank?
-        @errors.push("The email is empty")
-      end
-      
-      #password length Validation. 
-      if params[:password].blank?
-         @errors.push("Password is empty")
-      end
-      
-      if @errors.count==0
-           #no errors, save the data and redirect to dashboard
+    sql="SELECT * FROM organizations WHERE email='#{params[:email]}' AND password='#{quote_string(params[:password])}'"
+    result = CartoDB::Connection.query(sql)
+    
+    if result.rows.length==0
+      @errors = Array.new
+      @errors.push("Login incorrect")
+      render :template => 'signup/login'
+    else
       redirect_to '/dashboard'
-      else
-      #there has been errors print them on the template
-        render :template => 'signup/login'
-      end
+    end
+    
      
   end
   
   def forgot_password
+  end
+  
+  
+  def quote_string(v)
+    v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
   
   
