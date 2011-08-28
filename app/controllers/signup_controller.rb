@@ -73,6 +73,13 @@ class SignupController < ApplicationController
     
     if @errors.count==0
       #no errors, save the data and redirect to singup_complete
+      
+      
+      #save to CartoDB
+      sql="INSERT INTO organizations(organization_name) VALUES(#{params[:organization]})"
+      CartoDB::Connection.query(sql)
+      
+      
       redirect_to :action => :signup_complete
     else
       #there has been errors print them on the template
