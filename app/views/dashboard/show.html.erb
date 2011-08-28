@@ -4,9 +4,9 @@
 
 <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
 
-<%= button_to "Add project", :action => "new_project" %>
+<%= link_to "Add project", "/project" %>
 
-<%= button_to "Import from file", :action => "new_project" %>
+<%= button_to "Import from file", :action => "import_file" %>
 
 <h2> <%= @fake_total_projects %> projects published</h2>
 <h3> <%= @fake_current_projects %> ongoing projects </h3>

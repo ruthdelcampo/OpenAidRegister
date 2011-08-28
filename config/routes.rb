@@ -67,7 +67,7 @@ OpenAidRegister::Application.routes.draw do
   match 'forgot_password' => 'signup#forgot_password'
   match 'conditions' => 'conditions#show'
   match 'dashboard' => 'dashboard#show', :via => :get
-  match 'new_project' => 'dashboard#new_project'
+  match 'import_file' => 'dashboard#import_file'
   match 'download' => 'dashboard#download'
   match 'dashboard' => 'dashboard#delete', :via => :post
   

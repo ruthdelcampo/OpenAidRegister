@@ -11,8 +11,8 @@ class DashboardController < ApplicationController
        @fake_sector_distribution = [12, 0, 0, 0, 0, 0, 84, 4] 
   end
   
-  def new_project
-  redirect_to '/project_form' 
+  def import_file
+ 
   end
   
    def download

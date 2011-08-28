@@ -99,7 +99,7 @@ class SignupController < ApplicationController
   
   def login_validation
     
-    sql="SELECT * FROM organizations WHERE email='#{params[:email]}' AND password='#{quote_string(params[:password])}'"
+    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
     result = CartoDB::Connection.query(sql)
     
     if result.rows.length==0
