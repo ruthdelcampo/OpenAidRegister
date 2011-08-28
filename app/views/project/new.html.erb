@@ -48,15 +48,15 @@
 		Project's internal identifier Eg: 1256FB
 		<br>
 		<br>
-		Start Date 
-		<%= text_field_tag(:start_date, params[:start_date], ) %>
+		<%= label_tag(:start_date, "Start Date") %>
+		<%= date_select("start_date", "written_on", :start_year => 2000) %>
 		
 		<br>
 		<br>
-
-		
+		<%= label_tag(:end_date, "End Date") %>
+		<%= date_select("end_date", "written_on", :start_year => 2000) %> or 
 			<%= check_box_tag(:permanent, 1, params[:permanent]=="1") %>
-			<%= label_tag(:permanent, "or Permanent") %>
+			<%= label_tag(:permanent, "Permanent") %>
 		<br>
 		<br>
 		<br>

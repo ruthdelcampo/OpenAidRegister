@@ -16,8 +16,7 @@ class DashboardController < ApplicationController
   end
   
    def download
-    send_file '#{RAILS_ROOT}/images/bg.gif', :type => "image/gif"
-    redirect_to  '/dashboard'
+     render :template => '/dashboard/download.xml.erb'
    end
    
    def delete
