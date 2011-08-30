@@ -37,12 +37,10 @@
 		<br>
 		  <br>
 		
-		  	<%= label_tag(:name, "Your name:") %>
-		  	<%= text_field_tag(:name, params[:name]) %>
+		  	<%= label_tag(:contact_name, "Your name:") %>
+		  	<%= text_field_tag(:contact_name, params[:contact_name]) %>
 	
 		  
-		  	<%= label_tag(:position, "Your position:") %>
-			<%= text_field_tag(:position, params[:position]) %>
 			<br>
 			  <br>
 			
@@ -53,18 +51,18 @@
 		<br>
 		  <br>
 			
-			<%= label_tag(:organization, "Organization's name:") %>
-		<%= text_field_tag(:organization, params[:organization]) %>
+			<%= label_tag(:organization_name, "Organization's name:") %>
+		<%= text_field_tag(:organization_name, params[:organization_name]) %>
 		
-			<%= label_tag(:org_type, "Organization's type:") %>
-			<%= select_tag(:org_type, options_for_select([['', 1],['International NGO', 2], ['National NGO', 3], ['Regional NGO', 4]], :selected => params[:org_type])) %>
+			<%= label_tag(:organization_type_id, "Organization's type:") %>
+			<%= select_tag(:organization_type_id, options_for_select([['', 1],['International NGO', 21], ['National NGO', 22], ['Regional NGO', 23]], :selected => params[:organization_type_id])) %>
 			
 			
 		<br>
 		  <br>
 			
-			<%= label_tag(:org_country, "Organization's country:") %>
-			<%= select_tag(:org_country, options_for_select([
+			<%= label_tag(:organization_country, "Organization's country:") %>
+			<%= select_tag(:organization_country, options_for_select([
 				['AFGHANISTAN', 'AF'],
 				['ÅLAND ISLANDS', 'AX'],
 				['ALBANIA', 'AL'],
@@ -313,11 +311,11 @@
 				['YEMEN', 'YE'],
 				['ZAMBIA', 'ZM'],
 				['ZIMBABWE', 'ZW']
-				], :selected => params[:org_country]))%>
+				], :selected => params[:organization_country]))%>
 
 			
-			<%= label_tag(:org_website, "Organization's website:") %>
-				<%= text_field_tag(:org_website, params[:org_website]) %>
+			<%= label_tag(:organization_web, "Organization's website:") %>
+				<%= text_field_tag(:organization_web, params[:organization_web]) %>
 				
 			
 			<br>
@@ -326,8 +324,8 @@
 		You can also answer international  
 		<br>
 		<br>
-			<%= label_tag(:government_id, "Government's ID:") %>
-				<%= text_field_tag(:government_id, params[:government_id]) %>
+			<%= label_tag(:organization_guid, "Government's ID:") %>
+				<%= text_field_tag(:organization_guid, params[:organization_guid]) %>
 			
 			<br>
 			This is the Government ID Number. For example, in the US this wold be the EIN.

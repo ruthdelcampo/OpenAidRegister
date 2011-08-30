@@ -1,6 +1,7 @@
 <div class="center_content">
 
-	<h1> <%= session[:organization].organization_name %> </h1>
+	<h1> Hello, <%= session[:organization].organization_name %> </h1>
+
 
 <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
 
@@ -8,25 +9,27 @@
 
 <%= button_to "Import from file", :action => "import_file" %>
 
-<h2> <%= @fake_total_projects %> projects published</h2>
+<h2> <%= @projects_list.length %> projects published</h2>
 <h3> <%= @fake_current_projects %> ongoing projects </h3>
 <h3> <%= @fake_past_projects %> past projects</h3>
 
 <%= button_to "Download XML", :action => "download" %>
-<% if @fake_project_list %>
-<% @fake_project_list.each do |i| %>
-	<!-- Here we could do this as a list, but I dont really know how to do this
-	-->
-	<% flag_check = i[:name] %>
-	<%= check_box_tag :project_check, i[:name] %>
-	<%= link_to i[:name], i[:url]%>
+
+
+
+<% @projects_list.each do |project| %>
+
+<%= link_to project.title, '/project', {:action => 'view', :project_id =>project.title, :method => "post"} %>  
+<%= button_to "Delete", {:action => "delete",:delete_project_id => project.cartodb_id}, :method => "post",   :confirm => "Are you sure?" %>
+
+	
 	<br>
 <% end%>
-<% end%>
-
-<%= button_to "Delete projects", :action => "delete", :method => "post" %>
 
 
+<!-- < button_to "Delete projects", :action => "delete", :method => "post" %>
+	< check_box_tag :project_check[i], 1 %>
+-->
 
 
 

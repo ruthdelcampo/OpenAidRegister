@@ -1,35 +1,49 @@
-<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime= <%= @session[:organization].created_at %> version="1.01">
-<iati-activity last-updated-datetime= <%= @session[:organization].updated_at %> default-currency="EUR">
-<reporting-org type="22" ref="ES-CIF-G81469868"> <%= @session[:organization].organization_name %></reporting-org>
-<iati-identifier>ES-CIF-G81469868-12482</iati-identifier>
+<% if @download_projects %>
+
+<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= session[:organization].created_at %>" version="1.01">
+
+<% @download_projects.each do |project| %>
+
+<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR">
+<reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
+
+<iati-identifier><%= project.project_guid %></iati-identifier>
 <title>
-Acceso a la energía en comunidades rurales de la región de Cajamarca (Ecuador)
+<%= project.title %>
 </title>
 <description>
-<![CDATA[
-En septiembre del 2009 comenzamos en Perú el proyecto Acceso a la energía en comunidades rurales de la región de Cajamarca, a través de la planificación energética con energías renovables. En esta región, en la cuenca del Jequetepeque, fruto del PAER, también se han generado actividades de mejora de la gestión ambiental, que pretender fortalecer las capacidades locales, tanto de la sociedad civil como de las administraciones locales afectadas
-]]>
+<%= project.description %>
 </description>
-<participating-org role="Implementing" type="22" ref="ES-CIF-G81469868">Federación española de Ingeniería Sin Fronteras</participating-org>
-<participating-org role="Implementing" type="21" ref="PE-RUC-20110974648">Soluciones Practicas (antes ITDG)</participating-org>
-<activity-website>www.fooo.com</activity-website>
-<activity-date type="start-actual" iso-date="2009-09-01"/>
-<activity-date type="end-actual" iso-date="2012-12-31"/>
-<recipient-country code="PE">Peru</recipient-country>
+<participating-org role="Implementing" type="<%= session[:organization].organization_type_id %>" ref="<%= session[:organization].organization_guid %>"><%= session[:organization].organization_name %></participating-org>
+
+<activity-website><%= project.website %></activity-website>
+<activity-date type="start-actual"><%= project.start_date %></activity-date>
+<activity-date type="end-actual"><%= project.end_date %></activity-date>
+
+<!--<recipient-country code="PE">Peru</recipient-country>
 <location>
 <coordinates latitude="-7.100893" longitude="-78.511047" precision="1"/>
 </location>
+-->
 <contact-info>
-<organisation>ISF Valencia</organisation>
-<email>info@valencia.isf.es</email>
-<telephone>+34963879178</telephone>
+<organisation><%= session[:organization].organization_name %></organisation>
+<person-name> <%= project.contact_name %></person-name>
+<email><%= project.contact_email %></email>
 </contact-info>
 <budget>
-<value currency="EUR" value-date="">437257</value>
+<value currency="<%= project.budget_currency %>" value-date=""><%= project.budget %></value>
 </budget>
-<sector vocabulary="DAC" code="230">ENERGY GENERATION AND SUPPLY</sector>
+<sector vocabulary="DAC" code="<%= project.sector_id %>">Needs to be replaced by a specific sector</sector>
 <default-flow-type code="50">Other flows</default-flow-type>
 <default-finance-type code="110">Grant</default-finance-type>
 <default-tied-status code="5">Untied</default-tied-status>
 </iati-activity>
+
+
+<%end%>
 </iati-activities>
+
+<% else %>
+This site is empty because you didn't enter any project. 
+Why dont you start <%= link_to "entering your projects?", "/project" %>
+<%end%>

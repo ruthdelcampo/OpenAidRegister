@@ -34,17 +34,10 @@ class SignupController < ApplicationController
     end
     
     #Name length Validation. 
-    if params[:name].empty?
+    if params[:contact_name].empty?
       @errors.push("Your name is empty")
-    elsif params[:name].length < 3
+    elsif params[:contact_name].length < 3
       @errors.push("Please enter name and surname. It should be longer than 2 characters")
-    end
-    
-    #Position length Validation. 
-    if params[:position].empty?
-      @errors.push("Your position is empty")
-    elsif params[:position].length < 3
-      @errors.push("Insufficient length of your position")
     end
     
     #Phone Validation. 
@@ -54,19 +47,19 @@ class SignupController < ApplicationController
     end
     
     #Organization length Validation. 
-    if params[:organization].empty?
+    if params[:organization_name].empty?
       @errors.push("Your organization is empty")
-    elsif params[:organization].length < 3
+    elsif params[:organization_name].length < 3
       @errors.push("The organization name should be longer than 2 characters")
     end
     
     #Organization's type Validation. 
-    if params[:org_type].match("1")
+    if params[:organization_type_id].match("1")
       @errors.push("Please select your organization's type")
     end
     
     #Organization's country Validation. 
-    if params[:org_country].match("1")
+    if params[:organization_country].match("1")
       @errors.push("Please select your organization's country")
     end
     
@@ -79,9 +72,12 @@ class SignupController < ApplicationController
       
       
       #save to CartoDB
-      sql="INSERT INTO organizations(organization_name) VALUES('#{params[:organization]}')"
+      sql="INSERT INTO organizations(organization_guid, email, password, contact_name, organization_name, organization_type_id, organization_country, organization_web) VALUES('#{params[:organization_guid]}','#{params[:email]}','#{params[:password]}','#{params[:contact_name]}','#{params[:organization_name]}',#{params[:organization_type_id]},'#{params[:organization_country]}','#{params[:organization_web]}' )"
       CartoDB::Connection.query(sql)
       
+      sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
+      result = CartoDB::Connection.query(sql)
+      session[:organization] = result.rows.first
       
       redirect_to :action => :signup_complete
     else
@@ -92,6 +88,11 @@ class SignupController < ApplicationController
   end
   
   def signup_complete
+    
+    if session[:organization]
+    else
+       redirect_to :action => :login
+     end
   end
   
   def login
