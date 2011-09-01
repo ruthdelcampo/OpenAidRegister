@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
        
         if session[:organization]
         else
-           redirect_to :action => :login
+           redirect_to '/login'
         end
           
       sql="SELECT * FROM projects INNER JOIN organizations ON organizations.cartodb_id = projects.organization_guid"

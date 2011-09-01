@@ -24,7 +24,7 @@
 				<br>
 				  <br>
 				
-	<% if !@view_project.empty? %>
+	<% if @view_project %>
 	<%= @view_project %>
 	<% params[:title] = @view_project.title %>
 	<% params[:description] = @view_project.description %>

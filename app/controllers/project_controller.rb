@@ -4,7 +4,7 @@ class ProjectController < ApplicationController
     
       if session[:organization]
       else
-         redirect_to :action => :login
+         redirect_to '/login'
       end
       
 
