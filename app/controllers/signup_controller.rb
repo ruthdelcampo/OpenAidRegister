@@ -101,7 +101,10 @@ class SignupController < ApplicationController
   def login_validation
     
     sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
-    result = CartoDB::Connection.query(sql)
+    #result = CartoDB::Connection.query(sql)
+    
+    db = SQLite3::Database.new( "db/openaid.sqlite" )
+    result = db.execute(sql)
     
     if result.rows.length==0
       @errors = Array.new
@@ -113,15 +116,47 @@ class SignupController < ApplicationController
       redirect_to '/dashboard'
     end
     
+    
+      
      
   end
   
   def forgot_password
+    
+    if params[:method]=="post"
+      @errors = Array.new
+
+      #email Validation. First checks if its empty and then checks if it has the right format
+      String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
+      if params[:email].blank?
+        @errors.push("The email is empty")
+      else 
+        unless params[:email].match(format_email)
+        @errors.push("The format of the email is wrong")
+        end
+      end
+      if @errors.count==0
+        # send an email thanks for submitting
+        redirect_to :action => :password_complete
+        
+      else
+      render :template => 'signup/forgot_password'
+      end
+    end
+      
   end
   
   
   def quote_string(v)
     v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
+  end
+  
+  def password_complete
+    
+      if session[:organization]
+      else
+         redirect_to :action => :login
+       end
   end
   
   

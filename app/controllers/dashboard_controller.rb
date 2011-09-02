@@ -35,12 +35,9 @@ class DashboardController < ApplicationController
    
    def delete
  
-    # params[:project_check].each do |i|
-    # if params[:project_check][i] == 1
-    # project_id = @projects_list[i].cartodb_id 
     project_id = params[:delete_project_id]
     
-      sql="delete * FROM projects where projects.cartodb_id = 'project_id'"
+      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
       result = CartoDB::Connection.query(sql)
       redirect_to  '/dashboard'
  end

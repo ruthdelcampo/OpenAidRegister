@@ -30,8 +30,8 @@
 	<% params[:description] = @view_project.description %>
 	<% params[:language] = @view_project.language %>
 	
-	<!-- //Needs to be included when sector_type is solved in CartoDB
-	< params[:sector_type] = @view_project.sector_type %> 
+	<!-- //Needs to be included when sector_id is solved in CartoDB
+	< params[:sector_id] = @view_project.sector_id %> 
 	< params[:other_org_name] = @view_project.other_org_name %>
 	< params[:other_org_role] = @view_project.other_org_role %>
 	-->
@@ -74,8 +74,8 @@
 		
 		
 			<br>	<br>
-			<%= label_tag(:sector_type, "Sector:") %>
-		<%= select_tag(:sector_type, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]], :selected => params[:sector_type]), :multiple => true ) %>
+			<%= label_tag(:sector_id, "Sector:") %>
+		<%= select_tag(:sector_id, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]], :selected => params[:sector_id]), :multiple => true ) %>
 		<br>
 		You can select multiple sectors
 		<br>

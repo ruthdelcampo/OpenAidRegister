@@ -71,8 +71,9 @@ OpenAidRegister::Application.routes.draw do
   match 'download' => 'dashboard#download'
   match 'dashboard' => 'dashboard#delete', :via => :post
   
-  match 'project' => 'project#new', :via => :get
-  match 'project' => 'project#view',  :via => :post
+  match 'project' => 'project#new'
+  match 'view_project' => 'project#view'
+  match 'password_complete' => 'signup#password_complete'
   
   
   
