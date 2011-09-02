@@ -19,12 +19,11 @@
 
 <% @projects_list.each do |project| %>
 
+<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
 <!--< link_to project.title, '/view_project', {:action => "view_project", :view_project_id =>project.title}, :method =>"post" %>  -->
 
-<%= button_to project.title, {:action => "view_project",:view_project_id => project.cartodb_id}, :method => "get" %>
 <%= button_to "Delete", {:action => "delete",:delete_project_id => project.cartodb_id}, :method => "post", :confirm => "Are you sure?" %>
 
-	
 	<br>
 <% end%>
 

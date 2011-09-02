@@ -1,12 +1,14 @@
 class DashboardController < ApplicationController
+  
   def show
        
-        if session[:organization]
-        else
+        if session[:organization].blank?
            redirect_to '/login'
+           return
         end
+        
           
-      sql="SELECT * FROM projects INNER JOIN organizations ON organizations.cartodb_id = projects.organization_guid"
+      sql="SELECT * FROM projects WHERE organization_guid = #{session[:organization].cartodb_id}"
       result = CartoDB::Connection.query(sql)
          
        #@fake_project_1 ={:name => 'first project from this organization', :ID =>'orgID1', :url => 'www.foo2.com'}
@@ -25,7 +27,7 @@ class DashboardController < ApplicationController
   
    def download
     
-      sql="SELECT * FROM projects INNER JOIN organizations ON organizations.cartodb_id = projects.organization_guid"
+     sql="SELECT * FROM projects WHERE organization_guid = #{session[:organization].cartodb_id}"
       result = CartoDB::Connection.query(sql)
       
       # download_projects is an array which may contain 0 or more projects

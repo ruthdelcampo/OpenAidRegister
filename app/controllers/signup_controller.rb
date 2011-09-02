@@ -91,20 +91,25 @@ class SignupController < ApplicationController
     
     if session[:organization]
     else
-       redirect_to :action => :login
+       redirect_to '/login'       
+       return
      end
   end
   
   def login
+    
+    if session[:organization]
+      redirect_to '/dashboard'       
+      return 
+    end
   end
   
   def login_validation
     
-    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
-    #result = CartoDB::Connection.query(sql)
     
-    db = SQLite3::Database.new( "db/openaid.sqlite" )
-    result = db.execute(sql)
+    
+    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
+    result = CartoDB::Connection.query(sql)
     
     if result.rows.length==0
       @errors = Array.new

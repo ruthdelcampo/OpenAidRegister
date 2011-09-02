@@ -1,0 +1,161 @@
+<div class="center_content">
+   
+        
+		<h1> Register </h1>
+        
+		We need this project information to get an idea of your aid project. 
+		The most accurate data you can fill in, the better donors and general public will know about your project.
+		<br>
+		You can always <a HREF="mailto:ruthdelcampo@gmail.com">contact us</A> if you have troubles on this step.
+        
+       <br>
+		<br>
+			<br>
+			  <br>
+				<% if @errors.length>0 %>
+				<p>
+					<b>Errors:</b><br>
+					<%@errors.each do |error|%>
+					* <%=error%><br>
+					<%end%>
+				</p>
+				<%end%>
+
+				<br>
+				  <br>	
+				
+			
+       	<%= form_tag( :method => "post") do %>
+		
+		<br>
+			<%= label_tag(:title, "Project Title:") %>
+		  	<%= text_field_tag(:title, @project_data[:title]) %>
+		
+			<%= label_tag(:description, "Project Description:") %>
+		  	<%= text_area_tag(:description, @project_data[:description], :size => "30x16") %>
+		<br>
+			<br>
+			<%= label_tag(:language, "Language:") %>
+		<%= select_tag(:language, options_for_select([['english', 1]], :selected => @project_data[:language])) %>
+		<br>
+			Which language are you using  when introducing your project data? By default, english is selected    
+		
+		
+			<br>	<br>
+			<%= label_tag(:sector_id, "Sector:") %>
+		<%= select_tag(:sector_id, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]], :selected => @project_data[:sector_id]), :multiple => true ) %>
+		<br>
+		You can select multiple sectors
+		<br>
+		<br>
+		<%= label_tag(:project_guid, "Project's ID:") %>
+		<%= text_field_tag(:project_guid, @project_data[:project_guid]) %>
+		<br>
+		Project's internal identifier Eg: 1256FB
+		<br>
+		<br>
+		<%= label_tag(:start_date, "Start Date") %>
+	<!--	< date_select("start_date", "written_on", :start_year => 2000) %> -->
+		
+		<%= date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :include_blank => true)%>
+		
+		<br>
+		<br>
+		<%= label_tag(:end_date, "End Date") %>
+		<%= date_select("end_date", "written_on", :start_year => 2000, :order => [:month, :day, :year], :include_blank => true) %> or 
+			<%= check_box_tag(:permanent, 1, @project_data[:permanent] =="1") %>
+			<%= label_tag(:permanent, "Permanent") %>
+		<br>
+		<br>
+		<br>
+		<br>
+		GOOGLE MAPS
+		<br>
+		<br>
+		<br>
+		<br>
+		<%= label_tag(:budget, "Budget:") %>
+		<%= text_field_tag(:budget, @project_data[:budget]) %>
+		in <%= select_tag(:budget_currency, options_for_select([['', 1], ['US dollars', 2],['euros', 3],['Pound Sterling', 4],['Indian Rupee', 5],['Australian Dollar', 6], ['Yen', 7],['Canadian Dollar', 8]], :selected => @project_data[:budget_currency]))%>
+		<br>
+		<br>
+		
+		<%= label_tag(:website, "Project's website:") %>
+		<%= text_field_tag(:website, @project_data[:website]) %>
+		
+		<br>
+		<br>
+		<%= label_tag(:program_guid, "Program's ID:") %>
+	  	<%= text_field_tag(:program_guid, @project_data[:program_guid]) %>
+		<br>
+		Is this project funded by a program already in IATI?Introduce the IATI Identifier of the master program
+			<br>
+			<br>
+			<%= label_tag(:other_org_name, "Other organizations:") %>
+		  	<%= text_field_tag(:other_org_name, @project_data[:other_org_name], :disabled => 'true') %>
+			<%= label_tag(:other_org_role, "Their role:") %>
+		  	<%= select_tag(:other_org_role, options_for_select([['implementing', 1], ['', 2],['funding', 3],['extending', 4],['accountable', 5]], :selected => @project_data[:other_org_role]), :disabled => 'true') %>	
+			<br>
+			It will be available soon
+			<br>
+			<br>
+			
+			<%= label_tag(:result_title, "Result's title:") %>
+		<%= text_field_tag(:result_title, @project_data[:result_title]) %>
+			<%= label_tag(:result_description, "Result's Description:") %>
+			<%= text_area_tag(:result_description, @project_data[:result_description], :size => "30x16") %>
+			
+			<br>
+			<br>	
+		<!--	< check_box_tag(:same_person, 1, @project_data.same_person =="1") %>
+			< label_tag(:same_person, "Check this option if you are the contact person") %>
+		-->
+			
+			<br>
+			<br>
+				<%= label_tag(:contact_name, "Contact name:") %>
+			  	<%= text_field_tag(:contact_name, @project_data[:contact_name]) %>
+			
+			<%= label_tag(:contact_email, "Contact Email:") %>
+		  	<%= text_field_tag(:contact_email, @project_data[:contact_email]) %>
+			
+			<br>
+			<br>
+		
+			<%= label_tag(:contact_position, "Contact position:") %>
+			<%= text_field_tag(:contact_position, @project_data[:contact_position]) %>
+			
+		<input type="hidden" id="cartodb_id" name="cartodb_id" value="<%=@project_data[:cartodb_id]%>" />
+		
+			
+			
+				<br>
+				  <br>
+		<%= submit_tag("Submit")  %>
+		
+
+		
+		<script>
+			/* $("input[@name='input']").change(function(){
+			    if ($("input[@name='input']:checked").val() == 'file'){
+			 // Code for handling value 'file'        
+			  $("#method").attr('disabled', 'disabled');
+			  }else {
+			 	$("title", this).attr('disabled', 'disabled');
+				}});
+				*/
+		</script>
+	
+		<br>
+		
+	<% end %>
+	
+	
+
+
+   </div>    
+
+   
+  
+   
+ 
