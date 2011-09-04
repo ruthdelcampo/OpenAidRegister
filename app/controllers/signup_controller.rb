@@ -141,8 +141,16 @@ class SignupController < ApplicationController
         end
       end
       if @errors.count==0
+        
         # send an email thanks for submitting
-        redirect_to :action => :password_complete
+        #UPDATE table_name SET column1=value, column2=value2,... WHERE some_column=some_value
+        
+        #sql="UPDATE organizations SET password ='pepe' WHERE email ='#{quote_string(params[:email])}'"
+        #result = CartoDB::Connection.query(sql)
+        
+        render :template => 'signup/password_reset'
+       
+        return
         
       else
       render :template => 'signup/forgot_password'
@@ -152,17 +160,24 @@ class SignupController < ApplicationController
   end
   
   
+  def logout
+    reset_session
+    
+    redirect_to '/'
+    return 
+  end
+  
+  
   def quote_string(v)
     v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
   
-  def password_complete
+  def password_reset
     
-      if session[:organization]
-      else
-         redirect_to :action => :login
-       end
+    #site for informing the user a new password will be sent
+    
   end
+  
   
   
 end

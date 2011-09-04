@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
         end
         
           
-      sql="SELECT * FROM projects WHERE organization_guid = #{session[:organization].cartodb_id}"
+      sql="SELECT * FROM projects WHERE organization_id = #{session[:organization].cartodb_id}"
       result = CartoDB::Connection.query(sql)
          
        #@fake_project_1 ={:name => 'first project from this organization', :ID =>'orgID1', :url => 'www.foo2.com'}
@@ -27,7 +27,7 @@ class DashboardController < ApplicationController
   
    def download
     
-     sql="SELECT * FROM projects WHERE organization_guid = #{session[:organization].cartodb_id}"
+     sql="SELECT * FROM projects WHERE organization_id = #{session[:organization].cartodb_id}"
       result = CartoDB::Connection.query(sql)
       
       # download_projects is an array which may contain 0 or more projects

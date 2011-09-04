@@ -36,6 +36,20 @@
 		<h3> <i> Committed with aid transparency </i> </h3>
 
 		</div>
+		
+	
+		
+		<div class="right_content">
+
+	        	<% if !session[:organization].blank? %>
+					
+			<%= link_to "log out", '/logout' %>
+			
+	      	<%  end %>
+
+	</div>
+		
+		
 	
 <%= yield %>
 

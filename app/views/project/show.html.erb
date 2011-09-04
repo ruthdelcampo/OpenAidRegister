@@ -57,7 +57,7 @@
 		<%= label_tag(:start_date, "Start Date") %>
 	<!--	< date_select("start_date", "written_on", :start_year => 2000) %> -->
 		
-		<%= date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :include_blank => true)%>
+		<%= date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :default => { :day => 20 }, :include_blank => true )%>
 		
 		<br>
 		<br>

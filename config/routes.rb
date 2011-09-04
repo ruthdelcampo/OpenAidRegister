@@ -64,6 +64,9 @@ OpenAidRegister::Application.routes.draw do
   match 'signup_complete' => 'signup#signup_complete'
   match 'login' => 'signup#login', :via => :get
   match 'login' => 'signup#login_validation', :via => :post
+  
+  match 'logout' => 'signup#logout'
+  
   match 'forgot_password' => 'signup#forgot_password'
   match 'conditions' => 'conditions#show'
   match 'dashboard' => 'dashboard#show', :via => :get
@@ -72,7 +75,7 @@ OpenAidRegister::Application.routes.draw do
   match 'dashboard' => 'dashboard#delete', :via => :post
   
   match 'project' => 'project#show'
-  match 'password_complete' => 'signup#password_complete'
+  match 'password_reset' => 'signup#password_reset'
   
   
   

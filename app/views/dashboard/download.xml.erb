@@ -7,7 +7,8 @@
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR">
 <reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
 
-<iati-identifier><%= project.project_guid %></iati-identifier>
+<iati-identifier> <%= "#{session[:organization].organization_country}-#{session[:organization].organization_guid}-#{project.project_guid}" %>
+ </iati-identifier>
 <title>
 <%= project.title %>
 </title>
@@ -20,11 +21,6 @@
 <activity-date type="start-actual"><%= project.start_date %></activity-date>
 <activity-date type="end-actual"><%= project.end_date %></activity-date>
 
-<!--<recipient-country code="PE">Peru</recipient-country>
-<location>
-<coordinates latitude="-7.100893" longitude="-78.511047" precision="1"/>
-</location>
--->
 <contact-info>
 <organisation><%= session[:organization].organization_name %></organisation>
 <person-name> <%= project.contact_name %></person-name>
