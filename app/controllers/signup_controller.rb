@@ -8,11 +8,15 @@ class SignupController < ApplicationController
     
     @errors = Array.new
     
-    #email Validation. First checks if its empty and then checks if it has the right format
+    #email Validation. First checks if its empty and then checks if it already exists or if it has the right format
     String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
     if params[:email].blank?
       @errors.push("The email is empty")
-    else 
+    else
+      if already_exists(params[:email])
+       @errors.push("This email already exists")
+       end
+            
       unless params[:email].match(format_email)
       @errors.push("The format of the email is wrong")
       end
@@ -146,6 +150,9 @@ class SignupController < ApplicationController
         #UPDATE table_name SET column1=value, column2=value2,... WHERE some_column=some_value
         
         #sql="UPDATE organizations SET password ='pepe' WHERE email ='#{quote_string(params[:email])}'"
+        
+        mail_to params[:email], :bcc => "ruthdelcampo@gmail.com", :subject => "Password reset", :body => "we just reset your password to xyza. Please go to your organizations website and change the details"
+        
         #result = CartoDB::Connection.query(sql)
         
         render :template => 'signup/password_reset'
@@ -175,6 +182,18 @@ class SignupController < ApplicationController
   def password_reset
     
     #site for informing the user a new password will be sent
+    
+  end
+  
+  def already_exists (email)
+     sql="SELECT * FROM organizations WHERE email='#{email}'"
+      result = CartoDB::Connection.query(sql)
+
+      if result.rows.length==0
+        return false
+      else
+        return true
+      end
     
   end
   

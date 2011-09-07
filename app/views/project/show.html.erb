@@ -24,6 +24,8 @@
 				<br>
 				  <br>	
 				
+				<%= @project_data %>
+				
 			
        	<%= form_tag( :method => "post") do %>
 		
@@ -43,7 +45,33 @@
 		
 			<br>	<br>
 			<%= label_tag(:sector_id, "Sector:") %>
-		<%= select_tag(:sector_id, options_for_select([['', 1], ['EDUCATION', 2],['HEALTH', 3], ['POPULATIONPOLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH', 4], ['WATER AND SANITATION', 5], ['COMMUNICATION', 6],['ENERGY GENERATION AND SUPPLY', 7], ['BANKING AND FINANCIAL SERVICES', 8], ['BUSINESS AND OTHER SERVICES', 9], ['AGRICULTURE', 10], ['INDUSTRY', 11], ['MINERAL RESOURCES AND MINING', 12], ['CONSTRUCTION', 13], ['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT', 14], ['TOURISM', 15], ['MULTISECTOR/CROSS', 16], ['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE', 17], ['ACTION RELATING TO DEBT', 18], ['HUMANITARIAN AID', 19], ['UNALLOCATED/ UNSPECIFIED', 20]], :selected => @project_data[:sector_id]), :multiple => true ) %>
+		<%= select_tag(:sector_id, options_for_select([	['EDUCATION','110'],
+			['HEALTH','120'],
+			['POPULATION POLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH','130'],
+			['WATER AND SANITATION','140'],
+			['GOVERNMENT AND CIVIL SOCIETY','150'],
+			['OTHER SOCIAL INFRASTRUCTURE AND SERVICES','160'],
+			['TRANSPORT AND STORAGE','210'],
+			['COMMUNICATION','220'],
+			['ENERGY GENERATION AND SUPPLY','230'],
+			['BANKING AND FINANCIAL SERVICES','240'],
+			['BUSINESS AND OTHER SERVICES','250'],
+			['AGRICULTURE','311'],
+			['FORESTRY','312'],
+			['FISHING','313'],
+			['INDUSTRY','321'],
+			['MINERAL RESOURCES AND MINING','322'],
+			['CONSTRUCTION','323'],
+			['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT','331'],
+			['TOURISM','332'],
+			['MULTISECTOR/CROSS-CUTTING','400'],
+			['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE','500'],
+			['ACTION RELATING TO DEBT','600'],
+			['HUMANITARIAN AID','700'],
+			['ADMINISTRATIVE COSTS OF DONORS','910'],
+			['SUPPORT TO NON- GOVERNMENTAL ORGANISATIONS (NGOs)','920'],
+			['REFUGEES IN DONOR COUNTRIES','930'],
+			['UNALLOCATED/ UNSPECIFIED','998']], :selected => @project_data[:sector_id]), :multiple => true ) %>
 		<br>
 		You can select multiple sectors
 		<br>
@@ -54,16 +82,167 @@
 		Project's internal identifier Eg: 1256FB
 		<br>
 		<br>
-		<%= label_tag(:start_date, "Start Date") %>
-	<!--	< date_select("start_date", "written_on", :start_year => 2000) %> -->
+		<%= label_tag(:start_date, "Start Date" ) %>
+	<!--	< date_select("start_date", "written_on", :include_blank => true :discard_day =>true) %> -->
 		
-		<%= date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :default => { :day => 20 }, :include_blank => true )%>
+
+		<!--		< date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :include_blank => true, :default => @project_data[:start_date])%>	-->
+		
+		
+		<%= select_tag(:start_date_day, 
+		options_for_select([ 
+			['',''], 
+		['1','1'],
+		['2','2'], 
+		['3','3'], 
+		['4','4'],
+		['5','5'],
+		['6','6'], 
+		['7','7'],
+		['8','8'],
+		['9','9'],
+		['10','10'], 
+		['11','11'], 
+		['12','12'], 
+		['13','13'], 
+		['14','14'],
+		['15','15'],
+		['16','16'], 
+		['17','17'],
+		['18','18'],
+		['19','19'],
+		['20','20'], 
+		['21','21'], 
+		['22','22'], 
+		['23','23'], 
+		['24','24'],
+		['25','25'],
+		['26','26'], 
+		['27','27'],
+		['28','28'],
+		['29','29'],
+		['30','30'],
+		['31','31']	
+		], :selected => @project_data[:start_date_day]) ) %>
+		
+			
+			<%= select_tag(:start_date_month, options_for_select([
+				['',''],
+				['January','1'],
+				['February','2'],
+				['March','3'], 
+				['April','4'],
+				['May','5'],
+				['June','6'], 
+				['July','7'],
+				['August','8'],
+				['September','9'],
+				['October','10'], 
+				['November','11'], 
+				['December','12']],
+			 :selected => @project_data[:start_date_month])) %>
+			
+				<%= select_tag(:start_date_year, options_for_select([
+					['',''],
+					['2000','2000'],
+					['2001','2001'],
+					['2002','2002'],
+					['2003','2003'],
+					['2004','2004'],
+					['2005','2005'],
+					['2006','2006'],
+					['2007','2007'],
+					['2008','2008'],
+					['2009','2009'],
+					['2010','2010'],
+					['2011','2011'],
+					['2012','2012'],
+					['2013','2013'],
+					['2014','2014'],
+					['2015','2015']],
+				 :selected => @project_data[:start_date_year])) %>
+		
+		
 		
 		<br>
 		<br>
 		<%= label_tag(:end_date, "End Date") %>
-		<%= date_select("end_date", "written_on", :start_year => 2000, :order => [:month, :day, :year], :include_blank => true) %> or 
-			<%= check_box_tag(:permanent, 1, @project_data[:permanent] =="1") %>
+		
+				<%= select_tag(:end_date_day, options_for_select([ 
+					['',''], 
+				['1','1'],
+				['2','2'], 
+				['3','3'], 
+				['4','4'],
+				['5','5'],
+				['6','6'], 
+				['7','7'],
+				['8','8'],
+				['9','9'],
+				['10','10'], 
+				['11','11'], 
+				['12','12'], 
+				['13','13'], 
+				['14','14'],
+				['15','15'],
+				['16','16'], 
+				['17','17'],
+				['18','18'],
+				['19','19'],
+				['20','20'], 
+				['21','21'], 
+				['22','22'], 
+				['23','23'], 
+				['24','24'],
+				['25','25'],
+				['26','26'], 
+				['27','27'],
+				['28','28'],
+				['29','29'],
+				['30','30'],
+				['31','31']	
+				], :selected => @project_data[:end_date_day]) ) %>
+
+
+					<%= select_tag(:end_date_month, options_for_select([
+						['',''],
+						['January','1'],
+						['February','2'],
+						['March','3'], 
+						['April','4'],
+						['May','5'],
+						['June','6'], 
+						['July','7'],
+						['August','8'],
+						['September','9'],
+						['October','10'], 
+						['November','11'], 
+						['December','12']],
+					 :selected => @project_data[:end_date_month])) %>
+
+						<%= select_tag(:end_date_year, options_for_select([
+							['',''],
+							['2000','2000'],
+							['2001','2001'],
+							['2002','2002'],
+							['2003','2003'],
+							['2004','2004'],
+							['2005','2005'],
+							['2006','2006'],
+							['2007','2007'],
+							['2008','2008'],
+							['2009','2009'],
+							['2010','2010'],
+							['2011','2011'],
+							['2012','2012'],
+							['2013','2013'],
+							['2014','2014'],
+							['2015','2015']],
+						 :selected => @project_data[:end_date_year])) %>
+		
+		
+			
+			<%= check_box_tag(:permanent, 1, @project_data[:permanent] =="1", :onclick =>"disable_end_date()") %>
 			<%= label_tag(:permanent, "Permanent") %>
 		<br>
 		<br>
@@ -76,7 +255,174 @@
 		<br>
 		<%= label_tag(:budget, "Budget:") %>
 		<%= text_field_tag(:budget, @project_data[:budget]) %>
-		in <%= select_tag(:budget_currency, options_for_select([['', 1], ['US dollars', 2],['euros', 3],['Pound Sterling', 4],['Indian Rupee', 5],['Australian Dollar', 6], ['Yen', 7],['Canadian Dollar', 8]], :selected => @project_data[:budget_currency]))%>
+		in <%= select_tag(:budget_currency, options_for_select([
+		['',''],
+		['Afghani','AFN'],
+		['UAE Dirham','AED'],
+		['Lek','ALL'],
+		['Armenian Dram','AMD'],
+		['Netherlands Antillian Guilder','ANG'],
+		['Kwanza','AOA'],
+		['Argentine Peso','ARS'],
+		['Australian Dollar','AUD'],
+		['Aruban Guilder','AWG'],
+		['Azerbaijanian Manat','AZN'],
+		['Convertible Marks','BAM'],
+		['Barbados Dollar','BBD'],
+		['Taka','BDT'],
+		['Bulgarian Lev','BGN'],
+		['Bahraini Dinar','BHD'],
+		['Burundi Franc','BIF'],
+		['Bermudian Dollar','BMD'],
+		['Brunei Dollar','BND'],
+		['Boliviano','BOB'],
+		['Mvdol','BOV'],
+		['Brazilian Real','BRL'],
+		['Bahamian Dollar','BSD'],
+		['Ngultrum','BTN'],
+		['Pula','BWP'],
+		['Belarussian Ruble','BYR'],
+		['Belize Dollar','BZD'],
+		['Canadian Dollar','CAD'],
+		['Congolese Franc','CDF'],
+		['Swiss Franc','CHF'],
+		['Unidades de fomento','CLF'],
+		['Chilean Peso','CLP'],
+		['Yuan Renminbi','CNY'],
+		['Colombian Peso','COP'],
+		['Unidad de Valor Real','COU'],
+		['Costa Rican Colon','CRC'],
+		['Peso Convertible','CUC'],
+		['Cuban Peso','CUP'],
+		['Cape Verde Escudo','CVE'],
+		['Czech Koruna','CZK'],
+		['Djibouti Franc','DJF'],
+		['Danish Krone','DKK'],
+		['Dominican Peso','DOP'],
+		['Algerian Dinar','DZD'],
+		['Kroon','EEK'],
+		['Egyptian Pound','EGP'],
+		['Nakfa','ERN'],
+		['Ethiopian Birr','ETB'],
+		['Euro','EUR'],
+		['Fiji Dollar','FJD'],
+		['Falkland Islands Pound','FKP'],
+		['Pound Sterling','GBP'],
+		['Lari','GEL'],
+		['Cedi','GHS'],
+		['Gibraltar Pound','GIP'],
+		['Dalasi','GMD'],
+		['Guinea Franc','GNF'],
+		['Quetzal','GTQ'],
+		['Guyana Dollar','GYD'],
+		['Hong Kong Dollar','HKD'],
+		['Lempira','HNL'],
+		['Croatian Kuna','HRK'],
+		['Gourde','HTG'],
+		['Forint','HUF'],
+		['Rupiah','IDR'],
+		['New Israeli Sheqel','ILS'],
+		['Indian Rupee','INR'],
+		['Iraqi Dinar','IQD'],
+		['Iranian Rial','IRR'],
+		['Iceland Krona','ISK'],
+		['Jamaican Dollar','JMD'],
+		['Jordanian Dinar','JOD'],
+		['Yen','JPY'],
+		['Kenyan Shilling','KES'],
+		['Som','KGS'],
+		['Riel','KHR'],
+		['Comoro Franc','KMF'],
+		['North Korean Won','KPW'],
+		['Won','KRW'],
+		['Kuwaiti Dinar','KWD'],
+		['Cayman Islands Dollar','KYD'],
+		['Tenge','KZT'],
+		['Kip','LAK'],
+		['Lebanese Pound','LBP'],
+		['Sri Lanka Rupee','LKR'],
+		['Liberian Dollar','LRD'],
+		['Loti','LSL'],
+		['Lithuanian Litas','LTL'],
+		['Latvian Lats','LVL'],
+		['Libyan Dinar','LYD'],
+		['Moroccan Dirham','MAD'],
+		['Moldovan Leu','MDL'],
+		['Malagasy Ariary','MGA'],
+		['Denar','MKD'],
+		['Kyat','MMK'],
+		['Tugrik','MNT'],
+		['Pataca','MOP'],
+		['Ouguiya','MRO'],
+		['Mauritius Rupee','MUR'],
+		['Rufiyaa','MVR'],
+		['Malawi Kwacha','MWK'],
+		['Mexican Peso','MXN'],
+		['Mexican Unidad de Inversion (UDI)','MXV'],
+		['Malaysian Ringgit','MYR'],
+		['Metical','MZN'],
+		['Namibia Dollar','NAD'],
+		['Naira','NGN'],
+		['Cordoba Oro','NIO'],
+		['Norwegian Krone','NOK'],
+		['Nepalese Rupee','NPR'],
+		['New Zealand Dollar','NZD'],
+		['Rial Omani','OMR'],
+		['Balboa','PAB'],
+		['Nuevo Sol','PEN'],
+		['Kina','PGK'],
+		['Philippine Peso','PHP'],
+		['Pakistan Rupee','PKR'],
+		['Zloty','PLN'],
+		['Guarani','PYG'],
+		['Qatari Rial','QAR'],
+		['New Leu','RON'],
+		['Serbian Dinar','RSD'],
+		['Russian Ruble','RUB'],
+		['Rwanda Franc','RWF'],
+		['Saudi Riyal','SAR'],
+		['Solomon Islands Dollar','SBD'],
+		['Seychelles Rupee','SCR'],
+		['Sudanese Pound','SDG'],
+		['Swedish Krona','SEK'],
+		['Singapore Dollar','SGD'],
+		['Saint Helena Pound','SHP'],
+		['Leone','SLL'],
+		['Somali Shilling','SOS'],
+		['Surinam Dollar','SRD'],
+		['Dobra','STD'],
+		['El Salvador Colon','SVC'],
+		['Syrian Pound','SYP'],
+		['Lilangeni','SZL'],
+		['Baht','THB'],
+		['Somoni','TJS'],
+		['Manat','TMT'],
+		['Tunisian Dinar','TND'],
+		['Paanga','TOP'],
+		['Turkish Lira','TRY'],
+		['Trinidad and Tobago Dollar','TTD'],
+		['New Taiwan Dollar','TWD'],
+		['Tanzanian Shilling','TZS'],
+		['Hryvnia','UAH'],
+		['Uganda Shilling','UGX'],
+		['US Dollar','USD'],
+		['US Dollar (Next day)','USN'],
+		['US Dollar (Same day)','USS'],
+		['Uruguay Peso en Unidades Indexadas','UYI'],
+		['Peso Uruguayo','UYU'],
+		['Uzbekistan Sum','UZS'],
+		['Bolivar Fuerte','VEF'],
+		['Dong','VND'],
+		['Vatu','VUV'],
+		['Tala','WST'],
+		['CFA Franc BEAC','XAF'],
+		['East Caribbean Dollar','XCD'],
+		['CFA Franc BCEAO','XOF'],
+		['CFP Franc','XPF'],
+		['Yemeni Rial','YER'],
+		['Rand','ZAR'],
+		['Zambian Kwacha','ZMK'],
+		['Zimbabwe Dollar','ZWL']], :selected => @project_data[:budget_currency]))%>
 		<br>
 		<br>
 		
@@ -107,10 +453,47 @@
 			
 			<br>
 			<br>	
-		<!--	< check_box_tag(:same_person, 1, @project_data.same_person =="1") %>
-			< label_tag(:same_person, "Check this option if you are the contact person") %>
-		-->
+			<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", :onchange =>"change_contact_info()") %>
 			
+			<% label_tag(:same_person, "Check this option if you are the contact person") %>
+			
+			
+			
+			
+				<script>
+				function change_contact_info() { 
+				   if ($('#same_person').is(':checked')) {
+				// $("#contact_name").attr('disabled', 'disabled');
+				$("#contact_name").val("<%= session[:organization].contact_name %>");
+				// $("#contact_email").attr('disabled', 'disabled');
+				$("#contact_email").val("<%= session[:organization].email %>");
+			}else{
+				$("#contact_name").removeAttr('disabled');
+					$("#contact_name").val('');
+						$("#contact_email").removeAttr('disabled');
+							$("#contact_email").val('');
+			}
+				return false
+			
+			}
+			
+			function disable_end_date() { 
+			   if ($('#permanent').is(':checked')) {
+			$("#end_date_month").attr('disabled', 'disabled');
+				$("#end_date_day").attr('disabled', 'disabled');
+					$("#end_date_year").attr('disabled', 'disabled');
+		}else{
+			$("#end_date_month").removeAttr('disabled');
+				$("#end_date_day").removeAttr('disabled');
+					$("#end_date_year").removeAttr('disabled');
+		}
+			return false
+		
+		}
+			
+				</script>
+	
+				
 			<br>
 			<br>
 				<%= label_tag(:contact_name, "Contact name:") %>
@@ -121,9 +504,10 @@
 			
 			<br>
 			<br>
-		
-			<%= label_tag(:contact_position, "Contact position:") %>
-			<%= text_field_tag(:contact_position, @project_data[:contact_position]) %>
+		<!--
+			< label_tag(:contact_position, "Contact position:") %>
+			< text_field_tag(:contact_position, @project_data[:contact_position]) %>
+			-->
 			
 		<input type="hidden" id="cartodb_id" name="cartodb_id" value="<%=@project_data[:cartodb_id]%>" />
 		

@@ -6,39 +6,55 @@
 
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR">
 <reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
-
 <iati-identifier> <%= "#{session[:organization].organization_country}-#{session[:organization].organization_guid}-#{project.project_guid}" %>
  </iati-identifier>
 <title>
 <%= project.title %>
 </title>
+
+<% if !project.description.blank? %>
 <description>
 <%= project.description %>
 </description>
+<%end%>
+
 <participating-org role="Implementing" type="<%= session[:organization].organization_type_id %>" ref="<%= session[:organization].organization_guid %>"><%= session[:organization].organization_name %></participating-org>
 
+<% if !project.website.blank? %>
 <activity-website><%= project.website %></activity-website>
-<activity-date type="start-actual"><%= project.start_date %></activity-date>
-<activity-date type="end-actual"><%= project.end_date %></activity-date>
+<%end%>
 
+<% if !project.start_date.blank? %>
+<activity-date type="start-actual"><%= project.start_date %></activity-date>
+<%end%>
+
+<% if !project.end_date.blank? %>
+<activity-date type="end-actual"><%= project.end_date %></activity-date>
+<%end%>
+
+<sector vocabulary="DAC" code="<%= project.sector_id %>">Needs to be replaced by a specific sector</sector>
+<!--<sector vocabulary="DAC" code="230">ENERGY GENERATION AND SUPPLY</sector> -->
 <contact-info>
 <organisation><%= session[:organization].organization_name %></organisation>
+
+<% if !project.contact_name.blank? %>
 <person-name> <%= project.contact_name %></person-name>
+<%end%>
+
+<% if !project.contact_email.blank? %>
 <email><%= project.contact_email %></email>
+<%end%>
 </contact-info>
+
+<% if !project.budget.blank? %>
 <budget>
 <value currency="<%= project.budget_currency %>" value-date=""><%= project.budget %></value>
 </budget>
-<sector vocabulary="DAC" code="<%= project.sector_id %>">Needs to be replaced by a specific sector</sector>
-<default-flow-type code="50">Other flows</default-flow-type>
-<default-finance-type code="110">Grant</default-finance-type>
-<default-tied-status code="5">Untied</default-tied-status>
+<%end%>
 </iati-activity>
-
 
 <%end%>
 </iati-activities>
-
 <% else %>
 This site is empty because you didn't enter any project. 
 Why dont you start <%= link_to "entering your projects?", "/project" %>

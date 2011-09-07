@@ -22,6 +22,7 @@ class ProjectController < ApplicationController
       
       @project_data = params
       
+      
       if params[:title].blank?
        @errors.push("You need to enter a project title")
       end
@@ -59,22 +60,32 @@ class ProjectController < ApplicationController
       
       # finish this issue
       
-       if (params[:start_date][:"written_on(1i)"].blank?) && (params[:start_date][:"written_on(2i)"].blank?) && (params[:start_date][:"written_on(3i)"].blank?)
-        start_date = "null"
-        elsif (params[:start_date][:"written_on(1i)"].blank?) || (params[:start_date][:"written_on(2i)"].blank?) || (params[:start_date][:"written_on(3i)"].blank?)
-         @errors.push("You need to enter all parameters (day, month and year) in the start date") 
-        else
-        start_date = Date.civil(params[:start_date][:"written_on(1i)"].to_i,params[:start_date][:"written_on(2i)"].to_i,params[:start_date][:"written_on(3i)"].to_i)
-        end
-
-        if (params[:end_date][:"written_on(1i)"].blank?) && (params[:end_date][:"written_on(2i)"].blank?) && (params[:end_date][:"written_on(3i)"].blank?)
-        end_date = "null"
-        elsif (params[:end_date][:"written_on(1i)"].blank?) || (params[:end_date][:"written_on(2i)"].blank?) || (params[:end_date][:"written_on(3i)"].blank?)
-          @errors.push("You need to enter all parameters (day, month and year) in the end date") 
-        else
-          end_date = Date.civil(params[:end_date][:"written_on(1i)"].to_i,params[:end_date][:"written_on(2i)"].to_i,params[:end_date][:"written_on(3i)"].to_i)
-        end
+       #if (params[:start_date][:"written_on(1i)"].blank?) && (params[:start_date][:"written_on(2i)"].blank?) && (params[:start_date][:"written_on(3i)"].blank?)
+      #  start_date = "null"
+       # elsif (params[:start_date][:"written_on(1i)"].blank?) || (params[:start_date][:"written_on(2i)"].blank?) || (params[:start_date][:"written_on(3i)"].blank?)
+        # @errors.push("You need to enter all parameters (day, month and year) in the start date") 
+        #else
+        #start_date = Date.civil(params[:start_date][:"written_on(1i)"].to_i,params[:start_date][:"written_on(2i)"].to_i,params[:start_date][:"written_on(3i)"].to_i)
+        #end
         
+        
+         if (params[:start_date_day].blank?) && (params[:start_date_month].blank?) && (params[:start_date_year].blank?)
+           start_date = "null"
+           elsif (params[:start_date_day].blank?) || (params[:start_date_month].blank?) || (params[:start_date_year].blank?)
+            @errors.push("You need to enter all parameters (day, month and year) in the start date") 
+           else
+           start_date = Date.civil(params[:start_date_year].to_i,params[:start_date_month].to_i,params[:start_date_day].to_i)
+           end
+         
+        
+        
+        if (params[:end_date_day].blank?) && (params[:end_date_month].blank?) && (params[:end_date_year].blank?)
+          end_date = "null"
+          elsif (params[:end_date_day].blank?) || (params[:end_date_month].blank?) || (params[:end_date_year].blank?)
+           @errors.push("You need to enter all parameters (day, month and year) in the start date") 
+          else
+          end_date = Date.civil(params[:end_date_year].to_i,params[:end_date_month].to_i,params[:end_date_day].to_i)
+          end
         
       
        if (start_date<=>(end_date)) == 1
@@ -101,17 +112,24 @@ class ProjectController < ApplicationController
         #It is a new project, save to cartodb
         #other_org_name and other_org_role should be included next time
         
-      
-        
-        
+        debugger
         sql="INSERT INTO PROJECTS (organization_id, title, description, language, sector_id, project_guid, start_date, 
           end_date, budget, budget_currency, website, program_guid, result_title, 
                  result_description, contact_name, contact_email, contact_position) VALUES 
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', '#{params[:language]}', '#{params[:sector_id]}',
-                 '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
+                 '#{params[:project_guid]}', '#{start_date}', '#{end_date}', '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', '#{params[:result_description]}', '#{params[:contact_name]}',
                  '#{params[:contact_email]}', '#{params[:contact_position]}')"
+         
          CartoDB::Connection.query(sql)
+         
+         # result = CartoDB::Connection.query(sql) esto no da nada, tengo que hacer de alguna forma que se capture la fila que se acaba aniadir
+         # params[:sector_id].each do sectors
+         # sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES ('#{cartodb_id}', #{sectors})
+         # CartoDB::Connection.query(sql)
+         #end
+         
+         
       else
         
         
@@ -120,6 +138,14 @@ class ProjectController < ApplicationController
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
          result_description='#{params[:result_description]}', contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
        CartoDB::Connection.query(sql)
+       
+       # result = CartoDB::Connection.query(sql) esto no da nada, tengo que hacer de alguna forma que se capture la fila que se acaba aniadir
+       #sql = 'DELETE FROM project_sectors where  project_id = '#{params[:cartodb_id]}'"
+       # CartoDB::Connection.query(sql)
+       # params[:sector_id].each do sectors
+       # sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES ('#{params[:cartodb_id]}', #{sectors})
+       # CartoDB::Connection.query(sql)
+       #end
       
       end
       redirect_to '/dashboard'

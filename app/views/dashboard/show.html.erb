@@ -10,8 +10,8 @@
 <%= button_to "Import from file", :action => "import_file" %>
 
 <h2> <%= @projects_list.length %> projects published</h2>
-<h3> <%= @fake_current_projects %> ongoing projects </h3>
-<h3> <%= @fake_past_projects %> past projects</h3>
+<h3> <%= @current_projects %> ongoing projects </h3>
+<h3> <%= @past_projects %> past projects</h3>
 
 <%= button_to "Download XML", :action => "download" %>
 
