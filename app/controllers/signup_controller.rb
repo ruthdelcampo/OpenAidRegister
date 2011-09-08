@@ -83,6 +83,8 @@ class SignupController < ApplicationController
       result = CartoDB::Connection.query(sql)
       session[:organization] = result.rows.first
       
+      UserMailer.welcome_email(session[:organization]).deliver
+      
       redirect_to :action => :signup_complete
     else
       #there has been errors print them on the template
@@ -148,14 +150,17 @@ class SignupController < ApplicationController
         
         # send an email thanks for submitting
         #UPDATE table_name SET column1=value, column2=value2,... WHERE some_column=some_value
+        random_token = SecureRandom.urlsafe_base64  
         
-        #sql="UPDATE organizations SET password ='pepe' WHERE email ='#{quote_string(params[:email])}'"
+        sql="UPDATE organizations SET random_token ='#{random_token}' WHERE organizations.email = '#{params[:email]}'"
+        CartoDB::Connection.query(sql)
         
-        mail_to params[:email], :bcc => "ruthdelcampo@gmail.com", :subject => "Password reset", :body => "we just reset your password to xyza. Please go to your organizations website and change the details"
+        UserMailer.password_reset(random_token, params[:email]).deliver
         
-        #result = CartoDB::Connection.query(sql)
+        #mail_to params[:email], :bcc => "ruthdelcampo@gmail.com", :subject => "Password reset", :body => "we just reset your password to xyza. Please go to your organizations website and change the details"
         
-        render :template => 'signup/password_reset'
+        
+        redirect_to '/', :alert => "Email sent with  password reset instructions."
        
         return
         
@@ -181,8 +186,43 @@ class SignupController < ApplicationController
   
   def password_reset
     
-    #site for informing the user a new password will be sent
-    
+    @errors = Array.new
+    if params[:method]=="post"
+    #password length Validation. 
+        if params[:password].empty?
+           @errors.push("Password is empty")
+        elsif params[:password].length < 3
+          @errors.push("Insufficient password's length")
+        end
+        #password_confirm Validation. 
+        if params[:password_confirm].empty?
+           @errors.push("You need to repeat the password")
+        else 
+          unless params[:password_confirm].match(params[:password])
+          @errors.push("Password's don't match")
+          end
+        end 
+        
+         if @errors.count==0
+            #no errors, save the data and redirect to singup_complete
+            
+          sql="UPDATE organizations SET password ='#{params[:password]}', random_token = null WHERE organizations.random_token = '#{params[:token]}'"
+          result = CartoDB::Connection.query(sql)
+          redirect_to '/login', :alert => "you can now login"
+        end
+      
+    else
+      
+    sql="select * FROM organizations WHERE random_token = '#{params[:id]}'"
+    result = CartoDB::Connection.query(sql) 
+      if result.rows.length==0
+      redirect_to '/forgot_password', :notice => "unknown one time password"
+      else
+        @user_password_reset = result.rows.first[:email]
+        
+      render :template => 'signup/password_reset'
+      end
+    end
   end
   
   def already_exists (email)

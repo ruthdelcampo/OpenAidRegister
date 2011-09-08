@@ -452,6 +452,14 @@
 			<%= text_area_tag(:result_description, @project_data[:result_description], :size => "30x16") %>
 			
 			<br>
+			
+			<br>
+			<%= label_tag(:collaboration_type, "Collaboration_type:") %>
+		<%= select_tag(:collaboration_type, options_for_select([['', ''],['Aid through NGOs', 5],['Aid to NGOs', 6],['Aid through PPPs', 7]], :selected => @project_data[:collaboration_type])) %>
+		<br>
+		Which type of collaboration is your project?  <a href="http://iatistandard.org/codelists/collaboration_type">Check out here</A> to understand  all options
+		<br>
+		
 			<br>	
 			<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", :onchange =>"change_contact_info()") %>
 			

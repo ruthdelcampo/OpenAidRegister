@@ -115,10 +115,11 @@ class ProjectController < ApplicationController
         debugger
         sql="INSERT INTO PROJECTS (organization_id, title, description, language, sector_id, project_guid, start_date, 
           end_date, budget, budget_currency, website, program_guid, result_title, 
-                 result_description, contact_name, contact_email, contact_position) VALUES 
+                 result_description, collaboration_type, contact_name, contact_email, contact_position) VALUES 
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', '#{params[:language]}', '#{params[:sector_id]}',
                  '#{params[:project_guid]}', '#{start_date}', '#{end_date}', '#{params[:budget]}',
-                 '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', '#{params[:result_description]}', '#{params[:contact_name]}',
+                 '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', '#{params[:result_description]}',  '#{params[:collaboration_type]}',
+                 '#{params[:contact_name]}',
                  '#{params[:contact_email]}', '#{params[:contact_position]}')"
          
          CartoDB::Connection.query(sql)
@@ -136,7 +137,7 @@ class ProjectController < ApplicationController
         #it is an existing project do whatever
         sql="UPDATE projects SET description ='#{params[:description]}', language= '#{params[:language]}', sector_id='#{params[:sector_id]}', project_guid='#{params[:project_guid]}', start_date='#{start_date}', end_date='#{end_date}', budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
-         result_description='#{params[:result_description]}', contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
+         result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
        CartoDB::Connection.query(sql)
        
        # result = CartoDB::Connection.query(sql) esto no da nada, tengo que hacer de alguna forma que se capture la fila que se acaba aniadir

@@ -51,6 +51,10 @@
 <value currency="<%= project.budget_currency %>" value-date=""><%= project.budget %></value>
 </budget>
 <%end%>
+
+<% if !project.collaboration_type.blank? %>
+<collaboration-type code="<%= project.budget_currency %>"></collaboration-type>
+<%end%>
 </iati-activity>
 
 <%end%>

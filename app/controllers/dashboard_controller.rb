@@ -34,7 +34,6 @@ class DashboardController < ApplicationController
   end
   
    def download
-    
      sql="SELECT * FROM projects WHERE organization_id = #{session[:organization].cartodb_id}"
       result = CartoDB::Connection.query(sql)
       
