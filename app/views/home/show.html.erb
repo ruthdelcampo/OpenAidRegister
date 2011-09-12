@@ -25,8 +25,22 @@
 	 <%= link_to "GET STARTED", "/signup" %>
 	<br>
 	
+	
+	<h2> Latest published projects </h2>
+		
+		<%	@latest_published.each  do |project|%>
+		<p>	Title:	<%= project.title %> </p>
+
+		<p>	Description:	<%= project.description %> 	</p>
+		<p>	Budget:	<%= project.budget %> 	</p>
+
+		<% end %>
+	
 	<h2> Who is already sharing their data? </h2>
 	<img src="/images/redcross.jpeg" width="150" height="100">
+	
+	
+	
 	
 	
  </div> 

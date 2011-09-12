@@ -32,8 +32,14 @@
 <activity-date type="end-actual"><%= project.end_date %></activity-date>
 <%end%>
 
-<sector vocabulary="DAC" code="<%= project.sector_id %>">Needs to be replaced by a specific sector</sector>
-<!--<sector vocabulary="DAC" code="230">ENERGY GENERATION AND SUPPLY</sector> -->
+<% @download_sectors.each do |project_sector| %>
+<% if project_sector[:project_id] == project.cartodb_id %>
+<% project_sector[:sector_id].each do |sector| %>
+<sector vocabulary="DAC" code="<%= sector %>">Needs to be replaced by a specific sector</sector>
+<%end%>
+<%end%>
+<%end%>
+
 <contact-info>
 <organisation><%= session[:organization].organization_name %></organisation>
 
