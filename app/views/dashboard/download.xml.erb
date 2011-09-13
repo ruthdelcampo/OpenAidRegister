@@ -35,7 +35,12 @@
 <% @download_sectors.each do |project_sector| %>
 <% if project_sector[:project_id] == project.cartodb_id %>
 <% project_sector[:sector_id].each do |sector| %>
-<sector vocabulary="DAC" code="<%= sector %>">Needs to be replaced by a specific sector</sector>
+<% @download_sector_names.each do |sector_name| %>
+<% if sector_name[:sector_id].to_s() == sector %>
+<sector vocabulary="DAC" code="<%= sector %>"><%= sector_name.name %></sector>
+<%break%>
+<%end%>
+<%end%>
 <%end%>
 <%end%>
 <%end%>

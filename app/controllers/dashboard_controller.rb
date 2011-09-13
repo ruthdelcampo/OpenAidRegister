@@ -1,7 +1,6 @@
 class DashboardController < ApplicationController
   
-  def show
-       
+  def show 
     if session[:organization].blank?
       redirect_to '/login'
       return
@@ -36,17 +35,19 @@ class DashboardController < ApplicationController
       sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{session[:organization].cartodb_id} GROUP BY project_id"
       result = CartoDB::Connection.query(sql)
       @download_sectors = result.rows
-     render :template => '/dashboard/download.xml.erb'
-     
-   end
+      sql = "select project_sectors.sector_id, name from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.sector_id"
+      result = CartoDB::Connection.query(sql)
+      @download_sector_names = result.rows 
+      render :template => '/dashboard/download.xml.erb'
+    end
    end
    
    def delete
- 
-    project_id = params[:delete_project_id]
-    
-      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
-      result = CartoDB::Connection.query(sql)
-      redirect_to  '/dashboard'
- end
+     sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
+     CartoDB::Connection.query(sql)
+     sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"
+     CartoDB::Connection.query(sql)
+     redirect_to  '/dashboard'
+   end
+
 end

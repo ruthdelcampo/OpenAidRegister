@@ -67,11 +67,10 @@ class ProjectController < ApplicationController
       if params[:cartodb_id].blank?
         #It is a new project, save to cartodb
         #other_org_name and other_org_role should be included next time
-        sql="INSERT INTO PROJECTS (organization_id, title, description, language, sector_id, project_guid, start_date, 
+        sql="INSERT INTO PROJECTS (organization_id, title, description, language, project_guid, start_date, 
           end_date, budget, budget_currency, website, program_guid, result_title, 
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES 
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', '#{params[:language]}', 
-                 '#{params[:sector_id]}',
                  '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', 
                  '#{params[:result_description]}',  
@@ -92,7 +91,7 @@ class ProjectController < ApplicationController
          end
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET description ='#{params[:description]}', language= '#{params[:language]}', sector_id='#{params[:sector_id]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
+        sql="UPDATE projects SET description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
@@ -100,9 +99,11 @@ class ProjectController < ApplicationController
          #In this case, first delete all sectors and overwrite them
          sql = "DELETE FROM project_sectors where  project_id = '#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
-         params[:sector_id].each do |sectors|
-           sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{params[:cartodb_id]}, '#{sectors}')"
-           CartoDB::Connection.query(sql)
+         if params[:sector_id]
+           params[:sector_id].each do |sectors|
+             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{params[:cartodb_id]}, '#{sectors}')"
+             CartoDB::Connection.query(sql)
+           end
          end
       end
       redirect_to '/dashboard'
@@ -115,6 +116,17 @@ class ProjectController < ApplicationController
       sql="select * FROM projects WHERE cartodb_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql) 
       @project_data = result.rows.first
+      #transform the start_date and end_date in month, day, year
+      if @project_data[:start_date]
+      @project_data.start_date_day = @project_data[:start_date].day
+      @project_data.start_date_month = @project_data[:start_date].month
+      @project_data.start_date_year = @project_data[:start_date].year
+      end
+      if @project_data[:end_date]
+      @project_data.end_date_day = @project_data[:end_date].day
+      @project_data.end_date_month = @project_data[:end_date].month
+      @project_data.end_date_year = @project_data[:end_date].year
+      end
       #select sectors and form the array
       sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
