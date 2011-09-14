@@ -21,7 +21,7 @@ class ProjectController < ApplicationController
         if !is_a_number?(params[:budget])
           @errors.push("Budget must be written in numbers")
         end
-        if params[:budget_currency].match("1")
+        if params[:budget_currency].eql?("1")
           @errors.push("You need to select a currency")
         end
       end

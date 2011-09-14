@@ -1,12 +1,13 @@
 class DashboardController < ApplicationController
   
   def show 
+    
     if session[:organization].blank?
       redirect_to '/login'
       return
     end
     #Show the selection of projects
-    sql="SELECT * FROM projects WHERE organization_id = #{session[:organization].cartodb_id}"
+    sql="SELECT * FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
     result = CartoDB::Connection.query(sql)
     @projects_list = result.rows
     @current_projects = 0
@@ -19,30 +20,44 @@ class DashboardController < ApplicationController
         @past_projects +=1
       end
     end
-   @fake_sector_distribution = [12, 0, 0, 0, 0, 0, 84, 4] 
+    #look for the sector distribution of this organization
+    #sql = "select sector_id, COUNT(sector_id) from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY sector_id"
+    
+    sql = "select sectors.name, COUNT(project_sectors.sector_id) AS countNumofProjectsinthisSector from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) ON sectors.sector_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} GROUP BY project_sectors.sector_id, sectors.name"
+    result = CartoDB::Connection.query(sql)      
+    @sector_distribution = result.rows
   end
   
   def import_file
   end
   
   def download
-    if session[:organization].blank?
-      redirect_to '/login'
-    else
-      sql="SELECT * FROM projects WHERE organization_id = #{session[:organization].cartodb_id}"
+    sql="SELECT * FROM organizations WHERE cartodb_id = #{params[:id]}"
+    result = CartoDB::Connection.query(sql)
+    @download_organization = result.rows.first
+    #we need to check if there is an existing organization, else it will be error 404
+    if (!@download_organization.blank?)
+      sql="SELECT * FROM projects WHERE organization_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
       @download_projects = result.rows
-      sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{session[:organization].cartodb_id} GROUP BY project_id"
-      result = CartoDB::Connection.query(sql)
-      @download_sectors = result.rows
-      sql = "select project_sectors.sector_id, name from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.sector_id"
-      result = CartoDB::Connection.query(sql)
-      @download_sector_names = result.rows 
-      render :template => '/dashboard/download.xml.erb'
+      #Render XML if it has already projects entered and the organization is validated
+      if (@download_organization[:is_validated]) && (!@download_projects.blank?) 
+        sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY project_id"
+        result = CartoDB::Connection.query(sql)      
+        @download_sectors = result.rows
+        sql = "select project_sectors.sector_id, name from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.sector_id"
+        result = CartoDB::Connection.query(sql)
+        @download_sector_names = result.rows 
+        render :template => '/dashboard/download.xml.erb'
+      else
+        render :template => '/dashboard/download_empty.html.erb'
+      end
+    else
+      redirect_to '/public/404.html'
     end
-   end
+  end
    
-   def delete
+  def delete
      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"

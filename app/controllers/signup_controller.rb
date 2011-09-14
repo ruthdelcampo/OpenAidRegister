@@ -32,7 +32,7 @@ class SignupController < ApplicationController
     if params[:password_confirm].empty?
        @errors.push("You need to repeat the password")
     else 
-      unless params[:password_confirm].match(params[:password])
+      unless params[:password_confirm].eql?(params[:password])
       @errors.push("Password's don't match")
       end
     end
@@ -57,13 +57,16 @@ class SignupController < ApplicationController
       @errors.push("The organization name should be longer than 2 characters")
     end
     
+    
     #Organization's type Validation. 
-    if params[:organization_type_id].match("1")
+    if params[:organization_type_id].eql?("")
+      
       @errors.push("Please select your organization's type")
     end
     
     #Organization's country Validation. 
-    if params[:organization_country].match("1")
+    if params[:organization_country].eql?("1")
+      
       @errors.push("Please select your organization's country")
     end
     
@@ -71,12 +74,17 @@ class SignupController < ApplicationController
       @errors.push("Please accept the conditions and terms")
     end
     
+    
     if @errors.count==0
       #no errors, save the data and redirect to singup_complete
       
       
-      #save to CartoDB
-      sql="INSERT INTO organizations(organization_guid, email, password, contact_name, organization_name, organization_type_id, organization_country, organization_web) VALUES('#{params[:organization_guid]}','#{params[:email]}','#{params[:password]}','#{params[:contact_name]}','#{params[:organization_name]}',#{params[:organization_type_id]},'#{params[:organization_country]}','#{params[:organization_web]}' )"
+      #save to CartoDB. Is Validated will be false
+      sql="INSERT INTO organizations(organization_guid, email, password, contact_name, organization_name, 
+      organization_type_id, organization_country, organization_web, is_validated) 
+      VALUES('#{params[:organization_guid]}','#{params[:email]}','#{params[:password]}','#{params[:contact_name]}',
+      '#{params[:organization_name]}',#{params[:organization_type_id]},
+      '#{params[:organization_country]}','#{params[:organization_web]}', 'false')"
       CartoDB::Connection.query(sql)
       
       sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
@@ -198,7 +206,7 @@ class SignupController < ApplicationController
         if params[:password_confirm].empty?
            @errors.push("You need to repeat the password")
         else 
-          unless params[:password_confirm].match(params[:password])
+          unless params[:password_confirm].eql?(params[:password])
           @errors.push("Password's don't match")
           end
         end 

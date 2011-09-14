@@ -1,12 +1,10 @@
-<% if @download_projects %>
-
-<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= session[:organization].created_at %>" version="1.01">
+<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= @download_organization.created_at %>" version="1.01">
 
 <% @download_projects.each do |project| %>
 
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR">
 <reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
-<iati-identifier> <%= "#{session[:organization].organization_country}-#{session[:organization].organization_guid}-#{project.project_guid}" %>
+<iati-identifier> <%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
  </iati-identifier>
 <title>
 <%= project.title %>
@@ -18,7 +16,7 @@
 </description>
 <%end%>
 
-<participating-org role="Implementing" type="<%= session[:organization].organization_type_id %>" ref="<%= session[:organization].organization_guid %>"><%= session[:organization].organization_name %></participating-org>
+<participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= @download_organization.organization_guid %>"><%=@download_organization.organization_name %></participating-org>
 
 <% if !project.website.blank? %>
 <activity-website><%= project.website %></activity-website>
@@ -46,7 +44,7 @@
 <%end%>
 
 <contact-info>
-<organisation><%= session[:organization].organization_name %></organisation>
+<organisation><%= @download_organization.organization_name %></organisation>
 
 <% if !project.contact_name.blank? %>
 <person-name> <%= project.contact_name %></person-name>
@@ -70,7 +68,4 @@
 
 <%end%>
 </iati-activities>
-<% else %>
-This site is empty because you didn't enter any project. 
-Why dont you start <%= link_to "entering your projects?", "/project" %>
-<%end%>
+

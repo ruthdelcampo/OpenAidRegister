@@ -1,6 +1,6 @@
 <div class="center_content">
 
-	<h1> Hello, <%= session[:organization].organization_name %> </h1>
+	<h1> Hello, <%= session[:organization][:organization_name] %> </h1>
 
 
 <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
@@ -13,7 +13,14 @@
 <h3> <%= @current_projects %> ongoing projects </h3>
 <h3> <%= @past_projects %> past projects</h3>
 
-<%= button_to "Download XML", :action => "download" %>
+
+<% @sector_distribution.each do |sector| %>
+
+<%= sector[:countnumofprojectsinthissector]%> projects in <%= sector[:name] %>
+<br>
+<%end%>
+
+<%= button_to "Download XML", {:action => "download", :id => session[:organization][:cartodb_id]} %>
 
 
 
@@ -22,7 +29,7 @@
 <a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
 <!--< link_to project.title, '/view_project', {:action => "view_project", :view_project_id =>project.title}, :method =>"post" %>  -->
 
-<%= button_to "Delete", {:action => "delete",:delete_project_id => project.cartodb_id}, :method => "post", :confirm => "Are you sure?" %>
+<%= button_to "Delete", {:action => "delete",:delete_project_id => project[:cartodb_id]}, :method => "post", :confirm => "Are you sure?" %>
 
 	<br>
 <% end%>

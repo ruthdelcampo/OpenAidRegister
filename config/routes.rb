@@ -71,11 +71,14 @@ OpenAidRegister::Application.routes.draw do
   match 'conditions' => 'conditions#show'
   match 'dashboard' => 'dashboard#show', :via => :get
   match 'import_file' => 'dashboard#import_file'
-  match 'download' => 'dashboard#download'
+  
+  match "/download/:id" => "dashboard#download"
+  #match 'download' => 'dashboard#download'
   match 'dashboard' => 'dashboard#delete', :via => :post
   
   match 'project' => 'project#show'
   match 'password_reset' => 'signup#password_reset'
+
   
   
   

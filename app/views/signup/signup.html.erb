@@ -55,7 +55,7 @@
 		<%= text_field_tag(:organization_name, params[:organization_name]) %>
 		
 			<%= label_tag(:organization_type_id, "Organization's type:") %>
-			<%= select_tag(:organization_type_id, options_for_select([['', 1],['International NGO', 21], ['National NGO', 22], ['Regional NGO', 23]], :selected => params[:organization_type_id])) %>
+			<%= select_tag(:organization_type_id, options_for_select([['', ''],['International NGO', 21], ['National NGO', 22], ['Regional NGO', 23]], :selected => params[:organization_type_id])) %>
 			
 			
 		<br>
