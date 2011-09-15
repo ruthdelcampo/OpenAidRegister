@@ -1,28 +1,64 @@
+<script type="text/javascript">
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+      // Create the data table.
+      	var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Sector Name');
+      data.addColumn('number', 'Projects');
+		<% @sector_distribution.each do |sector| %>
+	data.addRow(['<%=sector.name %>', <%=sector.countnumofprojectsinthissector%>] );
+    <%end%>
+      // Set chart options
+      var options = {'title':'Project Sector Distribution in your organization',
+                     'width':400,
+                     'height':300};
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+
+
+
 <div class="center_content">
-
+	
+	 
+<%= flash[:notice] %>
+<%= flash[:alert] %>
+	
 	<h1> Hello, <%= session[:organization][:organization_name] %> </h1>
-
 
 <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
 
+<br>
+  <br>
+
 <%= link_to "Add project", "/project" %>
 
-<%= button_to "Import from file", :action => "import_file" %>
+<br>
+  <br>
+
+<%= form_for :file_upload, :url => { :action => "import_file" }, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :my_file %>
+  <%= f.submit "Import file" %>
+<% end %>
+
+
 
 <h2> <%= @projects_list.length %> projects published</h2>
 <h3> <%= @current_projects %> ongoing projects </h3>
 <h3> <%= @past_projects %> past projects</h3>
 
-
-<% @sector_distribution.each do |sector| %>
-
-<%= sector[:countnumofprojectsinthissector]%> projects in <%= sector[:name] %>
-<br>
-<%end%>
+<!-- insert the graph-->
+<div id="chart_div"></div>
 
 <%= button_to "Download XML", {:action => "download", :id => session[:organization][:cartodb_id]} %>
-
-
 
 <% @projects_list.each do |project| %>
 
@@ -30,25 +66,6 @@
 <!--< link_to project.title, '/view_project', {:action => "view_project", :view_project_id =>project.title}, :method =>"post" %>  -->
 
 <%= button_to "Delete", {:action => "delete",:delete_project_id => project[:cartodb_id]}, :method => "post", :confirm => "Are you sure?" %>
-
 	<br>
 <% end%>
-
-
-<!-- < button_to "Delete projects", :action => "delete", :method => "post" %>
-	< check_box_tag :project_check[i], 1 %>
--->
-
-
-
-	<!--
-	 <a href="#" class="read_more">read more</a> 
-@fake_project_list
-@fake_current_projects
-@fake_past_projects
-@fake_sector_distribution = [12, 0, 0, 0, 0, 0, 84, 4]
-
--->
-
-
 </div>

@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
       redirect_to '/login'
       return
     end
+    @errors = Array.new  # We need to initialize the errors array to be shown when there is aproblem with import file
     #Show the selection of projects
     sql="SELECT * FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
     result = CartoDB::Connection.query(sql)
@@ -22,13 +23,28 @@ class DashboardController < ApplicationController
     end
     #look for the sector distribution of this organization
     #sql = "select sector_id, COUNT(sector_id) from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY sector_id"
-    
     sql = "select sectors.name, COUNT(project_sectors.sector_id) AS countNumofProjectsinthisSector from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) ON sectors.sector_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} GROUP BY project_sectors.sector_id, sectors.name"
     result = CartoDB::Connection.query(sql)      
     @sector_distribution = result.rows
   end
   
   def import_file
+    unless session[:organization]
+      redirect_to '/login'
+      return
+    end
+    
+    if !params[:file_upload]
+      redirect_to '/dashboard', :alert => "You need to choose a file first to be able to upload it"
+      return
+    end  
+    
+    require 'fileutils'
+    tmp = params[:file_upload][:my_file].tempfile
+    file = File.join("uploads", params[:file_upload][:my_file].original_filename + "_" + session[:organization][:cartodb_id].to_s())
+    FileUtils.cp tmp.path, file
+    redirect_to '/dashboard', :notice => "Thanks for uploading the file. We are going to import your projects. In a few days you will see you projects uploaded. We will send you an email when the process is completed"
+    return 
   end
   
   def download

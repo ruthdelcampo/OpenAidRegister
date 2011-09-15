@@ -59,28 +59,23 @@ OpenAidRegister::Application.routes.draw do
   root :to => "home#show"
   
   match 'about' => 'about#show'
+  match 'conditions' => 'conditions#show'
+  
   match 'signup' => 'signup#signup', :via => :get
   match 'signup' => 'signup#signup_validation', :via => :post
   match 'signup_complete' => 'signup#signup_complete'
   match 'login' => 'signup#login', :via => :get
   match 'login' => 'signup#login_validation', :via => :post
-  
   match 'logout' => 'signup#logout'
-  
   match 'forgot_password' => 'signup#forgot_password'
-  match 'conditions' => 'conditions#show'
+  match 'password_reset' => 'signup#password_reset'
+  
   match 'dashboard' => 'dashboard#show', :via => :get
   match 'import_file' => 'dashboard#import_file'
-  
   match "/download/:id" => "dashboard#download"
-  #match 'download' => 'dashboard#download'
-  match 'dashboard' => 'dashboard#delete', :via => :post
+  match 'delete' => 'dashboard#delete', :via => :post
   
   match 'project' => 'project#show'
-  match 'password_reset' => 'signup#password_reset'
-
-  
-  
-  
+ 
   
 end

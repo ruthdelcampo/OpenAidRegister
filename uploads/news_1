@@ -1,0 +1,391 @@
+<!doctype html>  
+<!--[if lt IE 7 ]> <html dir="ltr" lang="en-US" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html dir="ltr" lang="en-US" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html dir="ltr" lang="en-US" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html dir="ltr" lang="en-US" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="ltr" lang="en-US" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>News | Transparency &amp; Accountability Initiative</title>
+	<meta name="description" content="">
+	<meta name="author" content="83Pixels">
+	
+	<!-- Mobile viewport optimized: j.mp/bplateviewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<!-- CSS: implied media="all" -->
+	
+	
+	<!-- For another *other* than IE6 -->
+	<!--[if ! lte IE 6]><!-->
+	<link rel="stylesheet" href="http://www.transparency-initiative.org/wp-content/themes/tai/css/style.css?v=2">
+	<!--<![endif]-->
+	
+	<!-- For IE6 users only - The poor sods -->
+	<!--[if lte IE 6]>
+	<link rel="stylesheet" href="http://www.transparency-initiative.org/wp-content/themes/tai/css/ie6.1.1.css" media="screen, projection">
+	<![endif]-->
+	
+	<link rel="stylesheet" type="text/css" media="all" href="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/tipsy/stylesheets/tipsy.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/tipTipv13/tipTip.css" />
+
+	<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/modernizr-1.7.min.js"></script>
+	
+	<!-- selectivisr used for html5 selectors in IE -->
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/selectivizr.js"></script>
+
+	<!-- typekit -->
+	<script type="text/javascript" src="http://use.typekit.com/cdv5zcv.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+	<!-- Firebug Lite (used only in dev) --> 
+	  
+		
+	<link rel='stylesheet' id='contact-form-7-css'  href='http://www.transparency-initiative.org/wp-content/plugins/contact-form-7/styles.css?ver=2.4.6' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.transparency-initiative.org/wp-includes/js/l10n.js?ver=20101110'></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js?ver=1.5.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.transparency-initiative.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.transparency-initiative.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='Transparency &amp; Accountability Initiative' href='http://www.transparency-initiative.org' />
+
+<!-- All in One SEO Pack 1.6.13.4 by Michael Torbert of Semper Fi Web Design[528,590] -->
+
+<meta name="keywords" content="budgets,effectiveness auditing,evaluation,impact,rct,transparency,accountability,extractive industries,nigeria,oil,governance,participation,india,open government partnership,anti-corruption,citizen participation,technology,access to information,dodd frank act,drc,natural resources,tax,angola,china,eiti,trade,zimbabwe" />
+
+<link rel="canonical" href="http://www.transparency-initiative.org/news/" />
+<!-- /all in one seo pack -->
+<script type="text/javascript">
+//<![CDATA[
+var _wpcf7 = { cached: 1 };
+//]]>
+</script>
+
+<!-- Protected by WP-SpamFree v2.1.1.2 :: JS BEGIN -->
+<script type="text/javascript" src="http://www.transparency-initiative.org/wp-content/plugins/wp-spamfree/js/wpsf-js.php"></script> 
+<!-- Protected by WP-SpamFree v2.1.1.2 :: JS END -->
+
+	
+	<!-- Grab Google CDN's jQuery, with a protocol relative URL (via cms); fall back to local if necessary -->
+	<script>window.jQuery || document.write("<script src='http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/jquery-1.5.2.min.js'>\x3C/script>")</script>
+	
+</head>
+<body>
+    <!--[if lte IE 6]>
+      <div class="outdated-browser-message">
+        <div class="wrapper article-text"><p>Hello. This site has not been designed with your web browser, Internet Explorer 6, in mind. A very small percentage of web users in the UK (2.9%) use this browser and Microsoft are actively discouraging its use (see <a href="http://www.theie6countdown.com/">The Internet Explorer 6 Countdown</a>).</p>
+        <p>To experience this site as intended may we suggest you try returning with a modern standards-compliant browser such as <a href="http://windows.microsoft.com/en-GB/internet-explorer/downloads/ie-9/worldwide-languages">Internet Explorer 9</a>, <a href="http://www.getfirefox.com/">Firefox</a>, <a href="http://www.google.com/chrome">Google Chrome</a>, <a href="http://www.opera.com/download/">Opera</a>, or <a href="http://www.apple.com/safari/download/">Safari</a>. If that�s not possible, you can install the <a href="http://www.google.com/chromeframe">Google Chrome Frame plugin</a> for IE 6 and 7 (if your setup allows plugins to be installed).</p>
+        </div>
+      </div>
+    <![endif]--> 
+    <!--[if IE 7]>
+      <div class="outdated-browser-message">
+        <div class="wrapper article-text">
+          <p>Hello, you seem to be using Internet Explorer 7. We're well on the way to making it work in IE 7 but you may find a few quirks and foibles using the site in this browser.</p>
+          <p>We suggest you try using a more modern browser (such as <a href="http://windows.microsoft.com/en-GB/internet-explorer/downloads/ie-9/worldwide-languages">IE 9</a>, <a href="http://www.getfirefox.com/">Firefox</a>, <a href="http://www.google.com/chrome">Google Chrome</a>, <a href="http://www.opera.com/download/">Opera</a>, or <a href="http://www.apple.com/safari/download/">Safari</a>). If that is not possible, you can install the <a href="http://www.google.com/chromeframe">Google Chrome Frame plugin</a> for IE 6 and 7 (if your setup allows plugins to be installed).</p>
+        </div>
+      </div>
+    <![endif]--> 		<div id="container" class="workstream ">
+		<header>
+			<a class="home-link ir" href="/" title="Back to the homepage">Welcome to the Transparency and Accountability Initiative.</a>
+			<div class="top">
+				<nav>
+					<ul id="menu-primary" class="menu"><li id="menu-item-238" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-238"><a href="http://www.transparency-initiative.org/">Home</a></li>
+<li id="menu-item-234" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-234"><a href="http://www.transparency-initiative.org/about">About</a></li>
+<li id="menu-item-239" class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-239"><a href="#">Our Work</a></li>
+<li id="menu-item-236" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-236"><a href="http://www.transparency-initiative.org/publications">Publications</a></li>
+<li id="menu-item-237" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-52 current_page_item current_page_parent menu-item-237"><a href="http://www.transparency-initiative.org/news">News</a></li>
+<li id="menu-item-235" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-235"><a href="http://www.transparency-initiative.org/contact">Contact</a></li>
+</ul>					<div class="dropdown-container">
+						<div class="dropdown-menu">
+							<div class="dropdown-pointer"></div>
+							<ul>
+																									<li class="nav-il"><a href="http://www.transparency-initiative.org/workstream/impact-learning" title="Impact &#038; Learning">Impact &#038; Learning</a></li>
+																	<li class="nav-nt"><a href="http://www.transparency-initiative.org/workstream/new-technologies" title="New Technologies">New Technologies</a></li>
+																	<li class="nav-pi"><a href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">Policy Innovations</a></li>
+								    <script type="text/javascript">
+    // <![CDATA[
+        var disqus_shortname = 'tainitiative';
+        var disqus_domain = 'disqus.com';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = 'http://' + disqus_domain + '/forums/' + disqus_shortname + '/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]>
+    </script>
+															</ul>
+						</div>
+					</div>
+					<!--<ul>
+						<li><a href="/" title="">Home</a></li>
+						<li><a href="/about" title="">About</a></li>
+						<li class="dropdown"><a class="parent" href="#" title="">Our Work</a>
+							
+						</li>
+						<li><a href="/publications" title="">Publications</a></li>
+						<li><a href="/news" title="">News</a></li>
+						<li><a href="/contact" title="">Contact</a></li>
+					</ul>-->			
+				</nav>
+				<form action="#" class="searchform" method="get" role="search">
+					<input class="search-box" type="text" id="s" name="s" value="Search">
+					<input id="search-submit" class="ir" type="submit" >
+				</form>
+			</div><!-- end of .top -->
+		</header>
+		<div id="main" role="main">
+		
+	<h1>News from the T/A Initiative </h1>
+
+	<div class="news-side">
+		<div class="w-filter">
+			<h3>Filter by Working Groups</h3>
+			<ul class="workstream-filter">
+									
+									
+					<li class="il"><a href="/news?impact-learning " title="Impact &#038; Learning">Impact &#038; Learning</a></li>
+								
+									
+					<li class="nt"><a href="/news?new-technologies " title="New Technologies">New Technologies</a></li>
+								
+									
+					<li class="pi"><a href="/news?policy-innovations " title="Policy Innovations">Policy Innovations</a></li>
+								
+									
+							</ul>
+		</div>
+		<div class="p-tags">
+			<h3>Popular Tags</h3>	
+			<ul class="popular-tags">
+				<li class="tag-1"><a href="http://www.transparency-initiative.org/news/tag/open-government-partnership">open government partnership</a></li>
+<li class="tag-2"><a href="http://www.transparency-initiative.org/news/tag/transparency">transparency</a></li>
+<li class="tag-3"><a href="http://www.transparency-initiative.org/news/tag/technology">technology</a></li>
+<li class="tag-4"><a href="http://www.transparency-initiative.org/news/tag/oil">oil</a></li>
+<li class="tag-5"><a href="http://www.transparency-initiative.org/news/tag/budgets">budgets</a></li>
+<li class="tag-6"><a href="http://www.transparency-initiative.org/news/tag/open-government">open government</a></li>
+<li class="tag-7"><a href="http://www.transparency-initiative.org/news/tag/eiti">EITI</a></li>
+			</ul>
+		</div>
+	</div><!-- end of news side -->
+	
+	
+<div class="blog-overview">
+
+																		
+				<h3>Featured News</h3>
+				<div class="featured-news">
+					<a href="http://www.transparency-initiative.org/news/how-can-ngos-rigorously-evaluate-their-impact" class="featured-thumb" title="How can NGOs rigorously evaluate their impact?">
+													<img class="image attachment-news-medium " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/3ie1.jpg?src=/wp-content/uploads/2011/09/3ie1.jpg&amp;w=260&amp;h=195&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/how-can-ngos-rigorously-evaluate-their-impact" title="How can NGOs rigorously evaluate their impact?">How can NGOs rigorously evaluate their impact?</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-il ir" href="http://www.transparency-initiative.org/workstream/impact-learning" title="Impact &#038; Learning">$s</a></span> Published: 7 days ago</p>					<p>NGO's face many difficulties when trying to measure and analyse the effectiveness of  their projects. This can often be due to a lack of resources and because already established effectiveness analysis techniques are not necessarily applicable to  ...	</p><p class="more"></p>					<a href="http://www.transparency-initiative.org/news/how-can-ngos-rigorously-evaluate-their-impact" title="View article">View article</a>
+				</div><!-- end featured -->
+				
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/petroleum-nigeria" class="news-thumb" title="Petroleum bill: The law that could cost Nigeria billions">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/petroleum1284507500.jpg?src=/wp-content/uploads/2011/08/petroleum1284507500.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/petroleum-nigeria" title="Petroleum bill: The law that could cost Nigeria billions">Petroleum bill: The law that could cost Nigeria billions</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 7 days ago</p>					<a href="http://www.transparency-initiative.org/news/petroleum-nigeria" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/social-accountability" class="news-thumb" title="Making social accountability happen">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/Social-Accountability.jpg?src=/wp-content/uploads/2011/08/Social-Accountability.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/social-accountability" title="Making social accountability happen">Making social accountability happen</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-il ir" href="http://www.transparency-initiative.org/workstream/impact-learning" title="Impact &#038; Learning">$s</a></span> Published: 7 days ago</p>					<a href="http://www.transparency-initiative.org/news/social-accountability" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/india-ogp" class="news-thumb" title="India chooses supremacy of Parliament over open govt">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/OGP-logo-small.gif?src=/wp-content/uploads/2011/07/OGP-logo-small.gif&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/india-ogp" title="India chooses supremacy of Parliament over open govt">India chooses supremacy of Parliament over open govt</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 13 days ago</p>					<a href="http://www.transparency-initiative.org/news/india-ogp" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/social-media-for-anticorruption" class="news-thumb" title="Social media for anticorruption? Exploring experiences in the former Soviet block">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/UN-LOGO.jpg?src=/wp-content/uploads/2011/08/UN-LOGO.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/social-media-for-anticorruption" title="Social media for anticorruption? Exploring experiences in the former Soviet block">Social media for anticorruption? Exploring experiences in the former Soviet block</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a><a class="news-nt ir" href="http://www.transparency-initiative.org/workstream/new-technologies" title="New Technologies">$s</a></span> Published: 14 days ago</p>					<a href="http://www.transparency-initiative.org/news/social-media-for-anticorruption" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/open-government-and-the-national-plan" class="news-thumb" title="Open Government and the National Plan">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/720px-US-WhiteHouse-Logo.svg_.png?src=/wp-content/uploads/2011/08/720px-US-WhiteHouse-Logo.svg_.png&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/open-government-and-the-national-plan" title="Open Government and the National Plan">Open Government and the National Plan</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 14 days ago</p>					<a href="http://www.transparency-initiative.org/news/open-government-and-the-national-plan" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/maria-otero-interview" class="news-thumb" title="Open Government Partnership: An Interview with Maria Otero, Under Secretary of State">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/OGP-logo-small.gif?src=/wp-content/uploads/2011/07/OGP-logo-small.gif&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/maria-otero-interview" title="Open Government Partnership: An Interview with Maria Otero, Under Secretary of State">Open Government Partnership: An Interview with Maria Otero, Under Secretary of State</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 22 days ago</p>					<a href="http://www.transparency-initiative.org/news/maria-otero-interview" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/dodd-frank-act-drc" class="news-thumb" title="Global Witness: The Dodd Frank Act&#8217;s Section 1502 on conflict minerals">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/65041802-global-witness1-e1314021569738.jpg?src=/wp-content/uploads/2011/08/65041802-global-witness1-e1314021569738.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/dodd-frank-act-drc" title="Global Witness: The Dodd Frank Act&#8217;s Section 1502 on conflict minerals">Global Witness: The Dodd Frank Act&#8217;s Section 1502 on conflict minerals</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 22 days ago</p>					<a href="http://www.transparency-initiative.org/news/dodd-frank-act-drc" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/what%e2%80%99s-so-exciting-about-tax-and-development-a-new-global-focus-on-tax-policy-aid-and-good-governance" class="news-thumb" title="IDS: What’s so exciting about tax and development? A new global focus on tax policy, aid and good governance">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/IDS_Master-Logo_2col-1.jpg?src=/wp-content/uploads/2011/08/IDS_Master-Logo_2col-1.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/what%e2%80%99s-so-exciting-about-tax-and-development-a-new-global-focus-on-tax-policy-aid-and-good-governance" title="IDS: What’s so exciting about tax and development? A new global focus on tax policy, aid and good governance">IDS: What’s so exciting about tax and development? A new global focus on tax policy, aid and good governance</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 22 days ago</p>					<a href="http://www.transparency-initiative.org/news/what%e2%80%99s-so-exciting-about-tax-and-development-a-new-global-focus-on-tax-policy-aid-and-good-governance" title="View article">View article</a>
+				</div>
+	
+																	
+				<div class="news-item">
+					<a href="http://www.transparency-initiative.org/news/china-africa-trade" class="news-thumb" title="Global Witness: Revelations in the Economist &#8211; The Queensway syndicate and the Africa trade">
+													<img class="image attachment-news-small " src="http://www.transparency-initiative.org/wp-content/themes/tai/timthumb.php/china-africa-1.jpg?src=/wp-content/uploads/2011/08/china-africa-1.jpg&amp;w=150&amp;h=112&amp;" />											</a>
+					<h2><a href="http://www.transparency-initiative.org/news/china-africa-trade" title="Global Witness: Revelations in the Economist &#8211; The Queensway syndicate and the Africa trade">Global Witness: Revelations in the Economist &#8211; The Queensway syndicate and the Africa trade</a></h2>
+					<p class="meta-large"><span class="icon-group"><a class="news-pi ir" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">$s</a></span> Published: 22 days ago</p>					<a href="http://www.transparency-initiative.org/news/china-africa-trade" title="View article">View article</a>
+				</div>
+	
+							
+			
+	<p class="label posts_nav">Displaying 1-10 of 44 results</p>
+	<span class='pagination label next'><a href="http://www.transparency-initiative.org/news/page/2" >Next Page</a></span>
+	<span class='pagination label previous'></span>
+	
+</div><!-- end .column-d -->	
+	</div><!-- end of main -->
+		<footer>
+			<div class="col-1">
+				<div class="intro">
+					<h3>About the T/A Initiative</h3>
+					<p>The Transparency and Accountability Initiative (T/A Initiative) is a donor collaborative committed to strengthening democracy and development through empowering citizens to hold their governing institutions to account.</p>	
+					<a class="more-link" href="/about" title="">Read more</a>
+				</div>
+				<div class="get-involved">
+					<h3>Sign up</h3>
+					<a href="/contact" class="signup-banner ir" title="Sign up to our regular newsletter">Sign up to our regular newsletter</a>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="get-intouch">
+					<h3>Get In Touch</h3>
+					<ul>
+						<li class="email"><a href="mailto:contact@transparency-initiative.org" title="">contact@transparency-initiative.org</a></li>
+						<li class="phone"><a href="tel:0207 031 0200" title="">+44 (0)207 031 0200</a></li>
+					</ul>
+				</div>
+				<div class="elsewhere">
+					<h3>Elsewhere on the internet</h3>
+					<ul>
+						<li class="facebook"><a href="http://www.facebook.com/pages/Transparency-Accountability-Initiative/150226518381612" title="">Our facebook page</a></li>
+						<li class="twitter"><a href="http://www.twitter.com/TAInitiative" title="">twitter.com/TAInitiative</a></li>
+					</ul>
+						
+				</div>
+			</div>
+			<div class="col-3">
+				<div class="quick-nav">
+				<a href="#" class="back-top ir" title="Back to top">Back to top</a>
+					<h3>Navigate our website</h3>
+					<ul id="menu-footer" class="menu"><li id="menu-item-251" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-251"><a href="http://www.transparency-initiative.org/">Home</a></li>
+<li id="menu-item-247" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-247"><a href="http://www.transparency-initiative.org/about">About</a></li>
+<li id="menu-item-249" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-249"><a href="http://www.transparency-initiative.org/publications">Publications</a></li>
+<li id="menu-item-250" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-250"><a href="http://www.transparency-initiative.org/news">News</a></li>
+<li id="menu-item-248" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-248"><a href="http://www.transparency-initiative.org/contact">Contact</a></li>
+</ul>					<ul class="our-work">
+						<li class="title">Our Work</li>
+																			<li><a class="il" href="http://www.transparency-initiative.org/workstream/impact-learning" title="Impact &#038; Learning">Impact &#038; Learning</a></li>
+													<li><a class="nt" href="http://www.transparency-initiative.org/workstream/new-technologies" title="New Technologies">New Technologies</a></li>
+													<li><a class="pi" href="http://www.transparency-initiative.org/workstream/policy-innovations" title="Policy Innovations">Policy Innovations</a></li>
+																	</ul>						
+				</div>
+			</div>
+			<div class="end">
+				<small>
+					<ul>
+						<!--<li><a href="#" title="Privacy Policy">Privacy Policy</a></li>-->
+						<!--<li><a href="#" title="Terms and conditions">Terms and conditions</a></li>-->
+						<li>&copy; 2011Open Society Foundation.</li>
+						<li><a href="http://www.83pixels.com" title="A small but beautifully formed Web Design & Consultancy company based in Somerset UK.">Hand Crafted By 83Pixels</a></li>
+					</ul>
+				</small>
+			</div>
+		</footer>
+	</div> <!--! end of #container -->
+	
+	
+	<!-- JavaScript at the bottom for fast page loading -->
+	
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/tipsy/javascripts/jquery.tipsy.js"></script>
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/tipTipv13/jquery.tipTip.js"></script>
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/jquery.scrollTo-min.js"></script>
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/libs/jquery.tools.min.js"></script>
+	<script src="http://www.transparency-initiative.org/wp-content/themes/tai/js/script.js"></script>
+	<!-- end scripts-->
+	
+	
+	<!--[if lt IE 7 ]>
+		<script src="js/libs/dd_belatedpng.js"></script>
+		<script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+	<![endif]-->
+	
+	
+	<script type="text/javascript">
+	
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-23407874-1']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	
+	</script>	
+	
+		<!-- Start of Woopra Code -->
+	<script type="text/javascript">
+	var woo_settings = {idle_timeout:'300000', domain:'transparency-initiative.org'};
+	(function(){
+	var wsc = document.createElement('script');
+	wsc.src = document.location.protocol+'//static.woopra.com/js/woopra.js';
+	wsc.type = 'text/javascript';
+	wsc.async = true;
+	var ssc = document.getElementsByTagName('script')[0];
+	ssc.parentNode.insertBefore(wsc, ssc);
+	})();
+	</script>
+	<!-- End of Woopra Code -->
+	<script type='text/javascript' src='http://www.transparency-initiative.org/wp-content/plugins/contact-form-7/jquery.form.js?ver=2.52'></script>
+<script type='text/javascript' src='http://www.transparency-initiative.org/wp-content/plugins/contact-form-7/scripts.js?ver=2.4.6'></script>
+</body>
+</html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching 24/81 queries in 0.034 seconds using disk: basic
+Object Caching 1858/1989 objects using disk: basic
+
+Served from: www.transparency-initiative.org @ 2011-09-13 20:15:38 -->

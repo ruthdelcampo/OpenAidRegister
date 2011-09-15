@@ -224,7 +224,7 @@ class SignupController < ApplicationController
     sql="select * FROM organizations WHERE random_token = '#{params[:id]}'"
     result = CartoDB::Connection.query(sql) 
       if result.rows.length==0
-      redirect_to '/forgot_password', :notice => "unknown one time password"
+      redirect_to '/forgot_password', :alert => "unknown one time password"
       else
         @user_password_reset = result.rows.first[:email]
         
