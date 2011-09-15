@@ -131,8 +131,9 @@ class SignupController < ApplicationController
       render :template => 'signup/login'
     else
       session[:organization] = result.rows.first
-      
-      redirect_to '/dashboard'
+      redirect_to(session[:return_to] || default)
+      #redirect_to(:back)
+      #redirect_to '/dashboard'
     end
     
     

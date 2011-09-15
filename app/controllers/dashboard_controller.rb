@@ -3,6 +3,7 @@ class DashboardController < ApplicationController
   def show 
     
     if session[:organization].blank?
+      session[:return_to] = request.request_uri
       redirect_to '/login'
       return
     end
@@ -74,6 +75,10 @@ class DashboardController < ApplicationController
   end
    
   def delete
+    if session[:organization].blank?
+      redirect_to '/login'
+      return
+    end
      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"

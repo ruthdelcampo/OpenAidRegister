@@ -4,6 +4,7 @@ class ProjectController < ApplicationController
   def show
     
     unless session[:organization]
+      session[:return_to] = request.request_uri
        redirect_to '/login'
        return
     end
@@ -13,6 +14,7 @@ class ProjectController < ApplicationController
     
     
     if params[:method]=="post"
+      
       @project_data = params      
       if params[:title].blank?
         @errors.push("You need to enter a project title")
@@ -113,6 +115,7 @@ class ProjectController < ApplicationController
      
     #it is a GET method
     if params[:id] #if it is an existing project select everything from projects and from project_sectors
+      
       sql="select * FROM projects WHERE cartodb_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql) 
       @project_data = result.rows.first
@@ -132,8 +135,14 @@ class ProjectController < ApplicationController
       result = CartoDB::Connection.query(sql)
       @project_data[:sector_id] = result.rows.first[:array_agg]
     end
+    
+    # This user comes from 
+    if params[:program_guid]
+      @project_data[:program_guid] = params[:program_guid] 
+    end
     render :template => '/project/show'
     return
+    
   end
   
   def is_a_number?(s)
