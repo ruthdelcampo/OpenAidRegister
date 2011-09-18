@@ -103,6 +103,7 @@ class SignupController < ApplicationController
   
   def signup_complete
     
+    debugger
     if session[:organization]
     else
        redirect_to '/login'       
@@ -131,7 +132,7 @@ class SignupController < ApplicationController
       render :template => 'signup/login'
     else
       session[:organization] = result.rows.first
-      redirect_to(session[:return_to] || default)
+      redirect_to session[:return_to] || request.referer
       #redirect_to(:back)
       #redirect_to '/dashboard'
     end

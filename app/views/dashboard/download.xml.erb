@@ -2,7 +2,7 @@
 
 <% @download_projects.each do |project| %>
 
-<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR">
+<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR" xml:lang="<%=project.language%>">
 <reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
 <iati-identifier> <%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
  </iati-identifier>
@@ -43,6 +43,10 @@
 <%end%>
 <%end%>
 
+<% if !project.program_guid.blank? %>
+<related-activity type="1" ref="<%= project.program_guid %>"></parent-id>
+<%end%>
+ 
 <contact-info>
 <organisation><%= @download_organization.organization_name %></organisation>
 
@@ -61,10 +65,27 @@
 </budget>
 <%end%>
 
+
+
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.budget_currency %>"></collaboration-type>
 <%end%>
+
+<% if !project.result_title.blank? %>
+<result type="output">
+	<title> <%=project.result_title %> </title>
+	<% if !project.result_description.blank? %>
+	<description><%= project.result_description %></description>
+	<%end%>
+</result>
+<%end%>
+
+
+
+
 </iati-activity>
+
+
 
 <%end%>
 </iati-activities>

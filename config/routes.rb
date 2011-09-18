@@ -76,6 +76,5 @@ OpenAidRegister::Application.routes.draw do
   match 'delete' => 'dashboard#delete', :via => :post
   
   match 'project' => 'project#show'
- 
   
 end

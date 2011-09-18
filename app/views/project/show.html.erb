@@ -1,3 +1,16 @@
+<% content_for :head do %>
+<script type="text/javascript"
+    src="http://maps.googleapis.com/maps/api/js?sensor=false">
+</script>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<% end %>
+
+
 <div class="center_content">
    
         
@@ -245,6 +258,7 @@
 		<br>
 		<br>
 		<br>
+		<div id="map_canvas" style="width:40%; height:40%"></div>
 		GOOGLE MAPS
 		<br>
 		<br>
@@ -622,18 +636,7 @@
 				  <br>
 		<%= submit_tag("Submit")  %>
 		
-
-		
-		<script>
-			/* $("input[@name='input']").change(function(){
-			    if ($("input[@name='input']:checked").val() == 'file'){
-			 // Code for handling value 'file'        
-			  $("#method").attr('disabled', 'disabled');
-			  }else {
-			 	$("title", this).attr('disabled', 'disabled');
-				}});
-				*/
-		</script>
+	
 	
 		<br>
 		
