@@ -82,12 +82,12 @@ class SignupController < ApplicationController
       #save to CartoDB. Is Validated will be false
       sql="INSERT INTO organizations(organization_guid, email, password, contact_name, organization_name, 
       organization_type_id, organization_country, organization_web, is_validated) 
-      VALUES('#{params[:organization_guid]}','#{params[:email]}','#{params[:password]}','#{params[:contact_name]}',
+      VALUES('#{params[:organization_guid]}','#{params[:email]}',md5('#{params[:password]}'),'#{params[:contact_name]}',
       '#{params[:organization_name]}',#{params[:organization_type_id]},
       '#{params[:organization_country]}','#{params[:organization_web]}', 'false')"
       CartoDB::Connection.query(sql)
       
-      sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
+      sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}'"
       result = CartoDB::Connection.query(sql)
       session[:organization] = result.rows.first
       
@@ -123,7 +123,7 @@ class SignupController < ApplicationController
     
     
     
-    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password='#{quote_string(params[:password])}'"
+    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password=md5('#{quote_string(params[:password])}')"
     result = CartoDB::Connection.query(sql)
     
     if result.rows.length==0
