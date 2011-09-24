@@ -15,7 +15,8 @@ class ProjectController < ApplicationController
     
     if params[:method]=="post"
       
-      @project_data = params      
+      @project_data = params  
+      debugger    
       if params[:title].blank?
         @errors.push("You need to enter a project title")
       end
@@ -136,9 +137,9 @@ class ProjectController < ApplicationController
       @project_data[:sector_id] = result.rows.first[:array_agg]
     end
     
-    # This user comes from 
-    if params[:program_guid]
-      @project_data[:program_guid] = params[:program_guid] 
+    # This user comes from IATI Data Explorer
+    if params[:related_activity]
+      @project_data[:program_guid] = params[:related_activity] 
     end
     render :template => '/project/show'
     return
