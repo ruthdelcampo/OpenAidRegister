@@ -103,7 +103,6 @@ class SignupController < ApplicationController
   
   def signup_complete
     
-    debugger
     if session[:organization]
     else
        redirect_to '/login'       

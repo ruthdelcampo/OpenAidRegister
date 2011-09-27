@@ -15,8 +15,7 @@ class ProjectController < ApplicationController
     
     if params[:method]=="post"
       
-      @project_data = params  
-      debugger    
+      @project_data = params      
       if params[:title].blank?
         @errors.push("You need to enter a project title")
       end
@@ -70,10 +69,12 @@ class ProjectController < ApplicationController
       if params[:cartodb_id].blank?
         #It is a new project, save to cartodb
         #other_org_name and other_org_role should be included next time
-        sql="INSERT INTO PROJECTS (organization_id, title, description, language, project_guid, start_date, 
+        sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date, 
           end_date, budget, budget_currency, website, program_guid, result_title, 
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES 
-                 (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', '#{params[:language]}', 
+                 (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', 
+                ST_GeomFromText('#{params[:google_markers]}',4326),
+                 '#{params[:language]}', 
                  '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', 
                  '#{params[:result_description]}',  
@@ -94,7 +95,10 @@ class ProjectController < ApplicationController
          end
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
+        
+        #update projects set the_geom= ST_GeomFromText('MULTIPOINT ((10 40), (40 30), (20 20), (30 10))',4326) where cartodb_id=2
+        debugger
+        sql="UPDATE projects SET the_geom=ST_GeomFromText('#{params[:google_markers]}',4326), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
@@ -117,9 +121,18 @@ class ProjectController < ApplicationController
     #it is a GET method
     if params[:id] #if it is an existing project select everything from projects and from project_sectors
       
-      sql="select * FROM projects WHERE cartodb_id = #{params[:id]}"
+      sql="select cartodb_id, organization_id, title, description, language, project_guid, start_date, 
+        end_date, budget, budget_currency, website, program_guid, result_title, 
+               result_description, collaboration_type, tied_status, aid_type, flow_type, 
+               finance_type, contact_name, contact_email, contact_position, ST_ASText(the_geom) 
+               FROM projects WHERE cartodb_id = #{params[:id]}"
+               
       result = CartoDB::Connection.query(sql) 
       @project_data = result.rows.first
+      
+      @project_data[:google_markers] = @project_data[:st_astext]
+      
+      
       #transform the start_date and end_date in month, day, year
       if @project_data[:start_date]
       @project_data.start_date_day = @project_data[:start_date].day
@@ -135,6 +148,7 @@ class ProjectController < ApplicationController
       sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
       @project_data[:sector_id] = result.rows.first[:array_agg]
+     
     end
     
     # This user comes from IATI Data Explorer

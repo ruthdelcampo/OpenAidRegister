@@ -49,35 +49,49 @@
 			Which language are you using  when introducing your project data? By default, english is selected    
 		
 		
+	
+		
 			<br>	<br>
 			<%= label_tag(:sector_id, "Sector:") %>
-		<%= select_tag(:sector_id, options_for_select([	['EDUCATION','110'],
-			['HEALTH','120'],
-			['POPULATION POLICIES/PROGRAMMES AND REPRODUCTIVE HEALTH','130'],
-			['WATER AND SANITATION','140'],
-			['GOVERNMENT AND CIVIL SOCIETY','150'],
-			['OTHER SOCIAL INFRASTRUCTURE AND SERVICES','160'],
-			['TRANSPORT AND STORAGE','210'],
-			['COMMUNICATION','220'],
-			['ENERGY GENERATION AND SUPPLY','230'],
-			['BANKING AND FINANCIAL SERVICES','240'],
-			['BUSINESS AND OTHER SERVICES','250'],
-			['AGRICULTURE','311'],
-			['FORESTRY','312'],
-			['FISHING','313'],
-			['INDUSTRY','321'],
-			['MINERAL RESOURCES AND MINING','322'],
-			['CONSTRUCTION','323'],
-			['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT','331'],
-			['TOURISM','332'],
-			['MULTISECTOR/CROSS-CUTTING','400'],
-			['COMMODITY AID AND GENERAL PROGRAMME ASSISTANCE','500'],
-			['ACTION RELATING TO DEBT','600'],
-			['HUMANITARIAN AID','700'],
-			['ADMINISTRATIVE COSTS OF DONORS','910'],
-			['SUPPORT TO NON- GOVERNMENTAL ORGANISATIONS (NGOs)','920'],
-			['REFUGEES IN DONOR COUNTRIES','930'],
-			['UNALLOCATED/ UNSPECIFIED','998']], :selected => @project_data[:sector_id]), :multiple => true ) %>
+		<%= select_tag(:sector_id, options_for_select([	
+			['Education -level unspecified','1'],
+			['Basic education','2'],
+			['Secondary education','3'],
+			['Post-secondary education','4'],
+			['Health-general','5'],
+			['Basic health', '6'],
+			['POPULATION POLICIES-PROGRAMMES AND REPRODUCTIVE HEALTH','7'],
+			['WATER AND SANITATION','8'],
+				['Government and civil society, general','9'],
+				['Conflict prevention and resolution- peace and security','10'],
+				['OTHER SOCIAL INFRASTRUCTURE AND SERVICES','11'],
+					['TRANSPORT AND STORAGE','12'],
+					['COMMUNICATION','13'],
+					['ENERGY GENERATION AND SUPPLY','14'],
+					['BANKING AND FINANCIAL SERVICES','15'],
+					['BUSINESS AND OTHER SERVICES','16'],
+					['AGRICULTURE','17'],
+					['FORESTRY','18'],
+					['FISHING','19'],
+					['INDUSTRY','20'],
+					['MINERAL RESOURCES AND MINING','21'],
+					['CONSTRUCTION','22'],
+					['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT','23'],
+					['TOURISM','24'],
+					['General environmental protection','25'],
+					['Other multisector','26'],
+					['General budget support','27'],
+					['Developmental food aid/Food security assistance','28'],
+					['Other commodity assistance','29'],
+					['ACTION RELATING TO DEBT','30'],
+					['Emergency Response','31'],
+					['Reconstruction relief and rehabilitation','32'],
+					['Disaster prevention and preparedness','33'],
+					['ADMINISTRATIVE COSTS OF DONORS','34'],
+					['SUPPORT TO NON- GOVERNMENTAL ORGANISATIONS (NGOs)','35'],
+					['REFUGEES IN DONOR COUNTRIES','36'],
+					['UNALLOCATED/ UNSPECIFIED','37']], 
+					:selected => @project_data[:sector_id]), :multiple => true ) %>
 		<br>
 		You can select multiple sectors
 		<br>
@@ -255,7 +269,6 @@
 		<br>
 		<br>
 		<div id="map_canvas" style="width:400px; height:300px;"></div>
-		GOOGLE MAPS
 		<br>
 		<br>
 		<br>
@@ -585,45 +598,16 @@
 						
 						
 						
-			<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", :onchange =>"change_contact_info()") %>
+			<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", 
+			:onchange =>"change_contact_info()") %>
 			
+			
+		
 			<% label_tag(:same_person, "Check this option if you are the contact person") %>
 			
 			
 			
 			
-				<script>
-				function change_contact_info() { 
-				   if ($('#same_person').is(':checked')) {
-				// $("#contact_name").attr('disabled', 'disabled');
-				$("#contact_name").val("<%= session[:organization].contact_name %>");
-				// $("#contact_email").attr('disabled', 'disabled');
-				$("#contact_email").val("<%= session[:organization].email %>");
-			}else{
-				$("#contact_name").removeAttr('disabled');
-					$("#contact_name").val('');
-						$("#contact_email").removeAttr('disabled');
-							$("#contact_email").val('');
-			}
-				return false
-			
-			}
-			
-			function disable_end_date() { 
-			   if ($('#permanent').is(':checked')) {
-			$("#end_date_month").attr('disabled', 'disabled');
-				$("#end_date_day").attr('disabled', 'disabled');
-					$("#end_date_year").attr('disabled', 'disabled');
-		}else{
-			$("#end_date_month").removeAttr('disabled');
-				$("#end_date_day").removeAttr('disabled');
-					$("#end_date_year").removeAttr('disabled');
-		}
-			return false
-		
-		}
-			
-				</script>
 	
 				
 			<br>
@@ -638,6 +622,8 @@
 			<br>
 			
 		<input type="hidden" id="cartodb_id" name="cartodb_id" value="<%=@project_data[:cartodb_id]%>" />
+		
+	<input type="hidden" id="google_markers" name="google_markers" value="<%=@project_data[:google_markers]%>" /> 
 		
 			
 			

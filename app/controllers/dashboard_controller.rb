@@ -24,9 +24,14 @@ class DashboardController < ApplicationController
     end
     #look for the sector distribution of this organization
     #sql = "select sector_id, COUNT(sector_id) from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY sector_id"
-    sql = "select sectors.name, COUNT(project_sectors.sector_id) AS countnumofprojectsinthissector from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) ON sectors.cartodb_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} GROUP BY project_sectors.sector_id, sectors.name"
+    sql = "select sectors.name, COUNT(project_sectors.sector_id) AS countnumofprojectsinthissector 
+    from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) 
+    ON sectors.cartodb_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} 
+    GROUP BY project_sectors.sector_id, sectors.name"
+    
     result = CartoDB::Connection.query(sql)      
     @sector_distribution = result.rows
+    
   end
   
   def import_file
