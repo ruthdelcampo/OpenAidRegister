@@ -5,7 +5,6 @@ gem 'rails', '3.0.5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 
 #gem 'cartodb-rb-client', :git => 'git://github.com/Vizzuality/cartodb-rb-client.git'
 
@@ -13,7 +12,21 @@ gem 'heroku'
 
 #gem 'jquery-rails'
 
-#gem 'ruby-debug19'
+
+
+unless $heroku 
+	group :development, :test do
+	 	gem 'ruby-debug19'
+	  	gem "rspec", ">= 2.0.0" 
+	   	gem "rspec-rails", ">= 2.0.0"
+
+	   	gem "autotest"
+	   	gem 'webrat'
+		gem 'heroku'
+		gem 'sqlite3'
+	end
+end
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
