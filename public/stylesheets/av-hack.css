@@ -1,0 +1,4 @@
+html, body { margin:0; padding:0; height:100%; }
+#outer_layout { min-height:100%; position:relative; float:left; width:100%; }
+#outer_footer { position:absolute; bottom:0; left:0; width:100%; }
+#body_container { float:left; height:100%; width:100%; padding-bottom:210px; }

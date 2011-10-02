@@ -2,6 +2,7 @@
 
 <% @download_projects.each do |project| %>
 
+
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="EUR" xml:lang="<%=project.language%>">
 <reporting-org type="22"  ref="OAR-123">Open Aid Register</reporting-org>
 <iati-identifier> <%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
@@ -18,6 +19,17 @@
 
 <participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= @download_organization.organization_guid %>"><%=@download_organization.organization_name %></participating-org>
 
+<% @download_other_orgs.each do |other_orgs| %>
+<% if other_orgs[:project_id] == project.cartodb_id %>
+<% counter= 1%>
+<% other_orgs[:other_org_names].each do |other_org_name| %>
+<participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref="">
+<%=other_org_name%></participating-org>
+<% counter+=1%>
+<%end%>
+<%end%>
+<%end%>
+
 <% if !project.website.blank? %>
 <activity-website><%= project.website %></activity-website>
 <%end%>
@@ -32,10 +44,11 @@
 
 <% @download_sectors.each do |project_sector| %>
 <% if project_sector[:project_id] == project.cartodb_id %>
+
 <% project_sector[:sector_id].each do |sector| %>
 <% @download_sector_names.each do |sector_name| %>
-<% if sector_name[:sector_id].to_s() == sector %>
-<sector vocabulary="DAC" code="<%= sector %>"><%= sector_name.name %></sector>
+<% if sector_name[:sector_id] == sector %>
+<sector vocabulary="DAC" code="<%= sector_name.sector_code %>"><%= sector_name.name %></sector>
 <%break%>
 <%end%>
 <%end%>
@@ -64,8 +77,6 @@
 <value currency="<%= project.budget_currency %>" value-date=""><%= project.budget %></value>
 </budget>
 <%end%>
-
-
 
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.budget_currency %>"></collaboration-type>

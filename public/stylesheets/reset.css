@@ -1,0 +1,7 @@
+html, body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, form, fieldset, p, select, img, input, fieldset { margin:0; padding:0; outline:0; border:0; }
+html, body { margin:0; padding:0; height:100%; }
+body { background:url(../images/body_bg.jpg) repeat left top; font:normal 12px/14px Georgia, "Times New Roman", Times, serif; color:#fff;}
+.clear { clear:both; }
+a:focus { outline:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; cursor:pointer; }

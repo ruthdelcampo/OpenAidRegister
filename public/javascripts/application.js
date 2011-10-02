@@ -3,6 +3,7 @@
 
 var map;
 var markers = [];
+var marker;
 
 $(document).ready(function(){ 
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
@@ -18,11 +19,14 @@ $(document).ready(function(){
 	google.maps.event.addListener(map, 'click', addMarker);
 	
 	// Remove markers
-	google.maps.event.addListener(map, 'doubleclick', removeMarker)
+	google.maps.event.addListener(map, 'dblclick', removeMarker)
 	
 	
 	//parse possible existing points
+	if (!($("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
 	parseWkt($("#google_markers").val());
+	}
+
 });
 
 function addMarker(event) {
@@ -36,9 +40,15 @@ function addMarker(event) {
 	
 }
 
-function removeMarker(event)
+function removeMarker()
 {
 	
+	if (markers) {
+    for (i in markers) {
+      markers[i].setMap(null);
+    }
+    markers.length = 0;
+  }
 	
 }
 
@@ -68,7 +78,7 @@ function parseWkt(wkt) {
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });		
-		markers.push();
+		markers.push(marker);
 	});
 }
 

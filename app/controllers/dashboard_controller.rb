@@ -59,17 +59,35 @@ class DashboardController < ApplicationController
     @download_organization = result.rows.first
     #we need to check if there is an existing organization, else it will be error 404
     if (!@download_organization.blank?)
-      sql="SELECT * FROM projects WHERE organization_id = #{params[:id]}"
+      sql="SELECT  cartodb_id, organization_id, title, description, language, project_guid, start_date, 
+      end_date, budget, budget_currency, website, program_guid, result_title, 
+      result_description, collaboration_type, tied_status, aid_type, flow_type, 
+      finance_type, contact_name, contact_email, contact_position, 
+      ST_ASText(the_geom) AS google_markers, updated_at
+      FROM projects WHERE organization_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
       @download_projects = result.rows
       #Render XML if it has already projects entered and the organization is validated
       if (@download_organization[:is_validated]) && (!@download_projects.blank?) 
-        sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY project_id"
-        result = CartoDB::Connection.query(sql)      
-        @download_sectors = result.rows
-        sql = "select project_sectors.sector_id, name from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.sector_id"
+        sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors 
+        INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id 
+        WHERE organization_id =#{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
-        @download_sector_names = result.rows 
+        result.rows.each do |row|
+          row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
+        end
+        
+        @download_sectors = result.rows
+        sql = "select project_sectors.sector_id, name, sector_code from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
+        result = CartoDB::Connection.query(sql)
+        @download_sector_names = result.rows
+        #now partner organizations
+        sql = "select project_id, array_agg(project_partnerorganizations.other_org_name) AS other_org_names, array_agg(project_partnerorganizations.other_org_role) AS other_org_roles  
+        from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id 
+        WHERE organization_id = #{params[:id]} GROUP BY project_id"
+        result = CartoDB::Connection.query(sql)
+        @download_other_orgs = result.rows
+        
         render :template => '/dashboard/download.xml.erb'
       else
         render :template => '/dashboard/download_empty.html.erb'

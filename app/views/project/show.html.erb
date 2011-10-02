@@ -461,7 +461,7 @@
 			<%= label_tag(:other_org_name, "Other organizations:") %>
 		  	<%= text_field_tag(:other_org_name_1, @project_data[:other_org_name_1]) %>
 				<%= label_tag(:other_org_role, "Their role:") %>
-			  	<%= select_tag(:other_org_role_1, options_for_select([['', ''], ['accountable', 1], ['extending', 2],['funding', 3], ['implementing', 4]], :selected => @project_data[:other_org_role_1])) %>
+			  	<%= select_tag(:other_org_role_1, options_for_select([['', ''], ['accountable', 1], 			['extending', 2],['funding', 3], ['implementing', 4]], :selected => @project_data[:other_org_role_1])) %>
 		<br>
 			<%= label_tag(:other_org_name, "Other organizations:") %>
 		  	<%= text_field_tag(:other_org_name_2, @project_data[:other_org_name_2]) %>
