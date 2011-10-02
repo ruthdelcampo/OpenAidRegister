@@ -6,7 +6,7 @@ gem 'rails', '3.0.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
-#gem 'cartodb-rb-client', :git => 'git://github.com/Vizzuality/cartodb-rb-client.git'
+gem 'cartodb-rb-client', :git => 'git://github.com/Vizzuality/cartodb-rb-client.git'
 
 gem 'heroku'
 
