@@ -13,7 +13,7 @@ gem 'heroku'
 
 #gem 'jquery-rails'
 
-gem 'ruby-debug19'
+#gem 'ruby-debug19'
 
 # Use unicorn as the web server
 # gem 'unicorn'
