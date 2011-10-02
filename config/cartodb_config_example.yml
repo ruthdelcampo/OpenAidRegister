@@ -1,0 +1,6 @@
+development:
+  host: https://ruth.cartodb.com
+  oauth_key: xxxx
+  oauth_secret: xxxx
+  username: xxxx
+  password: xxxx
