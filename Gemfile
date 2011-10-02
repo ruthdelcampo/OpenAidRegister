@@ -11,7 +11,7 @@ gem 'sqlite3'
 
 gem 'heroku'
 
-gem 'jquery-rails'
+#gem 'jquery-rails'
 
 gem 'ruby-debug19'
 
