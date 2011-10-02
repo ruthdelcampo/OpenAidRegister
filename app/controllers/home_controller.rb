@@ -12,9 +12,9 @@ class HomeController < ApplicationController
        
       
        
-        sql = "select * from projects WHERE organization_id IN (select cartodb_id from organizations WHERE is_validated = true) ORDER BY updated_at DESC LIMIT 3"
-        result =  CartoDB::Connection.query(sql)
-        @latest_published = result.rows
+        #sql = "select * from projects WHERE organization_id IN (select cartodb_id from organizations WHERE is_validated = true) ORDER BY updated_at DESC LIMIT 3"
+        #result =  CartoDB::Connection.query(sql)
+        #@latest_published = result.rows
     
   end
   
