@@ -1,81 +1,68 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>OpenAidRegister</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all %>
-	<%= yield :head %>
-  <%= csrf_meta_tag %>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>openAid</title>
+<%= stylesheet_link_tag "reset" %>
+<%= stylesheet_link_tag "layout" %>
+<%= stylesheet_link_tag "av-hack" %>
+<%= javascript_include_tag "jquery-1.3.2.min" %>
+<%= javascript_include_tag "cufon-yui.js" %>
+<%= javascript_include_tag "Helvetica_Neue_700-Helvetica_Neue_300-Helvetica_Neue_400.font" %>
+<%= javascript_include_tag "application" %>
 
+<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'71542055-cb49-4171-897d-f7327ef5cb51'});</script>
+
+<%= yield :head %>
+
+
+<meta name="description" content="Open Aid Register is an initiative to speed up getting the global picture of who is doing what, where in terms of aid." />
+
+<%= csrf_meta_tag %>
+
+
+<script type="text/javascript">
+Cufon.replace(['#header .header_text p,#header .header_boot ul li span' ], {fontFamily: 'Helvetica Neue Light',hover: true});
+Cufon.replace(['.top_nav ul li a, #header .nav ul li, .body_top .body_top_lf h3, .box_list ul li h4, .box_list ul li .date_sec ul li span' ], {fontFamily: 'Helvetica Neue Bold',hover: true});
+Cufon.replace('.body_top .body_top_lf h3, .box_list ul li h4', { fontFamily: 'Helvetica Neue Bold',hover: true, textShadow: '1px 1px 0px #fff'}); 
+</script>
+<!--[if gte IE 9]><script type="text/javascript">Cufon.set('engine', 'canvas');</script><![endif]-->
 </head>
 <body>
-
-	<div id="main_container">
-
-	        <div class="menu">
-	        	<ul>                                                                         
-	        		<li class="selected">
-					
-					<%= link_to "home", root_path %>
-					</li> 
-					
-	                <li>
-							<%= link_to "about", about_path %>
-						
-						</li>
-						  
-									
-										
-
-						
-	        	</ul>
-	        </div>
-	
-			<div class="center_content">
-
-		        	<h1>Open <span class="orange">Aid</span> Register</h1>
-
-		<h3> <i> Committed with aid transparency </i> </h3>
-
-		</div>
-		
-	
-		
-		<div class="right_content">
-
-	        	<% if !session[:organization].blank? %>
-					
-			<%= link_to "log out", '/logout' %>
-			
-	      	<%  end %>
-
-	</div>
-		
-		
-	
-<%= yield %>
-
-
-
-	</div>
-	<!-- end of main_container -->
-	 
-	<div id="footer">                                              
-        <div class="right_footer"> 
-	<h2> About this project </h2>
-	<p> Open Aid Register is an initiative to speed up getting the global picture of who is doing what, where in terms of aid.	 </p>
-	<p>
-		<%= link_to "Learn more about this", about_path %> or <%= mail_to "ruthdelcampo@gmail.com", "contact" %> us
-		
-		 </p>
-	
- </div>
- 
-	</div>  
-	
-	 
-
-
-
+<div id="outer_layout">
+  <div class="outer_wrapper">
+    <div class="layout">
+      <div id="header">
+        <div class="top_nav">
+          <ul>
+            <li class="first"><a href="#">HOME</a></li>
+            <li><a href="/login">LOGIN</a></li>
+            <!--li><a href="#">WHO IS ALREADY USING IT</a></li -->
+            <li><a href="http://blog.openaidregister.org">BLOG</a></li>
+            <li class="last"><a href="/about">ABOUT</a></li>
+          </ul>
+        </div>
+            <%= yield %>
+        </div>
+    </div>
+    <div>
+        <div id="outer_footer">
+            <div class="layout">
+                <div id="footer">
+                    <div class="footer_left">
+                        <p>Open Aid Register is an initiative to speed up getting the global picture of who is doing what, where in terms of aid. <a href="#">Learn more about this</a></p>
+                        <ul>
+                            <li class="first"><a href="mailto:ruthdelcampo@gmail.com">Contact</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Terms and conditions</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer_right"> <span class="newyork_logo"><img src="/images/newyork_school.gif" alt=""/></span> <span class="international"><img src="/images/international_logo.gif" alt=""/></span> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
 </body>
-</html>
+</html>            

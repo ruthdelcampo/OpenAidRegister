@@ -1,48 +1,73 @@
-
-        
-    <div class="center_content">
-	
-	<%= flash[:alert] %>
-    
-
-<%= link_to "Already a user? Please SIGN IN", "/login" %>
- <br>
-<br>
- 
-<h2> 
-	<p>	Each organization working on AID should publish their project's data.
-		</p><p>
-				Check out this video to learn why this is important 
-				</p>
-			</h2>
-        
-<iframe src="http://player.vimeo.com/video/24621998?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" width="400" height="225" frameborder="0"></iframe>
-
-
-<h2>But...for NGO's converting their data to IATI standard might be technically difficult. Open Aid Register helps NGOs in publishing its data. This is how it works
-	</h2>
-	
-	<img src="/images/stepsforOAR.gif" width="540" height="320">
-	
-	 <%= link_to "GET STARTED", "/signup" %>
-	<br>
-	
-	
-	<h2> Latest published projects </h2>
-		
-		<%	@latest_published.each  do |project|%>
-		<p>	Title:	<%= project.title %> </p>
-
-		<p>	Description:	<%= project.description %> 	</p>
-		<p>	Budget:	<%= project.budget %> 	</p>
-
-		<% end %>
-	
-	<h2> Who is already sharing their data? </h2>
-	<img src="/images/redcross.jpeg" width="150" height="100">
-	
-	
-	
-	
-	
- </div> 
+<div class="logo">
+  <h1><img src="/images/logo.png" alt="openAid" /></h1>
+</div>
+<div class="header_text">
+                <p>Open Aid Register helps non-profit and NGOs publish their data using the most common data standard for aid: IATI (International Aid Transparency Initiative) and keep it as open data.</p>
+              </div>
+              <div class="header_boot">
+                <p>DO YOU WORK IN A NON-PROFIT OR NGO?</p>
+                <h2>This is all you have to do to make your organization be <strong>transparent</strong></h2>
+                <ul>
+                  <li class="sign_in"><a href="/signup"><img src="/images/sign_ing.png" alt=""/></a><span><strong>1.</strong> <a href="/signup">Sign up</a> for an account if you haven’t one yet.</span></li>
+                  <li class="fill_form"><img src="/images/fill_form.png" alt=""/><span><strong>2.</strong> Fill in the form for each organization’s projects. </span></li>
+                  <li class="you_done"><img src="/images/you_done.gif" alt=""/><span><strong>3.</strong> You are done, your data is now released!</span></li>
+                </ul>
+              </div>
+              <div class="nav">
+                <ul>
+                  <li class="first"><a href="/">HOME</a></li>
+                  <li><a href="/login">LOGIN</a></li>
+                  <li><a href="#who_is_using_it">WHO IS ALREADY USING IT</a></li>
+                  <li><a href="http://blog.openaidregister.org">BLOG</a></li>
+                  <li class="last"><a href="/about">ABOUT</a></li>
+                </ul>
+              </div>
+            </div>
+            <div id="body_container">
+              <div class="body_top">
+                <div class="body_top_lf">
+                  <h3>OUR GOAL</h3>
+                  <p>Each organization working on AID should publish their data using a data standard and as open data.</p>
+                  <p>Open Aid Register helps organizations get rid of all technical issues and makes this process easy and smoothly.</p>
+                  <p>Check out this video to learn why this is important.</p>
+                  <span>
+                                <a href="javascript:var%20d=document,f='http://www.new.facebook.com/share',l=d.location,e=encodeURIComponent,p='.php?src=bm&v=4&i=1219930092&u='+e( window.location.href)+'&t='+e(d.title);1;try{if%20(!/^(.*\.)?facebook\.[^.]*$/.test(l.host))throw(0);share_internal_bookmarklet(p)}catch(z)%20{a=function()%20{if%20(!window.open(f+'r'+p,'sharer','toolbar=0,status=0,resizable=1,width=626,height=436'))l.href=f+p};if%20(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else{a()}}void(0)" title="Compartir en Facebook" class="facebook">Like it? Spread the word</a></span> </div>
+                <div class="body_top_rt">
+                    <iframe src="http://player.vimeo.com/video/24621998?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=0" width="659" height="357" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+                    
+                </div>
+              </div>
+              <div class="box_list">
+                <ul>
+                  <li class="first">
+                    <h4>WHO IS ALREADY USING THIS</h4>
+                    <span><img src="/images/red_cross.gif" alt="" /></span>
+                    <p class="blockquoto">Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands, her remarks focused on the unusual.</p>
+                  </li>
+                  <li>
+                    <h4>LAST PUBLISHED PROJECTS</h4>
+                    <h5>Economic Management Capacity Building Project</h5>
+                    <small>OXFAM<strong>$3400</strong></small>
+                    <p>Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands.</p>
+                    <div class="date_sec">
+                      <ul>
+                        <li><span>FROM</span> <strong>3/4/2005</strong> </li>
+                        <li><span>TO</span> <strong>4/9/2012</strong> </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="last">
+                    <h4>&nbsp;</h4>
+                    <h5>Child hunger provisioning in the horn of africa</h5>
+                    <small>Doctor without frontiers<strong>$3400</strong></small>
+                    <p>Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands.</p>
+                    <div class="date_sec">
+                      <ul>
+                        <li><span>FROM</span> <strong>3/4/2005</strong> </li>
+                        <li><span>TO</span> <strong>4/9/2012</strong> </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
