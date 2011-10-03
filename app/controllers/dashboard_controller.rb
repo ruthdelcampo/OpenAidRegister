@@ -76,8 +76,6 @@ class DashboardController < ApplicationController
         result.rows.each do |row|
           row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
         end
-        
-        
         @download_sectors = result.rows
         
         
@@ -85,17 +83,19 @@ class DashboardController < ApplicationController
         result = CartoDB::Connection.query(sql)
         @download_sector_names = result.rows
         #now partner organizations
-        sql = "select project_id, array_agg(project_partnerorganizations.other_org_name) AS other_org_names, array_agg(project_partnerorganizations.other_org_role) AS other_org_roles  
+        sql = "select project_id, array_agg(project_partnerorganizations.other_org_name) AS other_org_names, 
+        array_agg(project_partnerorganizations.other_org_role) AS other_org_roles  
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id 
         WHERE organization_id = #{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
-        debugger
+        
         result.rows.each do |row|
-          row[:other_org_names] = eval('['+row[:other_org_names][1..-2]+']')
+          row[:other_org_names] = eval('['+"row[:other_org_names][1..-2]"+']')
           row[:other_org_roles] = eval('['+row[:other_org_roles][1..-2]+']')  
         end
         @download_other_orgs = result.rows
         
+      debugger
         render :template => '/dashboard/download.xml.erb'
       else
         render :template => '/dashboard/download_empty.html.erb'
