@@ -76,7 +76,7 @@ class DashboardController < ApplicationController
         result.rows.each do |row|
           row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
         end
-        debugger
+        
         
         @download_sectors = result.rows
         
