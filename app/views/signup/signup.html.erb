@@ -1,6 +1,7 @@
-  <div class="logo">
-    <h1><a href="index.html" title="openAid Home"><img src="/images/sign_up.png" alt="openAid" /></a></h1>
-  </div>
+<div class="logo">
+          <h1><a href="" title="openAid Home">Sign up</a></h1>
+        </div>
+
   <div class="header_text">
     <p>We need this information about you and your organization to validate your account. We will also use the organization info when publishing your aid data so you won’t need to write this again.</p>
   </div>
@@ -8,33 +9,33 @@
 <div id="body_container">
   <div class="sign_sec">
     <div class="sign_left">
-    		<form action="#" method="post">
+    		<form action="" method="post">
           	<fieldset>
               	<div class="colem">
               	<h3>PERSONAL INFORMATION</h3>
                   <div class="row">
                   	<label>your email</label>
-                      <input name="" type="text" class="imp01"/>
+                      <input name="email" type="text" class="imp01" value="<%=params[:email] %>"/>
                   </div>
                   <div class="row">
                   	<div class="inner_row">
                       	<label>Password</label>
-                          <input name="" type="text" class="imp01"/>
+                          <input name="password" type="password" class="imp01" value=""/>
                       </div>
                       <div class="inner_row">
                       	<label>retype Password</label>
-                          <input name="" type="text" class="imp01"/>
+                          <input name="password_confirm" type="password" class="imp01" value=""/>
                       </div>
                   </div>
                   
                   <div class="row">
                   	<div class="inner_row1">
                       	<label>your name</label>
-                          <input name="" type="text" class="imp01"/>
+                          <input name="contact_name" type="text" class="imp01" value="<%=params[:contact_name] %>"/>
                       </div>
                       <div class="inner_row2">
                       	<label>phone</label>
-                          <input name="" type="text" class="imp01"/>
+                          <input name="telephone" type="text" class="imp01" value="<%=params[:telephone] %>"/>
                       </div>
                   </div>
                   </div>
@@ -42,11 +43,11 @@
               	<h3 class="padd_top">ORGANIZATION INFORMATION</h3>
                   <div class="row">
                   	<label>ORGANIZATION's name</label>
-                      <input name="" type="text" class="imp02"/>
+                      <input name="organization_name" type="text" class="imp02" value="<%= params[:organization_name] %>"/>
                   </div>
                   <div class="row">
                   	<label>ORGANIZATION's type</label>
-                      <input name="" type="text" class="imp02"/>
+                      <input name="organization_type_id" type="text" class="imp02" value="<%=params[:organization_type_id] %>"/>
                   </div>
                   <div class="row">
                   	<label>ORGANIZATION's website</label>
@@ -55,27 +56,38 @@
                    <div class="row">
                   	<div class="inner_row">
                       	<label>ORGANIZATION's country</label>
-                          <input name="" type="text" class="imp01"/>
+                          <input name="organization_web" type="text" class="imp01" value="<%=params[:organization_web] %>"/>
                       </div>
                       <div class="inner_row">
-                      	<label>goverment id</label>
-                          <input name="" type="text" class="imp01"/>
+                      	<label>government id</label>
+                          <input name="organization_guid" type="text" class="imp01" value="<%=params[:organization_guid] %>"/>
                       </div>
                   </div>
                   </div>
                   <div class="colem01">
                   	<span><input class="inp" name="" type="submit" value=""/></span>
-                      <p><small><input name="" type="checkbox" value="" /></small> Yes, I accept the <a href="#">terms and conditions</a></p>
+                      <p><small><input name="conditions" type="checkbox" value="true" /></small> Yes, I accept the <a href="#">terms and conditions</a></p>
                   </div>
               </fieldset>
           </form>
     
     </div>
     <div class="sign_right">
+	
+		<% if @errors %>
+		<p>
+			<b>Errors:</b><br>
+			<%@errors.each do |error|%>
+			* <%=error%><br>
+			<%end%>
+		</p>
+		<p>	<br></p>
+		<%end%>
+		
     		<span>DO YOU NEED SOME HELP?</span>
           <p>You can always <a href="#">contact us</a> if you have troubles on this step</p>
           <strong>We will only contact you once.</strong>
-          <small>For example, in the US this wold be the EIN. If you don’t know it, leave it blan</small>
+          <small>For example, in the US this wold be the EIN. If you don’t know it, leave it blank</small>
     </div>
   </div>
 </div>

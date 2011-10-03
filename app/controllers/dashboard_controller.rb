@@ -78,6 +78,8 @@ class DashboardController < ApplicationController
         end
         
         @download_sectors = result.rows
+        
+        
         sql = "select project_sectors.sector_id, name, sector_code from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
         result = CartoDB::Connection.query(sql)
         @download_sector_names = result.rows
@@ -86,6 +88,11 @@ class DashboardController < ApplicationController
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id 
         WHERE organization_id = #{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
+        debugger
+        result.rows.each do |row|
+          row[:other_org_names] = eval('['+row[:other_org_names][1..-2]+']')
+          row[:other_org_roles] = eval('['+row[:other_org_roles][1..-2]+']')  
+        end
         @download_other_orgs = result.rows
         
         render :template => '/dashboard/download.xml.erb'
