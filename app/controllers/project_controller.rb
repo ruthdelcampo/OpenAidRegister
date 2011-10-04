@@ -184,12 +184,16 @@ class ProjectController < ApplicationController
       #select sectors and form the array
       sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
-
+     
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
       
       #Select partner organizations and form the array
-      sql = "select array_agg(other_org_name) as array_other_orgs, array_agg(other_org_role) as array_other_roles from project_partnerorganizations where project_id = #{params[:id]}"
+      sql = "select array_agg('"'||other_org_name||'"') as array_other_orgs, 
+      array_agg(other_org_role) as array_other_roles 
+      from project_partnerorganizations where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
+      
+      #misssing the conversion
     
         @project_data[:other_org_name_1] = result.rows.first[:array_other_orgs][0]
          @project_data[:other_org_role_1] = result.rows.first[:array_other_roles][0]

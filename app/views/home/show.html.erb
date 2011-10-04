@@ -33,7 +33,7 @@
                   <span>
                                 <a href="javascript:var%20d=document,f='http://www.new.facebook.com/share',l=d.location,e=encodeURIComponent,p='.php?src=bm&v=4&i=1219930092&u='+e( window.location.href)+'&t='+e(d.title);1;try{if%20(!/^(.*\.)?facebook\.[^.]*$/.test(l.host))throw(0);share_internal_bookmarklet(p)}catch(z)%20{a=function()%20{if%20(!window.open(f+'r'+p,'sharer','toolbar=0,status=0,resizable=1,width=626,height=436'))l.href=f+p};if%20(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else{a()}}void(0)" title="Compartir en Facebook" class="facebook">Like it? Spread the word</a></span> </div>
                 <div class="body_top_rt">
-                    <iframe src="http://player.vimeo.com/video/29990175?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=0" width="659" height="357" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+                    <iframe src="http://player.vimeo.com/video/29997853?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=0" width="659" height="357" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
                     
                 </div>
               </div>
@@ -46,25 +46,25 @@
                   </li>
                   <li>
                     <h4>LAST PUBLISHED PROJECTS</h4>
-                    <h5>Economic Management Capacity Building Project</h5>
-                    <small>OXFAM<strong>$3400</strong></small>
-                    <p>Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands.</p>
+                    <h5><%= @latest_published.first[:title] %></h5>
+                    <small><%= @latest_published.first[:organization_name] %><strong><%= @latest_published.first[:budget] %></strong></small>
+                    <p><%= @latest_published.first[:description] %></p>
                     <div class="date_sec">
                       <ul>
-                        <li><span>FROM</span> <strong>3/4/2005</strong> </li>
-                        <li><span>TO</span> <strong>4/9/2012</strong> </li>
+                        <li><span>FROM</span> <strong><%= @latest_published.first[:start_date] %></strong> </li>
+                        <li><span>TO</span> <strong><%= @latest_published.first[:end_date] %></strong> </li>
                       </ul>
                     </div>
                   </li>
                   <li class="last">
                     <h4>&nbsp;</h4>
-                    <h5>Child hunger provisioning in the horn of africa</h5>
-                    <small>Doctor without frontiers<strong>$3400</strong></small>
-                    <p>Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands.</p>
+                    <h5><%= @latest_published.last[:title] %></h5>
+                    <small><%= @latest_published.last[:organization_name] %><strong><%= @latest_published.last[:budget] %></strong></small>
+                    <p><%= @latest_published.last[:description] %></p>
                     <div class="date_sec">
                       <ul>
-                        <li><span>FROM</span> <strong>3/4/2005</strong> </li>
-                        <li><span>TO</span> <strong>4/9/2012</strong> </li>
+                     <li><span>FROM</span> <strong><%= @latest_published.last[:start_date] %></strong></li>
+                        <li><span>TO</span> <strong><%= @latest_published.last[:end_date] %></strong> </li>
                       </ul>
                     </div>
                   </li>
