@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => "ruthdelcampo@gmail.com"
+  default :from => "ruthdelcampo@openaidregister.org"
   
   
   def welcome_email(user)
