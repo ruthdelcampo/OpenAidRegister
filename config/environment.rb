@@ -6,8 +6,8 @@ OpenAidRegister::Application.initialize!
 
 #Configure mailing system
 ActionMailer::Base.smtp_settings = {
-  :user_name => "app752815@heroku.com",
-  :password => "delcampo00",
+  :user_name => ENV['SENDGRID_USERNAME'],
+  :password => ENV['SENDGRID_PASSWORD'],
   :domain => "openaidregister.org",
   :address => "smtp.sendgrid.net",
   :port => 587,
