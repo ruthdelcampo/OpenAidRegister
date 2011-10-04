@@ -88,7 +88,7 @@ class DashboardController < ApplicationController
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id 
         WHERE organization_id = #{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
-        debugger
+        
         
         result.rows.each do |row|
           
@@ -98,7 +98,7 @@ class DashboardController < ApplicationController
         end
         @download_other_orgs = result.rows
         
-      debugger
+      
         render :template => '/dashboard/download.xml.erb'
       else
         render :template => '/dashboard/download_empty.html.erb'
