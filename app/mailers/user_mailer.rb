@@ -3,7 +3,9 @@ class UserMailer < ActionMailer::Base
   
   
   def welcome_email(user)
-      mail(:to => user.email, :subject => "Welcome to My Awesome Site")
+      @new_user = user
+      debugger
+      mail(:to => user.email, :subject => "Welcome to Open Aid Register!")
     end
     
     

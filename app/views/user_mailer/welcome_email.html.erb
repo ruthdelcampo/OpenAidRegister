@@ -4,14 +4,33 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to example.com </h1>
+    <h1>Welcome to Open Aid Register </h1>
+
+<%debugger%>
     <p>
-      You have successfully signed up to example.com,
+      You have successfully signed up to Open Aid Register.
       
     </p>
     <p>
-     
+     	In short, we will let you start registering projects. 
+		You will get a new email once we are ready. 
+		
+		You have registered with the following data:
+	
+		Your name: <%=@new_user.contact_name%>
+		Your email: <%=@new_user.email%>
+		Your Telephone: <%=@new_user.telephone%>
+		Organization's Name: <%=@new_user.organization_name%>
+		Organization's Type: <%=@new_user.organization_type_id%>
+		Organization's Web: <%=@new_user.organization_web%>
+		Organization's Country :<%=@new_user.organization_country%>
+		Government ID: <%=@new_user.organization_guid%>
+	
     </p>
-    <p>Thanks for joining and have a great day!</p>
+    <p>Thanks for your interest and have a great day!</p>
+
+ <p>
+	
+	The Open Aid Register Team</p>
   </body>
 </html>

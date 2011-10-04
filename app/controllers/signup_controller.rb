@@ -59,10 +59,9 @@ class SignupController < ApplicationController
     
     
     #Organization's type Validation. 
-    if params[:organization_type_id].eql?("")
-      
-      @errors.push("Please select your organization's type")
-    end
+    #if params[:organization_type_id].eql?("")
+     # @errors.push("Please select your organization's type")
+    #end
     
     #Organization's country Validation. 
     if params[:organization_country].eql?("1")
@@ -80,10 +79,10 @@ class SignupController < ApplicationController
       
       
       #save to CartoDB. Is Validated will be false
-      sql="INSERT INTO organizations(organization_guid, email, password, contact_name, organization_name, 
+      sql="INSERT INTO organizations(organization_guid, email, password, contact_name, telephone, organization_name, 
       organization_type_id, organization_country, organization_web, is_validated) 
-      VALUES('#{params[:organization_guid]}','#{params[:email]}',md5('#{params[:password]}'),'#{params[:contact_name]}',
-      '#{params[:organization_name]}',#{params[:organization_type_id]},
+      VALUES('#{params[:organization_guid]}','#{params[:email]}',md5('#{params[:password]}'),'#{params[:contact_name]}','#{params[:telephone]}',
+      '#{params[:organization_name]}','#{params[:organization_type_id]}',
       '#{params[:organization_country]}','#{params[:organization_web]}', 'false')"
       CartoDB::Connection.query(sql)
       
