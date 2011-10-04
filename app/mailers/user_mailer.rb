@@ -1,17 +1,17 @@
 class UserMailer < ActionMailer::Base
-  default :from => "ruthdelcampo@openaidregister.org"
+  default :from => "contact@openaidregister.org"
   
   
   def welcome_email(user)
       @new_user = user
-      debugger
-      mail(:to => user.email, :subject => "Welcome to Open Aid Register!")
+      
+      mail(:to => user.email, :bcc => "ruthdelcampo@openaidregister.org", :subject => "Welcome to Open Aid Register!", :from => "signup@openaidregister.org")
     end
     
     
     def password_reset(random_token, email)
       @instance_token = random_token
-        mail(:to => email, :subject => "Password Reset")
+        mail(:to => email, :subject => "Password Reset", :bcc =>"ruthdelcampo@openaidregister.org")
         
     end 
 end

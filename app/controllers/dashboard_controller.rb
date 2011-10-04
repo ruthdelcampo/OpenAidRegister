@@ -28,7 +28,6 @@ class DashboardController < ApplicationController
     from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) 
     ON sectors.cartodb_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} 
     GROUP BY project_sectors.sector_id, sectors.name"
-    
     result = CartoDB::Connection.query(sql)      
     @sector_distribution = result.rows
     

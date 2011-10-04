@@ -156,8 +156,6 @@ class SignupController < ApplicationController
       end
       if @errors.count==0
         
-        # send an email thanks for submitting
-        #UPDATE table_name SET column1=value, column2=value2,... WHERE some_column=some_value
         random_token = SecureRandom.urlsafe_base64  
         
         sql="UPDATE organizations SET random_token ='#{random_token}' WHERE organizations.email = '#{params[:email]}'"
@@ -165,7 +163,6 @@ class SignupController < ApplicationController
         
         UserMailer.password_reset(random_token, params[:email]).deliver
         
-        #mail_to params[:email], :bcc => "ruthdelcampo@gmail.com", :subject => "Password reset", :body => "we just reset your password to xyza. Please go to your organizations website and change the details"
         
         
         redirect_to '/', :alert => "Email sent with  password reset instructions."
