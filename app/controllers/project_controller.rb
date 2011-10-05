@@ -31,7 +31,7 @@ class ProjectController < ApplicationController
         now = DateTime.now.to_s(:number)
         params[:project_guid] = now
       end
-      sql = "SELECT * FROM projects WHERE organization_id = '#{session[:organization].cartodb_id}'"
+      sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '#{session[:organization].cartodb_id}'"
       result =  CartoDB::Connection.query(sql) 
       result.rows.each do |project|
         #check if there is no repeted cartodb_id but only when it is updating project
@@ -92,7 +92,7 @@ class ProjectController < ApplicationController
          
          # Now sectors must be written
          if params[:sector_id]
-           sql = "SELECT * from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "      
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "      
            result = CartoDB::Connection.query(sql)
            params[:sector_id].each do |sectors|
              sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{result.rows.first[:cartodb_id]}, #{sectors})"
@@ -103,7 +103,7 @@ class ProjectController < ApplicationController
            # Now all partner organizations must be written
           if !params[:other_org_name_1].blank?
             #Get the new cartodb_id
-            sql = "SELECT * from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "      
+            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "      
             result = CartoDB::Connection.query(sql)     
             for i in 1..5
               aux_name = eval("params[:other_org_name_" + i.to_s() + "]")

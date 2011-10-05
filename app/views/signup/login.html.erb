@@ -1,41 +1,51 @@
- <div class="center_content">
+ <div class="logo">
+          <h1><a href="" title="openAid Home">Login</a></h1>
+        </div>
 
-		<h1> Login</h1>
-		<h3>Sign in for publishing new projects</h3>
-		<br>
-		  <br>
-			<% if @errors %>
-			<p>
-				<b>Errors:</b><br>
-				<%@errors.each do |error|%>
-				* <%=error%><br>
-				<%end%>
-			</p>
+  <div class="header_text">
+    <p>Sign in to start publishing new projects</p>
+  </div>
+</div>
+<div id="body_container">
+  <div class="sign_sec">
+    <div class="sign_left">
+    		<form action="" method="post">
+          	<fieldset>
+              	<div class="colem">
+              	<h3>PERSONAL INFORMATION</h3>
+                  <div class="row">
+                  	<label>your email</label>
+                      <input name="email" type="text" class="imp01" value="<%=params[:email] %>"/>
+                  </div>
+                  <div class="row">
+
+                      	<label>Password</label>
+                          <input name="password" type="password" class="imp01" value=""/>
+                  </div>
+                  </div>
+                  <div class="colem01">
+                  	<span><input class="inp" name="" type="submit" value=""/></span>
+					<p> or <a href="/signup" color="#898989"> Sign Up </a> for a new account </p>
+                  </div>
+              </fieldset>
+          </form>
+
+    </div>
+    <div class="sign_right">
+		<% if @errors %>
+		<p>
+			<b>Errors:</b><br>
+			<%@errors.each do |error|%>
+			* <%=error%><br>
 			<%end%>
-			
-			<%= flash[:alert] %>
-			<br>
-			  <br>
-	
-		<%= form_tag( :method => "post") do %>
-			<%= label_tag(:email, "Email:") %>
-		  	<%= text_field_tag(:email) %>
-		
-			<br>
-			  <br>
-		
-		
-		  	<%= label_tag(:password, "Password:") %>
-		  	<%= password_field_tag(:password) %>	
-		
-		<br>
-		  <br>
-		<%= submit_tag("Login") %> or <a href="/signup">Sign Up for an account</a>
-		<br>
-		
-		<a href="/forgot_password">Forgot your password?</a>
-	<% end %>
-	
-	</div>
+		</p>
+		<p>	<br></p>
+		<%end%>
+
+    		<span>DO YOU NEED SOME HELP?</span>
+          <p>You can always <a href="#">contact us</a> if you have troubles on this step</p>
+    </div>
+  </div>
+</div>
 	
 

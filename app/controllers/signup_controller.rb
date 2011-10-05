@@ -86,7 +86,9 @@ class SignupController < ApplicationController
       '#{params[:organization_country]}','#{params[:organization_web]}', 'false')"
       CartoDB::Connection.query(sql)
       
-      sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}'"
+      sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country, 
+      organization_type_id, organization_guid, organization_web
+      FROM organizations WHERE email='#{quote_string(params[:email])}'"
       result = CartoDB::Connection.query(sql)
       session[:organization] = result.rows.first
       
@@ -121,7 +123,8 @@ class SignupController < ApplicationController
     
     
     
-    sql="SELECT * FROM organizations WHERE email='#{quote_string(params[:email])}' AND password=md5('#{quote_string(params[:password])}')"
+    sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country, 
+    organization_type_id, organization_guid, organization_web FROM organizations WHERE email='#{quote_string(params[:email])}' AND password=md5('#{quote_string(params[:password])}')"
     result = CartoDB::Connection.query(sql)
     
     if result.rows.length==0
@@ -218,7 +221,7 @@ class SignupController < ApplicationController
       
     else
       
-    sql="select * FROM organizations WHERE random_token = '#{params[:id]}'"
+    sql="select email FROM organizations WHERE random_token = '#{params[:id]}'"
     result = CartoDB::Connection.query(sql) 
       if result.rows.length==0
       redirect_to '/forgot_password', :alert => "unknown one time password"
@@ -231,7 +234,7 @@ class SignupController < ApplicationController
   end
   
   def already_exists (email)
-     sql="SELECT * FROM organizations WHERE email='#{email}'"
+     sql="SELECT cartodb_id FROM organizations WHERE email='#{email}'"
       result = CartoDB::Connection.query(sql)
 
       if result.rows.length==0

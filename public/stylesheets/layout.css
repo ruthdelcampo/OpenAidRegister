@@ -112,7 +112,7 @@
 .sign_sec .sign_left form .colem01 span{ float:left; width:205px; height:51px; background:url(../images/sign_btn.gif) no-repeat 0 0;}
 .sign_sec .sign_left form .colem01 span input.inp{ float:left; width:205px; height:51px; cursor:pointer; background:none; border:none;}
 .sign_sec .sign_left form .colem01 p{ float:left; width:auto; padding-left:18px; color:#666666; font:bold 13px/16px "Helvetica Neue"; margin-top:17px; display:inline;}
-.sign_sec .sign_left form .colem01 p a{color:#666666;}
+.sign_sec .sign_left form .colem01 p a{color:#ff3300;}
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
 

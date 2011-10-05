@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     end
     @errors = Array.new  # We need to initialize the errors array to be shown when there is aproblem with import file
     #Show the selection of projects
-    sql="SELECT * FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
+    sql="SELECT cartodb_id, title, end_date FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
     result = CartoDB::Connection.query(sql)
     @projects_list = result.rows
     @current_projects = 0
@@ -53,7 +53,9 @@ class DashboardController < ApplicationController
   end
   
   def download
-    sql="SELECT * FROM organizations WHERE cartodb_id = #{params[:id]}"
+    sql="SELECT is_validated, organization_country, organization_guid, 
+    organization_name, organization_type_id, created_at 
+    FROM organizations WHERE cartodb_id = #{params[:id]}"
     result = CartoDB::Connection.query(sql)
     @download_organization = result.rows.first
     #we need to check if there is an existing organization, else it will be error 404
