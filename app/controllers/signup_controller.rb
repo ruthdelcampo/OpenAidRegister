@@ -46,9 +46,9 @@ class SignupController < ApplicationController
     
     #Phone Validation. 
    
-    if params[:telephone].length < 4
-        @errors.push("Your telephone is empty or too short")
-    end
+    #if params[:telephone].length < 4
+     #   @errors.push("Your telephone is empty or too short")
+    # end
     
     #Organization length Validation. 
     if params[:organization_name].empty?
