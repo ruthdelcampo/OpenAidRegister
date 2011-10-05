@@ -16,7 +16,8 @@ class HomeController < ApplicationController
                 ORDER BY p.updated_at DESC LIMIT 2"
         
         result =  CartoDB::Connection.query(sql)
-      debugger
+        
+      
         @latest_published = result.rows
           
     
