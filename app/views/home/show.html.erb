@@ -40,8 +40,7 @@
               <div class="box_list">
                 <ul>
                   <li class="first">
-			
-                    <h4> WHO IS ALREADY USING THIS</h4>
+                    <h4><a name="who_is_using_it"></A> WHO IS ALREADY USING THIS</h4>
                     <span><img src="/images/red_cross.gif" alt="" /></span>
                     <p class="blockquoto">Taking into account the multitude of major natural disasters over the past year, the organization’s economic troubles, and the recession, her remarks focused on the unusual demands, her remarks focused on the unusual.</p>
                   </li>
@@ -52,8 +51,8 @@
                     <p><%= @latest_published.first[:description] %></p>
                     <div class="date_sec">
                       <ul>
-                        <li><span>FROM</span> <strong><%= @latest_published.first[:start_date] %></strong> </li>
-                        <li><span>TO</span> <strong><%= @latest_published.first[:end_date] %></strong> </li>
+                        <li><span>FROM</span> <strong><%= @latest_published.first[:start_date].strftime("%m/%d/%Y") %></strong> </li>
+                        <li><span>TO</span> <strong><%= @latest_published.first[:end_date].strftime("%m/%d/%Y") %></strong> </li>
                       </ul>
                     </div>
                   </li>
@@ -64,8 +63,8 @@
                     <p><%= @latest_published.last[:description] %></p>
                     <div class="date_sec">
                       <ul>
-                     <li><span>FROM</span> <strong><%= @latest_published.last[:start_date] %></strong></li>
-                        <li><span>TO</span> <strong><%= @latest_published.last[:end_date] %></strong> </li>
+                     <li><span>FROM</span> <strong><%= @latest_published.last[:start_date].strftime("%m/%d/%Y") %></strong></li>
+                        <li><span>TO</span> <strong><%= @latest_published.last[:end_date].strftime("%m/%d/%Y") %></strong> </li>
                       </ul>
                     </div>
                   </li>
