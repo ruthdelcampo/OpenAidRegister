@@ -49,7 +49,7 @@
 .body_top .body_top_lf h3{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue";padding-bottom:16px; text-transform:uppercase; text-shadow:1px 1px 0 #fff;}
 .body_top .body_top_lf p{ float:left; width:100%; color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px;}
 .body_top .body_top_lf span{ float:left; width:268px; height:51px;padding-top: 11px}
-.body_top .body_top_lf span a{ display:block; width:268px; height:51px; background:url(../images/spread_world.gif) no-repeat 0 0; text-indent:-9999px;}
+.body_top .body_top_lf span a{ display:block; width:218px; padding-left:50px; float:left; height:51px; background:url(../images/spread_world.gif) no-repeat 0 0; color:#fff;font:normal 17px/51px "Helvetica Neue";}
 
 .body_top .body_top_rt{ float:right; width:659px; height:358px; padding:10px; background:url(../images/video_bg.jpg) no-repeat 0 0;}
 
@@ -64,7 +64,7 @@
 .box_list ul li h5{ float:left; width:100%; color:#ff3300; font:bold 20px/26px "Helvetica";padding-bottom:7px; text-transform:uppercase; text-shadow:1px 1px 0 #fff;}
 .box_list ul li small{ float:left; width:100%; color:#666666; font:normal 15px/15px "Helvetica";}
 .box_list ul li small strong{ padding-left:10px; font-weight:normal; background:url(../images/dot.gif) no-repeat left center; margin-left:6px; display:inline;}
-.box_list ul li p.blockquoto{ padding:19px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
+.box_list ul li p.blockquoto{ padding:50px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
 
 .box_list ul li .date_sec{ float:left; width:100%; padding-top:13px;}
 .box_list ul li .date_sec ul{ float:left; width:100%; list-style:none;}
@@ -96,6 +96,8 @@
 .sign_sec .sign_left form .colem{ float:left; width:100%;}
 .sign_sec .sign_left form .padd_top{ padding-top:16px;}
 .sign_sec .sign_left form h3{ float:left; width:100%; color:#020202; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; padding-bottom:26px;}
+.sign_sec .sign_left p{ float:left; width:100%; color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px;}
+
 .sign_sec .sign_left form .row{ float:left; width:100%; padding-bottom:16px;}
 .sign_sec .sign_left form .row label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px;}
 .sign_sec .sign_left form .row input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
@@ -110,10 +112,11 @@
 
 .sign_sec .sign_left form .colem01{ float:left; width:100%; padding-top:20px;}
 .sign_sec .sign_left form .colem01 span{ float:left; width:205px; height:51px; background:url(../images/sign_btn.gif) no-repeat 0 0;}
-.sign_sec .sign_left form .colem01 span input.inp{ float:left; width:205px; height:51px; cursor:pointer; background:none; border:none;}
+.sign_sec .sign_left form .colem01 span input.inp{ float:left; width:205px; color:#fff; height:51px; cursor:pointer; background:none; border:none; text-align:center; font:bold 22px/51px "Helvetica Neue";}
 .sign_sec .sign_left form .colem01 p{ float:left; width:auto; padding-left:18px; color:#666666; font:bold 13px/16px "Helvetica Neue"; margin-top:17px; display:inline;}
-.sign_sec .sign_left form .colem01 p a{color:#ff3300;}
+.sign_sec .sign_left form .colem01 p a{color:#666666;}
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
+
 
 
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
