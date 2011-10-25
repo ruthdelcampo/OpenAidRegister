@@ -9,6 +9,8 @@ class DashboardController < ApplicationController
     end
     @errors = Array.new  # We need to initialize the errors array to be shown when there is aproblem with import file
     #Show the selection of projects
+    
+  
     sql="SELECT cartodb_id, title, end_date FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
     result = CartoDB::Connection.query(sql)
     @projects_list = result.rows
@@ -23,13 +25,15 @@ class DashboardController < ApplicationController
       end
     end
     #look for the sector distribution of this organization
-    #sql = "select sector_id, COUNT(sector_id) from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY sector_id"
+    # this is an example sql = "select sector_id, COUNT(sector_id) from project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id WHERE organization_id =#{params[:id]} GROUP BY sector_id"
     sql = "select sectors.name, COUNT(project_sectors.sector_id) AS countnumofprojectsinthissector 
     from sectors INNER JOIN (project_sectors INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id) 
     ON sectors.cartodb_id = project_sectors.sector_id WHERE organization_id =#{session[:organization][:cartodb_id]} 
     GROUP BY project_sectors.sector_id, sectors.name"
     result = CartoDB::Connection.query(sql)      
     @sector_distribution = result.rows
+   
+    
     
   end
   
@@ -120,5 +124,24 @@ class DashboardController < ApplicationController
      CartoDB::Connection.query(sql)
      redirect_to  '/dashboard'
    end
+   
+   
+   def publish
+      if session[:organization].blank?
+        redirect_to '/login'
+        return
+      end
+       sql="select api_key FROM organizations where cartodb_id =#{session[:organization][:cartodb_id]}"
+       result = CartoDB::Connection.query(sql)
+          
+       if result.rows.first[:api_key].blank?
+          redirect_to  '/dashboard', :alert => "I am sorry, we dont have your API Key. You have to first introduce your API Key from IATI Registry"
+       else
+         #send to IATI Registry
+         redirect_to  '/dashboard', :notice => "Published into IATI Registry succeeded. Let's "
+       end
+      
+       
+     end 
 
 end

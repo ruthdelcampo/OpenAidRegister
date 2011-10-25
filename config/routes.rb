@@ -74,6 +74,7 @@ OpenAidRegister::Application.routes.draw do
   match 'import_file' => 'dashboard#import_file'
   match "/download/:id" => "dashboard#download"
   match 'delete' => 'dashboard#delete', :via => :post
+  match 'publish' => 'dashboard#publish'
   
   match 'project' => 'project#show'
   

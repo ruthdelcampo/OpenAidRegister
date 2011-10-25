@@ -1,36 +1,74 @@
-<div class="logo">
-          <h1><a href="" title="openAid Home">Open<span>Aid</span>&nbsp;&nbsp;&nbsp;&nbsp;Register</a></h1>
-        </div>
-
-  <div class="header_text">
-    <p>Do you want to add new projects? Do you want to download your IATI Data? <br> 
-	From your dashboard you can control everything.</p>
-  </div>
-</div>
-<div id="body_container">
-  <div class="sign_sec">
-    <div class="sign_left">
-    		<form action="" method="post">
-          	<fieldset>
-              	<div class="colem">
-              	<h3>WELCOME, <%= session[:organization][:organization_name] %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/logout" color="#ff3300"> LOGOUT </a></h3>
-
-                </div>
-				<div class="colem01">
-              	<p>I am sorry, we are currently finishing the Open Aid Register dashboard, so you can't make many things now. You will have to wait some days to be able to use Open Aid Register. We will send you an email to announce it. Thanks!</p>
-                </div>
+<% content_for :head do %>
+<%= javascript_include_tag "dashboard" %>
+<% end %>
 
 
-              </fieldset>
-          </form>
-    
-    </div>
-    <div class="sign_right">
+	<div class="logo">
+	          <h1><a href="" title="openAid Home">Dashboard</a></h1>
+	        </div>
+
+	  <div class="header_text">
+	    <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
+	  </div>
+	</div>
+		 
+<%= flash[:notice] %>
+<%= flash[:alert] %>
 	
-		
-    		<span>DO YOU NEED SOME HELP?</span>
-          <p>You can always <a HREF="mailto:contact@openaidregister.org">contact us</a> if you have troubles on this step</p>
-         
-    </div>
-  </div>
+
+<br>
+  <br>
+
+<%= link_to "Add project", "/project" %>
+
+<br>
+  <br>
+
+<%= form_for :file_upload, :url => { :action => "import_file" }, :html => {:multipart => true} do |f| %>
+  <%= f.file_field :my_file %>
+  <%= f.submit "Import file" %>
+<% end %>
+
+
+
+
+
+<h2> <%= @projects_list.length %> projects published</h2>
+<h3> <%= @current_projects %> ongoing projects </h3>
+<h3> <%= @past_projects %> past projects</h3>
+
+
+<div id="chart_div"></div> 
+
+<%= button_to "Download XML", {:action => "download", :id => session[:organization][:cartodb_id]} %>
+
+<!--<a href="#publish"class="login-window">Publish</a> --><br>
+
+<% @projects_list.each do |project| %>
+
+<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
+<!--< link_to project.title, '/view_project', {:action => "view_project", :view_project_id =>project.title}, :method =>"post" %>  -->
+
+<%= button_to "Delete", {:action => "delete",:delete_project_id => project[:cartodb_id]}, :method => "post", :confirm => "Are you sure?" %>
+	<br>
+<% end%>
+
+<a href="#publish-box" class="publish-window">Publish</a>
+
+<div id="publish-box" class="publish-popup">
+        <a href="#" class="close"><img src="/images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+          <form method="post" class="signin" action="">
+                <fieldset class="textbox">
+            	<label class="username">
+                <span>IATI Registry API Key</span>
+ 				<input id="api_key" name="api_key" type="text" value=""/>
+                </label>
+                <label class="password">
+                <span>Name of the Aid Package</span>
+               <input id="name_package" name="name_package" type="text" value=""/>
+                </label>
+                <button id="submit3" class="submit3" type="button">Publish</button>      
+                </fieldset>
+          </form>
 </div>
+
