@@ -2,647 +2,729 @@
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>
+<script type="text/javascript"
+    src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+</script>
+<%= javascript_include_tag "project_form" %>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-
 <% end %>
 
+<div class="logo">
+      <h1 class="wid"><a href="index.html" title="openAid Home">Register new project</a><img src="/images/plus_icon.png" alt="" class="png"
+    </div>
+    <div class="header_text">
+      <p>We need this project information to build the XML dataset.<br>The most accurate data you can fill in, the better donors and general public will know about your project.</p>
+    </div>
+  </div>
+  <div id="body_container">
+    <div class="registry_sec">
+      <div class="registry_left">
+        <div class="form_section">
+          <form action="" method="post">
+            <fieldset>
+              <div class="colem">
+                <h3 class="first">BASIC INFORMATION</h3>
+                <div class="row">
+                  <label>PROJECT NAME</label>
+                  <input name="title" type="text" class="imp01" value ="<%=@project_data[:title]%>"/>
+                </div>
+                <div class="row">
+                  <label>PROJECT DESCRIPTION</label>
+                  <textarea name="description"rows="" cols="" value="<%=@project_data[:description]%>"></textarea>
+                </div>
+                <div class="row">
+                <label>SECTOR</label>
+                  <ul>
+                    <li>
+                      <div class="health"><a href="#">Health <img src="/images/cross.gif" alt="" /></a></div>
+                      <select class="wid-430" name="sector_id" MULTIPLE selected="<%=@project_data[:sector_id]%>">       
+                        <option></option>
+						<option value="1">Education facilities and training</option>
+						<option value="2">Teacher training</option>
+						<option value="3">Educational research</option>
+						<option value="4">Primary education</option>
+						<option value="5">Basic life skills for youth and adults</option>
+						<option value="6">Early childhood education</option>
+						<option value="7">Secondary education</option>
+						<option value="8">Vocational training</option>
+						<option value="9">Higher education</option>
+						<option value="10">Advanced technical and managerial training</option>
+						<option value="11">Health policy and administrative management</option>
+						<option value="12">Medical education/training</option>
+						<option value="13">Medical research</option>
+						<option value="14">Medical services</option>
+						<option value="15">Basic health care</option>
+						<option value="16">Basic health infrastructure</option>
+						<option value="17">Basic nutrition</option>
+						<option value="18">Infectious disease control</option>
+						<option value="19">Health education</option>
+						<option value="20">Malaria control</option>
+						<option value="21">Tuberculosis control</option>
+						<option value="22">Health personnel development</option>
+						<option value="23">Population policy and administrative management</option>
+						<option value="24">Reproductive health care</option>
+						<option value="25">Family planning</option>
+						<option value="26">STD control including HIV/AIDS</option>
+						<option value="27">Personnel development for population and reproductive health</option>
+						<option value="28">Water resources policy and administrative management</option>
+						<option value="29">Water resources protection</option>
+						<option value="30">Water supply and sanitation - large systems</option>
+						<option value="31">Basic drinking water supply and basic sanitation</option>
+						<option value="32">River development</option>
+						<option value="33">Waste management/disposal</option>
+						<option value="34">Education and training in water supply and sanitation</option>
+						<option value="35">Economic and development policy/planning</option>
+						<option value="36">Public sector financial management</option>
+						<option value="37">Legal and judicial development</option>
+						<option value="38">Government administration</option>
+						<option value="39">Strengthening civil society</option>
+						<option value="40">Elections</option>
+						<option value="41">Human rights</option>
+						<option value="42">Free flow of information</option>
+						<option value="43">Women's equality organisations and institutions</option>
+						<option value="44">Security system management and reform</option>
+						<option value="45">Civilian peace-building, conflict prevention and resolution</option>
+						<option value="46">Post-conflict peace-building (UN)</option>
+						<option value="47">Reintegration and SALW control</option>
+						<option value="48">Land mine clearance</option>
+						<option value="49">Child soldiers (Prevention and demobilisation)</option>
+						<option value="50">Social/ welfare services</option>
+						<option value="51">Employment policy and administrative management</option>
+						<option value="52">Housing policy and administrative management</option>
+						<option value="53">Low-cost housing</option>
+						<option value="54">Multisector aid for basic social services</option>
+						<option value="55">Culture and recreation</option>
+						<option value="56">Statistical capacity building</option>
+						<option value="57">Narcotics control</option>
+						<option value="58">Social mitigation of HIV/AIDS</option>
+						<option value="59">Transport policy and administrative management</option>
+						<option value="60">Road transport</option>
+						<option value="61">Rail transport</option>
+						<option value="62">Water transport</option>
+						<option value="63">Air transport</option>
+						<option value="64">Storage</option>
+						<option value="65">Education and training in transport and storage</option>
+						<option value="66">Communications policy and administrative management</option>
+						<option value="67">Telecommunications</option>
+						<option value="68">Radio/television/print media</option>
+						<option value="69">Information and communication technology (ICT)</option>
+						<option value="70">Energy policy and administrative management</option>
+						<option value="71">Power generation/non-renewable sources</option>
+						<option value="72">Power generation/renewable sources</option>
+						<option value="73">Electrical transmission/ distribution</option>
+						<option value="74">Gas distribution</option>
+						<option value="75">Oil-fired power plants</option>
+						<option value="76">Gas-fired power plants</option>
+						<option value="77">Coal-fired power plants</option>
+						<option value="78">Nuclear power plants</option>
+						<option value="79">Hydro-electric power plants</option>
+						<option value="80">Geothermal energy</option>
+						<option value="81">Solar energy</option>
+						<option value="82">Wind power</option>
+						<option value="83">Ocean power</option>
+						<option value="84">Biomass</option>
+						<option value="85">Energy education/training</option>
+						<option value="86">Energy research</option>
+						<option value="87">Financial policy and administrative management</option>
+						<option value="88">Monetary institutions</option>
+						<option value="89">Formal sector financial intermediaries</option>
+						<option value="90">Informal/semi-formal financial intermediaries</option>
+						<option value="91">Education/training in banking and financial services</option>
+						<option value="92">Business support services and institutions</option>
+						<option value="93">Privatisation</option>
+						<option value="94">Agricultural policy and administrative management</option>
+						<option value="95">Agricultural development</option>
+						<option value="96">Agricultural land resources</option>
+						<option value="97">Agricultural water resources</option>
+						<option value="98">Agricultural inputs</option>
+						<option value="99">Food crop production</option>
+						<option value="100">Industrial crops/export crops</option>
+						<option value="101">Livestock</option>
+						<option value="102">Agrarian reform</option>
+						<option value="103">Agricultural alternative development</option>
+						<option value="104">Agricultural extension</option>
+						<option value="105">Agricultural education/training</option>
+						<option value="106">Agricultural research</option>
+						<option value="107">Agricultural services</option>
+						<option value="108">Plant and post-harvest protection and pest control</option>
+						<option value="109">Agricultural financial services</option>
+						<option value="110">Agricultural co-operatives</option>
+						<option value="111">Livestock/veterinary services</option>
+						<option value="112">Forestry policy and administrative management</option>
+						<option value="113">Forestry development</option>
+						<option value="114">Fuelwood/charcoal</option>
+						<option value="115">Forestry education/training</option>
+						<option value="116">Forestry research</option>
+						<option value="117">Forestry services</option>
+						<option value="118">Fishing policy and administrative management</option>
+						<option value="119">Fishery development</option>
+						<option value="120">Fishery education/training</option>
+						<option value="121">Fishery research</option>
+						<option value="122">Fishery services</option>
+						<option value="123">Industrial policy and administrative management</option>
+						<option value="124">Industrial development</option>
+						<option value="125">Small and medium-sized enterprises (SME) development</option>
+						<option value="126">Cottage industries and handicraft</option>
+						<option value="127">Agro-industries</option>
+						<option value="128">Forest industries</option>
+						<option value="129">Textiles, leather and substitutes</option>
+						<option value="130">Chemicals</option>
+						<option value="131">Fertilizer plants</option>
+						<option value="132">Cement/lime/plaster</option>
+						<option value="133">Energy manufacturing</option>
+						<option value="134">Pharmaceutical production</option>
+						<option value="135">Basic metal industries</option>
+						<option value="136">Non-ferrous metal industries</option>
+						<option value="137">Engineering</option>
+						<option value="138">Transport equipment industry</option>
+						<option value="139">Technological research and development</option>
+						<option value="140">Mineral/mining policy and administrative management</option>
+						<option value="141">Mineral prospection and exploration</option>
+						<option value="142">Coal</option>
+						<option value="143">Oil and gas</option>
+						<option value="144">Ferrous metals</option>
+						<option value="145">Nonferrous metals</option>
+						<option value="146">Precious metals/materials</option>
+						<option value="147">Industrial minerals</option>
+						<option value="148">Fertilizer minerals</option>
+						<option value="149">Offshore minerals</option>
+						<option value="150">Construction policy and administrative management</option>
+						<option value="151">Trade policy and administrative management</option>
+						<option value="152">Trade facilitation</option>
+						<option value="153">Regional trade agreements (RTAs)</option>
+						<option value="154">Multilateral trade negotiations</option>
+						<option value="155">Trade-related adjustment</option>
+						<option value="156">Trade education/training</option>
+						<option value="157">Tourism policy and administrative management</option>
+						<option value="158">Environmental policy and administrative management</option>
+						<option value="159">Biosphere protection</option>
+						<option value="160">Bio-diversity</option>
+						<option value="161">Site preservation</option>
+						<option value="162">Flood prevention/control</option>
+						<option value="163">Environmental education/ training</option>
+						<option value="164">Environmental research</option>
+						<option value="165">Multisector aid</option>
+						<option value="166">Urban development and management</option>
+						<option value="167">Rural development</option>
+						<option value="168">Non-agricultural alternative development</option>
+						<option value="169">Multisector education/training</option>
+						<option value="170">Research/scientific institutions</option>
+						<option value="171">General budget support</option>
+						<option value="172">Food aid/Food security programmes</option>
+						<option value="173">Import support (capital goods)</option>
+						<option value="174">Import support (commodities)</option>
+						<option value="175">Action relating to debt</option>
+						<option value="176">Debt forgiveness</option>
+						<option value="177">Relief of multilateral debt</option>
+						<option value="178">Rescheduling and refinancing</option>
+						<option value="179">Debt for development swap</option>
+						<option value="180">Other debt swap</option>
+						<option value="181">Debt buy-back</option>
+						<option value="182">Material relief assistance and services</option>
+						<option value="183">Emergency food aid</option>
+						<option value="184">Relief co-ordination; protection and support services</option>
+						<option value="185">Reconstruction relief and rehabilitation</option>
+						<option value="186">Disaster prevention and preparedness</option>
+						<option value="187">Administrative costs</option>
+						<option value="188">Support to national NGOs</option>
+						<option value="189">Support to international NGOs</option>
+						<option value="190">Support to local and regional NGOs</option>
+						<option value="191">Refugees in donor countries</option>
+						<option value="192">Sectors not specified</option>
+						<option value="193">Promotion of development awareness</option>
+                      </select>
+                    </li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <label>LANGUAGE</label>
+                  <select class="wid-430" name="language" selected="<%=@project_data[:language]%>">
+                    <option value="1">English</option>
+                    <option></option>
+                  </select>
+                </div>
+                <div class="row">
+                  <div class="inner_row">
+                    <label>PROGRAM ID</label>
+                    <input name="project_guid" type="text" class="imp01" value ="<%=@project_data[:project_guid]%>"/>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="inner_row">
+                    <label>START DATE</label>
+                    <div class="callender">
+                      <input name="start_date" type="text" id="datepicker" value ="<%=@project_data[:start_date]%>" />
+                      <input type="button" class="button" id="datepicker"/>
+                    </div>
+                  </div>
+                  <div class="inner_row">
+                    <label>END DATE</label>
+                    <div class="callender">
+                      <input name="end_date" type="text" id="datepicker" value ="<%=@project_data[:end_date]%>"  />
+                      <input type="button" class="button" />
+                    </div>
+                  </div>
+                  <div class="inner_row last">
+                    <p class="date">Leave the end date blank if the project is permanent</p>
+                  </div>
+                </div>
 
-<div class="center_content">
-   
-        
-		<h1> Register </h1>
-        
-		We need this project information to get an idea of your aid project. 
-		The most accurate data you can fill in, the better donors and general public will know about your project.
-		<br>
-		You can always <a HREF="mailto:contact@openaidregister.org">contact us</A> if you have troubles on this step.
-        
-       <br>
-		<br>
-			<br>
-			  <br>
-				<% if @errors.length>0 %>
-				<p>
-					<b>Errors:</b><br>
-					<%@errors.each do |error|%>
-					* <%=error%><br>
-					<%end%>
-				</p>
-				<%end%>
-
-				<br>
-				  <br>	
+				 <div class="row">
+	              	<div class="inner_row">
+	                	<label>BUDGET</label>
+	                 	<input name="budget" type="text" class="imp01"value ="<%=@project_data[:budget]%>"/>
+	                </div>
+	                <div class="inner_row">
+	                  	<label>CURRENCY</label>
+	                  	<select name="budget_currency" class="wid-205" selected ="<%=@project_data[:budget]%>">
+	                    	<option value=""></option>
+	                      	<option value="AFN">Afghani</option>
+							<option value="DZD">Algerian Dinar</option>
+							<option value="ARS">Argentine Peso</option>
+							<option value="AMD">Armenian Dram</option>
+							<option value="AWG">Aruban Guilder</option>
+							<option value="AUD">Australian Dollar</option>
+							<option value="AZN">Azerbaijanian Manat</option>
+							<option value="BSD">Bahamian Dollar</option>
+							<option value="BHD">Bahraini Dinar</option>
+							<option value="THB">Baht</option>
+							<option value="PAB">Balboa</option>
+							<option value="BBD">Barbados Dollar</option>
+							<option value="BYR">Belarussian Ruble</option>
+							<option value="BZD">Belize Dollar</option>
+							<option value="BMD">Bermudian Dollar</option>
+							<option value="VEF">Bolivar Fuerte</option>
+							<option value="BOB">Boliviano</option>
+							<option value="BRL">Brazilian Real</option>
+							<option value="BND">Brunei Dollar</option>
+							<option value="BGN">Bulgarian Lev</option>
+							<option value="BIF">Burundi Franc</option>
+							<option value="CAD">Canadian Dollar</option>
+							<option value="CVE">Cape Verde Escudo</option>
+							<option value="KYD">Cayman Islands Dollar</option>
+							<option value="GHS">Cedi</option>
+							<option value="XOF">CFA Franc BCEAO</option>
+							<option value="XAF">CFA Franc BEAC</option>
+							<option value="XPF">CFP Franc</option>
+							<option value="CLP">Chilean Peso</option>
+							<option value="COP">Colombian Peso</option>
+							<option value="KMF">Comoro Franc</option>
+							<option value="CDF">Congolese Franc</option>
+							<option value="BAM">Convertible Marks</option>
+							<option value="NIO">Cordoba Oro</option>
+							<option value="CRC">Costa Rican Colon</option>
+							<option value="HRK">Croatian Kuna</option>
+							<option value="CUP">Cuban Peso</option>
+							<option value="CZK">Czech Koruna</option>
+							<option value="GMD">Dalasi</option>
+							<option value="DKK">Danish Krone</option>
+							<option value="MKD">Denar</option>
+							<option value="DJF">Djibouti Franc</option>
+							<option value="STD">Dobra</option>
+							<option value="DOP">Dominican Peso</option>
+							<option value="VND">Dong</option>
+							<option value="XCD">East Caribbean Dollar</option>
+							<option value="EGP">Egyptian Pound</option>
+							<option value="SVC">El Salvador Colon</option>
+							<option value="ETB">Ethiopian Birr</option>
+							<option value="EUR">Euro</option>
+							<option value="FKP">Falkland Islands Pound</option>
+							<option value="FJD">Fiji Dollar</option>
+							<option value="HUF">Forint</option>
+							<option value="GIP">Gibraltar Pound</option>
+							<option value="HTG">Gourde</option>
+							<option value="PYG">Guarani</option>
+							<option value="GNF">Guinea Franc</option>
+							<option value="GYD">Guyana Dollar</option>
+							<option value="HKD">Hong Kong Dollar</option>
+							<option value="UAH">Hryvnia</option>
+							<option value="ISK">Iceland Krona</option>
+							<option value="INR">Indian Rupee</option>
+							<option value="IRR">Iranian Rial</option>
+							<option value="IQD">Iraqi Dinar</option>
+							<option value="JMD">Jamaican Dollar</option>
+							<option value="JOD">Jordanian Dinar</option>
+							<option value="KES">Kenyan Shilling</option>
+							<option value="PGK">Kina</option>
+							<option value="LAK">Kip</option>
+							<option value="EEK">Kroon</option>
+							<option value="KWD">Kuwaiti Dinar</option>
+							<option value="AOA">Kwanza</option>
+							<option value="MMK">Kyat</option>
+							<option value="GEL">Lari</option>
+							<option value="LVL">Latvian Lats</option>
+							<option value="LBP">Lebanese Pound</option>
+							<option value="ALL">Lek</option>
+							<option value="HNL">Lempira</option>
+							<option value="SLL">Leone</option>
+							<option value="LRD">Liberian Dollar</option>
+							<option value="LYD">Libyan Dinar</option>
+							<option value="SZL">Lilangeni</option>
+							<option value="LTL">Lithuanian Litas</option>
+							<option value="LSL">Loti</option>
+							<option value="MGA">Malagasy Ariary</option>
+							<option value="MWK">Malawi Kwacha</option>
+							<option value="MYR">Malaysian Ringgit</option>
+							<option value="TMT">Manat</option>
+							<option value="MUR">Mauritius Rupee</option>
+							<option value="MZN">Metical</option>
+							<option value="MXN">Mexican Peso</option>
+							<option value="MXV">Mexican Unidad de Inversion (UDI)</option>
+							<option value="MDL">Moldovan Leu</option>
+							<option value="MAD">Moroccan Dirham</option>
+							<option value="BOV">Mvdol</option>
+							<option value="NGN">Naira</option>
+							<option value="ERN">Nakfa</option>
+							<option value="NAD">Namibia Dollar</option>
+							<option value="NPR">Nepalese Rupee</option>
+							<option value="ANG">Netherlands Antillian Guilder</option>
+							<option value="ILS">New Israeli Sheqel</option>
+							<option value="RON">New Leu</option>
+							<option value="TWD">New Taiwan Dollar</option>
+							<option value="NZD">New Zealand Dollar</option>
+							<option value="BTN">Ngultrum</option>
+							<option value="KPW">North Korean Won</option>
+							<option value="NOK">Norwegian Krone</option>
+							<option value="PEN">Nuevo Sol</option>
+							<option value="MRO">Ouguiya</option>
+							<option value="TOP">Paanga</option>
+							<option value="PKR">Pakistan Rupee</option>
+							<option value="MOP">Pataca</option>
+							<option value="CUC">Peso Convertible</option>
+							<option value="UYU">Peso Uruguayo</option>
+							<option value="PHP">Philippine Peso</option>
+							<option value="GBP">Pound Sterling</option>
+							<option value="BWP">Pula</option>
+							<option value="QAR">Qatari Rial</option>
+							<option value="GTQ">Quetzal</option>
+							<option value="ZAR">Rand</option>
+							<option value="OMR">Rial Omani</option>
+							<option value="KHR">Riel</option>
+							<option value="MVR">Rufiyaa</option>
+							<option value="IDR">Rupiah</option>
+							<option value="RUB">Russian Ruble</option>
+							<option value="RWF">Rwanda Franc</option>
+							<option value="SHP">Saint Helena Pound</option>
+							<option value="SAR">Saudi Riyal</option>
+							<option value="RSD">Serbian Dinar</option>
+							<option value="SCR">Seychelles Rupee</option>
+							<option value="SGD">Singapore Dollar</option>
+							<option value="SBD">Solomon Islands Dollar</option>
+							<option value="KGS">Som</option>
+							<option value="SOS">Somali Shilling</option>
+							<option value="TJS">Somoni</option>
+							<option value="LKR">Sri Lanka Rupee</option>
+							<option value="SDG">Sudanese Pound</option>
+							<option value="SRD">Surinam Dollar</option>
+							<option value="SEK">Swedish Krona</option>
+							<option value="CHF">Swiss Franc</option>
+							<option value="SYP">Syrian Pound</option>
+							<option value="BDT">Taka</option>
+							<option value="WST">Tala</option>
+							<option value="TZS">Tanzanian Shilling</option>
+							<option value="KZT">Tenge</option>
+							<option value="TTD">Trinidad and Tobago Dollar</option>
+							<option value="MNT">Tugrik</option>
+							<option value="TND">Tunisian Dinar</option>
+							<option value="TRY">Turkish Lira</option>
+							<option value="AED">UAE Dirham</option>
+							<option value="UGX">Uganda Shilling</option>
+							<option value="COU">Unidad de Valor Real</option>
+							<option value="CLF">Unidades de fomento</option>
+							<option value="UYI">Uruguay Peso en Unidades Indexadas</option>
+							<option value="USD">US Dollar</option>
+							<option value="USN">US Dollar (Next day)</option>
+							<option value="USS">US Dollar (Same day)</option>
+							<option value="UZS">Uzbekistan Sum</option>
+							<option value="VUV">Vatu</option>
+							<option value="KRW">Won</option>
+							<option value="YER">Yemeni Rial</option>
+							<option value="JPY">Yen</option>
+							<option value="CNY">Yuan Renminbi</option>
+							<option value="ZMK">Zambian Kwacha</option>
+							<option value="ZWL">Zimbabwe Dollar</option>
+							<option value="PLN">Zloty</option>
+	                    </select>
+	                </div>	                     
+	             </div>
+	            
+                <div class="row">
+                  <label>PROJECT WEBSITE</label>
+                  <input name="website" type="text" class="imp01" value ="<%=@project_data[:website]%>"/>
+                </div>
+              </div>
+              <div class="colem">
+                <h3>LOCATION</h3>
+                <div class="row">
+                  <label>PROJECT NAME</label>
+                  <div id="map_canvas" style="width:430px; height:300px;"></div>
+                </div>
+              </div>
+              <div class="colem">
+                <h3>ORGANIZATIONS INVOLVED</h3>
+                <div class="row">
+                  <div class="inner_row">
+                    <label>PARTNER ACTIVITY ID</label>
+                    <input name="program_guid" type="text" class="imp01" value ="<%=@project_data[:website]%>"/>
+                  </div>
+                  <div class="inner_row wid-400">
+                    <p class="date">Is this project funded by a program already in IATI? 
+                      Introduce the IATI Identifier of the master program</p>
+                  </div>
+                </div>
+                
+                <div class="row">
+                <label>OTHER PARTICIPATING ORGANIZATIONS</label>
+                  <ul>
+                    <li>
+                      <div class="health"><a href="#">Oxfam International</a><em>AS</em><a href="#" class="last">Implementer <img src="/images/cross.gif" alt="" /></a></div>
+                      <div class="inner_row">
+                        <label>NAME</label>
+                        <input name="other_org_name_1" type="text" class="imp01" value ="<%=@project_data[:other_org_name_1]%>"/>
+                      </div>
+                      <div class="inner_row">
+                        <label>AS...</label>
+                        <select name="other_org_role_1" class="wid-205" value ="<%=@project_data[:other_org_role_1]%>">
+     						<option value="1">accountable</option>
+						  	<option value="2">extending</option>
+						  	<option value="3">funding</option>
+						  	<option value="4">implementing</option>
+                        </select>
+                      </div>
+                      <div class="inner_row last02">
+                        <input type="button" class="button_add" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="colem">
+                <h3>PERFORMANCE</h3>
+                <div class="row">
+                  <label>RESULT TITLE</label>
+                  <input name="result_title" type="text" class="imp01" value ="<%=@project_data[:result_title]%>"/>
+                </div>
+                <div class="row">
+                  <label>DESCRIPTION / TARGETS</label>
+                  <textarea name="result_description" rows="" cols="" value ="<%=@project_data[:result_description]%>"></textarea>
+                </div>
+              </div>
+              <div class="colem">
+                <h3>CONTACT DATA</h3>
+                <div class="row">
+                  <ul class="patrn02">
+                    <li>
+                      <input name="same_person" type="checkbox" class="checkbox" value ="<%=@project_data[:same_person]%>"/>
+                      <span>Check this option if you are the contact person</span> </li>
+                  </ul>
+                  <ul>
+                    <li>
+                      <div class="inner_row wid-402 pad">
+                        <label>CONTACT NAME</label>
+                        <input name="contact_name" type="text" value ="<%=@project_data[:contact_name]%>" />
+                      </div>
+                      <div class="inner_row wid-402">
+                        <label>EMAIL</label>
+                        <input name="contact_email" type="text" value ="<%=@project_data[:contact_email]%>" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+				<div class="colem">
+	                <h3 class="padd_top">CLASSIFICATION</h3>
+	                <div class="row">
+	                  <div class="inner_row wid-402">
+	                    <label>COLLABORATION TYPE</label>
+	                    <select class="wid-400">
+							<option></option>
+	                      	<option value="1">Bilateral</option>
+						  	<option value="2">Multilateral</option>
+						  	<option value="4">Multilateral outflows</option>
+						  	<option value="5">Aid through NGOs</option>
+						  	<option value="6">Aid to NGOs</option>
+						  	<option value="7">Aid through PPPs</option>
+	                    </select>
+	                  </div>
+	                  <div class="inner_row">
+	                    <p class="date"> Check out<a hre="http://iatistandard.org/codelists/finance_type"> here</a> to understand all options</p>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="inner_row wid-402">
+	                    <label>TIED STATUS</label>
+	                    <select class="wid-400">
+	                      <option></option>
+							<option value="3">Partially tied</option>
+						  	<option value="4">Tied</option>
+						  	<option value="5">Untied</option> 
+	                    </select>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="inner_row wid-402">
+	                    <label>AID TYPE</label>
+	                    <select class="wid-400">
+	                      	<option></option>
+							<option value="A02">Sector budget support</option>
+						  	<option value="B01">Core support to NGOs, other private bodies, PPPs and research institutes</option>
+						  	<option value="B02">Core contributions to multilateral institutions</option>
+						  	<option value="B03">Contributions to specific-purpose programmes and funds managed by international organisations</option>
+						  	<option value="B04">Basket funds/pooled funding</option>
+						  	<option value="C01">Project-type interventions</option>
+							<option value="D01">Donor country personnel</option>
+							<option value="D02">Other technical assistance</option>
+							<option value="E01">Scholarships/training in donor country</option>
+							<option value="E02">Imputed student costs</option>
+							<option value="F01">Debt relief</option>
+							<option value="G01">Administrative costs not included elsewhere</option>
+							<option value="H01">Development awareness</option>
+							<option value="H02">Refugees in donor countries</option>
+	                      <option></option>
+	                    </select>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="inner_row wid-402">
+	                    <label>FLOW TYPE</label>
+	                    <select class="wid-400">
+	                      <option></option>
+							<option value="10">Official Development Assistance</option>
+						  	<option value="20">Other Official Flows</option>
+						  	<option value="30">Private NGO</option>
+						  	<option value="35">Private Market</option>
+	                      <option></option>
+	                    </select>
+	                  </div>
+	                </div>
+	                <div class="row">
+	                  <div class="inner_row wid-402">
+	                    <label>FIINANCE TYPE</label>
+	                    <select class="wid-400">
+	                      <option></option>
+						<option value="110">	Aid grant excluding debt reorganisation</option>
+						<option value="111">	Subsidies to national private investors</option>
+						<option value="210">	Interest subsidy grant in AF</option>
+						<option value="211">	Interest subsidy to national private exporters</option>
+						<option value="310">	Deposit basis</option>
+						<option value="311">	Encashment basis</option>
+						<option value="410">	Aid loan excluding debt reorganisation</option>
+						<option value="411">	Investment-related loan to developing countries</option>
+						<option value="412">	Loan in a joint venture with the recipient</option>
+						<option value="413">	Loan to national private investor</option>
+						<option value="414">	Loan to national private exporter</option>
+						<option value="451">	Non-banks guaranteed export credits</option>
+						<option value="452">	Non-banks non-guaranteed portions of guaranteed export credits</option>
+						<option value="453">	Bank export credits</option>
+						<option value="510">	Acquisition of equity as part of a joint venture with the recipient</option>
+						<option value="511">	Acquisition of equity not part of joint venture in developing countries</option>
+						<option value="512">	Other acquisition of equity. <option value="110">	Aid grant excluding debt reorganisation</option>
+						<option value="111">	Subsidies to national private investors</option>
+						<option value="210">	Interest subsidy grant in AF</option>
+						<option value="211">	Interest subsidy to national private exporters</option>
+						<option value="310">	Deposit basis</option>
+						<option value="311">	Encashment basis</option>
+						<option value="410">	Aid loan excluding debt reorganisation</option>
+						<option value="411">	Investment-related loan to developing countries</option>
+						<option value="412">	Loan in a joint venture with the recipient</option>
+						<option value="413">	Loan to national private investor</option>
+						<option value="414">	Loan to national private exporter</option>
+						<option value="451">	Non-banks guaranteed export credits</option>
+						<option value="452">	Non-banks non-guaranteed portions of guaranteed export credits</option>
+						<option value="453">	Bank export credits</option>
+						<option value="510">	Acquisition of equity as part of a joint venture with the recipient</option>
+						<option value="511">	Acquisition of equity not part of joint venture in developing countries</option>
+						<option value="512">	Other acquisition of equity. Investment in a country on the DAC List of ODA Recipients that is not made to acquire a lasting interest in an enterprise.</option>
+						<option value="610">	Debt forgiveness: ODA claims (P)</option>
+						<option value="611">	Debt forgiveness: ODA claims (I)</option>
+						<option value="612">	Debt forgiveness: OOF claims (P)</option>
+						<option value="613">	Debt forgiveness: OOF claims (I)</option>
+						<option value="614">	Debt forgiveness: Private claims (P)</option>
+						<option value="615">	Debt forgiveness: Private claims (I)</option>
+						<option value="616">	Debt forgiveness: OOF claims (DSR)</option>
+						<option value="617">	Debt forgiveness: Private claims (DSR)</option>
+						<option value="618">	Debt forgiveness: Other</option>
+						<option value="620">	Debt rescheduling: ODA claims (P)</option>
+						<option value="621">	Debt rescheduling: ODA claims (I)</option>
+						<option value="622">	Debt rescheduling: OOF claims (P)</option>
+						<option value="623">	Debt rescheduling: OOF claims (I)</option>
+						<option value="624">	Debt rescheduling: Private claims (P)</option>
+						<option value="625">	Debt rescheduling: Private claims (I)</option>
+						<option value="626">	Debt rescheduling: OOF claims (DSR)</option>
+						<option value="627">	Debt rescheduling: Private claims (DSR)</option>
+						<option value="630">	Unicode Encode Error</option>
+						<option value="631">	Unicode Encode Error</option>
+						<option value="632">	Unicode Encode Error</option>
+						<option value="710">	Foreign direct investment</option>
+						<option value="711">	Other foreign direct investment, including reinvested earnings</option>
+						<option value="810">	Bank bonds</option>
+						<option value="811">	Non-bank bonds</option>
+						<option value="910">	Other bank securities/claims</option>
+						<option value="911">	Other non-bank securities/claims</option>
+						<option value="912">	Securities and other instruments issued by multilateral agencies</option></option>
+						<option value="610">	Debt forgiveness: ODA claims (P)</option>
+						<option value="611">	Debt forgiveness: ODA claims (I)</option>
+						<option value="612">	Debt forgiveness: OOF claims (P)</option>
+						<option value="613">	Debt forgiveness: OOF claims (I)</option>
+						<option value="614">	Debt forgiveness: Private claims (P)</option>
+						<option value="615">	Debt forgiveness: Private claims (I)</option>
+						<option value="616">	Debt forgiveness: OOF claims (DSR)</option>
+						<option value="617">	Debt forgiveness: Private claims (DSR)</option>
+						<option value="618">	Debt forgiveness: Other</option>
+						<option value="620">	Debt rescheduling: ODA claims (P)</option>
+						<option value="621">	Debt rescheduling: ODA claims (I)</option>
+						<option value="622">	Debt rescheduling: OOF claims (P)</option>
+						<option value="623">	Debt rescheduling: OOF claims (I)</option>
+						<option value="624">	Debt rescheduling: Private claims (P)</option>
+						<option value="625">	Debt rescheduling: Private claims (I)</option>
+						<option value="626">	Debt rescheduling: OOF claims (DSR)</option>
+						<option value="627">	Debt rescheduling: Private claims (DSR)</option>
+						<option value="630">	Unicode Encode Error</option>
+						<option value="631">	Unicode Encode Error</option>
+						<option value="632">	Unicode Encode Error</option>
+						<option value="710">	Foreign direct investment</option>
+						<option value="711">	Other foreign direct investment, including reinvested earnings</option>
+						<option value="810">	Bank bonds</option>
+						<option value="811">	Non-bank bonds</option>
+						<option value="910">	Other bank securities/claims</option>
+						<option value="911">	Other non-bank securities/claims</option>
+						<option value="912">	Securities and other instruments issued by multilateral agencies</option>
+	                      <option></option>
+	                    </select>
+	                  </div>
+	                </div>
+	              </div>
+					<input type="hidden" id="cartodb_id" name="cartodb_id" value="<%=@project_data[:cartodb_id]%>" />
+				<input type="hidden" id="google_markers" name="google_markers" value="<%=@project_data[:google_markers]%>" />
+              <div class="colem01"> <span>
+                <input class="inp" type="submit" value="Submit"/>
+                </span> </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="registry_right">
+        <div class="top_section">
+          <h4><img src="/images/do_help02.gif" alt="" /></h4>
+          <p>If you have doubts of how to fill in this form you can always check an example or <a HREF="mailto:contact@openaidregister.org">contact us </a>with your questions.</p>
+        </div>
+        <div class="process">
+          <h4>PROCCESS OVERVIEW</h4>
+          <div class="slide">
+            <div class="slider"><a href="#"><img src="/images/slider.gif" alt="" /></a></div>
+          </div>
+          <p>You've completed more than a half of the form. You are almost done! :)</p>
+          <ul>
 			
-       	<%= form_tag( :method => "post") do %>
-		
-		<br>
-			<%= label_tag(:title, "Project Title:") %>
-		  	<%= text_field_tag(:title, @project_data[:title]) %>
-		
-			<%= label_tag(:description, "Project Description:") %>
-		  	<%= text_area_tag(:description, @project_data[:description], :size => "30x16") %>
-		<br>
-			<br>
-			<%= label_tag(:language, "Language:") %>
-		<%= select_tag(:language, options_for_select([['english', 1]], :selected => @project_data[:language])) %>
-		<br>
-			Which language are you using  when introducing your project data? By default, english is selected    
-		
-		
-	
-		
-			<br>	<br>
-			<%= label_tag(:sector_id, "Sector:") %>
-		<%= select_tag(:sector_id, options_for_select([	
-			['Education -level unspecified','1'],
-			['Basic education','2'],
-			['Secondary education','3'],
-			['Post-secondary education','4'],
-			['Health-general','5'],
-			['Basic health', '6'],
-			['POPULATION POLICIES-PROGRAMMES AND REPRODUCTIVE HEALTH','7'],
-			['WATER AND SANITATION','8'],
-				['Government and civil society, general','9'],
-				['Conflict prevention and resolution- peace and security','10'],
-				['OTHER SOCIAL INFRASTRUCTURE AND SERVICES','11'],
-					['TRANSPORT AND STORAGE','12'],
-					['COMMUNICATION','13'],
-					['ENERGY GENERATION AND SUPPLY','14'],
-					['BANKING AND FINANCIAL SERVICES','15'],
-					['BUSINESS AND OTHER SERVICES','16'],
-					['AGRICULTURE','17'],
-					['FORESTRY','18'],
-					['FISHING','19'],
-					['INDUSTRY','20'],
-					['MINERAL RESOURCES AND MINING','21'],
-					['CONSTRUCTION','22'],
-					['TRADE POLICY AND REGULATIONS AND TRADE-RELATED ADJUSTMENT','23'],
-					['TOURISM','24'],
-					['General environmental protection','25'],
-					['Other multisector','26'],
-					['General budget support','27'],
-					['Developmental food aid/Food security assistance','28'],
-					['Other commodity assistance','29'],
-					['ACTION RELATING TO DEBT','30'],
-					['Emergency Response','31'],
-					['Reconstruction relief and rehabilitation','32'],
-					['Disaster prevention and preparedness','33'],
-					['ADMINISTRATIVE COSTS OF DONORS','34'],
-					['SUPPORT TO NON- GOVERNMENTAL ORGANISATIONS (NGOs)','35'],
-					['REFUGEES IN DONOR COUNTRIES','36'],
-					['UNALLOCATED/ UNSPECIFIED','37']], 
-					:selected => @project_data[:sector_id]), :multiple => true ) %>
-		<br>
-		You can select multiple sectors
-		<br>
-		<br>
-		<%= label_tag(:project_guid, "Project's ID:") %>
-		<%= text_field_tag(:project_guid, @project_data[:project_guid]) %>
-		<br>
-		Project's internal identifier Eg: 1256FB
-		<br>
-		<br>
-		<%= label_tag(:start_date, "Start Date" ) %>
-	<!--	< date_select("start_date", "written_on", :include_blank => true :discard_day =>true) %> -->
-		
-
-		<!--		< date_select('start_date', 'written_on',:start_year => 2000, :order => [:month, :day, :year], :include_blank => true, :default => @project_data[:start_date])%>	-->
-		
-		
-		<%= select_tag(:start_date_day, 
-		options_for_select([ 
-			['',''], 
-		['1','1'],
-		['2','2'], 
-		['3','3'], 
-		['4','4'],
-		['5','5'],
-		['6','6'], 
-		['7','7'],
-		['8','8'],
-		['9','9'],
-		['10','10'], 
-		['11','11'], 
-		['12','12'], 
-		['13','13'], 
-		['14','14'],
-		['15','15'],
-		['16','16'], 
-		['17','17'],
-		['18','18'],
-		['19','19'],
-		['20','20'], 
-		['21','21'], 
-		['22','22'], 
-		['23','23'], 
-		['24','24'],
-		['25','25'],
-		['26','26'], 
-		['27','27'],
-		['28','28'],
-		['29','29'],
-		['30','30'],
-		['31','31']	
-		], :selected => @project_data[:start_date_day]) ) %>
-		
-			
-			<%= select_tag(:start_date_month, options_for_select([
-				['',''],
-				['January','1'],
-				['February','2'],
-				['March','3'], 
-				['April','4'],
-				['May','5'],
-				['June','6'], 
-				['July','7'],
-				['August','8'],
-				['September','9'],
-				['October','10'], 
-				['November','11'], 
-				['December','12']],
-			 :selected => @project_data[:start_date_month])) %>
-			
-				<%= select_tag(:start_date_year, options_for_select([
-					['',''],
-					['2000','2000'],
-					['2001','2001'],
-					['2002','2002'],
-					['2003','2003'],
-					['2004','2004'],
-					['2005','2005'],
-					['2006','2006'],
-					['2007','2007'],
-					['2008','2008'],
-					['2009','2009'],
-					['2010','2010'],
-					['2011','2011'],
-					['2012','2012'],
-					['2013','2013'],
-					['2014','2014'],
-					['2015','2015']],
-				 :selected => @project_data[:start_date_year])) %>
-		
-		
-		
-		<br>
-		<br>
-		<%= label_tag(:end_date, "End Date") %>
-		
-				<%= select_tag(:end_date_day, options_for_select([ 
-					['',''], 
-				['1','1'],
-				['2','2'], 
-				['3','3'], 
-				['4','4'],
-				['5','5'],
-				['6','6'], 
-				['7','7'],
-				['8','8'],
-				['9','9'],
-				['10','10'], 
-				['11','11'], 
-				['12','12'], 
-				['13','13'], 
-				['14','14'],
-				['15','15'],
-				['16','16'], 
-				['17','17'],
-				['18','18'],
-				['19','19'],
-				['20','20'], 
-				['21','21'], 
-				['22','22'], 
-				['23','23'], 
-				['24','24'],
-				['25','25'],
-				['26','26'], 
-				['27','27'],
-				['28','28'],
-				['29','29'],
-				['30','30'],
-				['31','31']	
-				], :selected => @project_data[:end_date_day]) ) %>
-
-
-					<%= select_tag(:end_date_month, options_for_select([
-						['',''],
-						['January','1'],
-						['February','2'],
-						['March','3'], 
-						['April','4'],
-						['May','5'],
-						['June','6'], 
-						['July','7'],
-						['August','8'],
-						['September','9'],
-						['October','10'], 
-						['November','11'], 
-						['December','12']],
-					 :selected => @project_data[:end_date_month])) %>
-
-						<%= select_tag(:end_date_year, options_for_select([
-							['',''],
-							['2000','2000'],
-							['2001','2001'],
-							['2002','2002'],
-							['2003','2003'],
-							['2004','2004'],
-							['2005','2005'],
-							['2006','2006'],
-							['2007','2007'],
-							['2008','2008'],
-							['2009','2009'],
-							['2010','2010'],
-							['2011','2011'],
-							['2012','2012'],
-							['2013','2013'],
-							['2014','2014'],
-							['2015','2015']],
-						 :selected => @project_data[:end_date_year])) %>
-		
-		
-			
-			<%= check_box_tag(:permanent, 1, @project_data[:permanent] =="1", :onclick =>"disable_end_date()") %>
-			<%= label_tag(:permanent, "Permanent") %>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div id="map_canvas" style="width:400px; height:300px;"></div>
-		<br>
-		<br>
-		<br>
-		<br>
-		<%= label_tag(:budget, "Budget:") %>
-		<%= text_field_tag(:budget, @project_data[:budget]) %>
-		in <%= select_tag(:budget_currency, options_for_select([
-		['',''],
-		['Afghani','AFN'],
-		['UAE Dirham','AED'],
-		['Lek','ALL'],
-		['Armenian Dram','AMD'],
-		['Netherlands Antillian Guilder','ANG'],
-		['Kwanza','AOA'],
-		['Argentine Peso','ARS'],
-		['Australian Dollar','AUD'],
-		['Aruban Guilder','AWG'],
-		['Azerbaijanian Manat','AZN'],
-		['Convertible Marks','BAM'],
-		['Barbados Dollar','BBD'],
-		['Taka','BDT'],
-		['Bulgarian Lev','BGN'],
-		['Bahraini Dinar','BHD'],
-		['Burundi Franc','BIF'],
-		['Bermudian Dollar','BMD'],
-		['Brunei Dollar','BND'],
-		['Boliviano','BOB'],
-		['Mvdol','BOV'],
-		['Brazilian Real','BRL'],
-		['Bahamian Dollar','BSD'],
-		['Ngultrum','BTN'],
-		['Pula','BWP'],
-		['Belarussian Ruble','BYR'],
-		['Belize Dollar','BZD'],
-		['Canadian Dollar','CAD'],
-		['Congolese Franc','CDF'],
-		['Swiss Franc','CHF'],
-		['Unidades de fomento','CLF'],
-		['Chilean Peso','CLP'],
-		['Yuan Renminbi','CNY'],
-		['Colombian Peso','COP'],
-		['Unidad de Valor Real','COU'],
-		['Costa Rican Colon','CRC'],
-		['Peso Convertible','CUC'],
-		['Cuban Peso','CUP'],
-		['Cape Verde Escudo','CVE'],
-		['Czech Koruna','CZK'],
-		['Djibouti Franc','DJF'],
-		['Danish Krone','DKK'],
-		['Dominican Peso','DOP'],
-		['Algerian Dinar','DZD'],
-		['Kroon','EEK'],
-		['Egyptian Pound','EGP'],
-		['Nakfa','ERN'],
-		['Ethiopian Birr','ETB'],
-		['Euro','EUR'],
-		['Fiji Dollar','FJD'],
-		['Falkland Islands Pound','FKP'],
-		['Pound Sterling','GBP'],
-		['Lari','GEL'],
-		['Cedi','GHS'],
-		['Gibraltar Pound','GIP'],
-		['Dalasi','GMD'],
-		['Guinea Franc','GNF'],
-		['Quetzal','GTQ'],
-		['Guyana Dollar','GYD'],
-		['Hong Kong Dollar','HKD'],
-		['Lempira','HNL'],
-		['Croatian Kuna','HRK'],
-		['Gourde','HTG'],
-		['Forint','HUF'],
-		['Rupiah','IDR'],
-		['New Israeli Sheqel','ILS'],
-		['Indian Rupee','INR'],
-		['Iraqi Dinar','IQD'],
-		['Iranian Rial','IRR'],
-		['Iceland Krona','ISK'],
-		['Jamaican Dollar','JMD'],
-		['Jordanian Dinar','JOD'],
-		['Yen','JPY'],
-		['Kenyan Shilling','KES'],
-		['Som','KGS'],
-		['Riel','KHR'],
-		['Comoro Franc','KMF'],
-		['North Korean Won','KPW'],
-		['Won','KRW'],
-		['Kuwaiti Dinar','KWD'],
-		['Cayman Islands Dollar','KYD'],
-		['Tenge','KZT'],
-		['Kip','LAK'],
-		['Lebanese Pound','LBP'],
-		['Sri Lanka Rupee','LKR'],
-		['Liberian Dollar','LRD'],
-		['Loti','LSL'],
-		['Lithuanian Litas','LTL'],
-		['Latvian Lats','LVL'],
-		['Libyan Dinar','LYD'],
-		['Moroccan Dirham','MAD'],
-		['Moldovan Leu','MDL'],
-		['Malagasy Ariary','MGA'],
-		['Denar','MKD'],
-		['Kyat','MMK'],
-		['Tugrik','MNT'],
-		['Pataca','MOP'],
-		['Ouguiya','MRO'],
-		['Mauritius Rupee','MUR'],
-		['Rufiyaa','MVR'],
-		['Malawi Kwacha','MWK'],
-		['Mexican Peso','MXN'],
-		['Mexican Unidad de Inversion (UDI)','MXV'],
-		['Malaysian Ringgit','MYR'],
-		['Metical','MZN'],
-		['Namibia Dollar','NAD'],
-		['Naira','NGN'],
-		['Cordoba Oro','NIO'],
-		['Norwegian Krone','NOK'],
-		['Nepalese Rupee','NPR'],
-		['New Zealand Dollar','NZD'],
-		['Rial Omani','OMR'],
-		['Balboa','PAB'],
-		['Nuevo Sol','PEN'],
-		['Kina','PGK'],
-		['Philippine Peso','PHP'],
-		['Pakistan Rupee','PKR'],
-		['Zloty','PLN'],
-		['Guarani','PYG'],
-		['Qatari Rial','QAR'],
-		['New Leu','RON'],
-		['Serbian Dinar','RSD'],
-		['Russian Ruble','RUB'],
-		['Rwanda Franc','RWF'],
-		['Saudi Riyal','SAR'],
-		['Solomon Islands Dollar','SBD'],
-		['Seychelles Rupee','SCR'],
-		['Sudanese Pound','SDG'],
-		['Swedish Krona','SEK'],
-		['Singapore Dollar','SGD'],
-		['Saint Helena Pound','SHP'],
-		['Leone','SLL'],
-		['Somali Shilling','SOS'],
-		['Surinam Dollar','SRD'],
-		['Dobra','STD'],
-		['El Salvador Colon','SVC'],
-		['Syrian Pound','SYP'],
-		['Lilangeni','SZL'],
-		['Baht','THB'],
-		['Somoni','TJS'],
-		['Manat','TMT'],
-		['Tunisian Dinar','TND'],
-		['Paanga','TOP'],
-		['Turkish Lira','TRY'],
-		['Trinidad and Tobago Dollar','TTD'],
-		['New Taiwan Dollar','TWD'],
-		['Tanzanian Shilling','TZS'],
-		['Hryvnia','UAH'],
-		['Uganda Shilling','UGX'],
-		['US Dollar','USD'],
-		['US Dollar (Next day)','USN'],
-		['US Dollar (Same day)','USS'],
-		['Uruguay Peso en Unidades Indexadas','UYI'],
-		['Peso Uruguayo','UYU'],
-		['Uzbekistan Sum','UZS'],
-		['Bolivar Fuerte','VEF'],
-		['Dong','VND'],
-		['Vatu','VUV'],
-		['Tala','WST'],
-		['CFA Franc BEAC','XAF'],
-		['East Caribbean Dollar','XCD'],
-		['CFA Franc BCEAO','XOF'],
-		['CFP Franc','XPF'],
-		['Yemeni Rial','YER'],
-		['Rand','ZAR'],
-		['Zambian Kwacha','ZMK'],
-		['Zimbabwe Dollar','ZWL']], :selected => @project_data[:budget_currency]))%>
-		<br>
-		<br>
-		
-		<%= label_tag(:website, "Project's website:") %>
-		<%= text_field_tag(:website, @project_data[:website]) %>
-		
-		<br>
-		<br>
-		<%= label_tag(:program_guid, "Program's ID:") %>
-	  	<%= text_field_tag(:program_guid, @project_data[:program_guid]) %>
-		<br>
-		Is this project funded by a program already in IATI?Introduce the IATI Identifier of the master program
-			<br>
-			<br>
-			
-			<%= label_tag(:other_org_name, "Other organizations:") %>
-		  	<%= text_field_tag(:other_org_name_1, @project_data[:other_org_name_1]) %>
-				<%= label_tag(:other_org_role, "Their role:") %>
-			  	<%= select_tag(:other_org_role_1, options_for_select([['', ''], ['accountable', 1], 			['extending', 2],['funding', 3], ['implementing', 4]], :selected => @project_data[:other_org_role_1])) %>
-		<br>
-			<%= label_tag(:other_org_name, "Other organizations:") %>
-		  	<%= text_field_tag(:other_org_name_2, @project_data[:other_org_name_2]) %>
-			<%= label_tag(:other_org_role, "Their role:") %>
-		  <%= select_tag(:other_org_role_2, options_for_select([['', ''], ['accountable', 1], ['extending', 2],['funding', 3], ['implementing', 4]], :selected => @project_data[:other_org_role_2])) %>	
-		<br>
-			<%= label_tag(:other_org_name, "Other organizations:") %>
-		  	<%= text_field_tag(:other_org_name_3, @project_data[:other_org_name_3]) %>
-			<%= label_tag(:other_org_role, "Their role:") %>
-		  	<%= select_tag(:other_org_role_3, options_for_select([['', ''], ['accountable', 1], ['extending', 2],['funding', 3], ['implementing', 4]], :selected => @project_data[:other_org_role_3])) %>	
-		
-			<br>
-			<br>
-			It will be available soon
-			<br>
-			<br>
-			
-			<%= label_tag(:result_title, "Result's title:") %>
-		<%= text_field_tag(:result_title, @project_data[:result_title]) %>
-			<%= label_tag(:result_description, "Result's Description:") %>
-			<%= text_area_tag(:result_description, @project_data[:result_description], :size => "30x16") %>
-			
-			<br>
-			
-			<br>
-			<%= label_tag(:collaboration_type, "Collaboration type:") %>
-		<%= select_tag(:collaboration_type, options_for_select([['', ''],['Aid through NGOs', 5],['Aid to NGOs', 6],['Aid through PPPs', 7]], :selected => @project_data[:collaboration_type])) %>
-		<br>
-	 <a href="http://iatistandard.org/codelists/collaboration_type">Check out here</A> to understand  all options
-		<br>
-
-		<br>
-		<%= label_tag(:aid_type, "Aid type:") %>
-	<%= select_tag(:aid_type, options_for_select([['', ''], 
-		['General budget support','A01'],
-			['Sector budget support','A02'],
-			['Core support to NGOs, other private bodies, PPPs and research institutes','B01'],
-			['Core contributions to multilateral institutions','B02'],
-			['Contributions to specific-purpose programmes and funds managed by international organisations','B03'],
-			['Basket funds/pooled funding','B04'],
-			['Project-type interventions','C01'],
-			['Donor country personnel','D01'],
-			['Other technical assistance','D02'],
-			['Scholarships/training in donor country','E01'],
-			['Imputed student costs','E02'],
-			['Debt relief','F01'],
-			['Administrative costs not included elsewhere','G01'],
-			['Development awareness','H01'],
-			['Refugees in donor countries','H02']], :selected => @project_data[:aid_type])) %>
-	<br>
- <a href="http://iatistandard.org/codelists/aid_type">Check out here</A> to understand  all options
-	<br>
-<br>
-
-		<%= label_tag(:tied_status, "Tied Status:") %>
-	<%= select_tag(:tied_status, options_for_select([['', ''],['Partially tied', 3],['Tied', 4],['Untied', 5]], :selected => @project_data[:tied_status])) %>
-		
-		<br>
-	<a href="http://iatistandard.org/codelists/tied_status">Check out here</A> to understand  all options
-		<br>
-		
-			
-			<br>
-
-					<%= label_tag(:flow_type, "Flow type:") %>
-				<%= select_tag(:flow_type, options_for_select([['', ''], 		
-				['Official development assistance (ODA)','10'],
-						['Other official flows (OOF)','20'],
-						['PRIVATE NGO','30'],
-						['	PRIVATE MARKET','35']], :selected => @project_data[:flow_type])) %>
-				
-				
-				
-
-					<br>
-				<a href="http://iatistandard.org/codelists/flow_type">Check out here</A> to understand  all options
-					<br>
-
-						<br>	
-						
-						
-							<%= label_tag(:finance_type, "Finance type:") %>
-						<%= select_tag(:finance_type, options_for_select([['', '']	,
-							['Aid grant excluding debt reorganisation','110'],
-							['Subsidies to national private investors','111'],
-							['Interest subsidy grant in AF','210'],
-							['Interest subsidy to national private exporters','211'],
-							['Deposit basis','310'],
-								['Encashment basis','311'],
-								['Aid loan excluding debt reorganisation','410'],
-								['Investment-related loan to developing countries','411'],
-								['Loan in a joint venture with the recipient','412'],
-							['Loan to national private investor','413'],
-							['Loan to national private exporter','414'],
-							['Non-banks guaranteed export credits','451'],
-							['Non-banks non-guaranteed portions of guaranteed export credits','452'],
-							['Bank export credits','453'],
-							['Acquisition of equity as part of a joint venture with the recipient','510'],
-							['Acquisition of equity not part of joint venture in developing countries','511'],
-							['Other acquisition of equity','512'],
-						['Debt forgiveness: ODA claims (P)','610'],
-						['Debt forgiveness: ODA claims (I)','611'],
-						['Debt forgiveness: OOF claims (P)','612'],
-						['Debt forgiveness: OOF claims (I)','613'],
-						['Debt forgiveness: Private claims (P)','614'],
-						['Debt forgiveness: Private claims (I)','615'],
-						['Debt forgiveness: OOF claims (DSR)','616'],
-						['Debt forgiveness: Private claims (DSR)','617'],
-						['Debt forgiveness: Other','618'],
-						['Debt rescheduling: ODA claims (P)','620'],
-						['Debt rescheduling: ODA claims (I)','621'],
-						['Debt rescheduling: OOF claims (P)','622'],
-						['Debt rescheduling: OOF claims (I)','623'],
-						['Debt rescheduling: Private claims (P)','624'],
-						['Debt rescheduling: Private claims (I)','625'],
-						['Debt rescheduling: OOF claims (DSR)','626'],
-						['Debt rescheduling: Private claims (DSR)','627'],
-						['Unicode Encode Error','630'],
-						['Unicode Encode Error','631'],
-						['Unicode Encode Error','632'],
-						['Foreign direct investment','710'],
-						['Other foreign direct investment, including reinvested earnings','711'],
-						['Bank bonds','810'],
-						['Non-bank bonds','811'],
-						['Other bank securities/claims','910'],
-						['Other non-bank securities/claims','911'],
-						['Securities and other instruments issued by multilateral agencies','912']], :selected => @project_data[:finance_type])) %>
-
-							<br>
-						<a href="http://iatistandard.org/codelists/finance_type">Check out here</A> to understand  all options
-							<br>
-
-								<br>
-						
-						
-						
-			<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", 
-			:onchange =>"change_contact_info()") %>
-			
-			
-		
-			<% label_tag(:same_person, "Check this option if you are the contact person") %>
-			
-			
-			
-			
-	
-				
-			<br>
-			<br>
-				<%= label_tag(:contact_name, "Contact name:") %>
-			  	<%= text_field_tag(:contact_name, @project_data[:contact_name]) %>
-			
-			<%= label_tag(:contact_email, "Contact Email:") %>
-		  	<%= text_field_tag(:contact_email, @project_data[:contact_email]) %>
-			
-			<br>
-			<br>
-			
-		<input type="hidden" id="cartodb_id" name="cartodb_id" value="<%=@project_data[:cartodb_id]%>" />
-		
-	<input type="hidden" id="google_markers" name="google_markers" value="<%=@project_data[:google_markers]%>" /> 
-		
-			
-			
-				<br>
-				  <br>
-		<%= submit_tag("Submit")  %>
-		
-	
-	
-		<br>
-		
-	<% end %>
-	
-	
-
-
-   </div>    
-
-   
-  
-   
- 
+            <li> You missed the <a href="#">project id</a> and it is important for us.</li>
+			<% if @errors.length>0 %>
+			<li>
+				<b>Errors:</b><br>
+				<%@errors.each do |error|%>
+				* <%=error%><br>
+				</li><%end%><%end%>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

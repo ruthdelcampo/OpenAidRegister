@@ -6,6 +6,8 @@
 <%= stylesheet_link_tag "reset" %>
 <%= stylesheet_link_tag "layout" %>
 <%= stylesheet_link_tag "av-hack" %>
+<%= stylesheet_link_tag "jquery-ui-1.8.16.custom" %>
+
 <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
 <%= javascript_include_tag "http://www.google.com/jsapi" %>
 <%= javascript_include_tag "jquery-1.6.4.min" %>
@@ -13,7 +15,6 @@
 <%= javascript_include_tag "Helvetica_Neue_700-Helvetica_Neue_300-Helvetica_Neue_400.font" %>
 <%= javascript_include_tag "application" %>
 
-<script type="text/javascript">var switchTo5x=true;</script><script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script type="text/javascript">stLight.options({publisher:'71542055-cb49-4171-897d-f7327ef5cb51'});</script>
 
 <%= yield :head %>
 
@@ -44,9 +45,9 @@ Cufon.replace('.body_top .body_top_lf h3, .box_list ul li h4', { fontFamily: 'He
 </script>
 </head>
 <body>
-<div id="outer_layout">
+<div id="outer_layout" class="theam02">
   <div class="outer_wrapper">
-    <div class="layout">
+    <div class="layout wid-1052">
       <div id="header">
         <div class="top_nav">
           <ul>

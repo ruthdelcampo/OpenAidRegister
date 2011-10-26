@@ -1,74 +1,108 @@
-<% content_for :head do %>
-<%= javascript_include_tag "dashboard" %>
-<% end %>
-
-
-	<div class="logo">
-	          <h1><a href="" title="openAid Home">Dashboard</a></h1>
-	        </div>
-
-	  <div class="header_text">
-	    <p>Do you want to add new projects?  or do you feel at looking at current statistics? From your dashboard you can control everything</p>
-	  </div>
-	</div>
-		 
-<%= flash[:notice] %>
-<%= flash[:alert] %>
-	
-
-<br>
-  <br>
-
-<%= link_to "Add project", "/project" %>
-
-<br>
-  <br>
-
-<%= form_for :file_upload, :url => { :action => "import_file" }, :html => {:multipart => true} do |f| %>
-  <%= f.file_field :my_file %>
-  <%= f.submit "Import file" %>
-<% end %>
-
-
-
-
-
-<h2> <%= @projects_list.length %> projects published</h2>
-<h3> <%= @current_projects %> ongoing projects </h3>
-<h3> <%= @past_projects %> past projects</h3>
-
-
-<div id="chart_div"></div> 
-
-<%= button_to "Download XML", {:action => "download", :id => session[:organization][:cartodb_id]} %>
-
-<!--<a href="#publish"class="login-window">Publish</a> --><br>
-
-<% @projects_list.each do |project| %>
-
-<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
-<!--< link_to project.title, '/view_project', {:action => "view_project", :view_project_id =>project.title}, :method =>"post" %>  -->
-
-<%= button_to "Delete", {:action => "delete",:delete_project_id => project[:cartodb_id]}, :method => "post", :confirm => "Are you sure?" %>
-	<br>
-<% end%>
-
-<a href="#publish-box" class="publish-window">Publish</a>
-
-<div id="publish-box" class="publish-popup">
-        <a href="#" class="close"><img src="/images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
-          <form method="post" class="signin" action="">
-                <fieldset class="textbox">
-            	<label class="username">
-                <span>IATI Registry API Key</span>
- 				<input id="api_key" name="api_key" type="text" value=""/>
-                </label>
-                <label class="password">
-                <span>Name of the Aid Package</span>
-               <input id="name_package" name="name_package" type="text" value=""/>
-                </label>
-                <button id="submit3" class="submit3" type="button">Publish</button>      
-                </fieldset>
-          </form>
-</div>
-
+ <div class="logo">
+      <h1><a href="index.html" title="openAid Home">Your dashboard</a><img src="common/images/+icon.png" alt="" class="rit png" /></h1>
+    </div>
+    <div class="header_text ">
+      <p>Do you want to add new projects? or do you feel at looking at current statistics? From your dashboard you can control everything.</p>
+    </div>
+  </div>
+  <div id="body_container">
+    <div class="sign_sec">
+      <div class="sign_left">
+      		<div class="dashboard">
+            	<div class="map">
+                	<img src="common/images/map.gif" alt="" />
+                </div>
+                <div class="edit_sec">
+                	<ul>
+                    	<li class="patrn">
+                        	<a href="#">Nueva Esperanza Development Program</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Diocesan Coordination for Development Projects</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li class="patrn">
+                        	<a href="#">Commercial Integrated Farming Initiative (CIFI) - Project...</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Africa Leadership Training and Capacity building</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li class="patrn">
+                        	<a href="#">Diocesan Coordination for Development Projects</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Commercial Integrated Farming Initiative (CIFI) - Project...</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li class="patrn">
+                        	<a href="#">Africa Leadership Training and Capacity building</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                        <li>
+                        	<a href="#">Nueva Esperanza Development Program</a>
+                            <div class="hide_shows">
+                            <a href="#" class="edit delete">delete</a>
+                            <a href="#" class="edit">edit</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="add_project">
+                    	<a href="/project">Add Project</a>
+                    </div>
+                </div>
+            </div>
+      
+      </div>
+      <div class="dashboard_right">
+      		<div class="project_details">
+            <h4><img src="common/images/text01.gif" alt="" /></h4>
+            <div class="rows"><strong>15</strong> <small>Projects <br />published</small></div>
+            <div class="rows"><span><em>8</em> Ongoing projects</span></div>
+            <div class="rows"><span><em>7</em> Past projects</span></div>
+            <div class="add_project">
+                  <a href="/project" class="add">Add Project</a>
+                  <span>or import <a href="#">from file</a></span>
+             </div>
+             <div class="publish">
+             <h3>PUBLISHING TOOLS</h3>
+             	<ul>
+                	<li>
+                    	<div class="but_sec"><a href="#">XML</a></div>
+                        <div class="text_sec">
+                        	<p>Download your IATI XML File and share it with everyone </p>
+                        </div>
+                    </li>
+                    <li>
+                    	<div class="but_sec"><a href="#">Publish</a></div>
+                        <div class="text_sec">
+                        	<p>Make your projects available at the IATI Registry</p>
+                        </div>
+                    </li>
+                </ul>
+             </div>
+            </div>

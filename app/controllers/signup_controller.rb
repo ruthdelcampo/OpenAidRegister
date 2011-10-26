@@ -77,8 +77,7 @@ class SignupController < ApplicationController
     if @errors.count==0
       #no errors, save the data and redirect to singup_complete
       
-      
-      #save to CartoDB. Is Validated will be false
+      #save to CartoDB. Is Validated must be false
       sql="INSERT INTO organizations(organization_guid, email, password, contact_name, telephone, organization_name, 
       organization_type_id, organization_country, organization_web, is_validated) 
       VALUES('#{params[:organization_guid]}','#{params[:email]}',md5('#{params[:password]}'),'#{params[:contact_name]}','#{params[:telephone]}',
@@ -86,14 +85,15 @@ class SignupController < ApplicationController
       '#{params[:organization_country]}','#{params[:organization_web]}', 'false')"
       CartoDB::Connection.query(sql)
       
+      #login the user
       sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country, 
       organization_type_id, organization_guid, organization_web
       FROM organizations WHERE email='#{quote_string(params[:email])}'"
       result = CartoDB::Connection.query(sql)
       session[:organization] = result.rows.first
       
+      #send an email
       UserMailer.welcome_email(session[:organization]).deliver
-      
       redirect_to :action => :signup_complete
     else
       #there has been errors print them on the template
@@ -121,8 +121,6 @@ class SignupController < ApplicationController
   
   def login_validation
     
-    
-    
     sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country, 
     organization_type_id, organization_guid, organization_web FROM organizations WHERE email='#{quote_string(params[:email])}' AND password=md5('#{quote_string(params[:password])}')"
     result = CartoDB::Connection.query(sql)
@@ -137,17 +135,23 @@ class SignupController < ApplicationController
       #redirect_to(:back)
       #redirect_to '/dashboard'
     end
-    
-    
-      
-     
   end
   
-  def forgot_password
+  def already_exists (email)
+     sql="SELECT cartodb_id FROM organizations WHERE email='#{email}'"
+      result = CartoDB::Connection.query(sql)
+      if result.rows.length==0
+        return false
+      else
+        return true
+      end
+  end
+  
+  #Not used in the current version
+  def forgot_password 
     
     if params[:method]=="post"
       @errors = Array.new
-
       #email Validation. First checks if its empty and then checks if it has the right format
       String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
       if params[:email].blank?
@@ -158,20 +162,12 @@ class SignupController < ApplicationController
         end
       end
       if @errors.count==0
-        
         random_token = SecureRandom.urlsafe_base64  
-        
         sql="UPDATE organizations SET random_token ='#{random_token}' WHERE organizations.email = '#{params[:email]}'"
         CartoDB::Connection.query(sql)
-        
         UserMailer.password_reset(random_token, params[:email]).deliver
-        
-        
-        
         redirect_to '/', :alert => "Email sent with  password reset instructions."
-       
         return
-        
       else
       render :template => 'signup/forgot_password'
       end
@@ -179,10 +175,9 @@ class SignupController < ApplicationController
       
   end
   
-  
+  #not used in the current session
   def logout
     reset_session
-    
     redirect_to '/'
     return 
   end
@@ -192,8 +187,9 @@ class SignupController < ApplicationController
     v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
   
+  
+  #Not used in the current session
   def password_reset
-    
     @errors = Array.new
     if params[:method]=="post"
     #password length Validation. 
@@ -210,41 +206,22 @@ class SignupController < ApplicationController
           @errors.push("Password's don't match")
           end
         end 
-        
          if @errors.count==0
             #no errors, save the data and redirect to singup_complete
-            
           sql="UPDATE organizations SET password ='#{params[:password]}', random_token = null WHERE organizations.random_token = '#{params[:token]}'"
           result = CartoDB::Connection.query(sql)
           redirect_to '/login', :alert => "you can now login"
-        end
-      
+        end    
     else
-      
     sql="select email FROM organizations WHERE random_token = '#{params[:id]}'"
     result = CartoDB::Connection.query(sql) 
       if result.rows.length==0
       redirect_to '/forgot_password', :alert => "unknown one time password"
       else
         @user_password_reset = result.rows.first[:email]
-        
       render :template => 'signup/password_reset'
       end
     end
   end
-  
-  def already_exists (email)
-     sql="SELECT cartodb_id FROM organizations WHERE email='#{email}'"
-      result = CartoDB::Connection.query(sql)
-
-      if result.rows.length==0
-        return false
-      else
-        return true
-      end
-    
-  end
-  
-  
   
 end

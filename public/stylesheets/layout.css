@@ -1,8 +1,10 @@
 #outer_layout{ float:left; width:100%; background:url(../images/header_bg01.jpg) repeat-x 0 0}
-.layout{ margin:auto; width:1032px;}
-.outer_wrapper{ float:left; width:100%; background:url(../images/header_bg.jpg) no-repeat center top;}
-.outer_header{ float:left; width:100%;}
 
+.layout{ margin:auto; width:1032px;}
+.layout.wid-1052{width:1052px;}
+.outer_wrapper{ float:left; width:100%; background:url(../images/header_bg.jpg) no-repeat center top;}
+#outer_layout.theam02 .outer_wrapper{background-image:url(../images/openAidHome3.jpg)}
+.outer_header{ float:left; width:100%;}
 #header{ float:left; width:100%;}
 
 #header .top_nav{ float:left; width:100%; padding:45px 0 0 0;}
@@ -14,10 +16,15 @@
 #header .top_nav ul li a:hover, #header .top_nav ul li a.active{ color:#ff3300; text-decoration:none;}
 
 #header .logo{ float:left; width:100%; padding:50px 0 0 0;}
-#header .logo h1{ float:left; width:860px;}
+#header .logo h1{ float:left; width:860px; }
+#header .logo h1.wid{width:1032px;}
 #header .logo h1 a{ float:left; width:auto; color:#fff; font:normal 101px/121px Georgia, "Times New Roman", Times, serif;}
 #header .logo h1 a span{ color:#ff3300;}
 #header .logo h1 a:hover{ text-decoration:none;}
+.theam02 #header .logo h1{position:relative;}
+.theam02 #header .logo h1 img{position:absolute; top:-15px; right:0px;}
+.theam02 #header .logo h1 img.rit{right:20px;}
+.theam02 #header .logo h1 a{position:relative; z-index:2;}
 
 #header .header_text{ float:left; width:100%; padding:15px 0 0 0;}
 #header .header_text p{ float:left; width:100%; font:normal 23px/28px "Helvetica Neue";}
@@ -64,7 +71,7 @@
 .box_list ul li h5{ float:left; width:100%; color:#ff3300; font:bold 20px/26px "Helvetica";padding-bottom:7px; text-transform:uppercase; text-shadow:1px 1px 0 #fff;}
 .box_list ul li small{ float:left; width:100%; color:#666666; font:normal 15px/15px "Helvetica";}
 .box_list ul li small strong{ padding-left:10px; font-weight:normal; background:url(../images/dot.gif) no-repeat left center; margin-left:6px; display:inline;}
-.box_list ul li p.blockquoto{ padding:50px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
+.box_list ul li p.blockquoto{ padding:19px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
 
 .box_list ul li .date_sec{ float:left; width:100%; padding-top:13px;}
 .box_list ul li .date_sec ul{ float:left; width:100%; list-style:none;}
@@ -96,8 +103,6 @@
 .sign_sec .sign_left form .colem{ float:left; width:100%;}
 .sign_sec .sign_left form .padd_top{ padding-top:16px;}
 .sign_sec .sign_left form h3{ float:left; width:100%; color:#020202; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; padding-bottom:26px;}
-.sign_sec .sign_left p{ float:left; width:100%; color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px;}
-
 .sign_sec .sign_left form .row{ float:left; width:100%; padding-bottom:16px;}
 .sign_sec .sign_left form .row label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px;}
 .sign_sec .sign_left form .row input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
@@ -118,103 +123,134 @@
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
 
-
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
 #body_container .sign_sec .sign_right span{ float:left; width:215px; height:11px; background:url(../images/do_help.gif) no-repeat 0 0; text-indent:-9999px;}
 #body_container .sign_sec .sign_right p{ float:left; width:274px; color:#fff; font:normal 17px/21px "Helvetica Neue"; padding:15px 0 0 9px;}
 #body_container .sign_sec .sign_right p a{ color:#fff;}
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
+
+
+.dashboard{width:724px; float:left; background:url(../images/dasboard_bg.jpg) no-repeat; padding:0 7px 0 7px; }
+.dashboard .map{width:100%; float:left;}
+.dashboard .map img{float:left;}
+.dashboard .edit_sec{width:100%; float:left;}
+.dashboard .edit_sec ul{width:100; float:left; list-style:none; border-bottom:1px solid #cccccc;}
+.dashboard .edit_sec ul li{width:666px; float:left; height:45px; float:left; padding:18px 29px 0 29px;}
+.dashboard .edit_sec ul li.patrn{background:url(../images/dark_pattern.gif) repeat;}
+.dashboard .edit_sec ul li:hover, .dashboard .edit_sec ul li.active{ background:#282828;}
+.dashboard .edit_sec ul li:hover a, .dashboard .edit_sec ul li.active a{color:#fff;}
+.dashboard .edit_sec ul li a{float:left; height:30px; line-height:30px; color:#333333; font-size:16px; font-family:"Helvetica Neue", arial; font-weight:bold;}
+.dashboard .edit_sec ul li a.edit{width:58px; font-size:15px;  float:right; text-align:center; background:url(../images/sprit_but.gif) 0 0 no-repeat; color:#000000; margin-left:10px; display:inline;}
+.dashboard .edit_sec ul li a.edit:hover{background-position:0 -34px; text-decoration:none;}
+.dashboard .edit_sec ul li a.edit.delete{background-position:-61px 0px; width:68px;}
+.dashboard .edit_sec ul li a.edit.delete:hover{background-position:-61px -34px;}
+.dashboard .edit_sec ul li .hide_shows{display:none;}
+.dashboard .edit_sec ul li:hover .hide_shows, .dashboard .edit_sec ul li.active .hide_shows {float:right; display:block;}
+.dashboard .edit_sec .add_project{width:664px; float:left; padding:10px 30px; }
+.dashboard .edit_sec .add_project a{float:right; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none;}
+
+#body_container .sign_sec .dashboard_right{ float:right; width:283px; padding-top:42px;}
+.dashboard_right .project_details{width:100%; float:left;}
+.dashboard_right .project_details h4{font-size:13px; color:#FF3300; font-family:"Helvetica Neue", arial; text-transform:uppercase; padding-bottom:2px;}
+.dashboard_right .project_details .rows{width:100%; float:left; padding-top:10px; }
+.dashboard_right .project_details .rows strong{font-size:51px; line-height:51px; font-family:"Helvetica Neue", arial; color:#fff; display:block; float:left;}
+.dashboard_right .project_details .rows small{font-size:15px;  font-family:"Helvetica Neue", arial; color:#fff; float:left; padding:10px 0 0 10px;}
+.dashboard_right .project_details .rows span{color:#999999; font-size:15px; font-family:"Helvetica Neue", arial;}
+.dashboard_right .project_details .rows span em{font-style:normal; color:#fff;}
+.dashboard_right .project_details .add_project{width:100%; float:left; padding-top:40px; }
+.dashboard_right .project_details .add_project a.add{float:left; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none; display:block;} 
+.dashboard_right .project_details .add_project span{width:100%; float:left; padding-top:5px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
+.dashboard_right .project_details .add_project span a{ color:#fff;}
+.dashboard_right .project_details .publish{width:100%; float:left; padding-top:120px;}
+.dashboard_right .project_details .publish h3{font-size:16px; font-family:"Helvetica Neue", arial; padding-bottom:25px; color:#000;}
+.dashboard_right .project_details .publish ul{width:100%; float:left; list-style:none;}
+.dashboard_right .project_details .publish ul li{width:100%; float:left; padding-bottom:10px;}
+.dashboard_right .project_details .publish .but_sec{width:170px; float:left;}
+.dashboard_right .project_details .publish .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
+.dashboard_right .project_details .publish .text_sec{width:113px; float:right;}
+.dashboard_right .project_details .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;}
+
+
+
+#body_container .registry_sec{ float:left; width:100%; padding:5px 0 118px 0;}
+.registry_sec .registry_left{ float:left; width:738px;}
+.registry_sec .registry_left .form_section{width:100%; float:left;}
+
+
+.registry_sec .form_section form{ float:left; width:647px; background:url(../images/register_bg.jpg) 0 0 no-repeat; padding:40px 44px 47px 45px}
+.registry_sec .form_section form .colem{ float:left; width:100%;}
+.registry_sec .form_section form .padd_top{ padding-top:16px;}
+.registry_sec .form_section form h3{ float:left; width:100%; color:#020202; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; padding-bottom:13px; padding-top:18px; text-indent:3px}
+.registry_sec .form_section form h3.first{padding-bottom:26px; padding-top:0;}
+.registry_sec .form_section form .row{ float:left; width:100%; padding-bottom:16px;}
+.registry_sec .form_section .row label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
+.registry_sec .form_section .row input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .row input.imp02{ border:1px solid #b1b1b1; float:left; width:625px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section form .row textarea{width:625px; float:left; height:110px; border:1px solid #b1b1b1; padding:10px;}
+.registry_sec .form_section form .row ul{width:609px; float:left; padding:10px 19px 30px 19px;  list-style:none; background:url(../images/patter02.gif) repeat;}
+.registry_sec .form_section form .row ul.patrn02{background:url(../images/patter03.gif);  padding:10px 19px 15px 19px; }
+.registry_sec .form_section form .row ul.patrn02 input.checkbox{float:left;}
+.registry_sec .form_section form .row ul.patrn02 span{float:left; padding-left:10px; color:#666666; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
+.registry_sec .form_section form .row ul li{width:100%; float:left;}
+.registry_sec .form_section form .row ul li .health{width:100%; float:left; padding-bottom:10px;}
+.registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:Arial, Helvetica, sans-serif; font-size:14px;}
+.registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
+.registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px;}
+.registry_sec .form_section form .row select{float:left; height:42px; margin:0; padding:0}
+.registry_sec .form_section form .row select.wid-430{width:430px;}
+.registry_sec .form_section form .row select.wid-205{width:205px;}
+.registry_sec .form_section form .row select.wid-400{width:400px;}
+
+.registry_sec .form_section .row .inner_row{ float:left; width:207px; margin-right:18px; display:inline;}
+.registry_sec .form_section .row .inner_row.wid-402{width:402px;}
+.registry_sec .form_section .row .inner_row.wid-402.pad{padding-bottom:10px;}
+.registry_sec .form_section .row .inner_row.wid-402 input{ border:1px solid #b1b1b1; float:left; width:380px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .row .inner_row.last{margin-right:0; width:195px}
+.registry_sec .form_section .row .inner_row.last02{margin-right:0; width:155px; padding-top:17px;}
+.registry_sec .form_section .row .inner_row input.imp01{ float:left; width:185px;}
+.registry_sec .form_section .row .inner_row .callender{width:185px; float:left; border:1px solid #b1b1b1; padding:5px 10px; height:30px; background:#fff;}
+.registry_sec .form_section .row .inner_row .callender input{width:148px; background:none; float:left;  line-height:30px; height:30px; border:none; padding-right:10px; border-right:1px solid #b1b1b1;}
+.registry_sec .form_section .row .inner_row .callender input.button{width:18px; float:right; margin:8px 0 0 0px; height:16px; display:inline; background:url(../images/callender.gif) 0 0 no-repeat; cursor:pointer; border-right:none;}
+.registry_sec .form_section .row .inner_row .callender input.button.euro{background-image:url(../images/euro.gif);}
+.registry_sec .form_section .row .inner_row p.date{ padding-top:25px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:14px; color:#999999; line-height:18px;}
+.registry_sec .form_section .row .inner_row.wid-400{width:400px; margin-right:0;}
+.registry_sec .form_section .row .map02{width:633px; border:1px solid #b1b1b1; background:#fff; padding:5px 6px; float:left;}
+.registry_sec .form_section .row .map02 img{float:left;}
+.registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+
+
+.registry_sec .form_section .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
+.registry_sec .form_section .row .inner_row2{ float:right; width:196px;}
+.registry_sec .form_section .row .inner_row2 input.imp01{ float:left; width:174px;}
+
+.registry_sec .form_section .colem01{ float:left; width:100%; padding-top:20px;}
+.registry_sec .form_section .colem01 span{ float:left; width:205px; height:51px; background:url(../images/sign_btn.gif) no-repeat 0 0;}
+.registry_sec .form_section .colem01 span input.inp{ float:left; width:205px; color:#fff; height:51px; cursor:pointer; background:none; border:none; text-align:center; font:bold 22px/51px "Helvetica Neue";}
+.registry_sec .form_section .colem01 p{ float:left; width:auto; padding-left:18px; color:#666666; font:bold 13px/16px "Helvetica Neue"; margin-top:17px; display:inline;}
+.registry_sec .form_section .colem01 p a{color:#666666;}
+.registry_sec .form_section .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
+
+
+
+
+
+
+
+
+
+#body_container .registry_sec .registry_right{ float:right; width:283px; padding-top:40px;}
+.registry_right .top_section{width:100%; float:left; min-height:350px; height:auto !important; height:350px;}
+.registry_right .top_section h4{font-size:13px; color:#FF3300; font-family:"Helvetica Neue", arial; text-transform:uppercase; padding-bottom:10px; width:100%;}
+.registry_right .top_section p{font-size:16px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; line-height:20px;}
+.registry_right .process{width:100%; float:left;  font-size:14px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; }
+.registry_right .process h4{font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; color:#666666; font-size:13px; padding-bottom:20px; width:100%; }
+.registry_right .process p{color:#000; color:#999999; padding-bottom:15px}
+.registry_right .process ul{width:100%; float:left; list-style:none; color:#FF3300;}
+.registry_right .process ul li{width:268px; float:left; background:url(../images/bullet.gif) 0 4px no-repeat; padding-left:15px;}
+.registry_right .process ul li a{color:#FF3300; text-decoration:underline;}
+
+.slide{width:250px; float:left; height:12px; clear:left; background:url(../images/slide_bg.gif) 0 0  no-repeat; position:relative; padding:10px 0px 15px 0px;}
+.slide .slider{position:absolute; top:2px; left:4px;}
+.slide .slider img{float:left;}
 /***** sign up page ends here *******/
-
-/* Mask for background, by default is not display */
-#mask {
-	display: none;
-	background: #000; 
-	position: fixed; left: 0; top: 0; 
-	z-index: 10;
-	width: 100%; height: 100%;
-	opacity: 0.8;
-	z-index: 999;
-}
-
-/* You can customize to your needs  */
-.publish-popup{
-	display:none;
-	background: #333;
-	padding: 10px; 	
-	border: 2px solid #ddd;
-	float: left;
-	font-size: 1.2em;
-	position: fixed;
-	top: 50%; left: 50%;
-	z-index: 99999;
-	box-shadow: 0px 0px 20px #999; /* CSS3 */
-        -moz-box-shadow: 0px 0px 20px #999; /* Firefox */
-        -webkit-box-shadow: 0px 0px 20px #999; /* Safari, Chrome */
-	border-radius:3px 3px 3px 3px;
-        -moz-border-radius: 3px; /* Firefox */
-        -webkit-border-radius: 3px; /* Safari, Chrome */
-}
-
-img.btn_close { Position the close button
-	float: right; 
-	margin: -28px -28px 0 0;
-}
-
-fieldset { 
-	border:none; 
-}
-
-form.signin .textbox label { 
-	display:block; 
-	padding-bottom:7px; 
-}
-
-form.signin .textbox span { 
-	display:block;
-}
-
-form.signin p, form.signin span { 
-	color:#999; 
-	font-size:11px; 
-	line-height:18px;
-} 
-
-form.signin .textbox input { 
-	background:#666666; 
-	border-bottom:1px solid #333;
-	border-left:1px solid #000;
-	border-right:1px solid #333;
-	border-top:1px solid #000;
-	color:#fff; 
-        border-radius: 3px 3px 3px 3px;
-	-moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-	font:13px Arial, Helvetica, sans-serif;
-	padding:6px 6px 4px;
-	width:200px;
-}
-
-form.signin input:-moz-placeholder { color:#bbb; text-shadow:0 0 2px #000; }
-form.signin input::-webkit-input-placeholder { color:#bbb; text-shadow:0 0 2px #000;  }
-
-.button { 
-	background: -moz-linear-gradient(center top, #f3f3f3, #dddddd);
-	background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#dddddd));
-	background:  -o-linear-gradient(top, #f3f3f3, #dddddd);
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f3f3f3', EndColorStr='#dddddd');
-	border-color:#000; 
-	border-width:1px;
-        border-radius:4px 4px 4px 4px;
-	-moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-	color:#333;
-	cursor:pointer;
-	display:inline-block;
-	padding:6px 6px 4px;
-	margin-top:10px;
-	font:12px; 
-	width:214px;
-}
-.button:hover { background:#ddd; }

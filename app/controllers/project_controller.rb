@@ -1,20 +1,22 @@
 class ProjectController < ApplicationController
   
   
-  def show
+  def show #Working partially except other organizations and review date parameters
     
-    unless session[:organization]
+     if session[:organization].blank?
       session[:return_to] = request.request_uri
        redirect_to '/login'
        return
     end
+    
     #We need to initialize the hash
     @errors = Array.new  
     @project_data = {}
     
-    
-    if params[:method]=="post"
-      @project_data = params      
+    if params[:method]=="post"#the form comes with the params
+      
+      @project_data = params  #this works when it is a new project or a existing one    
+      
       if params[:title].blank?
         @errors.push("You need to enter a project title")
       end
@@ -26,11 +28,13 @@ class ProjectController < ApplicationController
           @errors.push("You need to select a currency")
         end
       end
-      #Provide a Project_guid if it doesnt have any and check if there is already a project with that guid
+      
+      
       if params[:project_guid].blank?
-        now = DateTime.now.to_s(:number)
-        params[:project_guid] = now
+       @errors.push("You need to enter a project id")
       end
+      
+      #check that the project id is unique for this user
       sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '#{session[:organization].cartodb_id}'"
       result =  CartoDB::Connection.query(sql) 
       result.rows.each do |project|
@@ -39,29 +43,28 @@ class ProjectController < ApplicationController
           @errors.push("Please change the project id. You have already one project with this id")
         end
       end
-      #Prepare the date to be inserted in CartoDB and check also if it is not right      
-      if (params[:start_date_day].blank?) && (params[:start_date_month].blank?) && (params[:start_date_year].blank?)
+      
+      #Check if the day is not correct
+      
+      #   for instance when there is an end date but not a start date
+      if !params[:end_date].blank && params[:start_date].blank
+         @errors.push("You need to have a start date when you have introduced and end date")
+      end
+      # End date can be earlier as the start date
+      if !params[:end_date].blank && !params[:start_date].blank
+           ((Date.parse(start_date))<=>(Date.parse(end_date))) == 1 ##I need to check if this still works with the new way of date
+            @errors.push("The end date must be later than the start date")
+      end 
+      #Prepare the date to be inserted in CartoDB
+      if params[:start_date].blank?
         start_date = "null"
-      elsif (params[:start_date_day].blank?) || (params[:start_date_month].blank?) || (params[:start_date_year].blank?)
-        @errors.push("You need to enter all parameters (day, month and year) in the start date") 
-      else 
-        s_date = Date.civil(params[:start_date_year].to_i,params[:start_date_month].to_i,params[:start_date_day].to_i)
-        start_date = "'" + s_date.to_s() + "'"
       end
-      if (params[:end_date_day].blank?) && (params[:end_date_month].blank?) && (params[:end_date_year].blank?)
+      if params[:end_date].blank?
         end_date = "null"
-      elsif (params[:end_date_day].blank?) || (params[:end_date_month].blank?) || (params[:end_date_year].blank?)
-        @errors.push("You need to enter all parameters (day, month and year) in the start date") 
-      else
-        e_date = Date.civil(params[:end_date_year].to_i,params[:end_date_month].to_i,params[:end_date_day].to_i)
-        end_date = "'" + e_date.to_s() + "'"
       end
-      if (s_date<=>(e_date)) == 1
-        @errors.push("The end date must be later than the start date") 
-      end
+      
       
       # prepare the geom
-      
       if params[:google_markers].blank?
        params[:google_markers] = 'MULTIPOINT EMPTY'
       end
@@ -70,10 +73,10 @@ class ProjectController < ApplicationController
         render :template => '/project/show'
         return
       end
+      
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
-        #It is a new project, save to cartodb
-        #other_org_name and other_org_role should be included next time
+      #It is a new project, save to cartodb
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date, 
           end_date, budget, budget_currency, website, program_guid, result_title, 
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES 
@@ -100,18 +103,19 @@ class ProjectController < ApplicationController
            end
           end
           
-           # Now all partner organizations must be written
+           # This is not working and should be updated when dynamic organizations are well done
           if !params[:other_org_name_1].blank?
-            #Get the new cartodb_id
+            #Get the new cartodb_id because the project is new
             sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "      
             result = CartoDB::Connection.query(sql)     
+            
             for i in 1..5
               aux_name = eval("params[:other_org_name_" + i.to_s() + "]")
               aux_role = eval("params[:other_org_role_" + i.to_s() + "]")
               if !aux_name.blank?  
                 #insert organization
-                sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
-                CartoDB::Connection.query(sql)
+                #sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
+                #CartoDB::Connection.query(sql)
               else
                 break
               end
@@ -120,12 +124,12 @@ class ProjectController < ApplicationController
         
       else
         #it is an existing project do whatever
-        
         sql="UPDATE projects SET the_geom=ST_GeomFromText('#{params[:google_markers]}',4326), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
+         
          #In this case, first delete all sectors and overwrite them
          sql = "DELETE FROM project_sectors where  project_id = '#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
@@ -135,7 +139,8 @@ class ProjectController < ApplicationController
              CartoDB::Connection.query(sql)
            end
          end
-         #In this case, first delete all partner organizations and overwrite them
+         
+         #In this case, first delete all partner organizations and overwrite them. This needs to be rewritten when it is correctly working
          sql = "DELETE FROM project_partnerorganizations where  project_id = '#{params[:cartodb_id]}'"
          if !params[:other_org_name_1].blank?
            for i in 1..5
@@ -143,8 +148,8 @@ class ProjectController < ApplicationController
              aux_role = eval("params[:other_org_role_" + i.to_s() + "]")
              if !aux_name.blank?  
                #insert organization
-               sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
-               CartoDB::Connection.query(sql)
+               #sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
+               #CartoDB::Connection.query(sql)
              else
                break
              end
@@ -157,7 +162,7 @@ class ProjectController < ApplicationController
      
      
     #it is a GET method
-    if params[:id] #if it is an existing project select everything from projects and from project_sectors
+    if params[:id] # it is an existing project select everything from projects and from project_sectors
       
       sql="select cartodb_id, organization_id, title, description, language, project_guid, start_date, 
         end_date, budget, budget_currency, website, program_guid, result_title, 
@@ -170,44 +175,23 @@ class ProjectController < ApplicationController
       
       #@project_data[:google_markers] = @project_data[:st_astext]
       
-      #transform the start_date and end_date in month, day, year
-      if @project_data[:start_date]
-      @project_data.start_date_day = @project_data[:start_date].day
-      @project_data.start_date_month = @project_data[:start_date].month
-      @project_data.start_date_year = @project_data[:start_date].year
-      end
-      if @project_data[:end_date]
-      @project_data.end_date_day = @project_data[:end_date].day
-      @project_data.end_date_month = @project_data[:end_date].month
-      @project_data.end_date_year = @project_data[:end_date].year
-      end
       #select sectors and form the array
       sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
      
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
       
+      #This must be fixed when other organizations is done
       #Select partner organizations and form the array
       sql = "select array_agg(other_org_name) as array_other_orgs, 
       array_agg(other_org_role) as array_other_roles 
       from project_partnerorganizations where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
       
-      #misssing the conversion
-    
-        @project_data[:other_org_name_1] = result.rows.first[:array_other_orgs][0]
-         @project_data[:other_org_role_1] = result.rows.first[:array_other_roles][0]
-         @project_data[:other_org_name_2] = result.rows.first[:array_other_orgs][1]
-         @project_data[:other_org_role_2] = result.rows.first[:array_other_roles][1]
-         @project_data[:other_org_name_3] = result.rows.first[:array_other_orgs][2]
-         @project_data[:other_org_role_3] = result.rows.first[:array_other_roles][2]
-         @project_data[:other_org_name_4] = result.rows.first[:array_other_orgs][3]
-         @project_data[:other_org_role_4] = result.rows.first[:array_other_roles][3]
-         @project_data[:other_org_name_5] = result.rows.first[:array_other_orgs][4]
-         @project_data[:other_org_role_5] = result.rows.first[:array_other_roles][4]
     end
     
-    # This user comes from IATI Data Explorer
+    # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects. 
+    # The visualization tool provides a link to Open Aid Register so that NGO users can introduce additional information when they see their funding program
     if params[:related_activity]
       @project_data[:program_guid] = params[:related_activity] 
     end

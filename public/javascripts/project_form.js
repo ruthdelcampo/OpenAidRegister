@@ -1,11 +1,17 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+jQuery.noConflict();
 
 var map;
 var markers = [];
 var marker;
 
+
 $(document).ready(function(){ 
+	
+	$( "#datepicker" ).datepicker();
+	
+	
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
       zoom: 8,
