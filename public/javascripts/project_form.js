@@ -1,6 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-jQuery.noConflict();
+//jQuery.noConflict();
 
 var map;
 var markers = [];
@@ -9,9 +9,9 @@ var marker;
 
 $(document).ready(function(){ 
 	
-	$( "#datepicker" ).datepicker();
-	
-	
+		$( "#datepicker" ).datepicker();
+		$( "#datepicker2" ).datepicker();
+		
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
       zoom: 8,
@@ -103,21 +103,3 @@ function change_contact_info() {
 	return false
 
 }
-
-//for the checkbox permanent in project show
-
-function disable_end_date() { 
-   if ($('#permanent').is(':checked')) {
-$("#end_date_month").attr('disabled', 'disabled');
-	$("#end_date_day").attr('disabled', 'disabled');
-		$("#end_date_year").attr('disabled', 'disabled');
-}else{
-$("#end_date_month").removeAttr('disabled');
-	$("#end_date_day").removeAttr('disabled');
-		$("#end_date_year").removeAttr('disabled');
-}
-return false
-
-}
-
-

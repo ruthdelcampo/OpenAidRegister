@@ -1,16 +1,20 @@
  <div class="logo">
-      <h1><a href="index.html" title="openAid Home">Your dashboard</a><img src="common/images/+icon.png" alt="" class="rit png" /></h1>
+      <h1><a href="index.html" title="openAid Home">Your dashboard</a><img src="/images/plus_icon.png" alt="" class="rit png" /></h1>
     </div>
     <div class="header_text ">
       <p>Do you want to add new projects? or do you feel at looking at current statistics? From your dashboard you can control everything.</p>
     </div>
   </div>
+
+
+	<%= flash[:notice] %>
+	<%= flash[:alert] %>
   <div id="body_container">
     <div class="sign_sec">
       <div class="sign_left">
       		<div class="dashboard">
             	<div class="map">
-                	<img src="common/images/map.gif" alt="" />
+                	<img src="/images/map.gif" alt="" />
                 </div>
                 <div class="edit_sec">
                 	<ul>
@@ -80,7 +84,7 @@
       </div>
       <div class="dashboard_right">
       		<div class="project_details">
-            <h4><img src="common/images/text01.gif" alt="" /></h4>
+            <h4><img src="/images/text01.gif" alt="" /></h4>
             <div class="rows"><strong>15</strong> <small>Projects <br />published</small></div>
             <div class="rows"><span><em>8</em> Ongoing projects</span></div>
             <div class="rows"><span><em>7</em> Past projects</span></div>
@@ -92,7 +96,8 @@
              <h3>PUBLISHING TOOLS</h3>
              	<ul>
                 	<li>
-                    	<div class="but_sec"><a href="#">XML</a></div>
+                    	<div class="but_sec"><a id=<%=session[:organization][:cartodb_id]%> href="/download/<%=session[:organization][:cartodb_id]%>">XML</a></div>
+
                         <div class="text_sec">
                         	<p>Download your IATI XML File and share it with everyone </p>
                         </div>

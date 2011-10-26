@@ -3,6 +3,7 @@ class ProjectController < ApplicationController
   
   def show #Working partially except other organizations and review date parameters
     
+   
      if session[:organization].blank?
       session[:return_to] = request.request_uri
        redirect_to '/login'
