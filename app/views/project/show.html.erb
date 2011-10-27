@@ -16,7 +16,6 @@
       <p>We need this project information to build the XML dataset. The most accurate data you can fill in, the better donors and general public will know about your project.</p>
     </div>
   </div>
-<%debugger%>
   <div id="body_container">
     <div class="registry_sec">
       <div class="registry_left">
@@ -279,175 +278,176 @@
 	                </div>
 	                <div class="inner_row">
 	                  	<label>CURRENCY</label>
-	                  	<select name="budget_currency" class="wid-205" selected ="<%=@project_data[:budget]%>">
-	                    	<option value=""></option>
-	                      	<option value="AFN">Afghani</option>
-							<option value="DZD">Algerian Dinar</option>
-							<option value="ARS">Argentine Peso</option>
-							<option value="AMD">Armenian Dram</option>
-							<option value="AWG">Aruban Guilder</option>
-							<option value="AUD">Australian Dollar</option>
-							<option value="AZN">Azerbaijanian Manat</option>
-							<option value="BSD">Bahamian Dollar</option>
-							<option value="BHD">Bahraini Dinar</option>
-							<option value="THB">Baht</option>
-							<option value="PAB">Balboa</option>
-							<option value="BBD">Barbados Dollar</option>
-							<option value="BYR">Belarussian Ruble</option>
-							<option value="BZD">Belize Dollar</option>
-							<option value="BMD">Bermudian Dollar</option>
-							<option value="VEF">Bolivar Fuerte</option>
-							<option value="BOB">Boliviano</option>
-							<option value="BRL">Brazilian Real</option>
-							<option value="BND">Brunei Dollar</option>
-							<option value="BGN">Bulgarian Lev</option>
-							<option value="BIF">Burundi Franc</option>
-							<option value="CAD">Canadian Dollar</option>
-							<option value="CVE">Cape Verde Escudo</option>
-							<option value="KYD">Cayman Islands Dollar</option>
-							<option value="GHS">Cedi</option>
-							<option value="XOF">CFA Franc BCEAO</option>
-							<option value="XAF">CFA Franc BEAC</option>
-							<option value="XPF">CFP Franc</option>
-							<option value="CLP">Chilean Peso</option>
-							<option value="COP">Colombian Peso</option>
-							<option value="KMF">Comoro Franc</option>
-							<option value="CDF">Congolese Franc</option>
-							<option value="BAM">Convertible Marks</option>
-							<option value="NIO">Cordoba Oro</option>
-							<option value="CRC">Costa Rican Colon</option>
-							<option value="HRK">Croatian Kuna</option>
-							<option value="CUP">Cuban Peso</option>
-							<option value="CZK">Czech Koruna</option>
-							<option value="GMD">Dalasi</option>
-							<option value="DKK">Danish Krone</option>
-							<option value="MKD">Denar</option>
-							<option value="DJF">Djibouti Franc</option>
-							<option value="STD">Dobra</option>
-							<option value="DOP">Dominican Peso</option>
-							<option value="VND">Dong</option>
-							<option value="XCD">East Caribbean Dollar</option>
-							<option value="EGP">Egyptian Pound</option>
-							<option value="SVC">El Salvador Colon</option>
-							<option value="ETB">Ethiopian Birr</option>
-							<option value="EUR">Euro</option>
-							<option value="FKP">Falkland Islands Pound</option>
-							<option value="FJD">Fiji Dollar</option>
-							<option value="HUF">Forint</option>
-							<option value="GIP">Gibraltar Pound</option>
-							<option value="HTG">Gourde</option>
-							<option value="PYG">Guarani</option>
-							<option value="GNF">Guinea Franc</option>
-							<option value="GYD">Guyana Dollar</option>
-							<option value="HKD">Hong Kong Dollar</option>
-							<option value="UAH">Hryvnia</option>
-							<option value="ISK">Iceland Krona</option>
-							<option value="INR">Indian Rupee</option>
-							<option value="IRR">Iranian Rial</option>
-							<option value="IQD">Iraqi Dinar</option>
-							<option value="JMD">Jamaican Dollar</option>
-							<option value="JOD">Jordanian Dinar</option>
-							<option value="KES">Kenyan Shilling</option>
-							<option value="PGK">Kina</option>
-							<option value="LAK">Kip</option>
-							<option value="EEK">Kroon</option>
-							<option value="KWD">Kuwaiti Dinar</option>
-							<option value="AOA">Kwanza</option>
-							<option value="MMK">Kyat</option>
-							<option value="GEL">Lari</option>
-							<option value="LVL">Latvian Lats</option>
-							<option value="LBP">Lebanese Pound</option>
-							<option value="ALL">Lek</option>
-							<option value="HNL">Lempira</option>
-							<option value="SLL">Leone</option>
-							<option value="LRD">Liberian Dollar</option>
-							<option value="LYD">Libyan Dinar</option>
-							<option value="SZL">Lilangeni</option>
-							<option value="LTL">Lithuanian Litas</option>
-							<option value="LSL">Loti</option>
-							<option value="MGA">Malagasy Ariary</option>
-							<option value="MWK">Malawi Kwacha</option>
-							<option value="MYR">Malaysian Ringgit</option>
-							<option value="TMT">Manat</option>
-							<option value="MUR">Mauritius Rupee</option>
-							<option value="MZN">Metical</option>
-							<option value="MXN">Mexican Peso</option>
-							<option value="MXV">Mexican Unidad de Inversion (UDI)</option>
-							<option value="MDL">Moldovan Leu</option>
-							<option value="MAD">Moroccan Dirham</option>
-							<option value="BOV">Mvdol</option>
-							<option value="NGN">Naira</option>
-							<option value="ERN">Nakfa</option>
-							<option value="NAD">Namibia Dollar</option>
-							<option value="NPR">Nepalese Rupee</option>
-							<option value="ANG">Netherlands Antillian Guilder</option>
-							<option value="ILS">New Israeli Sheqel</option>
-							<option value="RON">New Leu</option>
-							<option value="TWD">New Taiwan Dollar</option>
-							<option value="NZD">New Zealand Dollar</option>
-							<option value="BTN">Ngultrum</option>
-							<option value="KPW">North Korean Won</option>
-							<option value="NOK">Norwegian Krone</option>
-							<option value="PEN">Nuevo Sol</option>
-							<option value="MRO">Ouguiya</option>
-							<option value="TOP">Paanga</option>
-							<option value="PKR">Pakistan Rupee</option>
-							<option value="MOP">Pataca</option>
-							<option value="CUC">Peso Convertible</option>
-							<option value="UYU">Peso Uruguayo</option>
-							<option value="PHP">Philippine Peso</option>
-							<option value="GBP">Pound Sterling</option>
-							<option value="BWP">Pula</option>
-							<option value="QAR">Qatari Rial</option>
-							<option value="GTQ">Quetzal</option>
-							<option value="ZAR">Rand</option>
-							<option value="OMR">Rial Omani</option>
-							<option value="KHR">Riel</option>
-							<option value="MVR">Rufiyaa</option>
-							<option value="IDR">Rupiah</option>
-							<option value="RUB">Russian Ruble</option>
-							<option value="RWF">Rwanda Franc</option>
-							<option value="SHP">Saint Helena Pound</option>
-							<option value="SAR">Saudi Riyal</option>
-							<option value="RSD">Serbian Dinar</option>
-							<option value="SCR">Seychelles Rupee</option>
-							<option value="SGD">Singapore Dollar</option>
-							<option value="SBD">Solomon Islands Dollar</option>
-							<option value="KGS">Som</option>
-							<option value="SOS">Somali Shilling</option>
-							<option value="TJS">Somoni</option>
-							<option value="LKR">Sri Lanka Rupee</option>
-							<option value="SDG">Sudanese Pound</option>
-							<option value="SRD">Surinam Dollar</option>
-							<option value="SEK">Swedish Krona</option>
-							<option value="CHF">Swiss Franc</option>
-							<option value="SYP">Syrian Pound</option>
-							<option value="BDT">Taka</option>
-							<option value="WST">Tala</option>
-							<option value="TZS">Tanzanian Shilling</option>
-							<option value="KZT">Tenge</option>
-							<option value="TTD">Trinidad and Tobago Dollar</option>
-							<option value="MNT">Tugrik</option>
-							<option value="TND">Tunisian Dinar</option>
-							<option value="TRY">Turkish Lira</option>
-							<option value="AED">UAE Dirham</option>
-							<option value="UGX">Uganda Shilling</option>
-							<option value="COU">Unidad de Valor Real</option>
-							<option value="CLF">Unidades de fomento</option>
-							<option value="UYI">Uruguay Peso en Unidades Indexadas</option>
-							<option value="USD">US Dollar</option>
-							<option value="USN">US Dollar (Next day)</option>
-							<option value="USS">US Dollar (Same day)</option>
-							<option value="UZS">Uzbekistan Sum</option>
-							<option value="VUV">Vatu</option>
-							<option value="KRW">Won</option>
-							<option value="YER">Yemeni Rial</option>
-							<option value="JPY">Yen</option>
-							<option value="CNY">Yuan Renminbi</option>
-							<option value="ZMK">Zambian Kwacha</option>
-							<option value="ZWL">Zimbabwe Dollar</option>
-							<option value="PLN">Zloty</option>
-	                    </select>
+	
+						<%= select_tag(:budget_currency, options_for_select([
+						['',''],
+						['Afghani','AFN'],
+						['UAE Dirham','AED'],
+						['Lek','ALL'],
+						['Armenian Dram','AMD'],
+						['Netherlands Antillian Guilder','ANG'],
+						['Kwanza','AOA'],
+						['Argentine Peso','ARS'],
+						['Australian Dollar','AUD'],
+						['Aruban Guilder','AWG'],
+						['Azerbaijanian Manat','AZN'],
+						['Convertible Marks','BAM'],
+						['Barbados Dollar','BBD'],
+						['Taka','BDT'],
+						['Bulgarian Lev','BGN'],
+						['Bahraini Dinar','BHD'],
+						['Burundi Franc','BIF'],
+						['Bermudian Dollar','BMD'],
+						['Brunei Dollar','BND'],
+						['Boliviano','BOB'],
+						['Mvdol','BOV'],
+						['Brazilian Real','BRL'],
+						['Bahamian Dollar','BSD'],
+						['Ngultrum','BTN'],
+						['Pula','BWP'],
+						['Belarussian Ruble','BYR'],
+						['Belize Dollar','BZD'],
+						['Canadian Dollar','CAD'],
+						['Congolese Franc','CDF'],
+						['Swiss Franc','CHF'],
+						['Unidades de fomento','CLF'],
+						['Chilean Peso','CLP'],
+						['Yuan Renminbi','CNY'],
+						['Colombian Peso','COP'],
+						['Unidad de Valor Real','COU'],
+						['Costa Rican Colon','CRC'],
+						['Peso Convertible','CUC'],
+						['Cuban Peso','CUP'],
+						['Cape Verde Escudo','CVE'],
+						['Czech Koruna','CZK'],
+						['Djibouti Franc','DJF'],
+						['Danish Krone','DKK'],
+						['Dominican Peso','DOP'],
+						['Algerian Dinar','DZD'],
+						['Kroon','EEK'],
+						['Egyptian Pound','EGP'],
+						['Nakfa','ERN'],
+						['Ethiopian Birr','ETB'],
+						['Euro','EUR'],
+						['Fiji Dollar','FJD'],
+						['Falkland Islands Pound','FKP'],
+						['Pound Sterling','GBP'],
+						['Lari','GEL'],
+						['Cedi','GHS'],
+						['Gibraltar Pound','GIP'],
+						['Dalasi','GMD'],
+						['Guinea Franc','GNF'],
+						['Quetzal','GTQ'],
+						['Guyana Dollar','GYD'],
+						['Hong Kong Dollar','HKD'],
+						['Lempira','HNL'],
+						['Croatian Kuna','HRK'],
+						['Gourde','HTG'],
+						['Forint','HUF'],
+						['Rupiah','IDR'],
+						['New Israeli Sheqel','ILS'],
+						['Indian Rupee','INR'],
+						['Iraqi Dinar','IQD'],
+						['Iranian Rial','IRR'],
+						['Iceland Krona','ISK'],
+						['Jamaican Dollar','JMD'],
+						['Jordanian Dinar','JOD'],
+						['Yen','JPY'],
+						['Kenyan Shilling','KES'],
+						['Som','KGS'],
+						['Riel','KHR'],
+						['Comoro Franc','KMF'],
+						['North Korean Won','KPW'],
+						['Won','KRW'],
+						['Kuwaiti Dinar','KWD'],
+						['Cayman Islands Dollar','KYD'],
+						['Tenge','KZT'],
+						['Kip','LAK'],
+						['Lebanese Pound','LBP'],
+						['Sri Lanka Rupee','LKR'],
+						['Liberian Dollar','LRD'],
+						['Loti','LSL'],
+						['Lithuanian Litas','LTL'],
+						['Latvian Lats','LVL'],
+						['Libyan Dinar','LYD'],
+						['Moroccan Dirham','MAD'],
+						['Moldovan Leu','MDL'],
+						['Malagasy Ariary','MGA'],
+						['Denar','MKD'],
+						['Kyat','MMK'],
+						['Tugrik','MNT'],
+						['Pataca','MOP'],
+						['Ouguiya','MRO'],
+						['Mauritius Rupee','MUR'],
+						['Rufiyaa','MVR'],
+						['Malawi Kwacha','MWK'],
+						['Mexican Peso','MXN'],
+						['Mexican Unidad de Inversion (UDI)','MXV'],
+						['Malaysian Ringgit','MYR'],
+						['Metical','MZN'],
+						['Namibia Dollar','NAD'],
+						['Naira','NGN'],
+						['Cordoba Oro','NIO'],
+						['Norwegian Krone','NOK'],
+						['Nepalese Rupee','NPR'],
+						['New Zealand Dollar','NZD'],
+						['Rial Omani','OMR'],
+						['Balboa','PAB'],
+						['Nuevo Sol','PEN'],
+						['Kina','PGK'],
+						['Philippine Peso','PHP'],
+						['Pakistan Rupee','PKR'],
+						['Zloty','PLN'],
+						['Guarani','PYG'],
+						['Qatari Rial','QAR'],
+						['New Leu','RON'],
+						['Serbian Dinar','RSD'],
+						['Russian Ruble','RUB'],
+						['Rwanda Franc','RWF'],
+						['Saudi Riyal','SAR'],
+						['Solomon Islands Dollar','SBD'],
+						['Seychelles Rupee','SCR'],
+						['Sudanese Pound','SDG'],
+						['Swedish Krona','SEK'],
+						['Singapore Dollar','SGD'],
+						['Saint Helena Pound','SHP'],
+						['Leone','SLL'],
+						['Somali Shilling','SOS'],
+						['Surinam Dollar','SRD'],
+						['Dobra','STD'],
+						['El Salvador Colon','SVC'],
+						['Syrian Pound','SYP'],
+						['Lilangeni','SZL'],
+						['Baht','THB'],
+						['Somoni','TJS'],
+						['Manat','TMT'],
+						['Tunisian Dinar','TND'],
+						['Paanga','TOP'],
+						['Turkish Lira','TRY'],
+						['Trinidad and Tobago Dollar','TTD'],
+						['New Taiwan Dollar','TWD'],
+						['Tanzanian Shilling','TZS'],
+						['Hryvnia','UAH'],
+						['Uganda Shilling','UGX'],
+						['US Dollar','USD'],
+						['US Dollar (Next day)','USN'],
+						['US Dollar (Same day)','USS'],
+						['Uruguay Peso en Unidades Indexadas','UYI'],
+						['Peso Uruguayo','UYU'],
+						['Uzbekistan Sum','UZS'],
+						['Bolivar Fuerte','VEF'],
+						['Dong','VND'],
+						['Vatu','VUV'],
+						['Tala','WST'],
+						['CFA Franc BEAC','XAF'],
+						['East Caribbean Dollar','XCD'],
+						['CFA Franc BCEAO','XOF'],
+						['CFP Franc','XPF'],
+						['Yemeni Rial','YER'],
+						['Rand','ZAR'],
+						['Zambian Kwacha','ZMK'],
+						['Zimbabwe Dollar','ZWL']], :selected => @project_data[:budget_currency]), :class => "wid-205" )%>
+	                  	
 	                </div>	                     
 	             </div>
 	            
@@ -468,7 +468,7 @@
                 <div class="row">
                   <div class="inner_row">
                     <label>PARTNER ACTIVITY ID</label>
-                    <input name="program_guid" type="text" class="imp01" value ="<%=@project_data[:website]%>"/>
+                    <input name="program_guid" type="text" class="imp01" value ="<%=@project_data[:program_guid]%>"/>
                   </div>
                   <div class="inner_row wid-400">
                     <p class="date">Is this project funded by a program already in IATI? 
@@ -487,12 +487,12 @@
                       </div>
                       <div class="inner_row">
                         <label>AS...</label>
-                        <select name="other_org_role_1" class="wid-205" value ="<%=@project_data[:other_org_role_1]%>">
-     						<option value="1">accountable</option>
-						  	<option value="2">extending</option>
-						  	<option value="3">funding</option>
-						  	<option value="4">implementing</option>
-                        </select>
+                        <%= select_tag(:other_org_role_1, options_for_select([
+							['', ''], 
+							['accountable', '1'], 
+							['extending', '2'],
+							['funding', '3'], 
+							['implementing', '4']], :selected => @project_data[:other_org_role_1]), :class => "wid-205" ) %>
                       </div>
                       <div class="inner_row last02">
                         <input type="button" class="button_add" />
@@ -509,7 +509,7 @@
                 </div>
                 <div class="row">
                   <label>DESCRIPTION / TARGETS</label>
-                  <textarea name="result_description" rows="" cols="" value ="<%=@project_data[:result_description]%>"></textarea>
+					<%= text_area_tag(:result_description, @project_data[:result_description]) %>
                 </div>
               </div>
               <div class="colem">
@@ -539,15 +539,7 @@
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>COLLABORATION TYPE</label>
-	                    <select class="wid-400">
-							<option></option>
-	                      	<option value="1">Bilateral</option>
-						  	<option value="2">Multilateral</option>
-						  	<option value="4">Multilateral outflows</option>
-						  	<option value="5">Aid through NGOs</option>
-						  	<option value="6">Aid to NGOs</option>
-						  	<option value="7">Aid through PPPs</option>
-	                    </select>
+	                    	<%= select_tag(:collaboration_type, options_for_select([['', ''],['Aid through NGOs', 5],['Aid to NGOs', 6],['Aid through PPPs', 7]], :selected => @project_data[:collaboration_type]), :class=>"wid-400") %>
 	                  </div>
 	                  <div class="inner_row">
 	                    <p class="date"> Check out<a hre="http://iatistandard.org/codelists/finance_type"> here</a> to understand all options</p>
@@ -556,141 +548,93 @@
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>TIED STATUS</label>
-	                    <select class="wid-400">
-	                      <option></option>
-							<option value="3">Partially tied</option>
-						  	<option value="4">Tied</option>
-						  	<option value="5">Untied</option> 
-	                    </select>
+	                   <%= select_tag(:tied_status, options_for_select([
+						['', ''],
+						['Partially tied', 3],
+						['Tied', 4],
+						['Untied', 5]], :selected => @project_data[:tied_status]), :class=>"wid-400") %>
 	                  </div>
 	                </div>
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>AID TYPE</label>
-	                    <select class="wid-400">
-	                      	<option></option>
-							<option value="A02">Sector budget support</option>
-						  	<option value="B01">Core support to NGOs, other private bodies, PPPs and research institutes</option>
-						  	<option value="B02">Core contributions to multilateral institutions</option>
-						  	<option value="B03">Contributions to specific-purpose programmes and funds managed by international organisations</option>
-						  	<option value="B04">Basket funds/pooled funding</option>
-						  	<option value="C01">Project-type interventions</option>
-							<option value="D01">Donor country personnel</option>
-							<option value="D02">Other technical assistance</option>
-							<option value="E01">Scholarships/training in donor country</option>
-							<option value="E02">Imputed student costs</option>
-							<option value="F01">Debt relief</option>
-							<option value="G01">Administrative costs not included elsewhere</option>
-							<option value="H01">Development awareness</option>
-							<option value="H02">Refugees in donor countries</option>	                      
-	                    </select>
+						<%= select_tag(:aid_type, options_for_select([['', ''], 
+							['General budget support','A01'],
+								['Sector budget support','A02'],
+								['Core support to NGOs, other private bodies, PPPs and research institutes','B01'],
+								['Core contributions to multilateral institutions','B02'],
+								['Contributions to specific-purpose programmes and funds managed by international organisations','B03'],
+								['Basket funds/pooled funding','B04'],
+								['Project-type interventions','C01'],
+								['Donor country personnel','D01'],
+								['Other technical assistance','D02'],
+								['Scholarships/training in donor country','E01'],
+								['Imputed student costs','E02'],
+								['Debt relief','F01'],
+								['Administrative costs not included elsewhere','G01'],
+								['Development awareness','H01'],
+								['Refugees in donor countries','H02']], :selected => @project_data[:aid_type]), :class=>"wid-400") %>
+	                  
 	                  </div>
 	                </div>
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>FLOW TYPE</label>
-	                    <select class="wid-400">
-	                      <option></option>
-							<option value="10">Official Development Assistance</option>
-						  	<option value="20">Other Official Flows</option>
-						  	<option value="30">Private NGO</option>
-						  	<option value="35">Private Market</option>
-	                    </select>
+	                    <%= select_tag(:flow_type, options_for_select([['', ''], 		
+						['Official development assistance (ODA)','10'],
+								['Other official flows (OOF)','20'],
+								['PRIVATE NGO','30'],
+								['	PRIVATE MARKET','35']], :selected => @project_data[:flow_type]), :class=>"wid-400") %>
 	                  </div>
 	                </div>
 	                <div class="row">
 	                  <div class="inner_row wid-402">
-	                    <label>FIINANCE TYPE</label>
-	                    <select class="wid-400">
-	                      <option></option>
-						<option value="110">	Aid grant excluding debt reorganisation</option>
-						<option value="111">	Subsidies to national private investors</option>
-						<option value="210">	Interest subsidy grant in AF</option>
-						<option value="211">	Interest subsidy to national private exporters</option>
-						<option value="310">	Deposit basis</option>
-						<option value="311">	Encashment basis</option>
-						<option value="410">	Aid loan excluding debt reorganisation</option>
-						<option value="411">	Investment-related loan to developing countries</option>
-						<option value="412">	Loan in a joint venture with the recipient</option>
-						<option value="413">	Loan to national private investor</option>
-						<option value="414">	Loan to national private exporter</option>
-						<option value="451">	Non-banks guaranteed export credits</option>
-						<option value="452">	Non-banks non-guaranteed portions of guaranteed export credits</option>
-						<option value="453">	Bank export credits</option>
-						<option value="510">	Acquisition of equity as part of a joint venture with the recipient</option>
-						<option value="511">	Acquisition of equity not part of joint venture in developing countries</option>
-						<option value="512">	Other acquisition of equity. <option value="110">	Aid grant excluding debt reorganisation</option>
-						<option value="111">	Subsidies to national private investors</option>
-						<option value="210">	Interest subsidy grant in AF</option>
-						<option value="211">	Interest subsidy to national private exporters</option>
-						<option value="310">	Deposit basis</option>
-						<option value="311">	Encashment basis</option>
-						<option value="410">	Aid loan excluding debt reorganisation</option>
-						<option value="411">	Investment-related loan to developing countries</option>
-						<option value="412">	Loan in a joint venture with the recipient</option>
-						<option value="413">	Loan to national private investor</option>
-						<option value="414">	Loan to national private exporter</option>
-						<option value="451">	Non-banks guaranteed export credits</option>
-						<option value="452">	Non-banks non-guaranteed portions of guaranteed export credits</option>
-						<option value="453">	Bank export credits</option>
-						<option value="510">	Acquisition of equity as part of a joint venture with the recipient</option>
-						<option value="511">	Acquisition of equity not part of joint venture in developing countries</option>
-						<option value="512">	Other acquisition of equity. Investment in a country on the DAC List of ODA Recipients that is not made to acquire a lasting interest in an enterprise.</option>
-						<option value="610">	Debt forgiveness: ODA claims (P)</option>
-						<option value="611">	Debt forgiveness: ODA claims (I)</option>
-						<option value="612">	Debt forgiveness: OOF claims (P)</option>
-						<option value="613">	Debt forgiveness: OOF claims (I)</option>
-						<option value="614">	Debt forgiveness: Private claims (P)</option>
-						<option value="615">	Debt forgiveness: Private claims (I)</option>
-						<option value="616">	Debt forgiveness: OOF claims (DSR)</option>
-						<option value="617">	Debt forgiveness: Private claims (DSR)</option>
-						<option value="618">	Debt forgiveness: Other</option>
-						<option value="620">	Debt rescheduling: ODA claims (P)</option>
-						<option value="621">	Debt rescheduling: ODA claims (I)</option>
-						<option value="622">	Debt rescheduling: OOF claims (P)</option>
-						<option value="623">	Debt rescheduling: OOF claims (I)</option>
-						<option value="624">	Debt rescheduling: Private claims (P)</option>
-						<option value="625">	Debt rescheduling: Private claims (I)</option>
-						<option value="626">	Debt rescheduling: OOF claims (DSR)</option>
-						<option value="627">	Debt rescheduling: Private claims (DSR)</option>
-						<option value="630">	Unicode Encode Error</option>
-						<option value="631">	Unicode Encode Error</option>
-						<option value="632">	Unicode Encode Error</option>
-						<option value="710">	Foreign direct investment</option>
-						<option value="711">	Other foreign direct investment, including reinvested earnings</option>
-						<option value="810">	Bank bonds</option>
-						<option value="811">	Non-bank bonds</option>
-						<option value="910">	Other bank securities/claims</option>
-						<option value="911">	Other non-bank securities/claims</option>
-						<option value="912">	Securities and other instruments issued by multilateral agencies</option></option>
-						<option value="610">	Debt forgiveness: ODA claims (P)</option>
-						<option value="611">	Debt forgiveness: ODA claims (I)</option>
-						<option value="612">	Debt forgiveness: OOF claims (P)</option>
-						<option value="613">	Debt forgiveness: OOF claims (I)</option>
-						<option value="614">	Debt forgiveness: Private claims (P)</option>
-						<option value="615">	Debt forgiveness: Private claims (I)</option>
-						<option value="616">	Debt forgiveness: OOF claims (DSR)</option>
-						<option value="617">	Debt forgiveness: Private claims (DSR)</option>
-						<option value="618">	Debt forgiveness: Other</option>
-						<option value="620">	Debt rescheduling: ODA claims (P)</option>
-						<option value="621">	Debt rescheduling: ODA claims (I)</option>
-						<option value="622">	Debt rescheduling: OOF claims (P)</option>
-						<option value="623">	Debt rescheduling: OOF claims (I)</option>
-						<option value="624">	Debt rescheduling: Private claims (P)</option>
-						<option value="625">	Debt rescheduling: Private claims (I)</option>
-						<option value="626">	Debt rescheduling: OOF claims (DSR)</option>
-						<option value="627">	Debt rescheduling: Private claims (DSR)</option>
-						<option value="630">	Unicode Encode Error</option>
-						<option value="631">	Unicode Encode Error</option>
-						<option value="632">	Unicode Encode Error</option>
-						<option value="710">	Foreign direct investment</option>
-						<option value="711">	Other foreign direct investment, including reinvested earnings</option>
-						<option value="810">	Bank bonds</option>
-						<option value="811">	Non-bank bonds</option>
-						<option value="910">	Other bank securities/claims</option>
-						<option value="911">	Other non-bank securities/claims</option>
-						<option value="912">	Securities and other instruments issued by multilateral agencies</option>
-	                    </select>
+	                    <label>FIINANCE TYPE</label>	                    
+	                     	<%= select_tag(:finance_type, options_for_select([['', '']	,
+								['Aid grant excluding debt reorganisation','110'],
+								['Subsidies to national private investors','111'],
+								['Interest subsidy grant in AF','210'],
+								['Interest subsidy to national private exporters','211'],
+								['Deposit basis','310'],
+									['Encashment basis','311'],
+									['Aid loan excluding debt reorganisation','410'],
+									['Investment-related loan to developing countries','411'],
+									['Loan in a joint venture with the recipient','412'],
+								['Loan to national private investor','413'],
+								['Loan to national private exporter','414'],
+								['Non-banks guaranteed export credits','451'],
+								['Non-banks non-guaranteed portions of guaranteed export credits','452'],
+								['Bank export credits','453'],
+								['Acquisition of equity as part of a joint venture with the recipient','510'],
+								['Acquisition of equity not part of joint venture in developing countries','511'],
+								['Other acquisition of equity','512'],
+							['Debt forgiveness: ODA claims (P)','610'],
+							['Debt forgiveness: ODA claims (I)','611'],
+							['Debt forgiveness: OOF claims (P)','612'],
+							['Debt forgiveness: OOF claims (I)','613'],
+							['Debt forgiveness: Private claims (P)','614'],
+							['Debt forgiveness: Private claims (I)','615'],
+							['Debt forgiveness: OOF claims (DSR)','616'],
+							['Debt forgiveness: Private claims (DSR)','617'],
+							['Debt forgiveness: Other','618'],
+							['Debt rescheduling: ODA claims (P)','620'],
+							['Debt rescheduling: ODA claims (I)','621'],
+							['Debt rescheduling: OOF claims (P)','622'],
+							['Debt rescheduling: OOF claims (I)','623'],
+							['Debt rescheduling: Private claims (P)','624'],
+							['Debt rescheduling: Private claims (I)','625'],
+							['Debt rescheduling: OOF claims (DSR)','626'],
+							['Debt rescheduling: Private claims (DSR)','627'],
+							['Unicode Encode Error','630'],
+							['Unicode Encode Error','631'],
+							['Unicode Encode Error','632'],
+							['Foreign direct investment','710'],
+							['Other foreign direct investment, including reinvested earnings','711'],
+							['Bank bonds','810'],
+							['Non-bank bonds','811'],
+							['Other bank securities/claims','910'],
+							['Other non-bank securities/claims','911'],
+							['Securities and other instruments issued by multilateral agencies','912']], :selected => @project_data[:finance_type]), :class=>"wid-400") %>	
 	                  </div>
 	                </div>
 	              </div>
