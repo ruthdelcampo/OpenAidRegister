@@ -98,11 +98,11 @@ debugger
          CartoDB::Connection.query(sql)
 
          # Now sectors must be written
-         if params[:sector_id]
+         if params[:sectors]
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
            result = CartoDB::Connection.query(sql)
-           params[:sector_id].each do |sectors|
-             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{result.rows.first[:cartodb_id]}, #{sectors})"
+           params[:sectors].each do |sector|
+             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{result.rows.first[:cartodb_id]}, #{sector[:id]})"
              CartoDB::Connection.query(sql)
            end
          end
@@ -136,9 +136,9 @@ debugger
          #In this case, first delete all sectors and overwrite them
          sql = "DELETE FROM project_sectors where  project_id = '#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
-         if params[:sector_id]
-           params[:sector_id].each do |sectors|
-             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{params[:cartodb_id]}, '#{sectors}')"
+         if params[:sectors]
+           params[:sectors].each do |sector|
+             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{params[:cartodb_id]}, #{sector[:id]})"
              CartoDB::Connection.query(sql)
            end
          end
@@ -198,6 +198,12 @@ debugger
       result = CartoDB::Connection.query(sql)
 
       @participating_orgs = result.try(:rows)
+
+      sql = "select sector_id as id
+      from project_sectors where project_id = #{params[:id]}"
+      result = CartoDB::Connection.query(sql)
+
+      @sectors = result.try(:rows)
     end
 
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.

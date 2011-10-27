@@ -33,6 +33,7 @@ $(document).ready(function(){
 	parseWkt($("#google_markers").val());
 	}
 
+  sectors();
   otherOrganizations();
 });
 
@@ -103,6 +104,32 @@ function change_contact_info() {
 }
 	return false
 
+}
+
+function sectors(){
+  var sectors = $('#sector_id');
+
+  sectors.change(function(evt){
+    evt.preventDefault();
+    var sector_id = $.trim($(this).find('option:selected').val());
+    var sector_name = $.trim($(this).find('option:selected').text());
+
+    if (sector_id != '' && sector_name != '') {
+
+      var li = $('<li>' +
+      '<div class="health"><a href="#">' + sector_name + '&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
+      '  <input type="hidden" name="sectors[][id]" value="' + sector_id + '" />' +
+      '</li>');
+
+      $(this).closest('ul').find('li.add_new').before(li);
+    }
+  })
+
+  console.debug($('#sectors_list').find('li:not(.add_new) a'))
+  $('#sectors_list').find('li:not(.add_new) a').live('click', function(evt){
+    evt.preventDefault();
+    $(this).closest('li').remove();
+  });
 }
 
 function otherOrganizations(){
