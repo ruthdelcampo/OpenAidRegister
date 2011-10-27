@@ -46,23 +46,28 @@
                       <input name="organization_name" type="text" class="imp02" value="<%= params[:organization_name] %>"/>
                   </div>
                   <div class="row">
-                  	<label>ORGANIZATION's type</label>
-                      <input name="organization_type_id" type="text" class="imp02" value="<%=params[:organization_type_id] %>"/>
-                  </div>
-                  <div class="row">
                   	<label>ORGANIZATION's website</label>
-                      <input name="organization_web" type="text" class="imp01"/>
+                      <input name="organization_web" type="text" class="imp02" value="<%=params[:organization_web] %>"/>
                   </div>
-                   <div class="row">
-                  	<div class="inner_row">
-                      	<label>ORGANIZATION's country</label>
-                          <input name="organization_country" type="text" class="imp01" value="<%=params[:organization_web] %>"/>
-                      </div>
-                      <div class="inner_row">
-                      	<label>government id</label>
-                          <input name="organization_guid" type="text" class="imp01" value="<%=params[:organization_guid] %>"/>
-                      </div>
-                  </div>
+
+					<div class="row">
+	                  	<div class="inner_row">
+	                      	<label>ORGANIZATION's type</label>
+	                          <input name="organization_type" type="text" class="imp01" value="<%=params[:organization_type] %>"/>
+	                      </div>
+	                      <div class="inner_row">
+	                      	<label>government id</label>
+	                          <input name="organization_guid" type="text" class="imp01" value="<%=params[:organization_guid] %>"/>
+	                      </div>
+	                  </div>
+	
+                  <div class="row">
+                  	<label>ORGANIZATION's country</label>
+                      <select name="organization_country" type="text" class="wid-205 "value="<%=params[:organization_country] %>">
+					<option></option>
+					</select>
+				</div>  
+			
                   </div>
                   <div class="colem01">
 	<span><input class="inp" name="" type="submit" value="Sign in"/></span>

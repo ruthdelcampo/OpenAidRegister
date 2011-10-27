@@ -122,6 +122,11 @@
 .sign_sec .sign_left form .colem01 p a{color:#666666;}
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
+.sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0}
+.sign_sec .sign_left form .row select.wid-430{width:430px;}
+.sign_sec .sign_left form .row select.wid-205{width:205px;}
+.sign_sec .sign_left form .row select.wid-400{width:400px;}
+
 
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
 #body_container .sign_sec .sign_right span{ float:left; width:215px; height:11px; background:url(../images/do_help.gif) no-repeat 0 0; text-indent:-9999px;}
