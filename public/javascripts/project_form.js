@@ -7,11 +7,11 @@ var markers = [];
 var marker;
 
 
-$(document).ready(function(){ 
-	
+$(document).ready(function(){
+
 		$( "#datepicker" ).datepicker();
 		$( "#datepicker2" ).datepicker();
-		
+
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
       zoom: 8,
@@ -23,16 +23,17 @@ $(document).ready(function(){
 
    //Add the listener to add a marker
 	google.maps.event.addListener(map, 'click', addMarker);
-	
+
 	// Remove markers
 	google.maps.event.addListener(map, 'dblclick', removeMarker)
-	
-	
+
+
 	//parse possible existing points
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=="")) {
 	parseWkt($("#google_markers").val());
 	}
 
+  otherOrganizations();
 });
 
 function addMarker(event) {
@@ -43,19 +44,19 @@ function addMarker(event) {
 	  });
 	markers.push(marker);
 	$("#google_markers").val(generateWkt());
-	
+
 }
 
 function removeMarker()
 {
-	
+
 	if (markers) {
     for (i in markers) {
       markers[i].setMap(null);
     }
     markers.length = 0;
   }
-	
+
 }
 
 function generateWkt() {
@@ -83,14 +84,14 @@ function parseWkt(wkt) {
 		    map:map,
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
-		  });		
+		  });
 		markers.push(marker);
 	});
 }
 
 
 // for the checkbox same person in project show
-function change_contact_info() { 
+function change_contact_info() {
 	if ($('#same_person').is(':checked')) {
 	$("#contact_name").val("<%= session[:organization].contact_name %>");
 	$("#contact_email").val("<%= session[:organization].email %>");
@@ -102,4 +103,33 @@ function change_contact_info() {
 }
 	return false
 
+}
+
+function otherOrganizations(){
+  var list = $('#participating_orgs'),
+      button = $('#add_partipating_org'),
+      other_org_name = $('#other_org_name'),
+      other_org_role = $('#other_org_role');
+
+  list.find('li:not(.add_new) a').live('click', function(evt){
+    evt.preventDefault();
+    $(this).closest('li').remove();
+  });
+
+  button.click(function(evt){
+    evt.preventDefault();
+    var org_name = $.trim(other_org_name.val());
+    var org_role = $.trim(other_org_role.find('option:selected').text());
+    if (org_name != '' && org_role != '') {
+      var li = $('<li>' +
+      '  <div class="health"><a href="#">' + org_name + '</a><em>AS</em><a href="#" class="last">' + org_role + '&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
+      '  <input type="hidden" name="participating_orgs[][name]" value="' + org_name + '" />' +
+      '  <input type="hidden" name="participating_orgs[][role]" value="' + org_role + '" />' +
+      '</li>');
+
+      list.find('li.add_new').before(li);
+      other_org_name.val('');
+      other_org_role.val('');
+    }
+  });
 }

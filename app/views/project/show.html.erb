@@ -33,13 +33,13 @@
  				<%= text_area_tag(:description, @project_data[:description]) %>
                 </div>
                 <div class="row">
-	
+
 					<div class="row">
 	                  <label>SECTOR</label>
 					   <ul>
 		                    <li>
 		                      <div class="health"><a href="#">Health <img src="/images/cross.gif" alt="" /></a></div>
-	 					<%= select_tag(:sector_id, options_for_select([	
+	 					<%= select_tag(:sector_id, options_for_select([
 							['Teacher training',	'2'],
 							['Education facilities and training',	'1'],
 							['Educational research',	'3'],
@@ -237,7 +237,7 @@
 									   </li>
 					                  </ul>
 	                </div>
-	               
+
                 <div class="row">
                   <label>LANGUAGE</label>
                   <select class="wid-430" name="language" selected="<%=@project_data[:language]%>">
@@ -255,14 +255,14 @@
                   <div class="inner_row">
                     <label>START DATE</label>
                     <div class="callender">
-                      <input name="start_date" type="text" id="datepicker" value ="<%=@project_data[:start_date]%>" />
+                      <input name="start_date" type="text" id="datepicker" value ="<%=@project_data[:start_date].strftime('%m/%d/%Y')%>" />
                       <input type="button" class="button" id="datepicker"/>
                     </div>
                   </div>
                   <div class="inner_row">
                     <label>END DATE</label>
                     <div class="callender">
-                      <input name="end_date" type="text" id="datepicker2" value ="<%=@project_data[:end_date]%>"  />
+                      <input name="end_date" type="text" id="datepicker2" value ="<%=@project_data[:end_date].strftime('%m/%d/%Y')%>"  />
                       <input type="button" class="button" />
                     </div>
                   </div>
@@ -278,7 +278,7 @@
 	                </div>
 	                <div class="inner_row">
 	                  	<label>CURRENCY</label>
-	
+
 						<%= select_tag(:budget_currency, options_for_select([
 						['',''],
 						['Afghani','AFN'],
@@ -447,10 +447,10 @@
 						['Rand','ZAR'],
 						['Zambian Kwacha','ZMK'],
 						['Zimbabwe Dollar','ZWL']], :selected => @project_data[:budget_currency]), :class => "wid-205" )%>
-	                  	
-	                </div>	                     
+
+	                </div>
 	             </div>
-	            
+
                 <div class="row">
                   <label>PROJECT WEBSITE</label>
                   <input name="website" type="text" class="imp01" value ="<%=@project_data[:website]%>"/>
@@ -471,31 +471,40 @@
                     <input name="program_guid" type="text" class="imp01" value ="<%=@project_data[:program_guid]%>"/>
                   </div>
                   <div class="inner_row wid-400">
-                    <p class="date">Is this project funded by a program already in IATI? 
+                    <p class="date">Is this project funded by a program already in IATI?
                       Introduce the IATI Identifier of the master program</p>
                   </div>
                 </div>
-                
+
                 <div class="row">
                 <label>OTHER PARTICIPATING ORGANIZATIONS</label>
-                  <ul>
-                    <li>
-                      <div class="health"><a href="#">Oxfam International</a><em>AS</em><a href="#" class="last">Implementer <img src="/images/cross.gif" alt="" /></a></div>
+                  <ul id="participating_orgs">
+                    <% ( params[:participating_orgs] || [] ).each do |participating_org| -%>
+                      <li>
+                        <div class="health">
+                          <a href="#"><%= participating_org[:name] %></a><em>AS</em>
+                          <a href="#" class="last"><%= participating_org[:role] %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
+                        </div>
+                        <%= hidden_field_tag :'participating_orgs[][name]', participating_org[:name] %>
+                        <%= hidden_field_tag :'participating_orgs[][role]', participating_org[:role] %>
+                      </li>
+                    <% end -%>
+                    <li class="add_new">
                       <div class="inner_row">
-                        <label>NAME</label>
-                        <input name="other_org_name_1" type="text" class="imp01" value ="<%=@project_data[:other_org_name_1]%>"/>
+                        <label for="other_org_name">NAME</label>
+                        <%= text_field_tag :other_org_name, nil, :class => 'imp01' %>
                       </div>
                       <div class="inner_row">
-                        <label>AS...</label>
-                        <%= select_tag(:other_org_role_1, options_for_select([
-							['', ''], 
-							['accountable', '1'], 
-							['extending', '2'],
-							['funding', '3'], 
-							['implementing', '4']], :selected => @project_data[:other_org_role_1]), :class => "wid-205" ) %>
+                        <label for="other_org_role">AS...</label>
+                        <%= select_tag :other_org_role, options_for_select([
+                          ['accountable', '1'],
+                          ['extending', '2'],
+                          ['funding', '3'],
+                          ['implementing', '4']
+                        ]), :class => 'wid-205', :include_blank => true %>
                       </div>
                       <div class="inner_row last02">
-                        <input type="button" class="button_add" />
+                        <%= submit_tag '', :id => 'add_partipating_org', :class => 'button_add' %>
                       </div>
                     </li>
                   </ul>
@@ -517,9 +526,9 @@
                 <div class="row">
                   <ul class="patrn02">
                     <li>
-						<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", 
+						<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1",
 						:onchange =>"change_contact_info()", :class => "checkbox") %>
-                      
+
                       <span>Check this option if you are the contact person</span> </li>
                   </ul>
                   <ul>
@@ -560,7 +569,7 @@
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>AID TYPE</label>
-						<%= select_tag(:aid_type, options_for_select([['', ''], 
+						<%= select_tag(:aid_type, options_for_select([['', ''],
 							['General budget support','A01'],
 								['Sector budget support','A02'],
 								['Core support to NGOs, other private bodies, PPPs and research institutes','B01'],
@@ -576,13 +585,13 @@
 								['Administrative costs not included elsewhere','G01'],
 								['Development awareness','H01'],
 								['Refugees in donor countries','H02']], :selected => @project_data[:aid_type]), :class=>"wid-400") %>
-	                  
+
 	                  </div>
 	                </div>
 	                <div class="row">
 	                  <div class="inner_row wid-402">
 	                    <label>FLOW TYPE</label>
-	                    <%= select_tag(:flow_type, options_for_select([['', ''], 		
+	                    <%= select_tag(:flow_type, options_for_select([['', ''],
 						['Official development assistance (ODA)','10'],
 								['Other official flows (OOF)','20'],
 								['PRIVATE NGO','30'],
@@ -591,7 +600,7 @@
 	                </div>
 	                <div class="row">
 	                  <div class="inner_row wid-402">
-	                    <label>FIINANCE TYPE</label>	                    
+	                    <label>FIINANCE TYPE</label>
 	                     	<%= select_tag(:finance_type, options_for_select([['', '']	,
 								['Aid grant excluding debt reorganisation','110'],
 								['Subsidies to national private investors','111'],
@@ -636,7 +645,7 @@
 							['Non-bank bonds','811'],
 							['Other bank securities/claims','910'],
 							['Other non-bank securities/claims','911'],
-							['Securities and other instruments issued by multilateral agencies','912']], :selected => @project_data[:finance_type]), :class=>"wid-400") %>	
+							['Securities and other instruments issued by multilateral agencies','912']], :selected => @project_data[:finance_type]), :class=>"wid-400") %>
 	                  </div>
 	                </div>
 	              </div>
@@ -665,7 +674,7 @@
 			<h5><b>Errors:</b></h5>
 			<%@errors.each do |error|%>
 			<li>
-				<%=error%><br>		
+				<%=error%><br>
 				</li><%end%>
 				<%end%>
           </ul>
