@@ -113,7 +113,7 @@ class DashboardController < ApplicationController
       redirect_to '/login'
       return
     end
-    debugger
+    
      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"

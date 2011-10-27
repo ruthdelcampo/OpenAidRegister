@@ -3,7 +3,10 @@ class ProjectController < ApplicationController
   
   def show #Working partially except other organizations and review date parameters
     
-   
+if params[:method]=="post"
+  
+end
+
      if session[:organization].blank?
       session[:return_to] = request.request_uri
        redirect_to '/login'
@@ -48,22 +51,21 @@ class ProjectController < ApplicationController
       #Check if the day is not correct
       
       #   for instance when there is an end date but not a start date
-      if !params[:end_date].blank && params[:start_date].blank
+      if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
       end
       # End date can be earlier as the start date
-      if !params[:end_date].blank && !params[:start_date].blank
+      if !(params[:end_date] =="") && !(params[:start_date]=="")
            ((Date.parse(start_date))<=>(Date.parse(end_date))) == 1 ##I need to check if this still works with the new way of date
             @errors.push("The end date must be later than the start date")
       end 
       #Prepare the date to be inserted in CartoDB
-      if params[:start_date].blank?
+      if (params[:start_date]=="")
         start_date = "null"
       end
-      if params[:end_date].blank?
+      if (params[:end_date] =="")
         end_date = "null"
       end
-      
       
       # prepare the geom
       if params[:google_markers].blank?

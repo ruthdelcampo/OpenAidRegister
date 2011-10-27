@@ -20,7 +20,7 @@
     <div class="registry_sec">
       <div class="registry_left">
         <div class="form_section">
-          <form action="" method="post">
+          <%= form_tag( :method => "post") do %>
             <fieldset>
               <div class="colem">
                 <h3 class="first">BASIC INFORMATION</h3>
@@ -245,7 +245,7 @@
                 </div>
                 <div class="row">
                   <div class="inner_row">
-                    <label>PROGRAM ID</label>
+                    <label>PROJECT ID</label>
                     <input name="project_guid" type="text" class="imp01" value ="<%=@project_data[:project_guid]%>"/>
                   </div>
                 </div>
@@ -700,7 +700,7 @@
                 <input class="inp" type="submit" value="Submit"/>
                 </span> </div>
             </fieldset>
-          </form>
+          <% end %>
         </div>
       </div>
       <div class="registry_right">
@@ -715,14 +715,14 @@
           </div>
           <p>You've completed more than a half of the form. You are almost done! :)</p>
           <ul>
-			
-            <li> You missed the <a href="#">project id</a> and it is important for us.</li>
 			<% if @errors.length>0 %>
+			<b>Errors:</b><br>
+			<%@errors.each do |error|%>
 			<li>
-				<b>Errors:</b><br>
-				<%@errors.each do |error|%>
-				* <%=error%><br>
-				</li><%end%><%end%>
+				<%=error%><br>
+		
+				</li><%end%>
+				<%end%>
           </ul>
         </div>
       </div>
