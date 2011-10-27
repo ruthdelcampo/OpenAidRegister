@@ -52,7 +52,7 @@ class SignupController < ApplicationController
     
     #Organization length Validation. 
     if params[:organization_name].empty?
-      @errors.push("Your organization is empty")
+      @errors.push("Your organization's name is empty")
     elsif params[:organization_name].length < 3
       @errors.push("The organization name should be longer than 2 characters")
     end
@@ -64,7 +64,7 @@ class SignupController < ApplicationController
     #end
     
     #Organization's country Validation. 
-    if params[:organization_country].eql?("1")
+    if params[:organization_country].eql?("")
       
       @errors.push("Please select your organization's country")
     end

@@ -107,9 +107,15 @@
 .sign_sec .sign_left form .row label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px;}
 .sign_sec .sign_left form .row input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .sign_sec .sign_left form .row input.imp02{ border:1px solid #b1b1b1; float:left; width:625px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+/* Added to be able to print nicely about and terms page */
+.sign_sec .sign_left p{ float:left; width:100%; color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px;}
+/* */
 
 .sign_sec .sign_left form .row .inner_row{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row input.imp01{ float:left; width:185px;}
+.sign_sec .sign_left form .row .inner_row.last{ float:left; width:170px;}
+.sign_sec .sign_left form .row .inner_row p.inform{ padding-top:25px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:14px; color:#999999; line-height:18px;}
+
 
 .sign_sec .sign_left form .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row2{ float:right; width:196px;}
@@ -128,12 +134,18 @@
 .sign_sec .sign_left form .row select.wid-400{width:400px;}
 
 
-#body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
+#body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:40px;}
 #body_container .sign_sec .sign_right span{ float:left; width:215px; height:11px; background:url(../images/do_help.gif) no-repeat 0 0; text-indent:-9999px;}
 #body_container .sign_sec .sign_right p{ float:left; width:274px; color:#fff; font:normal 17px/21px "Helvetica Neue"; padding:15px 0 0 9px;}
 #body_container .sign_sec .sign_right p a{ color:#fff;}
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
-#body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
+/***changing the sign right so that errors can be seen*/
+#body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:100px;}
+
+.sign_sec .sign_down{ float:right; width:283px; padding-top:270px;} 
+.sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
+/**/
+
 
 
 .dashboard{width:724px; float:left; background:url(../images/dasboard_bg.jpg) no-repeat; padding:0 7px 0 7px; }
@@ -203,6 +215,9 @@
 .registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
 .registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px;}
 .registry_sec .form_section form .row select{float:left; height:42px; margin:0; padding:0}
+/**included this new css for sector select to be bigger  */
+.registry_sec .form_section form .row select.wid-425{width:425px; height:110px;}
+/**/
 .registry_sec .form_section form .row select.wid-430{width:430px;}
 .registry_sec .form_section form .row select.wid-205{width:205px;}
 .registry_sec .form_section form .row select.wid-400{width:400px;}
@@ -237,13 +252,6 @@
 .registry_sec .form_section .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
 
-
-
-
-
-
-
-
 #body_container .registry_sec .registry_right{ float:right; width:283px; padding-top:40px;}
 .registry_right .top_section{width:100%; float:left; min-height:350px; height:auto !important; height:350px;}
 .registry_right .top_section h4{font-size:13px; color:#FF3300; font-family:"Helvetica Neue", arial; text-transform:uppercase; padding-bottom:10px; width:100%;}
@@ -251,8 +259,9 @@
 .registry_right .process{width:100%; float:left;  font-size:14px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; }
 .registry_right .process h4{font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; color:#666666; font-size:13px; padding-bottom:20px; width:100%; }
 .registry_right .process p{color:#000; color:#999999; padding-bottom:15px}
+.registry_right .process h5{ font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;color:#FF3300;font-size:13px; padding-bottom:5px;}
 .registry_right .process ul{width:100%; float:left; list-style:none; color:#FF3300;}
-.registry_right .process ul li{width:268px; float:left; background:url(../images/bullet.gif) 0 4px no-repeat; padding-left:15px;}
+.registry_right .process ul li{width:268px; float:left; background:url(../images/bullet.gif) 0 4px no-repeat; padding-bottom:5px;padding-left:15px;}
 .registry_right .process ul li a{color:#FF3300; text-decoration:underline;}
 
 .slide{width:250px; float:left; height:12px; clear:left; background:url(../images/slide_bg.gif) 0 0  no-repeat; position:relative; padding:10px 0px 15px 0px;}

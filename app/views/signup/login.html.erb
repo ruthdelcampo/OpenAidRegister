@@ -3,7 +3,8 @@
         </div>
 
   <div class="header_text">
-    <p>Sign in to start publishing new projects</p>
+    <p>Sign in to start publishing new projects<br><br></p>
+
   </div>
 </div>
 <div id="body_container">
@@ -32,18 +33,17 @@
 
     </div>
     <div class="sign_right">
-		<% if @errors %>
-		<p>
-			<b>Errors:</b><br>
-			<%@errors.each do |error|%>
-			* <%=error%><br>
-			<%end%>
-		</p>
-		<p>	<br></p>
-		<%end%>
-
     		<span>DO YOU NEED SOME HELP?</span>
           <p>You can always <a HREF="mailto:contact@openaidregister.org">contact us</a> if you have troubles on this step</p>
+			<% if @errors %>
+			<p>
+				<b>Errors:</b><br>
+				<%@errors.each do |error|%>
+				* <%=error%><br>
+				<%end%>
+			</p>
+			<p>	<br></p>
+			<%end%>
     </div>
   </div>
 </div>

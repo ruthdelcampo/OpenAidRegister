@@ -104,7 +104,7 @@ class DashboardController < ApplicationController
       end
       
     else #if the organization doesnt exist
-      redirect_to '/public/404.html'
+      render :status => 404
     end
   end
    
