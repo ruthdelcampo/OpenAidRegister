@@ -44,6 +44,8 @@ class ProjectController < ApplicationController
       end
 
       #Check if the day is not correct
+      
+      
 
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
@@ -60,10 +62,10 @@ class ProjectController < ApplicationController
       end
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
-        params[:start_date] = "null"
+        start_date = "null"
       end
       if (params[:end_date] =="")
-        params[:end_date] = "null"
+        end_date = "null"
       end
 
       # prepare the geom
@@ -75,7 +77,7 @@ class ProjectController < ApplicationController
         render :template => '/project/show'
         return
       end
-
+debugger
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
@@ -85,7 +87,7 @@ class ProjectController < ApplicationController
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}',
                 ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)),
                  '#{params[:language]}',
-                 '#{params[:project_guid]}', '#{start_date}', '#{end_date}', '#{params[:budget]}',
+                 '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}',
                  '#{params[:result_description]}',
                  '#{params[:collaboration_type]}','#{params[:tied_status]}',
