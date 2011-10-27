@@ -113,13 +113,13 @@ class DashboardController < ApplicationController
       redirect_to '/login'
       return
     end
+    debugger
      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      
      #Missing delete other organizations
-     
      redirect_to  '/dashboard'
    end
    
@@ -145,6 +145,9 @@ class DashboardController < ApplicationController
             render :text => "OK"
            end
          end
+      else
+        redirect_to "/dashboard", :alert=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
       end
+      
    end
 end

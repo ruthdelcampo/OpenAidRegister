@@ -17,63 +17,26 @@
                 	<img src="/images/map.gif" alt="" />
                 </div>
                 <div class="edit_sec">
+	
+				<%counter= true%>
+				<% @projects_list.each do |project| %>
                 	<ul>
+					<%if counter%>
                     	<li class="patrn">
-                        	<a href="#">Nueva Esperanza Development Program</a>
+					<%else%>
+               			<li>  
+					<%end%>       	
+						<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
                             <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
+                            <!--<a href="/delete?delete_project_id=<%=project[:cartodb_id]%>" data-confirm="Are you sure?" class="edit delete">delete</a>-->
+<a href="/delete" data-confirm="Are you sure?" class="edit delete">delete</a>
+
+                            <a href="/project?id=<%=project.cartodb_id%>" class="edit">edit</a>
                             </div>
+					<% counter=!counter%>
                         </li>
-                        <li>
-                        	<a href="#">Diocesan Coordination for Development Projects</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li class="patrn">
-                        	<a href="#">Commercial Integrated Farming Initiative (CIFI) - Project...</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li>
-                        	<a href="#">Africa Leadership Training and Capacity building</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li class="patrn">
-                        	<a href="#">Diocesan Coordination for Development Projects</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li>
-                        	<a href="#">Commercial Integrated Farming Initiative (CIFI) - Project...</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li class="patrn">
-                        	<a href="#">Africa Leadership Training and Capacity building</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
-                        <li>
-                        	<a href="#">Nueva Esperanza Development Program</a>
-                            <div class="hide_shows">
-                            <a href="#" class="edit delete">delete</a>
-                            <a href="#" class="edit">edit</a>
-                            </div>
-                        </li>
+				<%end%>
+                        
                     </ul>
                     <div class="add_project">
                     	<a href="/project">Add Project</a>
@@ -85,9 +48,9 @@
       <div class="dashboard_right">
       		<div class="project_details">
             <h4><img src="/images/text01.gif" alt="" /></h4>
-            <div class="rows"><strong>15</strong> <small>Projects <br />published</small></div>
-            <div class="rows"><span><em>8</em> Ongoing projects</span></div>
-            <div class="rows"><span><em>7</em> Past projects</span></div>
+            <div class="rows"><strong><%= @projects_list.length %></strong> <small>Projects <br />published</small></div>
+            <div class="rows"><span><em><%= @current_projects %></em> Ongoing projects</span></div>
+            <div class="rows"><span><em><%= @past_projects %></em> Past projects</span></div>
             <div class="add_project">
                   <a href="/project" class="add">Add Project</a>
                   <span>or import <a href="#">from file</a></span>
@@ -96,14 +59,14 @@
              <h3>PUBLISHING TOOLS</h3>
              	<ul>
                 	<li>
-                    	<div class="but_sec"><a id=<%=session[:organization][:cartodb_id]%> href="/download/<%=session[:organization][:cartodb_id]%>">XML</a></div>
+                    	<div class="but_sec"><a href="/download/<%=session[:organization][:cartodb_id]%>">XML</a></div>
 
                         <div class="text_sec">
                         	<p>Download your IATI XML File and share it with everyone </p>
                         </div>
                     </li>
                     <li>
-                    	<div class="but_sec"><a href="#">Publish</a></div>
+                    	<div class="but_sec"><a href="/publish">Publish</a></div>
                         <div class="text_sec">
                         	<p>Make your projects available at the IATI Registry</p>
                         </div>
