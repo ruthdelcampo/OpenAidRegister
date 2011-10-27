@@ -28,9 +28,7 @@
 					<%end%>       	
 						<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
                             <div class="hide_shows">
-                            <!--<a href="/delete?delete_project_id=<%=project[:cartodb_id]%>" data-confirm="Are you sure?" class="edit delete">delete</a>-->
-<a href="/delete" data-confirm="Are you sure?" class="edit delete">delete</a>
-
+                            <a href="/delete?delete_project_id=<%=project[:cartodb_id]%>" data-confirm="Are you sure?" class="edit delete">delete</a>
                             <a href="/project?id=<%=project.cartodb_id%>" class="edit">edit</a>
                             </div>
 					<% counter=!counter%>
