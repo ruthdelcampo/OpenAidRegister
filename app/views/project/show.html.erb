@@ -255,14 +255,14 @@
                   <div class="inner_row">
                     <label>START DATE</label>
                     <div class="callender">
-                      <input name="start_date" type="text" id="datepicker" value ="<%=@project_data[:start_date].strftime('%m/%d/%Y')%>" />
+                      <input name="start_date" type="text" id="datepicker" value ="<%= format_date(@project_data[:start_date]) %>" />
                       <input type="button" class="button" id="datepicker"/>
                     </div>
                   </div>
                   <div class="inner_row">
                     <label>END DATE</label>
                     <div class="callender">
-                      <input name="end_date" type="text" id="datepicker2" value ="<%=@project_data[:end_date].strftime('%m/%d/%Y')%>"  />
+                      <input name="end_date" type="text" id="datepicker2" value ="<%= format_date(@project_data[:end_date]) %>"  />
                       <input type="button" class="button" />
                     </div>
                   </div>
