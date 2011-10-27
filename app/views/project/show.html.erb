@@ -16,6 +16,7 @@
       <p>We need this project information to build the XML dataset. The most accurate data you can fill in, the better donors and general public will know about your project.</p>
     </div>
   </div>
+<%debugger%>
   <div id="body_container">
     <div class="registry_sec">
       <div class="registry_left">
@@ -33,209 +34,211 @@
  				<%= text_area_tag(:description, @project_data[:description]) %>
                 </div>
                 <div class="row">
-                <label>SECTOR</label>
-                  <ul>
-                    <li>
-                      <div class="health"><a href="#">Health <img src="/images/cross.gif" alt="" /></a></div>
-                      <select class="wid-425" name="sector_id" MULTIPLE selected="<%=@project_data[:sector_id]%>">       
-                        <option></option>
-						<option value="1">Education facilities and training</option>
-						<option value="2">Teacher training</option>
-						<option value="3">Educational research</option>
-						<option value="4">Primary education</option>
-						<option value="5">Basic life skills for youth and adults</option>
-						<option value="6">Early childhood education</option>
-						<option value="7">Secondary education</option>
-						<option value="8">Vocational training</option>
-						<option value="9">Higher education</option>
-						<option value="10">Advanced technical and managerial training</option>
-						<option value="11">Health policy and administrative management</option>
-						<option value="12">Medical education/training</option>
-						<option value="13">Medical research</option>
-						<option value="14">Medical services</option>
-						<option value="15">Basic health care</option>
-						<option value="16">Basic health infrastructure</option>
-						<option value="17">Basic nutrition</option>
-						<option value="18">Infectious disease control</option>
-						<option value="19">Health education</option>
-						<option value="20">Malaria control</option>
-						<option value="21">Tuberculosis control</option>
-						<option value="22">Health personnel development</option>
-						<option value="23">Population policy and administrative management</option>
-						<option value="24">Reproductive health care</option>
-						<option value="25">Family planning</option>
-						<option value="26">STD control including HIV/AIDS</option>
-						<option value="27">Personnel development for population and reproductive health</option>
-						<option value="28">Water resources policy and administrative management</option>
-						<option value="29">Water resources protection</option>
-						<option value="30">Water supply and sanitation - large systems</option>
-						<option value="31">Basic drinking water supply and basic sanitation</option>
-						<option value="32">River development</option>
-						<option value="33">Waste management/disposal</option>
-						<option value="34">Education and training in water supply and sanitation</option>
-						<option value="35">Economic and development policy/planning</option>
-						<option value="36">Public sector financial management</option>
-						<option value="37">Legal and judicial development</option>
-						<option value="38">Government administration</option>
-						<option value="39">Strengthening civil society</option>
-						<option value="40">Elections</option>
-						<option value="41">Human rights</option>
-						<option value="42">Free flow of information</option>
-						<option value="43">Women's equality organisations and institutions</option>
-						<option value="44">Security system management and reform</option>
-						<option value="45">Civilian peace-building, conflict prevention and resolution</option>
-						<option value="46">Post-conflict peace-building (UN)</option>
-						<option value="47">Reintegration and SALW control</option>
-						<option value="48">Land mine clearance</option>
-						<option value="49">Child soldiers (Prevention and demobilisation)</option>
-						<option value="50">Social/ welfare services</option>
-						<option value="51">Employment policy and administrative management</option>
-						<option value="52">Housing policy and administrative management</option>
-						<option value="53">Low-cost housing</option>
-						<option value="54">Multisector aid for basic social services</option>
-						<option value="55">Culture and recreation</option>
-						<option value="56">Statistical capacity building</option>
-						<option value="57">Narcotics control</option>
-						<option value="58">Social mitigation of HIV/AIDS</option>
-						<option value="59">Transport policy and administrative management</option>
-						<option value="60">Road transport</option>
-						<option value="61">Rail transport</option>
-						<option value="62">Water transport</option>
-						<option value="63">Air transport</option>
-						<option value="64">Storage</option>
-						<option value="65">Education and training in transport and storage</option>
-						<option value="66">Communications policy and administrative management</option>
-						<option value="67">Telecommunications</option>
-						<option value="68">Radio/television/print media</option>
-						<option value="69">Information and communication technology (ICT)</option>
-						<option value="70">Energy policy and administrative management</option>
-						<option value="71">Power generation/non-renewable sources</option>
-						<option value="72">Power generation/renewable sources</option>
-						<option value="73">Electrical transmission/ distribution</option>
-						<option value="74">Gas distribution</option>
-						<option value="75">Oil-fired power plants</option>
-						<option value="76">Gas-fired power plants</option>
-						<option value="77">Coal-fired power plants</option>
-						<option value="78">Nuclear power plants</option>
-						<option value="79">Hydro-electric power plants</option>
-						<option value="80">Geothermal energy</option>
-						<option value="81">Solar energy</option>
-						<option value="82">Wind power</option>
-						<option value="83">Ocean power</option>
-						<option value="84">Biomass</option>
-						<option value="85">Energy education/training</option>
-						<option value="86">Energy research</option>
-						<option value="87">Financial policy and administrative management</option>
-						<option value="88">Monetary institutions</option>
-						<option value="89">Formal sector financial intermediaries</option>
-						<option value="90">Informal/semi-formal financial intermediaries</option>
-						<option value="91">Education/training in banking and financial services</option>
-						<option value="92">Business support services and institutions</option>
-						<option value="93">Privatisation</option>
-						<option value="94">Agricultural policy and administrative management</option>
-						<option value="95">Agricultural development</option>
-						<option value="96">Agricultural land resources</option>
-						<option value="97">Agricultural water resources</option>
-						<option value="98">Agricultural inputs</option>
-						<option value="99">Food crop production</option>
-						<option value="100">Industrial crops/export crops</option>
-						<option value="101">Livestock</option>
-						<option value="102">Agrarian reform</option>
-						<option value="103">Agricultural alternative development</option>
-						<option value="104">Agricultural extension</option>
-						<option value="105">Agricultural education/training</option>
-						<option value="106">Agricultural research</option>
-						<option value="107">Agricultural services</option>
-						<option value="108">Plant and post-harvest protection and pest control</option>
-						<option value="109">Agricultural financial services</option>
-						<option value="110">Agricultural co-operatives</option>
-						<option value="111">Livestock/veterinary services</option>
-						<option value="112">Forestry policy and administrative management</option>
-						<option value="113">Forestry development</option>
-						<option value="114">Fuelwood/charcoal</option>
-						<option value="115">Forestry education/training</option>
-						<option value="116">Forestry research</option>
-						<option value="117">Forestry services</option>
-						<option value="118">Fishing policy and administrative management</option>
-						<option value="119">Fishery development</option>
-						<option value="120">Fishery education/training</option>
-						<option value="121">Fishery research</option>
-						<option value="122">Fishery services</option>
-						<option value="123">Industrial policy and administrative management</option>
-						<option value="124">Industrial development</option>
-						<option value="125">Small and medium-sized enterprises (SME) development</option>
-						<option value="126">Cottage industries and handicraft</option>
-						<option value="127">Agro-industries</option>
-						<option value="128">Forest industries</option>
-						<option value="129">Textiles, leather and substitutes</option>
-						<option value="130">Chemicals</option>
-						<option value="131">Fertilizer plants</option>
-						<option value="132">Cement/lime/plaster</option>
-						<option value="133">Energy manufacturing</option>
-						<option value="134">Pharmaceutical production</option>
-						<option value="135">Basic metal industries</option>
-						<option value="136">Non-ferrous metal industries</option>
-						<option value="137">Engineering</option>
-						<option value="138">Transport equipment industry</option>
-						<option value="139">Technological research and development</option>
-						<option value="140">Mineral/mining policy and administrative management</option>
-						<option value="141">Mineral prospection and exploration</option>
-						<option value="142">Coal</option>
-						<option value="143">Oil and gas</option>
-						<option value="144">Ferrous metals</option>
-						<option value="145">Nonferrous metals</option>
-						<option value="146">Precious metals/materials</option>
-						<option value="147">Industrial minerals</option>
-						<option value="148">Fertilizer minerals</option>
-						<option value="149">Offshore minerals</option>
-						<option value="150">Construction policy and administrative management</option>
-						<option value="151">Trade policy and administrative management</option>
-						<option value="152">Trade facilitation</option>
-						<option value="153">Regional trade agreements (RTAs)</option>
-						<option value="154">Multilateral trade negotiations</option>
-						<option value="155">Trade-related adjustment</option>
-						<option value="156">Trade education/training</option>
-						<option value="157">Tourism policy and administrative management</option>
-						<option value="158">Environmental policy and administrative management</option>
-						<option value="159">Biosphere protection</option>
-						<option value="160">Bio-diversity</option>
-						<option value="161">Site preservation</option>
-						<option value="162">Flood prevention/control</option>
-						<option value="163">Environmental education/ training</option>
-						<option value="164">Environmental research</option>
-						<option value="165">Multisector aid</option>
-						<option value="166">Urban development and management</option>
-						<option value="167">Rural development</option>
-						<option value="168">Non-agricultural alternative development</option>
-						<option value="169">Multisector education/training</option>
-						<option value="170">Research/scientific institutions</option>
-						<option value="171">General budget support</option>
-						<option value="172">Food aid/Food security programmes</option>
-						<option value="173">Import support (capital goods)</option>
-						<option value="174">Import support (commodities)</option>
-						<option value="175">Action relating to debt</option>
-						<option value="176">Debt forgiveness</option>
-						<option value="177">Relief of multilateral debt</option>
-						<option value="178">Rescheduling and refinancing</option>
-						<option value="179">Debt for development swap</option>
-						<option value="180">Other debt swap</option>
-						<option value="181">Debt buy-back</option>
-						<option value="182">Material relief assistance and services</option>
-						<option value="183">Emergency food aid</option>
-						<option value="184">Relief co-ordination; protection and support services</option>
-						<option value="185">Reconstruction relief and rehabilitation</option>
-						<option value="186">Disaster prevention and preparedness</option>
-						<option value="187">Administrative costs</option>
-						<option value="188">Support to national NGOs</option>
-						<option value="189">Support to international NGOs</option>
-						<option value="190">Support to local and regional NGOs</option>
-						<option value="191">Refugees in donor countries</option>
-						<option value="192">Sectors not specified</option>
-						<option value="193">Promotion of development awareness</option>
-                      </select>
-                    </li>
-                  </ul>
-                </div>
+	
+					<div class="row">
+	                  <label>SECTOR</label>
+					   <ul>
+		                    <li>
+		                      <div class="health"><a href="#">Health <img src="/images/cross.gif" alt="" /></a></div>
+	 					<%= select_tag(:sector_id, options_for_select([	
+							['Teacher training',	'2'],
+							['Education facilities and training',	'1'],
+							['Educational research',	'3'],
+							['Primary education',	'4'],
+							['Basic life skills for youth and adults',	'5'],
+							['Early childhood education',	'6'],
+							['Secondary education',	'7'],
+							['Vocational training',	'8'],
+							['Higher education',	'9'],
+							['Advanced technical and managerial training',	'10'],
+							['Health policy and administrative management',	'11'],
+							['Medical education/training',	'12'],
+							['Medical research',	'13'],
+							['Medical services',	'14'],
+							['Basic health care',	'15'],
+							['Basic health infrastructure',	'16'],
+							['Basic nutrition',	'17'],
+							['Infectious disease control',	'18'],
+							['Health education',	'19'],
+							['Malaria control',	'20'],
+							['Tuberculosis control',	'21'],
+							['Health personnel development',	'22'],
+							['Population policy and administrative management',	'23'],
+							['Reproductive health care',	'24'],
+							['Family planning',	'25'],
+							['STD control including HIV/AIDS',	'26'],
+							['Personnel development for population and reproductive health',	'27'],
+							['Water resources policy and administrative management',	'28'],
+							['Water resources protection',	'29'],
+							['Water supply and sanitation - large systems',	'30'],
+							['Basic drinking water supply and basic sanitation',	'31'],
+							['River development',	'32'],
+							['Waste management/disposal',	'33'],
+							['Education and training in water supply and sanitation',	'34'],
+							['Economic and development policy/planning',	'35'],
+							['Public sector financial management',	'36'],
+							['Legal and judicial development',	'37'],
+							['Government administration',	'38'],
+							['Strengthening civil society',	'39'],
+							['Elections',	'40'],
+							['Human rights',	'41'],
+							['Free flow of information',	'42'],
+							['Womens equality organisations and institutions',	'43'],
+							['Security system management and reform',	'44'],
+							['Civilian peace-building, conflict prevention and resolution',	'45'],
+							['Post-conflict peace-building (UN)',	'46'],
+							['Reintegration and SALW control',	'47'],
+							['Land mine clearance',	'48'],
+							['Child soldiers (Prevention and demobilisation)',	'49'],
+							['Social/ welfare services',	'50'],
+							['Employment policy and administrative management',	'51'],
+							['Housing policy and administrative management',	'52'],
+							['Low-cost housing',	'53'],
+							['Multisector aid for basic social services',	'54'],
+							['Culture and recreation',	'55'],
+							['Statistical capacity building',	'56'],
+							['Narcotics control',	'57'],
+							['Social mitigation of HIV/AIDS',	'58'],
+							['Transport policy and administrative management',	'59'],
+							['Road transport',	'60'],
+							['Rail transport',	'61'],
+							['Water transport',	'62'],
+							['Air transport',	'63'],
+							['Storage',	'64'],
+							['Education and training in transport and storage',	'65'],
+							['Communications policy and administrative management',	'66'],
+							['Telecommunications',	'67'],
+							['Radio/television/print media',	'68'],
+							['Information and communication technology (ICT)',	'69'],
+							['Energy policy and administrative management',	'70'],
+							['Power generation/non-renewable sources',	'71'],
+							['Power generation/renewable sources',	'72'],
+							['Electrical transmission/ distribution',	'73'],
+							['Gas distribution',	'74'],
+							['Oil-fired power plants',	'75'],
+							['Gas-fired power plants',	'76'],
+							['Coal-fired power plants',	'77'],
+							['Nuclear power plants',	'78'],
+							['Hydro-electric power plants',	'79'],
+							['Geothermal energy',	'80'],
+							['Solar energy',	'81'],
+							['Wind power',	'82'],
+							['Ocean power',	'83'],
+							['Biomass',	'84'],
+							['Energy education/training',	'85'],
+							['Energy research',	'86'],
+							['Financial policy and administrative management',	'87'],
+							['Monetary institutions',	'88'],
+							['Formal sector financial intermediaries',	'89'],
+							['Informal/semi-formal financial intermediaries',	'90'],
+							['Education/training in banking and financial services',	'91'],
+							['Business support services and institutions',	'92'],
+							['Privatisation',	'93'],
+							['Agricultural policy and administrative management',	'94'],
+							['Agricultural development',	'95'],
+							['Agricultural land resources',	'96'],
+							['Agricultural water resources',	'97'],
+							['Agricultural inputs',	'98'],
+							['Food crop production',	'99'],
+							['Industrial crops/export crops',	'100'],
+							['Livestock',	'101'],
+							['Agrarian reform',	'102'],
+							['Agricultural alternative development',	'103'],
+							['Agricultural extension',	'104'],
+							['Agricultural education/training',	'105'],
+							['Agricultural research',	'106'],
+							['Agricultural services',	'107'],
+							['Plant and post-harvest protection and pest control',	'108'],
+							['Agricultural financial services',	'109'],
+							['Agricultural co-operatives',	'110'],
+							['Livestock/veterinary services',	'111'],
+							['Forestry policy and administrative management',	'112'],
+							['Forestry development',	'113'],
+							['Fuelwood/charcoal',	'114'],
+							['Forestry education/training',	'115'],
+							['Forestry research',	'116'],
+							['Forestry services',	'117'],
+							['Fishing policy and administrative management',	'118'],
+							['Fishery development',	'119'],
+							['Fishery education/training',	'120'],
+							['Fishery research',	'121'],
+							['Fishery services',	'122'],
+							['Industrial policy and administrative management',	'123'],
+							['Industrial development',	'124'],
+							['Small and medium-sized enterprises (SME) development',	'125'],
+							['Cottage industries and handicraft',	'126'],
+							['Agro-industries',	'127'],
+							['Forest industries',	'128'],
+							['Textiles, leather and substitutes',	'129'],
+							['Chemicals',	'130'],
+							['Fertilizer plants',	'131'],
+							['Cement/lime/plaster',	'132'],
+							['Energy manufacturing',	'133'],
+							['Pharmaceutical production',	'134'],
+							['Basic metal industries',	'135'],
+							['Non-ferrous metal industries',	'136'],
+							['Engineering',	'137'],
+							['Transport equipment industry',	'138'],
+							['Technological research and development',	'139'],
+							['Mineral/mining policy and administrative management',	'140'],
+							['Mineral prospection and exploration',	'141'],
+							['Coal',	'142'],
+							['Oil and gas',	'143'],
+							['Ferrous metals',	'144'],
+							['Nonferrous metals',	'145'],
+							['Precious metals/materials',	'146'],
+							['Industrial minerals',	'147'],
+							['Fertilizer minerals',	'148'],
+							['Offshore minerals',	'149'],
+							['Construction policy and administrative management',	'150'],
+							['Trade policy and administrative management',	'151'],
+							['Trade facilitation',	'152'],
+							['Regional trade agreements (RTAs)',	'153'],
+							['Multilateral trade negotiations',	'154'],
+							['Trade-related adjustment',	'155'],
+							['Trade education/training',	'156'],
+							['Tourism policy and administrative management',	'157'],
+							['Environmental policy and administrative management',	'158'],
+							['Biosphere protection',	'159'],
+							['Bio-diversity',	'160'],
+							['Site preservation',	'161'],
+							['Flood prevention/control',	'162'],
+							['Environmental education/ training',	'163'],
+							['Environmental research',	'164'],
+							['Multisector aid',	'165'],
+							['Urban development and management',	'166'],
+							['Rural development',	'167'],
+							['Non-agricultural alternative development',	'168'],
+							['Multisector education/training',	'169'],
+							['Research/scientific institutions',	'170'],
+							['General budget support',	'171'],
+							['Food aid/Food security programmes',	'172'],
+							['Import support (capital goods)',	'173'],
+							['Import support (commodities)',	'174'],
+							['Action relating to debt',	'175'],
+							['Debt forgiveness',	'176'],
+							['Relief of multilateral debt',	'177'],
+							['Rescheduling and refinancing',	'178'],
+							['Debt for development swap',	'179'],
+							['Other debt swap',	'180'],
+							['Debt buy-back',	'181'],
+							['Material relief assistance and services',	'182'],
+							['Emergency food aid',	'183'],
+							['Relief co-ordination; protection and support services',	'184'],
+							['Reconstruction relief and rehabilitation',	'185'],
+							['Disaster prevention and preparedness',	'186'],
+							['Administrative costs',	'187'],
+							['Support to national NGOs',	'188'],
+							['Support to international NGOs',	'189'],
+							['Support to local and regional NGOs',	'190'],
+							['Refugees in donor countries',	'191'],
+							['Sectors not specified',	'192'],
+							['Promotion of development awareness',	'193']],
+									:selected => @project_data[:sector_id]), :multiple => true, :class => "wid-425"  ) %>
+									   </li>
+					                  </ul>
+	                </div>
+	               
                 <div class="row">
                   <label>LANGUAGE</label>
                   <select class="wid-430" name="language" selected="<%=@project_data[:language]%>">

@@ -97,10 +97,10 @@ class DashboardController < ApplicationController
         @download_other_orgs = result.rows
         
         #finally render the XML
-        render :template => '/dashboard/download.xml.erb' 
+        render :template => '/dashboard/download.xml.erb',  :layout => false
         
       else #if there are still no projects
-        render :template => '/dashboard/download_empty.html.erb'
+        render :template => '/dashboard/download_empty.html.erb',  :layout => false
       end
       
     else #if the organization doesnt exist

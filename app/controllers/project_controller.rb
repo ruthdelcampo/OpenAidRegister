@@ -182,8 +182,9 @@ end
       sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
      
+     if !result.rows.first[:array_agg].blank?
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
-      
+    end
       #This must be fixed when other organizations is done
       #Select partner organizations and form the array
       sql = "select array_agg(other_org_name) as array_other_orgs, 
