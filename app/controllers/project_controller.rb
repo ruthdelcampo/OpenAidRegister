@@ -83,7 +83,7 @@ class ProjectController < ApplicationController
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}',
-                ST_GeomFromText('#{params[:google_markers]}',4326),
+                ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)),
                  '#{params[:language]}',
                  '#{params[:project_guid]}', '#{start_date}', '#{end_date}', '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}',
@@ -105,8 +105,6 @@ class ProjectController < ApplicationController
            end
          end
 
-         require 'ruby-debug'
-         debugger
          # This is not working and should be updated when dynamic organizations are well done
          if params[:participating_orgs].present?
            #Get the new cartodb_id because the project is new
@@ -123,20 +121,11 @@ class ProjectController < ApplicationController
              sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
              CartoDB::Connection.query(sql)
            end
-
-           for i in 1..5
-             aux_name = eval("params[:other_org_name_" + i.to_s() + "]")
-             aux_role = eval("params[:other_org_role_" + i.to_s() + "]")
-             if !aux_name.blank?
-             else
-               break
-             end
-           end
           end
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_GeomFromText('#{params[:google_markers]}',4326), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{params[:start_date]}, end_date=#{params[:end_date]}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
+        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date='#{params[:start_date]}', end_date='#{params[:end_date]}', budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}',
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
@@ -154,19 +143,24 @@ class ProjectController < ApplicationController
 
          #In this case, first delete all partner organizations and overwrite them. This needs to be rewritten when it is correctly working
          sql = "DELETE FROM project_partnerorganizations where  project_id = '#{params[:cartodb_id]}'"
-         if !params[:other_org_name_1].blank?
-           for i in 1..5
-             aux_name = eval("params[:other_org_name_" + i.to_s() + "]")
-             aux_role = eval("params[:other_org_role_" + i.to_s() + "]")
-             if !aux_name.blank?
-               #insert organization
-               #sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
-               #CartoDB::Connection.query(sql)
-             else
-               break
-             end
+         CartoDB::Connection.query(sql)
+
+         if params[:participating_orgs].present?
+           #Get the new cartodb_id because the project is new
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
+           result = CartoDB::Connection.query(sql)
+
+           other_participating_orgs = params[:participating_orgs]
+           other_participating_orgs.each do |participating_org|
+             next if participating_org[:name].blank? || participating_org[:role].blank?
+             aux_name = participating_org[:name]
+             aux_role = participating_org[:role]
+
+             #insert organization
+             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
+             CartoDB::Connection.query(sql)
            end
-         end
+          end
       end
       redirect_to '/dashboard'
       return
@@ -194,13 +188,14 @@ class ProjectController < ApplicationController
      if !result.rows.first[:array_agg].blank?
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
     end
+
       #This must be fixed when other organizations is done
       #Select partner organizations and form the array
-      sql = "select array_agg(other_org_name) as array_other_orgs,
-      array_agg(other_org_role) as array_other_roles
+      sql = "select other_org_name, other_org_role
       from project_partnerorganizations where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
 
+      @participating_orgs = result.try(:rows)
     end
 
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.

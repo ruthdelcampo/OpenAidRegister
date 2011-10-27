@@ -479,6 +479,16 @@
                 <div class="row">
                 <label>OTHER PARTICIPATING ORGANIZATIONS</label>
                   <ul id="participating_orgs">
+                    <% ( @participating_orgs || [] ).each do |participating_org| -%>
+                      <li>
+                        <div class="health">
+                          <a href="#"><%= participating_org.other_org_name %></a><em>AS</em>
+                          <a href="#" class="last"><%= participating_org.other_org_role %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
+                        </div>
+                        <%= hidden_field_tag :'participating_orgs[][name]', participating_org.other_org_name %>
+                        <%= hidden_field_tag :'participating_orgs[][role]', participating_org.other_org_role %>
+                      </li>
+                    <% end -%>
                     <% ( params[:participating_orgs] || [] ).each do |participating_org| -%>
                       <li>
                         <div class="health">
