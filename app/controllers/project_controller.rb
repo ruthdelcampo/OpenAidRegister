@@ -56,15 +56,15 @@ end
       end
       # End date can be earlier as the start date
       if !(params[:end_date] =="") && !(params[:start_date]=="")
-           ((Date.parse(start_date))<=>(Date.parse(end_date))) == 1 ##I need to check if this still works with the new way of date
+           ((Date.parse(params[:start_date]))<=>(Date.parse(params[:end_date]))) == 1 ##I need to check if this still works with the new way of date
             @errors.push("The end date must be later than the start date")
       end 
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
-        start_date = "null"
+        params[:start_date] = "null"
       end
       if (params[:end_date] =="")
-        end_date = "null"
+        params[:end_date] = "null"
       end
       
       # prepare the geom
@@ -86,7 +86,7 @@ end
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}', 
                 ST_GeomFromText('#{params[:google_markers]}',4326),
                  '#{params[:language]}', 
-                 '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
+                 '#{params[:project_guid]}', #{params[:start_date]}, #{params[:end_date]}, '#{params[:budget]}',
                  '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}', 
                  '#{params[:result_description]}',  
                  '#{params[:collaboration_type]}','#{params[:tied_status]}',
@@ -127,7 +127,7 @@ end
         
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_GeomFromText('#{params[:google_markers]}',4326), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
+        sql="UPDATE projects SET the_geom=ST_GeomFromText('#{params[:google_markers]}',4326), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{params[:start_date]}, end_date=#{params[:end_date]}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}', 
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}', 
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"

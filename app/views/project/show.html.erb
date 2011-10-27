@@ -517,7 +517,9 @@
                 <div class="row">
                   <ul class="patrn02">
                     <li>
-                      <input name="same_person" type="checkbox" class="checkbox" value ="<%=@project_data[:same_person]%>"/>
+						<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1", 
+						:onchange =>"change_contact_info()", :class => "checkbox") %>
+                      
                       <span>Check this option if you are the contact person</span> </li>
                   </ul>
                   <ul>

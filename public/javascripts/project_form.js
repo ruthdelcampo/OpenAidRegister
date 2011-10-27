@@ -29,7 +29,7 @@ $(document).ready(function(){
 	
 	
 	//parse possible existing points
-	if (!($("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
+	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=="")) {
 	parseWkt($("#google_markers").val());
 	}
 
@@ -59,20 +59,20 @@ function removeMarker()
 }
 
 function generateWkt() {
-	//well known text   MULTIPOINT(10 40, 12 35, 20 30)
+	//well known text   POINT(10 40, 12 35, 20 30)
 	var markersAux = [];
 	$.each(markers,function(index,value) {
 		//markersAux.push("("+value.position.lng()+" "+value.position.lat()+")");
 		markersAux.push( value.position.lng()+" "+value.position.lat());
 	});
-	return "MULTIPOINT (" + markersAux.join(",") + ")";
+	return "POINT (" + markersAux.join(",") + ")";
 }
 
 
 function parseWkt(wkt) {
 	var procstring;
 	var auxarr;
-	procstring = $.trim(wkt.replace("MULTIPOINT",""));
+	procstring = $.trim(wkt.replace("POINT",""));
 	procstring = procstring.slice(0,-1).slice(1);
 	auxarr = procstring.split(",");
 	$.each(auxarr,function(index,value) {
