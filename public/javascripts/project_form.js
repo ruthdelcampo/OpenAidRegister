@@ -12,7 +12,6 @@ $(document).ready(function(){
 		$( "#datepicker" ).datepicker();
 		$( "#datepicker2" ).datepicker();
 
-
 //Initalize
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
@@ -38,9 +37,13 @@ $(document).ready(function(){
 
   sectors();
   otherOrganizations();
-change_contact_info();
-
+  change_contact_info();
+  showErrors();
 });
+
+function showErrors(){
+  $('html,body').animate({scrollTop: $("#errors").offset().top - 15}, 1000);
+}
 
 function addMarker(event) {
 	marker = new google.maps.Marker({
