@@ -152,7 +152,7 @@ class ProjectController < ApplicationController
            end
          end
 
-         #In this case, first delete all partner organizations and overwrite them. This needs to be rewritten when it is correctly working
+         #In this case, first delete all partner organizations and overwrite them.
          sql = "DELETE FROM project_partnerorganizations where  project_id = '#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
 

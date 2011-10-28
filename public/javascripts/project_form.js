@@ -11,13 +11,16 @@ $(document).ready(function(){
 
 		$( "#datepicker" ).datepicker();
 		$( "#datepicker2" ).datepicker();
-
+		
+		
+//Initalize
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
       zoom: 8,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+//Paint the map
     map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
 
@@ -35,6 +38,8 @@ $(document).ready(function(){
 
   sectors();
   otherOrganizations();
+change_contact_info();
+
 });
 
 function addMarker(event) {
