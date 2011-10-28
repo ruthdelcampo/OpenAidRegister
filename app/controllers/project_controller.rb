@@ -71,9 +71,13 @@ class ProjectController < ApplicationController
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
         start_date = "null"
+      else
+         start_date = "'" + start_date.to_s() + "'"
       end
       if (params[:end_date] =="")
         end_date = "null"
+      else
+          end_date = "'" + end_date.to_s() + "'"
       end
 
       # prepare the geom
@@ -82,7 +86,7 @@ class ProjectController < ApplicationController
       end
       #there has been errors print them on the template AND EXIT
       if @errors.count>0
-        debugger
+        
         render :template => '/project/show'
         return
       end
@@ -90,6 +94,7 @@ class ProjectController < ApplicationController
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
+      debugger
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES
