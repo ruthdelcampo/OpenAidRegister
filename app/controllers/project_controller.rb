@@ -51,7 +51,7 @@ class ProjectController < ApplicationController
       if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
       end
-      # End date can be earlier as the start date
+      # End date cant be earlier as the start date
       if params[:end_date].present? && params[:start_date].present?
         start_date = params[:start_date].split('/').map(&:to_i)
         end_date = params[:end_date].split('/').map(&:to_i)
@@ -60,6 +60,14 @@ class ProjectController < ApplicationController
 
         @errors.push("The end date must be later than the start date") if start_date > end_date
       end
+      
+      #it is a permanent project
+      if params[:start_date].present? && (params[:end_date] =="")
+        start_date = params[:start_date].split('/').map(&:to_i)
+        start_date = Date.new(start_date[2], start_date[0], start_date[1]) 
+      end
+      
+      
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
         start_date = "null"
@@ -77,7 +85,7 @@ class ProjectController < ApplicationController
         render :template => '/project/show'
         return
       end
-debugger
+
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
@@ -127,7 +135,7 @@ debugger
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date='#{params[:start_date]}', end_date='#{params[:end_date]}', budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
+        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}',
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
