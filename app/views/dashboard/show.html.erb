@@ -17,15 +17,15 @@
                 	<img src="/images/map.gif" alt="" />
                 </div>
                 <div class="edit_sec">
-	
+
 				<%counter= true%>
 				<% @projects_list.each do |project| %>
                 	<ul>
 					<%if counter%>
                     	<li class="patrn">
 					<%else%>
-               			<li>  
-					<%end%>       	
+               			<li>
+					<%end%>
 						<a href="/project?id=<%=project.cartodb_id%>"><%=project.title%></a>
                             <div class="hide_shows">
                             <a href="/delete?delete_project_id=<%=project[:cartodb_id]%>" data-confirm="Are you sure?" class="edit delete">delete</a>
@@ -34,14 +34,14 @@
 					<% counter=!counter%>
                         </li>
 					<%end%>
-                        
+
                     </ul>
                     <div class="add_project">
                     	<a href="/project">Add Project</a>
                     </div>
                 </div>
             </div>
-      
+
       </div>
       <div class="dashboard_right">
       		<div class="project_details">
