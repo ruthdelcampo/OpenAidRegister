@@ -1,4 +1,8 @@
 <% content_for :head do %>
+<script>
+  var contact_name = '<%= session[:organization][:contact_name] %>';
+  var contact_email = '<%= session[:organization][:email] %>';
+</script>
 <script type="text/javascript"
     src="http://maps.googleapis.com/maps/api/js?sensor=false">
 </script>
@@ -363,11 +367,11 @@
                     <li>
                       <div class="inner_row wid-402 pad">
                         <label>CONTACT NAME</label>
-                        <input name="contact_name" type="text" value ="<%=@project_data[:contact_name]%>" />
+                        <%= text_field_tag :contact_name, @project_data[:contact_name] %>
                       </div>
                       <div class="inner_row wid-402">
                         <label>EMAIL</label>
-                        <input name="contact_email" type="text" value ="<%=@project_data[:contact_email]%>" />
+                        <%= text_field_tag :contact_email, @project_data[:contact_email] %>
                       </div>
                     </li>
                   </ul>

@@ -42,7 +42,9 @@ $(document).ready(function(){
 });
 
 function showErrors(){
-  $('html,body').animate({scrollTop: $("#errors").offset().top - 15}, 1000);
+  if ($("#errors").length > 0){
+    $('html,body').animate({scrollTop: $("#errors").offset().top - 15}, 1000);
+  }
 }
 
 function addMarker(event) {
@@ -101,17 +103,15 @@ function parseWkt(wkt) {
 
 // for the checkbox same person in project show
 function change_contact_info() {
-	if ($('#same_person').is(':checked')) {
-	$("#contact_name").val("<%= session[:organization].contact_name %>");
-	$("#contact_email").val("<%= session[:organization].email %>");
-}else{
-	$("#contact_name").removeAttr('disabled');
-		$("#contact_name").val('');
-			$("#contact_email").removeAttr('disabled');
-				$("#contact_email").val('');
-}
-	return false
-
+  $('#same_person').change(function(){
+    if ($(this).is(':checked')){
+      $("#contact_name").val(contact_name);
+      $("#contact_email").val(contact_email);
+    }else{
+      $("#contact_name").val(null);
+      $("#contact_email").val(null);
+    }
+  });
 }
 
 function sectors(){
