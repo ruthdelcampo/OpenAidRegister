@@ -110,12 +110,8 @@
 /* Added to be able to print nicely about and terms page */
 .sign_sec .sign_left p{ float:left; width:100%; color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px;}
 /* */
-
 .sign_sec .sign_left form .row .inner_row{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row input.imp01{ float:left; width:185px;}
-.sign_sec .sign_left form .row .inner_row.last{ float:left; width:170px;}
-.sign_sec .sign_left form .row .inner_row p.inform{ padding-top:25px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:14px; color:#999999; line-height:18px;}
-
 
 .sign_sec .sign_left form .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row2{ float:right; width:196px;}
@@ -128,18 +124,20 @@
 .sign_sec .sign_left form .colem01 p a{color:#666666;}
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
-/***Added select in sign up fork*/
+
+/***Added select in sign up form*/
 .sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0}
 .sign_sec .sign_left form .row select.wid-430{width:430px;}
 .sign_sec .sign_left form .row select.wid-205{width:205px;}
 .sign_sec .sign_left form .row select.wid-400{width:400px;}
 /**/
 
-#body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:40px;}
+#body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
 #body_container .sign_sec .sign_right span{ float:left; width:215px; height:11px; background:url(../images/do_help.gif) no-repeat 0 0; text-indent:-9999px;}
 #body_container .sign_sec .sign_right p{ float:left; width:274px; color:#fff; font:normal 17px/21px "Helvetica Neue"; padding:15px 0 0 9px;}
 #body_container .sign_sec .sign_right p a{ color:#fff;}
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
+#body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
 #body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:100px;}
 
@@ -147,9 +145,7 @@
 .sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
 /**/
 
-
-
-.dashboard{width:724px; float:left; background:url(../images/dasboard_bg.jpg) no-repeat; padding:0 7px 0 7px; }
+.dashboard{width:724px; float:left; background:url(../images/dasboard_bg.png) no-repeat; padding:0 7px 0 7px; }
 .dashboard .map{width:100%; float:left;}
 .dashboard .map img{float:left;}
 .dashboard .edit_sec{width:100%; float:left;}
@@ -196,7 +192,7 @@
 .registry_sec .registry_left .form_section{width:100%; float:left;}
 
 
-.registry_sec .form_section form{ float:left; width:647px; background:url(../images/register_bg.jpg) 0 0 no-repeat; padding:40px 44px 47px 45px}
+.registry_sec .form_section form{ float:left; width:647px; background:url(../images/register_bg.png) 0 0 no-repeat; padding:40px 44px 47px 45px}
 .registry_sec .form_section form .colem{ float:left; width:100%;}
 .registry_sec .form_section form .padd_top{ padding-top:16px;}
 .registry_sec .form_section form h3{ float:left; width:100%; color:#020202; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; padding-bottom:13px; padding-top:18px; text-indent:3px}
@@ -205,17 +201,17 @@
 .registry_sec .form_section .row label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
 .registry_sec .form_section .row input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .row input.imp02{ border:1px solid #b1b1b1; float:left; width:625px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
-.registry_sec .form_section form .row textarea{width:625px; float:left; height:110px; border:1px solid #b1b1b1; padding:10px;}
+.registry_sec .form_section form .row textarea{width:625px; float:left; height:110px; border:1px solid #b1b1b1; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section form .row ul{width:609px; float:left; padding:10px 19px 30px 19px;  list-style:none; background:url(../images/patter02.gif) repeat;}
 .registry_sec .form_section form .row ul.patrn02{background:url(../images/patter03.gif);  padding:10px 19px 15px 19px; }
 .registry_sec .form_section form .row ul.patrn02 input.checkbox{float:left;}
 .registry_sec .form_section form .row ul.patrn02 span{float:left; padding-left:10px; color:#666666; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
 .registry_sec .form_section form .row ul li{width:100%; float:left;}
 .registry_sec .form_section form .row ul li .health{width:100%; float:left; padding-bottom:10px;}
-.registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:Arial, Helvetica, sans-serif; font-size:14px;}
+.registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
 .registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
-.registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px;}
-.registry_sec .form_section form .row select{float:left; height:42px; margin:0; font: 14px/42px "Helvetica Neue"; color:#666666;}
+.registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}
+.registry_sec .form_section form .row select{float:left; height:42px; margin:0; font:14px/42px "Helvetica Neue"; color:#666666;}
 .registry_sec .form_section form .row select option{}
 /**included this new css for sector select to be bigger  */
 .registry_sec .form_section form .row select.wid-425{width:425px; height:110px;}
@@ -229,13 +225,13 @@
 .registry_sec .form_section .row .inner_row.wid-402.pad{padding-bottom:10px;}
 .registry_sec .form_section .row .inner_row.wid-402 input{ border:1px solid #b1b1b1; float:left; width:380px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .row .inner_row.last{margin-right:0; width:195px}
-.registry_sec .form_section .row .inner_row.last02{margin-right:0; width:155px; padding-top:17px;}
+.registry_sec .form_section .row .inner_row.last02{margin-right:0; width:155px; padding-top:22px;}
 .registry_sec .form_section .row .inner_row input.imp01{ float:left; width:185px;}
 .registry_sec .form_section .row .inner_row .callender{width:185px; float:left; border:1px solid #b1b1b1; padding:5px 10px; height:30px; background:#fff;}
-.registry_sec .form_section .row .inner_row .callender input{width:148px; background:none; float:left;  line-height:30px; height:30px; border:none; padding-right:10px; border-right:1px solid #b1b1b1;}
+.registry_sec .form_section .row .inner_row .callender input{width:148px; background:none; float:left;  line-height:30px; height:30px; border:none; padding-right:10px; border-right:1px solid #b1b1b1; font:bold 13px/42px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .row .inner_row .callender input.button{width:18px; float:right; margin:8px 0 0 0px; height:16px; display:inline; background:url(../images/callender.gif) 0 0 no-repeat; cursor:pointer; border-right:none;}
 .registry_sec .form_section .row .inner_row .callender input.button.euro{background-image:url(../images/euro.gif);}
-.registry_sec .form_section .row .inner_row p.date{ padding-top:25px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:14px; color:#999999; line-height:18px;}
+.registry_sec .form_section .row .inner_row p.date{ padding-top:25px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:15px; color:#999999; line-height:18px;}
 .registry_sec .form_section .row .inner_row.wid-400{width:400px; margin-right:0;}
 .registry_sec .form_section .row .map02{width:633px; border:1px solid #b1b1b1; background:#fff; padding:5px 6px; float:left;}
 .registry_sec .form_section .row .map02 img{float:left;}
@@ -254,6 +250,13 @@
 .registry_sec .form_section .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
 
+
+
+
+
+
+
+
 #body_container .registry_sec .registry_right{ float:right; width:283px; padding-top:40px;}
 .registry_right .top_section{width:100%; float:left; min-height:350px; height:auto !important; height:350px;}
 .registry_right .top_section h4{font-size:13px; color:#FF3300; font-family:"Helvetica Neue", arial; text-transform:uppercase; padding-bottom:10px; width:100%;}
@@ -261,9 +264,8 @@
 .registry_right .process{width:100%; float:left;  font-size:14px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; }
 .registry_right .process h4{font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; color:#666666; font-size:13px; padding-bottom:20px; width:100%; }
 .registry_right .process p{color:#000; color:#999999; padding-bottom:15px}
-.registry_right .process h5{ font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;color:#FF3300;font-size:13px; padding-bottom:5px;}
 .registry_right .process ul{width:100%; float:left; list-style:none; color:#FF3300;}
-.registry_right .process ul li{width:268px; float:left; background:url(../images/bullet.gif) 0 4px no-repeat; padding-bottom:5px;padding-left:15px;}
+.registry_right .process ul li{width:268px; float:left; background:url(../images/bullet.gif) 0 4px no-repeat; padding-left:15px;}
 .registry_right .process ul li a{color:#FF3300; text-decoration:underline;}
 
 .slide{width:250px; float:left; height:12px; clear:left; background:url(../images/slide_bg.gif) 0 0  no-repeat; position:relative; padding:10px 0px 15px 0px;}
