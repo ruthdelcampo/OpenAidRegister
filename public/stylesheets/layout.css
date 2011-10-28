@@ -141,7 +141,7 @@
 /***changing the sign right so that errors can be seen*/
 #body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:100px;}
 
-.sign_sec .sign_down{ float:right; width:283px; padding-top:270px;} 
+.sign_sec .sign_down{ float:right; width:283px; padding-top:270px;}
 .sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
 /**/
 
@@ -173,7 +173,7 @@
 .dashboard_right .project_details .rows span{color:#999999; font-size:15px; font-family:"Helvetica Neue", arial;}
 .dashboard_right .project_details .rows span em{font-style:normal; color:#fff;}
 .dashboard_right .project_details .add_project{width:100%; float:left; padding-top:40px; }
-.dashboard_right .project_details .add_project a.add{float:left; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none; display:block;} 
+.dashboard_right .project_details .add_project a.add{float:left; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none; display:block;}
 .dashboard_right .project_details .add_project span{width:100%; float:left; padding-top:5px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
 .dashboard_right .project_details .add_project span a{ color:#fff;}
 .dashboard_right .project_details .publish{width:100%; float:left; padding-top:120px;}
@@ -207,7 +207,8 @@
 .registry_sec .form_section form .row ul.patrn02 input.checkbox{float:left;}
 .registry_sec .form_section form .row ul.patrn02 span{float:left; padding-left:10px; color:#666666; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
 .registry_sec .form_section form .row ul li{width:100%; float:left;}
-.registry_sec .form_section form .row ul li .health{width:100%; float:left; padding-bottom:10px;}
+.registry_sec .form_section form .row ul li.add_new{margin-top: 5px}
+.registry_sec .form_section form .row ul li .health{float:left; padding:5px 0;}
 .registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
 .registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
 .registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}

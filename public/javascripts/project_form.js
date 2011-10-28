@@ -115,6 +115,11 @@ function sectors(){
     var sector_name = $.trim($(this).find('option:selected').text());
 
     if (sector_id != '' && sector_name != '') {
+      var existing_li = sectors.closest('ul').find('li:not(.add_new):contains(' + sector_name + ')');
+      if (existing_li.length > 0){
+        existing_li.find('div').effect('highlight', {'color': '#FF3300'}, 200);
+        return;
+      }
 
       var li = $('<li>' +
       '<div class="health"><a href="#">' + sector_name + '&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
@@ -125,7 +130,6 @@ function sectors(){
     }
   })
 
-  console.debug($('#sectors_list').find('li:not(.add_new) a'))
   $('#sectors_list').find('li:not(.add_new) a').live('click', function(evt){
     evt.preventDefault();
     $(this).closest('li').remove();
@@ -148,6 +152,11 @@ function otherOrganizations(){
     var org_name = $.trim(other_org_name.val());
     var org_role = $.trim(other_org_role.find('option:selected').text());
     if (org_name != '' && org_role != '') {
+      var existing_li = list.find('li:not(.add_new):contains(' + org_name + '):contains(' + org_role + ')');
+      if (existing_li.length > 0){
+        existing_li.find('div').effect('highlight', {'color': '#FF3300'}, 200);
+        return;
+      }
       var li = $('<li>' +
       '  <div class="health"><a href="#">' + org_name + '</a><em>AS</em><a href="#" class="last">' + org_role + '&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
       '  <input type="hidden" name="participating_orgs[][name]" value="' + org_name + '" />' +
