@@ -1,7 +1,8 @@
 module ApplicationHelper
-  
+
   def format_date(date)
-    date.strftime('%m/%d/%Y') if date
+    date.strftime('%m/%d/%Y') and return if date.present? && date.is_a?(Date)
+    date
   end
 
   def sector_by_id(id)
