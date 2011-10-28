@@ -108,7 +108,7 @@ class DashboardController < ApplicationController
     end
   end
    
-  def delete #not working totally. We need to delete the other organizations involved
+  def delete #deletes records in the three tables
     if session[:organization].blank?
       redirect_to '/login'
       return
@@ -118,8 +118,9 @@ class DashboardController < ApplicationController
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
-     
-     #Missing delete other organizations
+      sql="delete FROM project_partnerorganizations where project_id = '#{params[:delete_project_id]}'"
+      CartoDB::Connection.query(sql)
+    
      redirect_to  '/dashboard'
    end
    
