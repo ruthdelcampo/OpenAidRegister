@@ -49,7 +49,7 @@ class DashboardController < ApplicationController
     
     #take the organization information. This request can also be done from outside people
     sql="SELECT is_validated, organization_country, organization_guid, 
-    organization_name, organization_type_id, created_at 
+    organization_name, organization_type_id 
     FROM organizations WHERE cartodb_id = #{params[:id]}"
     result = CartoDB::Connection.query(sql)
     @download_organization = result.rows.first
@@ -62,38 +62,51 @@ class DashboardController < ApplicationController
       end_date, budget, budget_currency, website, program_guid, result_title, 
       result_description, collaboration_type, tied_status, aid_type, flow_type, 
       finance_type, contact_name, contact_email, contact_position, 
-      ST_ASText(the_geom) AS google_markers, updated_at
+      ST_ASText(the_geom) AS google_markers, created_at, updated_at
       FROM projects WHERE organization_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
       @download_projects = result.rows
       
       #Render XML if it has already projects entered and the organization is validated
-      if (@download_organization[:is_validated]) && (!@download_projects.blank?) 
+      
+      ######ATTENTION!!
+      #Before going to production, change this.
+      #if (@download_organization[:is_validated]) && (!@download_projects.blank?) 
+       
+       if !@download_projects.blank?
         
         # get the se project_sector info
         sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors 
         INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id 
         WHERE organization_id =#{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
+        
         result.rows.each do |row|
           row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
+          
         end
         @download_sectors = result.rows
+        
         
         #get the sector names
         sql = "select project_sectors.sector_id, name, sector_code from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
         result = CartoDB::Connection.query(sql)
         @download_sector_names = result.rows
         
+        
         #now partner organizations. I need to check if this finally works well
-        sql = "select project_id, array_agg('\"'||project_partnerorganizations.other_org_name||'\"') AS other_org_names, 
+        sql = "select project_id, array_agg(project_partnerorganizations.other_org_name) AS other_org_names, 
         array_agg(project_partnerorganizations.other_org_role) AS other_org_roles  
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id 
         WHERE organization_id = #{params[:id]} GROUP BY project_id"
         result = CartoDB::Connection.query(sql)
+        
         result.rows.each do |row|
-          row[:other_org_roles] = eval('['+row[:other_org_roles][1..-2]+']')  
+          row[:other_org_names] = row[:other_org_names][1..-2].split(",")
+          row[:other_org_roles] = row[:other_org_roles][1..-2].split(",")
+
         end
+        
         @download_other_orgs = result.rows
         
         #finally render the XML
@@ -108,12 +121,13 @@ class DashboardController < ApplicationController
     end
   end
    
+   
   def delete #deletes records in the three tables
     if session[:organization].blank?
       redirect_to '/login'
       return
     end
-    
+       
      sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
      CartoDB::Connection.query(sql)
      sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"

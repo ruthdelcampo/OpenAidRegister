@@ -128,11 +128,12 @@
 .sign_sec .sign_left form .colem01 p a{color:#666666;}
 .sign_sec .sign_left form .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
 
+/***Added select in sign up fork*/
 .sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0}
 .sign_sec .sign_left form .row select.wid-430{width:430px;}
 .sign_sec .sign_left form .row select.wid-205{width:205px;}
 .sign_sec .sign_left form .row select.wid-400{width:400px;}
-
+/**/
 
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:40px;}
 #body_container .sign_sec .sign_right span{ float:left; width:215px; height:11px; background:url(../images/do_help.gif) no-repeat 0 0; text-indent:-9999px;}
@@ -214,7 +215,8 @@
 .registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:Arial, Helvetica, sans-serif; font-size:14px;}
 .registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
 .registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px;}
-.registry_sec .form_section form .row select{float:left; height:42px; margin:0; padding:0}
+.registry_sec .form_section form .row select{float:left; height:42px; margin:0; font: 14px/42px "Helvetica Neue"; color:#666666;}
+.registry_sec .form_section form .row select option{}
 /**included this new css for sector select to be bigger  */
 .registry_sec .form_section form .row select.wid-425{width:425px; height:110px;}
 /**/

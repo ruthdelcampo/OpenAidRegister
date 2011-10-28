@@ -82,6 +82,7 @@ class ProjectController < ApplicationController
       end
       #there has been errors print them on the template AND EXIT
       if @errors.count>0
+        debugger
         render :template => '/project/show'
         return
       end
