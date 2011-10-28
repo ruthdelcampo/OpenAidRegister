@@ -11,8 +11,8 @@ $(document).ready(function(){
 
 		$( "#datepicker" ).datepicker();
 		$( "#datepicker2" ).datepicker();
-		
-		
+
+
 //Initalize
     var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
     var myOptions = {
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
 	//parse possible existing points
-	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=="")) {
+	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
 	parseWkt($("#google_markers").val());
 	}
 
@@ -72,14 +72,14 @@ function generateWkt() {
 		//markersAux.push("("+value.position.lng()+" "+value.position.lat()+")");
 		markersAux.push( value.position.lng()+" "+value.position.lat());
 	});
-	return "POINT (" + markersAux.join(",") + ")";
+	return "MULTIPOINT (" + markersAux.join(",") + ")";
 }
 
 
 function parseWkt(wkt) {
 	var procstring;
 	var auxarr;
-	procstring = $.trim(wkt.replace("POINT",""));
+	procstring = $.trim(wkt.replace("MULTIPOINT",""));
 	procstring = procstring.slice(0,-1).slice(1);
 	auxarr = procstring.split(",");
 	$.each(auxarr,function(index,value) {

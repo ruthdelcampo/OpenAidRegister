@@ -44,8 +44,8 @@ class ProjectController < ApplicationController
       end
 
       #Check if the day is not correct
-      
-      
+
+
 
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
@@ -60,14 +60,14 @@ class ProjectController < ApplicationController
 
         @errors.push("The end date must be later than the start date") if start_date > end_date
       end
-      
+
       #it is a permanent project
       if params[:start_date].present? && (params[:end_date] =="")
         start_date = params[:start_date].split('/').map(&:to_i)
-        start_date = Date.new(start_date[2], start_date[0], start_date[1]) 
+        start_date = Date.new(start_date[2], start_date[0], start_date[1])
       end
-      
-      
+
+
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
         start_date = "null"
@@ -86,7 +86,7 @@ class ProjectController < ApplicationController
       end
       #there has been errors print them on the template AND EXIT
       if @errors.count>0
-        
+
         render :template => '/project/show'
         return
       end
@@ -94,7 +94,7 @@ class ProjectController < ApplicationController
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
-      debugger
+
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES
