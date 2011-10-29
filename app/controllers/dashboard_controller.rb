@@ -144,25 +144,30 @@ class DashboardController < ApplicationController
         redirect_to '/login'
         return
       end
-
-      if params[:method]=="post" #when it returns information gathered from the ajax form
-        if params[:api_key].blank? || params[:name_package].blank?
-         redirect_to '/dashboard', :alert => "We need the apy key and the name package to be able to publish this information in the IATI Registry. For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
-         else
-           #send to IATI REgistry
-           if # no_success
-             #email to contact@openaidregister to check what happened
-             render :text => 'There was an error while inserting the data in IATI Registry. Please try again later or contact us'
-           else #if success
-             #sql insert new data since it was succesful
-              api_key = params[:api_key]
-              name_package = params[:name_package]
-            render :text => "OK"
-           end
-         end
-      else
-        redirect_to "/dashboard", :alert=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
-      end
-
-   end
+       redirect_to "/dashboard", :alert=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
+      
+      #if session[:organization][:is_valid_publish]
+      #   #send to IATI REgistry
+      #     if # no_success
+      #        #email to contact@openaidregister to check what happened
+      #        render :text => 'There was an error while inserting the data in IATI Registry. Please try again later or contact us'
+      #      else #if success
+      #        #sql insert new data since it was succesful
+      #          api_key = params[:api_key]
+      #          name_package = params[:name_package]
+      #        render :text => "Succesfully updated"
+      #       end
+      #elsif session[:organization][:api_key].present? && session[:organization][:package_name].present?
+      #    if #no success
+      #      #email to contact@openaidregister to check what happened
+      #      render :text => 'There was an error while inserting the data in IATI Registry. Please check your IATI Details are correct'
+      #    else #if success
+      #      session[:organization][:is_valid_publish]
+      #    end
+      #else 
+      #    redirect_to '/dashboard', :alert => "Please, introduce your IATI Registry (api key and the name package) details in your account. We need this information to be able to publish your data in the Registry.  For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
+      #end
+      
+  end
+          
 end
