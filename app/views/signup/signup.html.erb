@@ -60,7 +60,7 @@
 	                      	<input name="organization_guid" type="text" class="imp01" value="<%=params[:organization_guid] %>"/>
 	                      </div>
 						<div class="inner_row last">
-	                      	 <p class="inform"> In the US this would be the EIN Number <p>
+	                      	 <p class="inform"> In the US this would be the EIN Number </p>
 	                    </div>
 	                  </div>
 				
@@ -319,7 +319,16 @@
 							], :selected => params[:organization_country]))%>
 				</div>
 			
-			
+				<div class="colem">
+              	<h3 class="padd_top">IATI REGISTRY INFORMATION</h3>
+                  <div class="row">
+                  	<label>API KEY</label>
+                      <input name="organization_name" type="text" class="imp02" value="<%= params[:organization_name] %>"/>
+                  </div>
+                  <div class="row">
+                  	<label>PACKAGE NAME</label>
+                      <input name="organization_web" type="text" class="imp02" value="<%=params[:organization_web] %>"/>
+                  </div>
 			
 			
 			

@@ -112,7 +112,10 @@
 /* */
 .sign_sec .sign_left form .row .inner_row{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row input.imp01{ float:left; width:185px;}
-
+/* Added to be able to include new text*/
+.sign_sec .sign_left form .row .inner_row.last{ float:left; width:170px;}
+.sign_sec .sign_left form .row .inner_row p.inform{ padding-top:25px;padding-bottom:5px; width:100%; float:left; font-family:"Helvetica Neue",Arial, Helvetica, sans-serif; font-size:14px; color:#999999; line-height:18px;}
+/* */
 .sign_sec .sign_left form .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
 .sign_sec .sign_left form .row .inner_row2{ float:right; width:196px;}
 .sign_sec .sign_left form .row .inner_row2 input.imp01{ float:left; width:174px;}
@@ -183,8 +186,16 @@
 .dashboard_right .project_details .publish .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
 .dashboard_right .project_details .publish .text_sec{width:113px; float:right;}
 .dashboard_right .project_details .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;}
-
-
+/***changing the dashboard right to include account*/
+.dashboard_right .project_details .account{width:100%; float:left; padding-top:20px;}
+.dashboard_right .project_details .account h3{font-size:16px; font-family:"Helvetica Neue", arial; padding-bottom:25px; color:#000;}
+.dashboard_right .project_details .account ul{width:100%; float:left; list-style:none;}
+.dashboard_right .project_details .account ul li{width:100%; float:left; padding-bottom:10px;}
+.dashboard_right .project_details .account .but_sec{width:170px; float:left;}
+.dashboard_right .project_details .account .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
+.dashboard_right .project_details .account .text_sec{width:113px; float:right;}
+.dashboard_right .project_details .account .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;}
+/**/
 
 #body_container .registry_sec{ float:left; width:100%; padding:5px 0 118px 0;}
 .registry_sec .registry_left{ float:left; width:738px;}
