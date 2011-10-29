@@ -281,10 +281,33 @@
               <div class="colem">
                 <h3>LOCATION</h3>
                 <div class="row">
+					<div class="inner_row wid-440"> 
                   <label>SELECT IN THE MAP</label>
                   <div id="map_canvas" style="width:430px; height:300px;"></div>
+					</div>
+					
+					<div class="inner_row last03">
+						 <label>LEVEL OF DETAIL</label>
+							<ul>
+			                    <li>
+						<%=	radio_button_tag 'geo_detail', 'country' %>	
+					   	<h6>Country</h6>
+                    
+								</li>
+					 			<li>
+									<%=	radio_button_tag 'geo_detail', 'region' %>
+						 			<h6>Region</h6>
+								</li>
+	                    		<li>
+									<%=	radio_button_tag 'geo_detail', 'city' %>
+									<h6> City </h6>
+								</li>		
+							</ul>
+						</div>
+						<div class="inner_row last03">
+							<p class="date"> Which level of detail do your geo markers refer to?</p>
+						</div>
                 </div>
-              </div>
               <div class="colem">
                 <h3>ORGANIZATIONS INVOLVED</h3>
                 <div class="row">

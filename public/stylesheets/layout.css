@@ -140,7 +140,6 @@
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
 #body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:100px;}
-
 .sign_sec .sign_down{ float:right; width:283px; padding-top:270px;}
 .sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
 /**/
@@ -225,8 +224,18 @@
 .registry_sec .form_section .row .inner_row.wid-402{width:402px;}
 .registry_sec .form_section .row .inner_row.wid-402.pad{padding-bottom:10px;}
 .registry_sec .form_section .row .inner_row.wid-402 input{ border:1px solid #b1b1b1; float:left; width:380px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+/**included this new css for sector select to be bigger  */
+.registry_sec .form_section .row .inner_row.wid-440{width:440px;}
+/**/
 .registry_sec .form_section .row .inner_row.last{margin-right:0; width:195px}
 .registry_sec .form_section .row .inner_row.last02{margin-right:0; width:155px; padding-top:22px;}
+/**included this new css for sector select to be bigger  */
+.registry_sec .form_section .row .inner_row.last03{margin-right:0px; width:140px; }
+.registry_sec .form_section .row .inner_row.last03 ul {width:150px; float:left; padding:5px 0;}
+.registry_sec .form_section .row .inner_row.last03 ul li { margin-left:10px;margin-top:10px;margin-bottom:5px}
+.registry_sec .form_section .row .inner_row.last03 ul li h6{ color:#666666; font: 14px/16px "Helvetica Neue"; margin-left:10px;display:inline;}
+/**/
+
 .registry_sec .form_section .row .inner_row input.imp01{ float:left; width:185px;}
 .registry_sec .form_section .row .inner_row .callender{width:185px; float:left; border:1px solid #b1b1b1; padding:5px 10px; height:30px; background:#fff;}
 .registry_sec .form_section .row .inner_row .callender input{width:148px; background:none; float:left;  line-height:30px; height:30px; border:none; padding-right:10px; border-right:1px solid #b1b1b1; font:bold 13px/42px "Helvetica Neue"; color:#aeaeae;}
