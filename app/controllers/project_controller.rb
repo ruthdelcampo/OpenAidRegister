@@ -139,6 +139,33 @@ class ProjectController < ApplicationController
            end
           end
 
+         if params[:reverse_geo].present?
+           #Get the new cartodb_id because the project is new
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
+           result = CartoDB::Connection.query(sql)
+
+           reverse_geo = params[:reverse_geo]
+           reverse_geo.each do |geo|
+             next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
+             latlng       = geo[:latlng]
+             adm1         = geo[:adm1]
+             adm2         = geo[:adm2]
+             country      = geo[:country]
+             level_detail = geo[:level_detail]
+
+             #insert organization
+             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
+               #{result.rows.first[:cartodb_id]},
+               ST_GeomFromText('POINT(#{latlng})',4326),
+               '#{adm1}',
+               '#{adm2}',
+               '#{country}',
+               '#{level_detail}'
+             )"
+             CartoDB::Connection.query(sql)
+           end
+         end
+
       else
         #it is an existing project do whatever
         sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
@@ -177,6 +204,38 @@ class ProjectController < ApplicationController
              CartoDB::Connection.query(sql)
            end
           end
+
+         #In this case, first delete all partner organizations and overwrite them.
+         sql = "DELETE FROM reverse_geo where  project_id = '#{params[:cartodb_id]}'"
+         CartoDB::Connection.query(sql)
+
+         if params[:reverse_geo].present?
+           #Get the new cartodb_id because the project is new
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
+           result = CartoDB::Connection.query(sql)
+
+           reverse_geo = params[:reverse_geo]
+           reverse_geo.each do |geo|
+             next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
+             latlng       = geo[:latlng]
+             adm1         = geo[:adm1]
+             adm2         = geo[:adm2]
+             country      = geo[:country]
+             level_detail = geo[:level_detail]
+
+             #insert organization
+             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
+               #{result.rows.first[:cartodb_id]},
+               ST_GeomFromText('POINT(#{latlng})',4326),
+               '#{adm1}',
+               '#{adm2}',
+               '#{country}',
+               '#{level_detail}'
+             )"
+             puts sql
+             CartoDB::Connection.query(sql)
+           end
+         end
       end
       redirect_to '/dashboard'
       return
@@ -218,6 +277,12 @@ class ProjectController < ApplicationController
       result = CartoDB::Connection.query(sql)
 
       @sectors = result.try(:rows)
+
+      sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, level_detail
+      from reverse_geo where project_id = #{params[:id]}"
+      result = CartoDB::Connection.query(sql)
+
+      @reverse_geo = result.try(:rows)
     end
 
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.

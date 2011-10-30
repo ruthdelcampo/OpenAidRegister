@@ -275,31 +275,42 @@
                   <input name="website" type="text" class="imp01" value ="<%=@project_data[:website]%>"/>
                 </div>
               </div>
-              <div class="colem">
+              <div id="location" class="colem">
                 <h3>LOCATION</h3>
                 <div class="row">
-					<div class="inner_row wid-440"> 
+					<div class="inner_row wid-440">
                   <label>SELECT IN THE MAP</label>
                   <div id="map_canvas" style="width:430px; height:300px;"></div>
 					</div>
-					
+
 					<div class="inner_row last03">
 						 <label>LEVEL OF DETAIL</label>
 							<ul>
 			                    <li>
-						<%=	radio_button_tag 'geo_detail', 'country' %>	
+                            <%=	radio_button_tag 'geo_detail', 'country', false, :class => 'geo_detail' %>
 					   	<h6>Country</h6>
-                    
+
 								</li>
 					 			<li>
-									<%=	radio_button_tag 'geo_detail', 'region' %>
+                  <%=	radio_button_tag 'geo_detail', 'region', false, :class => 'geo_detail' %>
 						 			<h6>Region</h6>
 								</li>
 	                    		<li>
-									<%=	radio_button_tag 'geo_detail', 'city' %>
+                            <%=	radio_button_tag 'geo_detail', 'city', true, :class => 'geo_detail' %>
 									<h6> City </h6>
-								</li>		
+								</li>
 							</ul>
+              <ul class="reverse_geo">
+                <% (@reverse_geo || []).each do |geo| %>
+                  <li>
+                    <input type="hidden" name="reverse_geo[][latlng]" value="<%= geo.latlng %>" />
+                    <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo.adm2 %>" />
+                    <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo.adm1 %>" />
+                    <input type="hidden" name="reverse_geo[][country]" value="<%= geo.country %>" />
+                    <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo.level_detail %>" />
+                  </li>
+                <% end -%>
+              </ul>
 						</div>
 						<div class="inner_row last03">
 							<p class="date"> Which level of detail do your geo markers refer to?</p>

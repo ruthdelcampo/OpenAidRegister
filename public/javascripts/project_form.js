@@ -5,6 +5,7 @@
 var map;
 var markers = [];
 var marker;
+var geocoder;
 
 
 $(document).ready(function(){
@@ -55,7 +56,7 @@ function addMarker(event) {
 	  });
 	markers.push(marker);
 	$("#google_markers").val(generateWkt());
-
+  geocodePoint(event.latLng);
 }
 
 function removeMarker()
@@ -63,6 +64,7 @@ function removeMarker()
 
 	if (markers) {
     for (i in markers) {
+      removeGeocoding(markers[i]);
       markers[i].setMap(null);
     }
     markers.length = 0;
@@ -100,6 +102,44 @@ function parseWkt(wkt) {
 	});
 }
 
+function geocodePoint(latLong){
+  if (!geocoder){
+    geocoder = new google.maps.Geocoder();
+  }
+
+  geocoder.geocode({location: latLong}, function(results, status){
+    var city, region, country;
+
+    if (status == 'OK'){
+      if (results.length > 0){
+        $.each(results[0].address_components, function(index, item){
+          if (item.types[0] == 'locality'){
+            city = item.long_name;
+          }
+          if (item.types[0] == 'administrative_area_level_1'){
+            region = item.long_name;
+          }
+          if (item.types[0] == 'country'){
+            country = item.long_name;
+          }
+        });
+        $('#location ul.reverse_geo').append($(
+          '<li>' +
+          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + latLong.lng() + ' ' + latLong.lat()  + '" />' +
+          '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
+          '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
+          '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +
+          '  <input type="hidden" name="reverse_geo[][level_detail]" value="' + $('#location input.geo_detail:checked').val() + '" />' +
+          '</li>'
+        ));
+      }
+    }
+  });
+}
+
+function removeGeocoding(marker){
+  $('#location ul.reverse_geo li input[value="' + marker.position.lng() + ' ' + marker.position.lat() + '"]').closest('li').remove();
+}
 
 // for the checkbox same person in project show
 function change_contact_info() {
