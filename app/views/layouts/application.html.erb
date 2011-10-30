@@ -7,12 +7,15 @@
 <%= stylesheet_link_tag "layout" %>
 <%= stylesheet_link_tag "av-hack" %>
 <%= stylesheet_link_tag "jquery-ui-1.8.16.custom" %>
+<%= stylesheet_link_tag "jquery.msg" %>
 
-<%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
-<%= javascript_include_tag "http://www.google.com/jsapi" %>
 <%= javascript_include_tag "jquery-1.6.4.min" %>
-<%= javascript_include_tag "jquery-ui-1.8.16.custom.min" %>
+<%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
+<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js" %>
+<%= javascript_include_tag "http://www.google.com/jsapi" %>
 <%= javascript_include_tag "rails" %>
+<%= javascript_include_tag "jquery.center" %>
+<%= javascript_include_tag "jquery.msg" %>
 <%= javascript_include_tag "cufon-yui.js" %>
 <%= javascript_include_tag "Helvetica_Neue_700-Helvetica_Neue_300-Helvetica_Neue_400.font" %>
 <%= javascript_include_tag "application" %>
@@ -47,6 +50,17 @@ Cufon.replace('.body_top .body_top_lf h3, .box_list ul li h4', { fontFamily: 'He
 </script>
 </head>
 <body>
+<% if flash[:notice] -%>
+  <div id="notice">
+    <h1><%= flash[:notice] %></h1>
+  </div>
+<% end -%>
+<% if flash[:alert] -%>
+  <div id="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end -%>
+
 <div id="outer_layout" class="theam02">
   <div class="outer_wrapper">
     <div class="layout wid-1052">
