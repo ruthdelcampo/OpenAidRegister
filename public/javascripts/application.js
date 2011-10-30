@@ -11,11 +11,14 @@ function showFlashMessages(){
     content = $('#alert').html();
   }
 
+if (content.length >0){
   $.msg({
+	bgPath : '/images/',
     autoUnblock: false,
     css: {
       border: '1px solid #ff3300'
     },
     content: content
   });
+}
 }
