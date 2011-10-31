@@ -1,28 +1,22 @@
 <iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.now() %>" version="1.01">
-
 <% @download_projects.each do |project| %>
 
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="project.budget_currency" xml:lang="<%=project.language%>">
 
-
-<reporting-org type="<%= @download_organization.organization_type_id %>"  ref="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"><%= @download_organization.organization_name %></reporting-org>
-
+<reporting-org type="<%= @download_organization.organization_type_id %>"  ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
 
 <iati-identifier> <%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
- </iati-identifier>
-
+</iati-identifier>
 
 <title>
 <%= project.title %>
 </title>
-
 
 <% if !project.description.blank? %>
 <description>
 <%= project.description %>
 </description>
 <%end%>
-
 
 <% if !project.start_date.blank? %>
 <activity-date type="start-actual"><%= project.start_date %></activity-date>
@@ -32,12 +26,11 @@
 <activity-date type="end-planned"><%= project.end_date %></activity-date>
 <%end%>
 
-
 <participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= @download_organization.organization_guid %>"><%=@download_organization.organization_name %></participating-org>
 
 <% @download_other_orgs.each do |other_orgs| %>
 <% if other_orgs[:project_id] == project.cartodb_id %>
-<% counter= 1%>
+<% counter= 0%>
 <% other_orgs[:other_org_names].each do |other_org_name| %>
 <participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref="">
 <%=other_org_name%></participating-org>
@@ -46,11 +39,9 @@
 <%end%>
 <%end%>
 
-
 <% if !project.website.blank? %>
 <activity-website><%= project.website %></activity-website>
 <%end%>
-
 
 <% @download_sectors.each do |project_sector| %>
 <% if project_sector[:project_id] == project.cartodb_id %>
@@ -65,11 +56,9 @@
 <%end%>
 <%end%>
 
-
 <% if !project.program_guid.blank? %>
 <related-activity type="1" ref="<%= project.program_guid %>"></related-activity>
 <%end%>
-
 
 <% if !project.budget.blank? %>
 <budget>
@@ -77,12 +66,30 @@
 </budget>
 <%end%>
 
-
-<!--
-<recipient-country code=""/>
-<location-type code="ADM1"></location-type>
-<location-type code="ADM2"></location-type>
--->
+<% @download_geo_projects.each do |geo_project| %>
+<% if geo_project[:project_id] == project.cartodb_id %>
+<% if geo_project[:level_detail] == "country"%>
+<% geo_project[:country].each do |country| %>
+<recipient-country code=""> <%= country %></recipient-country>
+<%end%>
+<% elsif geo_project[:level_detail] == "region"%>
+<% counter = 0 %>
+<% geo_project[:country].each do |country| %>
+<recipient-country code=""><%= country %></recipient-country>
+<location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
+<% counter+=1%>
+<%end%>
+<%else%>
+<% counter = 0 %>
+<% geo_project[:country].each do |country| %>
+<recipient-country code=""><%= country %></recipient-country>
+<location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
+<location-type code="ADM2"><%= geo_project[:adm2][counter] %></location-type>
+<% counter+=1%>
+<%end%>
+<%end%>
+<%end%>
+<%end%>
 
 <% if !project.result_title.blank? %>
 <result type="output">
@@ -93,7 +100,7 @@
 </result>
 <%end%>
 
-
+<% if !project.contact_name.blank? || !project.contact_email.blank? %>
 <contact-info>
 <organisation><%= @download_organization.organization_name %></organisation>
 
@@ -105,7 +112,7 @@
 <email><%= project.contact_email %></email>
 <%end%>
 </contact-info>
-
+<%end%>
 
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.collaboration_type %>"></collaboration-type>
@@ -127,7 +134,6 @@
 <default-finance-type code="<%= project.finance_type %>"></default-finance-type>
 <%end%>
 
-
 <% if !project.result_title.blank? %>
 <result type="output">
 	<title> <%=project.result_title %> </title>
@@ -137,10 +143,7 @@
 </result>
 <%end%>
 
-
 </iati-activity>
-
-
 
 <%end%>
 </iati-activities>

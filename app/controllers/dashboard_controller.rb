@@ -89,7 +89,8 @@ class DashboardController < ApplicationController
 
 
         #get the sector names
-        sql = "select project_sectors.sector_id, name, sector_code from project_sectors INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
+        sql = "select project_sectors.sector_id, name, sector_code from project_sectors 
+        INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
         result = CartoDB::Connection.query(sql)
         @download_sector_names = result.rows
 
@@ -106,8 +107,29 @@ class DashboardController < ApplicationController
           row[:other_org_roles] = row[:other_org_roles][1..-2].split(",")
 
         end
+        
+        
 
         @download_other_orgs = result.rows
+        
+        
+        
+        #get the geo information
+        
+        sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country, 
+        array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
+        INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
+        WHERE organization_id =#{params[:id]} GROUP BY project_id, level_detail"
+        result = CartoDB::Connection.query(sql)
+        
+         result.rows.each do |row|
+            #dont know why country behaves different than the other elements
+            row[:adm1] = row[:adm1][1..-2].split(",")
+            row[:adm2] = row[:adm2][1..-2].split(",")
+          end
+        
+        @download_geo_projects = result.rows
+        
 
         #finally render the XML
         render :template => '/dashboard/download.xml.erb',  :layout => false
