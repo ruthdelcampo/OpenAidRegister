@@ -26,6 +26,12 @@
 .theam02 #header .logo h1{position:relative;}
 .theam02 #header .logo h1 img{position:absolute; top:-15px; right:0px;}
 .theam02 #header .logo h1 img.rit{right:20px;}
+.theam02 #header .logo h1 img.rit2{right:420px;}
+.theam02 #header .logo h1 img.rit3{right:335px;}
+.theam02 #header .logo h1 img.rit4{right:335px;}
+
+
+
 .theam02 #header .logo h1 a{position:relative; z-index:2;}
 
 #header .header_text{ float:left; width:100%; padding:15px 0 0 0;}
