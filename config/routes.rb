@@ -63,6 +63,9 @@ OpenAidRegister::Application.routes.draw do
   
   match 'signup' => 'signup#signup', :via => :get
   match 'signup' => 'signup#signup_validation', :via => :post
+  
+  match 'account' => 'signup#signup', :via => :get
+  match 'account' => 'signup#signup_validation', :via => :post
   match 'signup_complete' => 'signup#signup_complete'
   match 'login' => 'signup#login', :via => :get
   match 'login' => 'signup#login_validation', :via => :post

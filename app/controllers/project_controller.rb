@@ -274,8 +274,7 @@ class ProjectController < ApplicationController
 
       @participating_orgs = result.try(:rows)
 
-      sql = "select sector_id as id
-      from project_sectors where project_id = #{params[:id]}"
+      sql = "select sector_id as id from project_sectors where project_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
 
       @sectors = result.try(:rows)
