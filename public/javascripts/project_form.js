@@ -14,9 +14,9 @@ $(document).ready(function(){
 		$( "#datepicker2" ).datepicker();
 
 //Initalize
-    var latlng = new google.maps.LatLng(40.69847032728747, -73.9514422416687);
+    var latlng = new google.maps.LatLng(14.5, 15.5);
     var myOptions = {
-      zoom: 8,
+      zoom: 3,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
@@ -113,7 +113,7 @@ function geocodePoint(latLong){
     if (status == 'OK'){
       if (results.length > 0){
         $.each(results[0].address_components, function(index, item){
-          if (item.types[0] == 'locality'){
+          if (item.types[0] == 'administrative_area_level_2'){
             city = item.long_name;
           }
           if (item.types[0] == 'administrative_area_level_1'){

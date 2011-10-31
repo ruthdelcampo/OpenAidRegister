@@ -138,6 +138,8 @@ class ProjectController < ApplicationController
              CartoDB::Connection.query(sql)
            end
           end
+          
+          
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
@@ -205,7 +207,7 @@ class ProjectController < ApplicationController
            end
           end
 
-         #In this case, first delete all partner organizations and overwrite them.
+         #In this case, first delete all geo organizations and overwrite them.
          sql = "DELETE FROM reverse_geo where  project_id = '#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
 

@@ -300,21 +300,21 @@
 									<h6> City </h6>
 								</li>
 							</ul>
-              <ul class="reverse_geo">
-                <% (@reverse_geo || []).each do |geo| %>
-                  <li>
-                    <input type="hidden" name="reverse_geo[][latlng]" value="<%= geo.latlng %>" />
-                    <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo.adm2 %>" />
-                    <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo.adm1 %>" />
-                    <input type="hidden" name="reverse_geo[][country]" value="<%= geo.country %>" />
-                    <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo.level_detail %>" />
-                  </li>
-                <% end -%>
-              </ul>
-						</div>
+					<ul class="reverse_geo">
+						<% (@reverse_geo || []).each do |geo| %>
+						<li>
+							<input type="hidden" name="reverse_geo[][latlng]" value="<%= geo.latlng %>" />
+						    <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo.adm2 %>" />
+						    <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo.adm1 %>" />
+						    <input type="hidden" name="reverse_geo[][country]" value="<%= geo.country %>" />
+						    <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo.level_detail %>" />	
+						</li>
+						<% end -%>
+					</ul>
+					</div>
 						<div class="inner_row last03">
 							<p class="date"> Which level of detail do your geo markers refer to?</p>
-						</div>
+						</div>			
                 </div>
               <div class="colem">
                 <h3>ORGANIZATIONS INVOLVED</h3>

@@ -134,7 +134,8 @@ class DashboardController < ApplicationController
      CartoDB::Connection.query(sql)
       sql="delete FROM project_partnerorganizations where project_id = '#{params[:delete_project_id]}'"
       CartoDB::Connection.query(sql)
-
+       sql="delete FROM reverse_geo where project_id = '#{params[:delete_project_id]}'"
+      CartoDB::Connection.query(sql)
      redirect_to  '/dashboard'
    end
 
