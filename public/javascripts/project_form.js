@@ -9,9 +9,9 @@ var geocoder;
 
 
 $(document).ready(function(){
-	
+
 	$( "#datepicker" ).datepicker();
-	
+
 		$( "#datepicker2" ).datepicker();
 
 //Initalize
@@ -19,7 +19,8 @@ $(document).ready(function(){
     var myOptions = {
       zoom: 3,
       center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDoubleClickZoom: true
     };
 //Paint the map
     map = new google.maps.Map(document.getElementById("map_canvas"),
@@ -57,21 +58,19 @@ function addMarker(event) {
 	  });
 	markers.push(marker);
 	$("#google_markers").val(generateWkt());
-  geocodePoint(event.latLng);
+  geocodePoint(event.latLng, markers.length);
+  enableOrDisableGeodetail();
 }
 
-function removeMarker()
-{
-
+function removeMarker(evt) {
 	if (markers) {
     for (i in markers) {
-      removeGeocoding(markers[i]);
       markers[i].setMap(null);
     }
-    markers.length = 0;
+    markers = [];
   }
-$("#google_markers").val("");
-
+  $("#google_markers").val("");
+  removeGeocoding();
 }
 
 function generateWkt() {
@@ -104,7 +103,7 @@ function parseWkt(wkt) {
 	});
 }
 
-function geocodePoint(latLong){
+function geocodePoint(latLong, marker_id){
   if (!geocoder){
     geocoder = new google.maps.Geocoder();
   }
@@ -126,7 +125,7 @@ function geocodePoint(latLong){
           }
         });
         $('#location ul.reverse_geo').append($(
-          '<li>' +
+          '<li class="marker_' + marker_id + '">' +
           '  <input type="hidden" name="reverse_geo[][latlng]" value="' + latLong.lng() + ' ' + latLong.lat()  + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
@@ -139,8 +138,17 @@ function geocodePoint(latLong){
   });
 }
 
-function removeGeocoding(marker){
-  $('#location ul.reverse_geo li input[value="' + marker.position.lng() + ' ' + marker.position.lat() + '"]').closest('li').remove();
+function removeGeocoding(){
+  $('#location ul.reverse_geo li').remove();
+  enableOrDisableGeodetail();
+}
+
+function enableOrDisableGeodetail(){
+  if (markers.length > 0){
+    $('#location input.geo_detail:checked').attr('disabled', true);
+  }else{
+    $('#location input.geo_detail:checked').attr('disabled', false);
+  }
 }
 
 // for the checkbox same person in project show
