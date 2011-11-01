@@ -1,3 +1,25 @@
+<% content_for :head do %>
+  <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?sensor=false">
+  </script>
+  <script>
+    var projects_list = [];
+    <% @projects_list.each do |project| -%>
+      projects_list.push({
+        markers: '<%= project.project_markers %>',
+        info: {
+          name: '<%= project.title %>',
+          sectors: <%= project.sectors.delete("{NULL}").split(',').map{|s| sector_by_id(s)}.to_json.html_safe %>,
+          budget: '<%= project.budget %>',
+          start_date: '<%= format_date(project.start_date) %>',
+          end_date: '<%= format_date(project.end_date) %>'
+        }
+      });
+    <% end -%>
+  </script>
+  <%= javascript_include_tag "dashboard" %>
+<% end %>
+
  <div class="logo">
       <h1><a href="/dashboard" title="openAid Home">Your dashboard</a><img src="/images/plus_icon.png" alt="" class="rit png" /></h1>
     </div>
@@ -11,9 +33,8 @@
     <div class="sign_sec">
       <div class="sign_left">
       		<div class="dashboard">
-            	<div class="map">
-                	<img src="/images/map.gif" alt="" />
-                </div>
+            	<div id="map_canvas" class="map">
+              </div>
                 <div class="edit_sec">
 
 				<%counter= true%>
@@ -78,7 +99,7 @@
                     	<div class="but_sec"><a href="/account">Profile</a></div>
 
                         <div class="text_sec">
-						
+
                         	<p>Edit your account details </p>
                         </div>
                     </li>

@@ -9,8 +9,26 @@ class DashboardController < ApplicationController
     end
     @errors = Array.new  # We need to initialize the errors array to be shown when there is aproblem with import file
 
-    #Show the selection of projects
-    sql="SELECT cartodb_id, title, end_date FROM projects WHERE organization_id = #{session[:organization][:cartodb_id]}"
+    # Selects markers in all projects
+    sql = <<-SQL
+      SELECT p.cartodb_id,
+             ST_ASText(p.the_geom) AS project_markers,
+             p.title,
+             array_agg(ps.sector_id) AS sectors,
+             (p.budget || p.budget_currency) AS budget,
+             p.start_date,
+             p.end_date
+      FROM projects p
+      LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
+      WHERE p.organization_id = #{session[:organization][:cartodb_id]}
+      GROUP BY p.cartodb_id,
+               project_markers,
+               p.title,
+               p.budget,
+               p.budget_currency,
+               p.start_date,
+               p.end_date
+    SQL
     result = CartoDB::Connection.query(sql)
     @projects_list = result.rows
     @current_projects = 0
@@ -89,7 +107,7 @@ class DashboardController < ApplicationController
 
 
         #get the sector names
-        sql = "select project_sectors.sector_id, name, sector_code from project_sectors 
+        sql = "select project_sectors.sector_id, name, sector_code from project_sectors
         INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
         result = CartoDB::Connection.query(sql)
         @download_sector_names = result.rows
@@ -107,30 +125,30 @@ class DashboardController < ApplicationController
           row[:other_org_roles] = row[:other_org_roles][1..-2].split(",")
 
         end
-        
-        
+
+
 
         @download_other_orgs = result.rows
-        
-        
-        
+
+
+
         #get the geo information
-        
-        sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country, 
+
+        sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
         array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
         INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
         WHERE organization_id =#{params[:id]} GROUP BY project_id, level_detail"
         result = CartoDB::Connection.query(sql)
-        
-        
+
+
          result.rows.each do |row|
             #dont know why country behaves different than the other elements
             row[:adm1] = row[:adm1][1..-2].split(",")
             row[:adm2] = row[:adm2][1..-2].split(",")
           end
-        
+
         @download_geo_projects = result.rows
-        
+
 
         #finally render the XML
         render :template => '/dashboard/download.xml.erb',  :layout => false
@@ -169,7 +187,7 @@ class DashboardController < ApplicationController
         return
       end
        redirect_to "/dashboard", :notice=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
-      
+
       #if session[:organization][:is_valid_publish]
       #   #send to IATI REgistry
       #     if # no_success
@@ -188,10 +206,10 @@ class DashboardController < ApplicationController
       #    else #if success
       #      session[:organization][:is_valid_publish]
       #    end
-      #else 
+      #else
       #    redirect_to '/dashboard', :alert => "Please, introduce your IATI Registry (api key and the name package) details in your account. We need this information to be able to publish your data in the Registry.  For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
       #end
-      
+
   end
-          
+
 end
