@@ -122,6 +122,7 @@ class DashboardController < ApplicationController
         WHERE organization_id =#{params[:id]} GROUP BY project_id, level_detail"
         result = CartoDB::Connection.query(sql)
         
+        debugger
          result.rows.each do |row|
             #dont know why country behaves different than the other elements
             row[:adm1] = row[:adm1][1..-2].split(",")
