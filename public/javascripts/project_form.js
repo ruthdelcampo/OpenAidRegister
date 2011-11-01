@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 	$( "#datepicker" ).datepicker();
 
-		$( "#datepicker2" ).datepicker();
+  $( "#datepicker2" ).datepicker();
 
 //Initalize
     var latlng = new google.maps.LatLng(14.5, 15.5);
@@ -32,10 +32,9 @@ $(document).ready(function(){
 	// Remove markers
 	google.maps.event.addListener(map, 'dblclick', removeMarker)
 
-
 	//parse possible existing points
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
-	parseWkt($("#google_markers").val());
+    parseWkt($("#google_markers").val());
 	}
 
   sectors();
@@ -56,7 +55,18 @@ function addMarker(event) {
 	    draggable:true,
 	    position: event.latLng
 	  });
+
 	markers.push(marker);
+
+  var marker_index = markers.length;
+
+	// Change an existing marker
+	google.maps.event.addListener(marker, 'dragend', function(event){
+    $("#google_markers").val(generateWkt());
+    geocodePoint(event.latLng, marker_index);
+    enableOrDisableGeodetail();
+  });
+
 	$("#google_markers").val(generateWkt());
   geocodePoint(event.latLng, markers.length);
   enableOrDisableGeodetail();
@@ -76,8 +86,7 @@ function removeMarker(evt) {
 function generateWkt() {
 	//well known text   POINT(10 40, 12 35, 20 30)
 	var markersAux = [];
-	$.each(markers,function(index,value) {
-		//markersAux.push("("+value.position.lng()+" "+value.position.lat()+")");
+	$.each(markers,function(index, value) {
 		markersAux.push( value.position.lng()+" "+value.position.lat());
 	});
 	return "MULTIPOINT (" + markersAux.join(",") + ")";
@@ -100,6 +109,15 @@ function parseWkt(wkt) {
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
 		markers.push(marker);
+
+    var marker_index = markers.length;
+
+    // Change an existing marker
+    google.maps.event.addListener(marker, 'dragend', function(event){
+      $("#google_markers").val(generateWkt());
+      geocodePoint(event.latLng, marker_index);
+      enableOrDisableGeodetail();
+    });
 	});
 }
 
@@ -124,6 +142,7 @@ function geocodePoint(latLong, marker_id){
             country = item.long_name;
           }
         });
+        $('#location ul.reverse_geo li.marker_' + marker_id).remove();
         $('#location ul.reverse_geo').append($(
           '<li class="marker_' + marker_id + '">' +
           '  <input type="hidden" name="reverse_geo[][latlng]" value="' + latLong.lng() + ' ' + latLong.lat()  + '" />' +
