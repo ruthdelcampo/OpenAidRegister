@@ -69,6 +69,7 @@ function removeMarker()
     }
     markers.length = 0;
   }
+$("#google_markers").val("");
 
 }
 

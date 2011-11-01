@@ -165,6 +165,7 @@ class ProjectController < ApplicationController
          end
 
       else
+        
         #it is an existing project do whatever
         sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', 
         language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
