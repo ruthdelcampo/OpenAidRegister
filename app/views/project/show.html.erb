@@ -61,7 +61,6 @@
                   <label>LANGUAGE</label>
                   <select class="wid-430" name="language" selected="<%=@project_data[:language]%>">
                     <option value="1">English</option>
-                    <option></option>
                   </select>
                 </div>
                 <div class="row">
@@ -360,10 +359,10 @@
                       <div class="inner_row">
                         <label for="other_org_role">AS...</label>
                         <%= select_tag :other_org_role, options_for_select([
-                          ['accountable', '1'],
-                          ['extending', '2'],
-                          ['funding', '3'],
-                          ['implementing', '4']
+                          ['Accountable', '1'],
+                          ['Extending', '2'],
+                          ['Funding', '3'],
+                          ['Implementing', '4']
                         ]), :class => 'wid-205', :include_blank => true %>
                       </div>
                       <div class="inner_row last02">

@@ -34,7 +34,7 @@ class DashboardController < ApplicationController
       return
     end
     if !params[:file_upload]
-      redirect_to '/dashboard', :alert => "You need to choose a file first to be able to upload it"
+      redirect_to '/dashboard', :alert => "You need to choose a file first"
       return
     end
     require 'fileutils'
@@ -61,7 +61,7 @@ class DashboardController < ApplicationController
       sql="SELECT  cartodb_id, organization_id, title, description, language, project_guid, start_date,
       end_date, budget, budget_currency, website, program_guid, result_title,
       result_description, collaboration_type, tied_status, aid_type, flow_type,
-      finance_type, contact_name, contact_email, contact_position,
+      finance_type, contact_name, contact_email,
       ST_ASText(the_geom) AS google_markers, created_at, updated_at
       FROM projects WHERE organization_id = #{params[:id]}"
       result = CartoDB::Connection.query(sql)
@@ -122,7 +122,7 @@ class DashboardController < ApplicationController
         WHERE organization_id =#{params[:id]} GROUP BY project_id, level_detail"
         result = CartoDB::Connection.query(sql)
         
-        debugger
+        
          result.rows.each do |row|
             #dont know why country behaves different than the other elements
             row[:adm1] = row[:adm1][1..-2].split(",")

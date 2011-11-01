@@ -45,8 +45,6 @@ class ProjectController < ApplicationController
 
       #Check if the day is not correct
 
-
-
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
@@ -97,7 +95,7 @@ class ProjectController < ApplicationController
 
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
-                 result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, contact_position) VALUES
+                 result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
                  (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}',
                 ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)),
                  '#{params[:language]}',
@@ -108,7 +106,7 @@ class ProjectController < ApplicationController
                  '#{params[:aid_type]}',
                  '#{params[:flow_type]}','#{params[:finance_type]}',
                  '#{params[:contact_name]}',
-                 '#{params[:contact_email]}', '#{params[:contact_position]}')"
+                 '#{params[:contact_email]}')"
          CartoDB::Connection.query(sql)
 
          # Now sectors must be written
@@ -139,8 +137,6 @@ class ProjectController < ApplicationController
            end
           end
           
-          
-
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
@@ -170,10 +166,12 @@ class ProjectController < ApplicationController
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
+        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', 
+        language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
          website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}',
          result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
-         aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}', contact_position ='#{params[:contact_position]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
+         aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',
+         finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
 
          #In this case, first delete all sectors and overwrite them
@@ -215,7 +213,6 @@ class ProjectController < ApplicationController
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
            result = CartoDB::Connection.query(sql)
-
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
@@ -250,11 +247,12 @@ class ProjectController < ApplicationController
       sql="select cartodb_id, organization_id, title, description, language, project_guid, start_date,
         end_date, budget, budget_currency, website, program_guid, result_title,
                result_description, collaboration_type, tied_status, aid_type, flow_type,
-               finance_type, contact_name, contact_email, contact_position, ST_ASText(the_geom) AS google_markers
+               finance_type, contact_name, contact_email, ST_ASText(the_geom) AS google_markers
                FROM projects WHERE cartodb_id = #{params[:id]}"
 
       result = CartoDB::Connection.query(sql)
       @project_data = result.rows.first
+      
 
       #@project_data[:google_markers] = @project_data[:st_astext]
 

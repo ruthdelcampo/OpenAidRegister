@@ -84,7 +84,7 @@ class SignupController < ApplicationController
           FROM organizations WHERE cartodb_id = #{session[:organization][:cartodb_id]}"
           result = CartoDB::Connection.query(sql)
           session[:organization] = result.rows.first
-          debugger
+          
             redirect_to '/dashboard',  :notice => "Your account has been succesfully updated"     
         else
           @org_data[:email] = session[:organization][:email]

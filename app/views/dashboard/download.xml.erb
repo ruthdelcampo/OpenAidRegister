@@ -134,15 +134,6 @@
 <default-finance-type code="<%= project.finance_type %>"></default-finance-type>
 <%end%>
 
-<% if !project.result_title.blank? %>
-<result type="output">
-	<title> <%=project.result_title %> </title>
-	<% if !project.result_description.blank? %>
-	<description><%= project.result_description %></description>
-	<%end%>
-</result>
-<%end%>
-
 </iati-activity>
 
 <%end%>
