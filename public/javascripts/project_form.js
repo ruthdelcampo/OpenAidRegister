@@ -6,6 +6,7 @@ var map;
 var markers = [];
 var marker;
 var geocoder;
+var map_bounds;
 
 
 $(document).ready(function(){
@@ -36,6 +37,8 @@ $(document).ready(function(){
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
     parseWkt($("#google_markers").val());
 	}
+
+  map.fitBounds(map_bounds);
 
   sectors();
   otherOrganizations();
@@ -96,6 +99,11 @@ function generateWkt() {
 function parseWkt(wkt) {
 	var procstring;
 	var auxarr;
+
+  if (!map_bounds) {
+    map_bounds = new google.maps.LatLngBounds();
+  }
+
 	procstring = $.trim(wkt.replace("MULTIPOINT",""));
 	procstring = procstring.slice(0,-1).slice(1);
 	auxarr = procstring.split(",");
@@ -110,7 +118,12 @@ function parseWkt(wkt) {
 		  });
 		markers.push(marker);
 
+    map_bounds.extend(marker.getPosition());
+
     var marker_index = markers.length;
+
+    geocodePoint(marker.getPosition(), marker_index);
+    enableOrDisableGeodetail();
 
     // Change an existing marker
     google.maps.event.addListener(marker, 'dragend', function(event){
