@@ -139,10 +139,9 @@
 
 
 /***Added select in sign up form*/
-.sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0}
+.sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0;font:14px/42px "Helvetica Neue"; color:#666666;}
 .sign_sec .sign_left form .row select.wid-430{width:430px;}
 .sign_sec .sign_left form .row select.wid-205{width:205px;}
-.sign_sec .sign_left form .row select.wid-400{width:400px;}
 /**/
 
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
@@ -234,7 +233,7 @@
 .registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}
 .registry_sec .form_section form .row select{float:left; height:42px; margin:0; font:14px/42px "Helvetica Neue"; color:#666666;}
 .registry_sec .form_section form .row select option{}
-/**included this new css for sector select to be bigger  */
+/**included this new css for sector select to be higher  */
 .registry_sec .form_section form .row select.wid-425{width:425px; height:110px;}
 /**/
 .registry_sec .form_section form .row select.wid-430{width:430px;}
@@ -245,7 +244,7 @@
 .registry_sec .form_section .row .inner_row.wid-402{width:402px;}
 .registry_sec .form_section .row .inner_row.wid-402.pad{padding-bottom:10px;}
 .registry_sec .form_section .row .inner_row.wid-402 input{ border:1px solid #b1b1b1; float:left; width:380px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
-/**included this new css for sector select to be bigger  */
+/**included */
 .registry_sec .form_section .row .inner_row.wid-440{width:440px;}
 /**/
 .registry_sec .form_section .row .inner_row.last{margin-right:0; width:195px}
@@ -268,7 +267,6 @@
 .registry_sec .form_section .row .map02 img{float:left;}
 .registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
-
 .registry_sec .form_section .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
 .registry_sec .form_section .row .inner_row2{ float:right; width:196px;}
 .registry_sec .form_section .row .inner_row2 input.imp01{ float:left; width:174px;}
@@ -279,14 +277,6 @@
 .registry_sec .form_section .colem01 p{ float:left; width:auto; padding-left:18px; color:#666666; font:bold 13px/16px "Helvetica Neue"; margin-top:17px; display:inline;}
 .registry_sec .form_section .colem01 p a{color:#666666;}
 .registry_sec .form_section .colem01 p small{ float:left; width:auto; height:auto; padding:3px 9px 0 0;}
-
-
-
-
-
-
-
-
 
 #body_container .registry_sec .registry_right{ float:right; width:283px; padding-top:40px;}
 .registry_right .top_section{width:100%; float:left; min-height:350px; height:auto !important; height:350px;}

@@ -57,9 +57,9 @@ class SignupController < ApplicationController
        
        
        #Organization's type Validation. 
-       #if params[:organization_type_id].eql?("")
-        # @errors.push("Please select your organization's type")
-       #end
+       if params[:organization_type_id].eql?("")
+         @errors.push("Please select your organization's type")
+       end
 
        #Organization's country Validation. 
        if params[:organization_country].eql?("")

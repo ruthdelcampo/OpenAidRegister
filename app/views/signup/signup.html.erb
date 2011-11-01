@@ -72,7 +72,17 @@
 					<div class="row">
 	                  	<div class="inner_row">
 	                      	<label>ORGANIZATION's type</label>
-	                          <input name="organization_type_id" type="text" class="imp01" value="<%=@org_data[:organization_type_id] %>"/>
+	                          <%= select_tag(:organization_type_id, options_for_select([['', ''],
+								['Government','10'],
+								['Other Public Sector','15'],
+								['International NGO','21'],
+								['National NGO','22'],
+								['Regional NGO','23'],
+								['Public Private Partnership','30'],
+								['Multilateral','40'],
+								['Foundation','60'],
+								['Private Sector','70'],
+								['Academic Training and Research','80']], :selected => @org_data[:organization_type_id]), :class=>"wid-205") %>
 	                      </div>
 	                      <div class="inner_row">
 	                      	<label>government id</label>

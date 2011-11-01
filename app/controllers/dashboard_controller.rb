@@ -168,7 +168,7 @@ class DashboardController < ApplicationController
         redirect_to '/login'
         return
       end
-       redirect_to "/dashboard", :alert=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
+       redirect_to "/dashboard", :notice=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
       
       #if session[:organization][:is_valid_publish]
       #   #send to IATI REgistry
