@@ -45,6 +45,8 @@ class ProjectController < ApplicationController
 
       #Check if the day is not correct
 
+
+
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
@@ -165,7 +167,6 @@ class ProjectController < ApplicationController
          end
 
       else
-        
         #it is an existing project do whatever
         sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', 
         language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
@@ -253,7 +254,6 @@ class ProjectController < ApplicationController
 
       result = CartoDB::Connection.query(sql)
       @project_data = result.rows.first
-      
 
       #@project_data[:google_markers] = @project_data[:st_astext]
 
