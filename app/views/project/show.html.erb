@@ -286,15 +286,15 @@
                      <label>LEVEL OF DETAIL</label>
                       <ul>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'country', false, :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'country', current_geo_level?('country'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
                           <h6>Country</h6>
                         </li>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'region', false, :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'region', current_geo_level?('region'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
                           <h6>Region</h6>
                         </li>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'city', true, :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'city', current_geo_level?('city'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
                           <h6> City </h6>
                         </li>
                       </ul>

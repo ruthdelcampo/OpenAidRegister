@@ -145,9 +145,9 @@ function removeGeocoding(){
 
 function enableOrDisableGeodetail(){
   if (markers.length > 0){
-    $('#location input.geo_detail:checked').attr('disabled', true);
+    $('#location input.geo_detail').attr('disabled', true);
   }else{
-    $('#location input.geo_detail:checked').attr('disabled', false);
+    $('#location input.geo_detail').attr('disabled', false);
   }
 }
 
