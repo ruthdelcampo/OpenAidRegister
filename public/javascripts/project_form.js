@@ -9,8 +9,9 @@ var geocoder;
 
 
 $(document).ready(function(){
-
-		$( "#datepicker" ).datepicker();
+	
+	$( "#datepicker" ).datepicker();
+	
 		$( "#datepicker2" ).datepicker();
 
 //Initalize
