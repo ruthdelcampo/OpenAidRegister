@@ -31,7 +31,7 @@ $(document).ready(function(){
 	google.maps.event.addListener(map, 'click', addMarker);
 
 	// Remove markers
-	google.maps.event.addListener(map, 'dblclick', removeMarker)
+ 	//google.maps.event.addListener(map, 'dblclick', removeMarker)
 
 	//parse possible existing points
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
@@ -44,12 +44,21 @@ $(document).ready(function(){
   otherOrganizations();
   change_contact_info();
   showErrors();
+  deleteAll()
+
 });
 
 function showErrors(){
   if ($("#errors").length > 0){
     $('html,body').animate({scrollTop: $("#errors").offset().top - 15}, 1000);
   }
+}
+
+
+function deleteAll(){
+	$('#delete_points').click(function() {
+		removeMarker();
+  });
 }
 
 function addMarker(event) {
@@ -75,7 +84,9 @@ function addMarker(event) {
   enableOrDisableGeodetail();
 }
 
-function removeMarker(evt) {
+//function removeMarker(evt) {
+	
+function removeMarker() {
 	if (markers) {
     for (i in markers) {
       markers[i].setMap(null);

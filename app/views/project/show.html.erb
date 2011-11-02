@@ -29,6 +29,14 @@
                   <label>PROJECT NAME*</label>
                   <input name="title" type="text" class="imp01" value ="<%=@project_data[:title]%>"/>
                 </div>
+
+				<div class="row">
+                  <div class="inner_row">
+                    <label>PROJECT ID*</label>
+                    <input name="project_guid" type="text" class="imp01" value ="<%=@project_data[:project_guid]%>"/>
+                  </div>
+                </div>
+
                 <div class="row">
                   <label>PROJECT DESCRIPTION</label>
  				<%= text_area_tag(:description, @project_data[:description]) %>
@@ -63,12 +71,7 @@
                     <option value="1">English</option>
                   </select>
                 </div>
-                <div class="row">
-                  <div class="inner_row">
-                    <label>PROJECT ID*</label>
-                    <input name="project_guid" type="text" class="imp01" value ="<%=@project_data[:project_guid]%>"/>
-                  </div>
-                </div>
+
                 <div class="row">
                   <div class="inner_row">
                     <label>START DATE</label>
@@ -313,6 +316,10 @@
                   <div class="inner_row last03">
                     <p class="date"> Which level of detail do your geo markers refer to?</p>
                   </div>
+				  <div class="inner_row last03">	
+						<div class="but_del"><a href="#location" id="delete_points"></a></div>				
+                  </div>
+ 
                 </div>
               <div class="colem">
                 <h3>ORGANIZATIONS INVOLVED</h3>

@@ -255,6 +255,9 @@
 .registry_sec .form_section .row .inner_row.last03 ul {width:150px; float:left; padding:5px 0;}
 .registry_sec .form_section .row .inner_row.last03 ul li { margin-left:10px;margin-top:10px;margin-bottom:5px}
 .registry_sec .form_section .row .inner_row.last03 ul li h6{ color:#666666; font: 14px/16px "Helvetica Neue"; margin-left:10px;display:inline;}
+
+.registry_sec .form_section .row .inner_row.last03 .but_del a{ float:left; width:205px; height:51px; margin-top:20px; background:url(../images/delete_all.gif) no-repeat 0 0;}
+
 /**/
 
 .registry_sec .form_section .row .inner_row input.imp01{ float:left; width:185px;}
