@@ -71,7 +71,9 @@
             <div class="add_project">
                   <a href="/project" class="add">Add Project</a>
 
-                  <span>or import <a href="/import_file">from file</a></span>
+                  <%= form_tag import_file_path, :multipart => true do %>
+                    <span>or import <a href="#"><%= file_field_tag :file_upload %>from file</a></span>
+                  <% end -%>
              </div>
              <div class="publish">
              <h3>PUBLISHING TOOLS</h3>

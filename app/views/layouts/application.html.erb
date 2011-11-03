@@ -62,12 +62,12 @@ Cufon.replace('.body_top .body_top_lf h3, .box_list ul li h4', { fontFamily: 'He
 <body>
 <% if flash[:notice] -%>
   <div id="notice">
-    <h1><%= flash[:notice] %></h1>
+    <%= simple_format flash[:notice] %>
   </div>
 <% end -%>
 <% if flash[:alert] -%>
   <div id="alert">
-    <%= flash[:alert] %>
+    <%= simple_format flash[:alert] %>
   </div>
 <% end -%>
 

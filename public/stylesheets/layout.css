@@ -186,8 +186,9 @@
 .dashboard_right .project_details .rows span em{font-style:normal; color:#fff;}
 .dashboard_right .project_details .add_project{width:100%; float:left; padding-top:40px; }
 .dashboard_right .project_details .add_project a.add{float:left; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none; display:block;}
-.dashboard_right .project_details .add_project span{width:100%; float:left; padding-top:5px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
-.dashboard_right .project_details .add_project span a{ color:#fff;}
+.dashboard_right .project_details .add_project span{ width:100%; float:left; padding-top:5px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:15px;}
+.dashboard_right .project_details .add_project span a{ position: relative; color:#fff; }
+.dashboard_right .project_details .add_project span input{ display: block; width: 53px; position: absolute; top: 0; -moz-opacity:0; filter:alpha(opacity: 0);	opacity: 0; z-index: 1; cursor: pointer; }
 .dashboard_right .project_details .publish{width:100%; float:left; padding-top:120px;}
 .dashboard_right .project_details .publish h3{font-size:16px; font-family:"Helvetica Neue", arial; padding-bottom:25px; color:#000;}
 .dashboard_right .project_details .publish ul{width:100%; float:left; list-style:none;}

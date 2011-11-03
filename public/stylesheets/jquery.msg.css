@@ -31,6 +31,11 @@
   -pie-lazy-init: true;
   behavior: url(PIE.htc);
 }
+.black-on-white .jquery-msg-content p{
+  font-size: 22px;
+  line-height: 1.2em;
+  font-weight: bold;
+}
 
 .white-on-black .jquery-msg-content {
   -moz-opacity: 0.5;

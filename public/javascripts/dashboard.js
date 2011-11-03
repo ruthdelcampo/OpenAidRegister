@@ -1,24 +1,29 @@
 var map_bounds;
 
 $(document).ready(function(){
-    var latlng = new google.maps.LatLng(14.5, 15.5);
-    var myOptions = {
-      zoom: 3,
-      center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDoubleClickZoom: true
-    };
-
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-    $.each(projects_list, function(index, project){
-      if (!(project.markers == 'POINT EMPTY' || project.markers == 'MULTIPOINT EMPTY' || project.markers == "")) {
-        parseWkt(project);
-      }
-    });
-
-    map.fitBounds(map_bounds);
+	initMap();
+	initUploadForm();
 });
+
+function initMap(){
+	var latlng = new google.maps.LatLng(14.5, 15.5);
+	var myOptions = {
+		zoom: 3,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		disableDoubleClickZoom: true
+	};
+
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+	$.each(projects_list, function(index, project){
+		if (!(project.markers == 'POINT EMPTY' || project.markers == 'MULTIPOINT EMPTY' || project.markers == "")) {
+			parseWkt(project);
+		}
+	});
+
+	map.fitBounds(map_bounds);
+}
 
 function parseWkt(project) {
   var wkt = project.markers;
@@ -73,4 +78,12 @@ function createInfowindow(marker, project){
     }).open(map, marker);
 
   });
+}
+
+function initUploadForm(){
+	var input = $('.dashboard_right .project_details .add_project form input');
+
+	input.change(function(){
+		$(this).closest('form').submit();
+	});
 }

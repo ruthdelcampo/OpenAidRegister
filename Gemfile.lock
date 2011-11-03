@@ -34,6 +34,10 @@ GEM
     arel (2.0.10)
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     builder (2.1.2)
     cartodb-rb-client (0.2.0)
       activesupport (>= 3.0.0, <= 3.1.0)
@@ -130,12 +134,14 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    xml-simple (1.1.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   autotest
+  aws-s3
   cartodb-rb-client (= 0.2.0)
   heroku
   rails (= 3.0.5)

@@ -4,3 +4,4 @@ log/*.log
 tmp/
 
 config/cartodb_config.yml
+config/app_config.yml

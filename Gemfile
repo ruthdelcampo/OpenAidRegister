@@ -10,6 +10,8 @@ gem 'cartodb-rb-client', '0.2.0'
 
 gem 'heroku'
 
+gem 'aws-s3', :require => 'aws/s3'
+
 #gem 'jquery-rails'
 
 

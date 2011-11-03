@@ -47,19 +47,19 @@ class DashboardController < ApplicationController
 
   def import_file #not completely working. Need to add functionallity
 
-    unless session[:organization]
-      redirect_to '/login'
-      return
-    end
-    if !params[:file_upload]
-      redirect_to '/dashboard', :alert => "You need to choose a file first"
-      return
-    end
-    require 'fileutils'
-    tmp = params[:file_upload][:my_file].tempfile
-    file = File.join("uploads", params[:file_upload][:my_file].original_filename + "_" + session[:organization][:cartodb_id].to_s())
-    FileUtils.cp tmp.path, file
-    redirect_to '/dashboard', :notice => "Thanks for uploading the file. We are going to import your projects. In a few days you will see you projects uploaded. We will send you an email when the process is completed"
+    redirect_to '/login' and return if session[:organization].blank?
+
+    redirect_to '/dashboard', :alert => "You need to choose a file first" and return if params[:file_upload].blank?
+
+    file_name = params[:file_upload].original_filename
+    file      = params[:file_upload].tempfile
+    AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
+
+    redirect_to '/dashboard', :notice => <<-EOF
+      Thanks for uploading the file.
+      We are going to import your projects.
+      In a few days you will see you projects uploaded. We will send you an email when the process is completed.
+    EOF
     return
   end
 
