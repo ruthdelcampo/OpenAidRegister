@@ -1,11 +1,11 @@
 <iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.now() %>" version="1.01">
 <% @download_projects.each do |project| %>
 
-<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="project.budget_currency" xml:lang="<%=project.language%>">
+<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
 
 <reporting-org type="<%= @download_organization.organization_type_id %>"  ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
 
-<iati-identifier> <%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
+<iati-identifier><%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
 </iati-identifier>
 
 <title>
@@ -62,7 +62,7 @@
 
 <% if !project.budget.blank? %>
 <budget>
-<value currency="<%= project.budget_currency %>" value-date=""><%= project.budget %></value>
+<value currency="<%= project.budget_currency %>" value-date="<%= project.start_date %>"><%= project.budget %></value>
 </budget>
 <%end%>
 

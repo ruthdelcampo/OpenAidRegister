@@ -53,12 +53,18 @@ class DashboardController < ApplicationController
 
     file_name = params[:file_upload].original_filename
     file      = params[:file_upload].tempfile
-    AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
-
+    
+     result = AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
+      
+    debugger
+    #send an email notification to ruth del Campo
+    UserMailer.new_file(session[:organization], file_name).deliver
+    
     redirect_to '/dashboard', :notice => <<-EOF
       Thanks for uploading the file.
       We are going to import your projects.
-      In a few days you will see you projects uploaded. We will send you an email when the process is completed.
+      In a few days you will see you projects uploaded. 
+      We will contact you if we need some help and you will get an email when the process is completed.
     EOF
     return
   end

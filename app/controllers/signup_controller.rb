@@ -99,9 +99,8 @@ class SignupController < ApplicationController
       else
         if already_exists(params[:email])
          @errors.push("This email already exists")
-         end
-        unless params[:email].match(format_email)
-        @errors.push("The format of the email is wrong")
+        elsif !match_email(params[:email])
+          @errors.push("The format of the email is wrong")
         end
       end
       
@@ -187,14 +186,12 @@ end
     if params[:method]=="post"
       @errors = Array.new
       #email Validation. First checks if its empty and then checks if it has the right format
-      String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
       if params[:email].blank?
         @errors.push("The email is empty")
-      else 
-        unless params[:email].match(format_email)
+      elsif !match_email(params[:email])
         @errors.push("The format of the email is wrong")
-        end
       end
+      
       if @errors.count==0
         random_token = SecureRandom.urlsafe_base64  
         sql="UPDATE organizations SET random_token ='#{random_token}' WHERE organizations.email = '#{params[:email]}'"
@@ -214,11 +211,6 @@ end
     reset_session
     redirect_to '/'
     return 
-  end
-  
-  
-  def quote_string(v)
-    v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
   
   

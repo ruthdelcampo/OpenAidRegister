@@ -1,5 +1,5 @@
 module ApplicationHelper
-
+  
   def format_date(date)
     return date.strftime('%m/%d/%Y') if date.present? && date.is_a?(Date)
     date

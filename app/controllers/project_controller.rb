@@ -44,9 +44,7 @@ class ProjectController < ApplicationController
       end
 
       #Check if the day is not correct
-
-
-
+      
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
@@ -85,12 +83,20 @@ class ProjectController < ApplicationController
        params[:google_markers] = 'MULTIPOINT EMPTY'
       end
       #there has been errors print them on the template AND EXIT
+      
+        if params[:contact_email].present? && !match_email(params[:contact_email])
+        @errors.push("The format of the contact email is wrong")
+        end
+         
       if @errors.count>0
 
         render :template => '/project/show'
         return
       end
 
+      
+     
+      
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
@@ -98,20 +104,32 @@ class ProjectController < ApplicationController
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
-                 (#{session[:organization].cartodb_id}, '#{params[:title]}', '#{params[:description]}',
+                 (#{session[:organization].cartodb_id}, '#{quote(params[:title])}', '#{quote(params[:description])}',
                 ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)),
                  '#{params[:language]}',
-                 '#{params[:project_guid]}', #{start_date}, #{end_date}, '#{params[:budget]}',
-                 '#{params[:budget_currency]}', '#{params[:website]}', '#{params[:program_guid]}', '#{params[:result_title]}',
-                 '#{params[:result_description]}',
+                 '#{quote(params[:project_guid])}', #{start_date}, #{end_date}, '#{params[:budget]}',
+                 '#{params[:budget_currency]}', '#{quote(params[:website])}', '#{quote(params[:program_guid])}', '#{quote(params[:result_title])}',
+                 '#{quote(params[:result_description])}',
                  '#{params[:collaboration_type]}','#{params[:tied_status]}',
                  '#{params[:aid_type]}',
                  '#{params[:flow_type]}','#{params[:finance_type]}',
-                 '#{params[:contact_name]}',
-                 '#{params[:contact_email]}')"
+                 '#{quote(params[:contact_name])}',
+                 '#{quote(params[:contact_email])}')"
+          
+          #result = cartodb_connect(sql)
+          
+          #if result.is_a?(CartoDB::Client::Error)
+           # redirect_to :back, :alert =>"sorry, it seems that there is a problem with the connection. 
+          #  Try it again in few minutes or send an email to support and we'll help you. "
+           # #send_email
+          #  return
+          #end
+         
          CartoDB::Connection.query(sql)
 
          # Now sectors must be written
+         
+         
          if params[:sectors]
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
            result = CartoDB::Connection.query(sql)
@@ -134,7 +152,7 @@ class ProjectController < ApplicationController
              aux_role = participating_org[:role]
 
              #insert organization
-             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
+             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{quote(aux_name)}', '#{aux_role}')"
              CartoDB::Connection.query(sql)
            end
           end
@@ -168,12 +186,12 @@ class ProjectController < ApplicationController
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), description ='#{params[:description]}', 
-        language= '#{params[:language]}', project_guid='#{params[:project_guid]}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
-         website='#{params[:website]}', program_guid = '#{params[:program_guid]}', result_title='#{params[:result_title]}',
-         result_description='#{params[:result_description]}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
+        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), title ='#{quote(params[:title])}', description ='#{quote(params[:description])}', 
+        language= '#{params[:language]}', project_guid='#{quote(params[:project_guid])}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
+         website='#{quote(params[:website])}', program_guid = '#{quote(params[:program_guid])}', result_title='#{quote(params[:result_title])}',
+         result_description='#{quote(params[:result_description])}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
          aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',
-         finance_type ='#{params[:finance_type]}',contact_name='#{params[:contact_name]}', contact_email='#{params[:contact_email]}' WHERE cartodb_id='#{params[:cartodb_id]}'"
+         finance_type ='#{params[:finance_type]}',contact_name='#{quote(params[:contact_name])}', contact_email='#{quote(params[:contact_email])}' WHERE cartodb_id='#{params[:cartodb_id]}'"
          CartoDB::Connection.query(sql)
 
          #In this case, first delete all sectors and overwrite them
@@ -202,7 +220,7 @@ class ProjectController < ApplicationController
              aux_role = participating_org[:role]
 
              #insert organization
-             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{aux_name}', '#{aux_role}')"
+             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{quote(aux_name)}', '#{aux_role}')"
              CartoDB::Connection.query(sql)
            end
           end
