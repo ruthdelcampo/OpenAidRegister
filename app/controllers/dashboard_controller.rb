@@ -20,7 +20,7 @@ class DashboardController < ApplicationController
              p.end_date
       FROM projects p
       LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
-      WHERE p.organization_id = #{session[:organization][:cartodb_id]}
+      WHERE p.organization_id = ?
       GROUP BY p.cartodb_id,
                project_markers,
                p.title,
@@ -29,7 +29,7 @@ class DashboardController < ApplicationController
                p.start_date,
                p.end_date
     SQL
-    result = CartoDB::Connection.query(sql)
+    result = execute_query(sql, session[:organization][:cartodb_id])
     @projects_list = result.rows
     @current_projects = 0
     @past_projects = 0
@@ -74,8 +74,8 @@ class DashboardController < ApplicationController
     #take the organization information. This request can also be done from outside people
     sql="SELECT is_validated, organization_country, organization_guid,
     organization_name, organization_type_id
-    FROM organizations WHERE cartodb_id = #{params[:id]}"
-    result = CartoDB::Connection.query(sql)
+    FROM organizations WHERE cartodb_id = ?"
+    result = execute_query(sql, params[:id])
     @download_organization = result.rows.first
 
     #we need to check if there is an existing organization, else it will be error 404
@@ -87,8 +87,8 @@ class DashboardController < ApplicationController
       result_description, collaboration_type, tied_status, aid_type, flow_type,
       finance_type, contact_name, contact_email,
       ST_ASText(the_geom) AS google_markers, created_at, updated_at
-      FROM projects WHERE organization_id = #{params[:id]}"
-      result = CartoDB::Connection.query(sql)
+      FROM projects WHERE organization_id = ?"
+      result = execute_query(sql, params[:id])
       @download_projects = result.rows
 
       #Render XML if it has already projects entered and the organization is validated
@@ -102,8 +102,8 @@ class DashboardController < ApplicationController
         # get the se project_sector info
         sql = "select project_id, array_agg(project_sectors.sector_id) AS sector_id from project_sectors
         INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id
-        WHERE organization_id =#{params[:id]} GROUP BY project_id"
-        result = CartoDB::Connection.query(sql)
+        WHERE organization_id =? GROUP BY project_id"
+        result = execute_query(sql, params[:id])
 
         result.rows.each do |row|
           row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
@@ -115,7 +115,7 @@ class DashboardController < ApplicationController
         #get the sector names
         sql = "select project_sectors.sector_id, name, sector_code from project_sectors
         INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
-        result = CartoDB::Connection.query(sql)
+        result = execute_query(sql)
         @download_sector_names = result.rows
 
 
@@ -123,8 +123,8 @@ class DashboardController < ApplicationController
         sql = "select project_id, array_agg(project_partnerorganizations.other_org_name) AS other_org_names,
         array_agg(project_partnerorganizations.other_org_role) AS other_org_roles
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id
-        WHERE organization_id = #{params[:id]} GROUP BY project_id"
-        result = CartoDB::Connection.query(sql)
+        WHERE organization_id = ? GROUP BY project_id"
+        result = execute_query(sql, params[:id])
 
         result.rows.each do |row|
           row[:other_org_names] = row[:other_org_names][1..-2].split(",")
@@ -143,8 +143,8 @@ class DashboardController < ApplicationController
         sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
         array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
         INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
-        WHERE organization_id =#{params[:id]} GROUP BY project_id, level_detail"
-        result = CartoDB::Connection.query(sql)
+        WHERE organization_id = ? GROUP BY project_id, level_detail"
+        result = execute_query(sql, params[:id])
 
 
          result.rows.each do |row|
@@ -175,15 +175,19 @@ class DashboardController < ApplicationController
       return
     end
 
-     sql="delete FROM projects where projects.cartodb_id = '#{params[:delete_project_id]}'"
-     CartoDB::Connection.query(sql)
-     sql="delete FROM project_sectors where project_id = '#{params[:delete_project_id]}'"
-     CartoDB::Connection.query(sql)
-      sql="delete FROM project_partnerorganizations where project_id = '#{params[:delete_project_id]}'"
-      CartoDB::Connection.query(sql)
-       sql="delete FROM reverse_geo where project_id = '#{params[:delete_project_id]}'"
-      CartoDB::Connection.query(sql)
-     redirect_to  '/dashboard'
+    sql="delete FROM projects where projects.cartodb_id = '?'"
+    execute_query(sql, params[:delete_project_id])
+
+    sql="delete FROM project_sectors where project_id = '?'"
+    execute_query(sql, params[:delete_project_id])
+
+    sql="delete FROM project_partnerorganizations where project_id = '?'"
+    execute_query(sql, params[:delete_project_id])
+
+    sql="delete FROM reverse_geo where project_id = '?'"
+    execute_query(sql, params[:delete_project_id])
+
+    redirect_to  '/dashboard'
    end
 
 

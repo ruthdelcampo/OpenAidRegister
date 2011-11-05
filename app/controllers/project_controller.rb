@@ -34,8 +34,8 @@ class ProjectController < ApplicationController
       end
 
       #check that the project id is unique for this user
-      sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '#{session[:organization].cartodb_id}'"
-      result =  CartoDB::Connection.query(sql)
+      sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '?'"
+      result = execute_query(sql, session[:organization].cartodb_id)
       result.rows.each do |project|
         #check if there is no repeted cartodb_id but only when it is updating project
         if params[:project_guid] == project.project_guid && params[:cartodb_id] != project.cartodb_id.to_s
@@ -104,46 +104,56 @@ class ProjectController < ApplicationController
         sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
-                 (#{session[:organization].cartodb_id}, '#{quote(params[:title])}', '#{quote(params[:description])}',
-                ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)),
-                 '#{params[:language]}',
-                 '#{quote(params[:project_guid])}', #{start_date}, #{end_date}, '#{params[:budget]}',
-                 '#{params[:budget_currency]}', '#{quote(params[:website])}', '#{quote(params[:program_guid])}', '#{quote(params[:result_title])}',
-                 '#{quote(params[:result_description])}',
-                 '#{params[:collaboration_type]}','#{params[:tied_status]}',
-                 '#{params[:aid_type]}',
-                 '#{params[:flow_type]}','#{params[:finance_type]}',
-                 '#{quote(params[:contact_name])}',
-                 '#{quote(params[:contact_email])}')"
-          
-          #result = cartodb_connect(sql)
-          
-          #if result.is_a?(CartoDB::Client::Error)
-           # redirect_to :back, :alert =>"sorry, it seems that there is a problem with the connection. 
-          #  Try it again in few minutes or send an email to support and we'll help you. "
-           # #send_email
-          #  return
-          #end
-         
-         CartoDB::Connection.query(sql)
+                 (?, '?', '?',
+                ST_Multi(ST_GeomFromText('?',4326)),
+                 '?',
+                 '?', ?, ?, '?',
+                 '?', '?', '?', '?',
+                 '?',
+                 '?','?',
+                 '?',
+                 '?','?',
+                 '?',
+                 '?')"
+         execute_query(sql, session[:organization].cartodb_id,
+                                     params[:title],
+                                     params[:description],
+                                     params[:google_markers],
+                                     params[:language],
+                                     params[:project_guid],
+                                     start_date,
+                                     end_date,
+                                     params[:budget],
+                                     params[:budget_currency],
+                                     params[:website],
+                                     params[:program_guid],
+                                     params[:result_title],
+                                     params[:result_description],
+                                     params[:collaboration_type],
+                                     params[:tied_status],
+                                     params[:aid_type],
+                                     params[:flow_type],
+                                     params[:finance_type],
+                                     params[:contact_name],
+                                     params[:contact_email])
 
          # Now sectors must be written
          
          
          if params[:sectors]
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
-           result = CartoDB::Connection.query(sql)
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
            params[:sectors].each do |sector|
-             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{result.rows.first[:cartodb_id]}, #{sector[:id]})"
-             CartoDB::Connection.query(sql)
+             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (?, ?)"
+             execute_query(sql, result.rows.first[:cartodb_id], sector[:id])
            end
          end
 
          # This is not working and should be updated when dynamic organizations are well done
          if params[:participating_orgs].present?
            #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
-           result = CartoDB::Connection.query(sql)
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
 
            other_participating_orgs = params[:participating_orgs]
            other_participating_orgs.each do |participating_org|
@@ -152,15 +162,15 @@ class ProjectController < ApplicationController
              aux_role = participating_org[:role]
 
              #insert organization
-             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{result.rows.first[:cartodb_id]}, '#{quote(aux_name)}', '#{aux_role}')"
-             CartoDB::Connection.query(sql)
+             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (?, '?', '?')"
+             execute_query(sql, result.rows.first[:cartodb_id], aux_name, aux_role)
            end
           end
-          
+
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
-           result = CartoDB::Connection.query(sql)
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
 
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
@@ -173,45 +183,65 @@ class ProjectController < ApplicationController
 
              #insert organization
              sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
-               #{result.rows.first[:cartodb_id]},
-               ST_GeomFromText('POINT(#{latlng})',4326),
-               '#{adm1}',
-               '#{adm2}',
-               '#{country}',
-               '#{level_detail}'
+               ?,
+               ST_GeomFromText('POINT(?)',4326),
+               '?',
+               '?',
+               '?',
+               '?'
              )"
-             CartoDB::Connection.query(sql)
+             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, level_detail)
            end
          end
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('#{params[:google_markers]}',4326)), title ='#{quote(params[:title])}', description ='#{quote(params[:description])}', 
-        language= '#{params[:language]}', project_guid='#{quote(params[:project_guid])}', start_date=#{start_date}, end_date=#{end_date}, budget='#{params[:budget]}', budget_currency='#{params[:budget_currency]}',
-         website='#{quote(params[:website])}', program_guid = '#{quote(params[:program_guid])}', result_title='#{quote(params[:result_title])}',
-         result_description='#{quote(params[:result_description])}', collaboration_type='#{params[:collaboration_type]}',tied_status ='#{params[:tied_status]}',
-         aid_type ='#{params[:aid_type]}', flow_type ='#{params[:flow_type]}',
-         finance_type ='#{params[:finance_type]}',contact_name='#{quote(params[:contact_name])}', contact_email='#{quote(params[:contact_email])}' WHERE cartodb_id='#{params[:cartodb_id]}'"
-         CartoDB::Connection.query(sql)
+        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?',
+        language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
+         website='?', program_guid = '?', result_title='?',
+         result_description='?', collaboration_type='?',tied_status ='?',
+         aid_type ='?', flow_type ='?',
+         finance_type ='?',contact_name='?', contact_email='?' WHERE cartodb_id='?'"
+
+         execute_query(sql, params[:google_markers],
+                            params[:description],
+                            params[:language],
+                            params[:project_guid],
+                            start_date,
+                            end_date,
+                            params[:budget],
+                            params[:budget_currency],
+                            params[:website],
+                            params[:program_guid],
+                            params[:result_title],
+                            params[:result_description],
+                            params[:collaboration_type],
+                            params[:tied_status],
+                            params[:aid_type],
+                            params[:flow_type],
+                            params[:finance_type],
+                            params[:contact_name],
+                            params[:contact_email],
+                            params[:cartodb_id])
 
          #In this case, first delete all sectors and overwrite them
-         sql = "DELETE FROM project_sectors where  project_id = '#{params[:cartodb_id]}'"
-         CartoDB::Connection.query(sql)
+         sql = "DELETE FROM project_sectors where  project_id = '?'"
+         execute_query(sql, params[:cartodb_id])
          if params[:sectors]
            params[:sectors].each do |sector|
-             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (#{params[:cartodb_id]}, #{sector[:id]})"
-             CartoDB::Connection.query(sql)
+             sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (?, ?)"
+             execute_query(sql, params[:cartodb_id], sector[:id])
            end
          end
 
          #In this case, first delete all partner organizations and overwrite them.
-         sql = "DELETE FROM project_partnerorganizations where  project_id = '#{params[:cartodb_id]}'"
-         CartoDB::Connection.query(sql)
+         sql = "DELETE FROM project_partnerorganizations where  project_id = '?'"
+         execute_query(sql, params[:cartodb_id])
 
          if params[:participating_orgs].present?
            #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
-           result = CartoDB::Connection.query(sql)
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
 
            other_participating_orgs = params[:participating_orgs]
            other_participating_orgs.each do |participating_org|
@@ -220,19 +250,19 @@ class ProjectController < ApplicationController
              aux_role = participating_org[:role]
 
              #insert organization
-             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (#{params[:cartodb_id]}, '#{quote(aux_name)}', '#{aux_role}')"
-             CartoDB::Connection.query(sql)
+             sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (?, '?', '?')"
+             execute_query(sql, params[:cartodb_id], aux_name, aux_role)
            end
           end
 
          #In this case, first delete all geo organizations and overwrite them.
-         sql = "DELETE FROM reverse_geo where  project_id = '#{params[:cartodb_id]}'"
-         CartoDB::Connection.query(sql)
+         sql = "DELETE FROM reverse_geo where  project_id = '?'"
+         execute_query(sql, params[:cartodb_id])
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=#{session[:organization].cartodb_id} ORDER BY cartodb_id DESC LIMIT 1 "
-           result = CartoDB::Connection.query(sql)
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
@@ -244,15 +274,14 @@ class ProjectController < ApplicationController
 
              #insert organization
              sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
-               #{result.rows.first[:cartodb_id]},
-               ST_GeomFromText('POINT(#{latlng})',4326),
-               '#{adm1}',
-               '#{adm2}',
-               '#{country}',
-               '#{level_detail}'
+               ?,
+               ST_GeomFromText('POINT(?)',4326),
+               '?',
+               '?',
+               '?',
+               '?'
              )"
-             puts sql
-             CartoDB::Connection.query(sql)
+             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, level_detail)
            end
          end
       end
@@ -264,20 +293,20 @@ class ProjectController < ApplicationController
     #it is a GET method
     if params[:id] # it is an existing project select everything from projects and from project_sectors
 
-      sql="select cartodb_id, organization_id, title, description, language, project_guid, start_date,
+      sql='select cartodb_id, organization_id, title, description, language, project_guid, start_date,
         end_date, budget, budget_currency, website, program_guid, result_title,
                result_description, collaboration_type, tied_status, aid_type, flow_type,
                finance_type, contact_name, contact_email, ST_ASText(the_geom) AS google_markers
-               FROM projects WHERE cartodb_id = #{params[:id]}"
+               FROM projects WHERE cartodb_id = ?'
 
-      result = CartoDB::Connection.query(sql)
+      result = execute_query(sql, params[:id])
       @project_data = result.rows.first
 
       #@project_data[:google_markers] = @project_data[:st_astext]
 
       #select sectors and form the array
-      sql = "select array_agg(sector_id) from project_sectors where project_id = #{params[:id]}"
-      result = CartoDB::Connection.query(sql)
+      sql = "select array_agg(sector_id) from project_sectors where project_id = ?"
+      result = execute_query(sql, params[:id])
 
      if !result.rows.first[:array_agg].blank?
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
@@ -286,19 +315,19 @@ class ProjectController < ApplicationController
       #This must be fixed when other organizations is done
       #Select partner organizations and form the array
       sql = "select other_org_name, other_org_role
-      from project_partnerorganizations where project_id = #{params[:id]}"
-      result = CartoDB::Connection.query(sql)
+      from project_partnerorganizations where project_id = ?"
+      result = execute_query(sql, params[:id])
 
       @participating_orgs = result.try(:rows)
 
-      sql = "select sector_id as id from project_sectors where project_id = #{params[:id]}"
-      result = CartoDB::Connection.query(sql)
+      sql = "select sector_id as id from project_sectors where project_id = ?"
+      result = execute_query(sql, params[:id])
 
       @sectors = result.try(:rows)
 
       sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, level_detail
-      from reverse_geo where project_id = #{params[:id]}"
-      result = CartoDB::Connection.query(sql)
+      from reverse_geo where project_id = ?"
+      result = execute_query(sql, params[:id])
 
       @reverse_geo = result.try(:rows)
     end

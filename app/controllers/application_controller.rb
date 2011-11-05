@@ -56,4 +56,13 @@ class ApplicationController < ActionController::Base
     rescue URI::BadURIError
       false
     end
+
+  def execute_query(sql, *params)
+    prepared_statement = sql.gsub(/\?/) do |match|
+      params.shift.to_s.sanitize_sql!
+    end
+
+    CartoDB::Connection.query(prepared_statement)
+  end
+
 end
