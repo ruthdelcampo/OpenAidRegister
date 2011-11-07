@@ -86,7 +86,7 @@ class ProjectController < ApplicationController
 
       # prepare the geom
       if params[:google_markers].blank?
-       params[:google_markers] = 'MULTIPOINT EMPTY'
+       params[:google_markers] = "MULTIPOINT EMPTY"
       end
       #there has been errors print them on the template AND EXIT
       
@@ -192,14 +192,15 @@ class ProjectController < ApplicationController
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?',
+        sql="UPDATE projects SET title='?', the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?',
         language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
          website='?', program_guid = '?', result_title='?',
          result_description='?', collaboration_type='?',tied_status ='?',
          aid_type ='?', flow_type ='?',
          finance_type ='?',contact_name='?', contact_email='?' WHERE cartodb_id='?'"
 
-         execute_query(sql, params[:google_markers],
+         execute_query(sql, params[:title],
+                            params[:google_markers],
                             params[:description],
                             params[:language],
                             params[:project_guid],

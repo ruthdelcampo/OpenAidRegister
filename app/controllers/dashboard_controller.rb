@@ -69,7 +69,7 @@ class DashboardController < ApplicationController
     return
   end
 
-  def download #Partially working but Need to review some funcionality for google reverse geocoding and other organizations
+  def download
 
     #take the organization information. This request can also be done from outside people
     sql="SELECT is_validated, organization_country, organization_guid,
