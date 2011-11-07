@@ -75,12 +75,12 @@
 .box_list ul li{ float:left; width:314px; padding-left:48px;}
 .box_list ul li.first{padding-left:0;}
 .box_list ul li.last{width:313px; padding-left:43px;}
-.box_list ul li h4{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue";padding-bottom:19px; text-transform:uppercase; text-shadow:1px 1px 0 #fff; height:16px;}
-.box_list ul li span{ float:left; width:228px; height:75px; padding-top:4px}
+.box_list ul li h4{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue";padding-bottom:10px; text-transform:uppercase; text-shadow:1px 1px 0 #fff; height:16px;}
+.box_list ul li span{ float:left; width:228px; height:100px; padding-top:0px}
 .box_list ul li p{ float:left; width:100%; color:#000; font:normal 17px/21px "Helvetica Neue";padding:26px 0 0 0;}
 .box_list ul li h5{ float:left; width:100%; color:#ff3300; font:bold 20px/26px "Helvetica";padding-bottom:7px; text-transform:uppercase; text-shadow:1px 1px 0 #fff;}
 .box_list ul li small{ float:left; width:100%; color:#666666; font:normal 15px/15px "Helvetica";}
-.box_list ul li small strong{ padding-left:10px; font-weight:normal; background:url(../images/dot.gif) no-repeat left center; margin-left:6px; display:inline;}
+.box_list ul li small strong{ padding-left:20px; font-weight:normal; background:url(../images/dot.gif) no-repeat left center; margin-left:6px; display:inline;}
 .box_list ul li p.blockquoto{ padding:19px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
 
 .box_list ul li .date_sec{ float:left; width:100%; padding-top:13px;}
