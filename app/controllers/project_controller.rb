@@ -239,9 +239,6 @@ class ProjectController < ApplicationController
          execute_query(sql, params[:cartodb_id])
 
          if params[:participating_orgs].present?
-           #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
-           result = execute_query(sql, session[:organization].cartodb_id)
 
            other_participating_orgs = params[:participating_orgs]
            other_participating_orgs.each do |participating_org|
@@ -260,9 +257,6 @@ class ProjectController < ApplicationController
          execute_query(sql, params[:cartodb_id])
 
          if params[:reverse_geo].present?
-           #Get the new cartodb_id because the project is new
-           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
-           result = execute_query(sql, session[:organization].cartodb_id)
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
@@ -281,7 +275,7 @@ class ProjectController < ApplicationController
                '?',
                '?'
              )"
-             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, level_detail)
+             execute_query(sql, params[:cartodb_id], latlng, adm1, adm2, country, level_detail)
            end
          end
       end
