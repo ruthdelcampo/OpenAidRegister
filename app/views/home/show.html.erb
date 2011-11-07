@@ -53,25 +53,25 @@
                   </li>
                   <li>
                     <h4>LAST PUBLISHED PROJECTS</h4>
-                    <h5><%= @latest_published.first[:title] %></h5>
-                    <small><%= @latest_published.first[:organization_name] %><strong><%= @latest_published.first[:budget] if @latest_published.first[:budget].present? %></strong></small>
-                    <p><%= @latest_published.first[:description] if @latest_published.first[:description].present?%></p>
+                    <h5>Water Team: Water Point Monitoring</h5>
+                    <small>EWB Canada<strong>170000 CAD</strong></small>
+                    <p>Mapping water points is a critical step towards improving clean water access for rural families in Malawi. Using an innovative tool we created to monitor the lifecycle of hand pumps, wells and boreholes, EWB volunteers have documented the location of water points across the country. With this information, we are facilitating improved decision-making for development partners and local government</p>
                     <div class="date_sec">
                       <ul>
-                        <li><span>FROM</span> <strong><%= @latest_published.first[:start_date].strftime("%m/%d/%Y")  if @latest_published.first[:start_date].present?%></strong> </li>
-                        <li><span>TO</span> <strong><%= @latest_published.first[:end_date].strftime("%m/%d/%Y") if @latest_published.first[:end_date].present? %></strong> </li>
+                        <li><span>FROM</span> <strong>2010-11-01</strong> </li>
+                        <li><span>TO</span> <strong>2011-11-01</strong> </li>
                       </ul>
                     </div>
                   </li>
                   <li class="last">
                     <h4>&nbsp;</h4>
-                    <h5><%= @latest_published.last[:title] %></h5>
-                    <small><%= @latest_published.last[:organization_name] %><strong><%= @latest_published.last[:budget] if @latest_published.last[:budget].present?  %></strong></small>
-                    <p><%= @latest_published.last[:description] if @latest_published.last[:description].present?  %></p>
+                    <h5>Water Team: Small-business solutions for repair and parts</h5>
+                    <small>EWB Canada<strong>140000 CAD</strong></small>
+                    <p>In villages where the majority of water points are broken, access to spare parts and repair training are needed to restore clean sources of water. To make this a reality, EWB is providing knowledge, training, and research support to our partners to develop and pilot a solution to this problem.</p>
                     <div class="date_sec">
                       <ul>
-                     <li><span>FROM</span> <strong><%= @latest_published.last[:start_date].strftime("%m/%d/%Y") if @latest_published.last[:start_date].present? %></strong></li>
-                        <li><span>TO</span> <strong><%= @latest_published.last[:end_date].strftime("%m/%d/%Y") if @latest_published.last[:end_date].present? %></strong> </li>
+                     <li><span>FROM</span> <strong>2010-11-01</strong></li>
+                        <li><span>TO</span> <strong>2011-11-01</strong> </li>
                       </ul>
                     </div>
                   </li>
