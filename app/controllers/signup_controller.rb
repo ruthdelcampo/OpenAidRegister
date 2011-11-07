@@ -65,7 +65,13 @@ class SignupController < ApplicationController
        if params[:organization_country].eql?("")
          @errors.push("Please select your organization's country")
        end
-
+       
+       #prepare organization guid to scape all whitespaces
+       if params[:organization_guid].present?
+          params[:organization_guid] = params[:organization_guid].tr(" ", "-")
+      end
+      
+      
     if !session[:organization].blank?
 
         if @errors.count==0
