@@ -3,7 +3,7 @@
 class String
 
   def sanitize_sql!
-    self.gsub(/\\/, '\&\&').gsub(/'/, "\'")
+    self.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
 
 end
