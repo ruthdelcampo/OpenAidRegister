@@ -64,6 +64,16 @@ class ProjectController < ApplicationController
         start_date = params[:start_date].split('/').map(&:to_i)
         start_date = Date.new(start_date[2], start_date[0], start_date[1])
       end
+      
+        if params[:contact_email].present? && !match_email(params[:contact_email])
+        @errors.push("The format of the contact email is wrong")
+        end
+         
+         if @errors.count>0
+
+            render :template => '/project/show'
+            return
+          end
 
 
       #Prepare the date to be inserted in CartoDB
@@ -84,17 +94,8 @@ class ProjectController < ApplicationController
       end
       #there has been errors print them on the template AND EXIT
       
-        if params[:contact_email].present? && !match_email(params[:contact_email])
-        @errors.push("The format of the contact email is wrong")
-        end
-         
-      if @errors.count>0
-
-        render :template => '/project/show'
-        return
-      end
-
-      
+      #prepare the project id. Take out all possible spaces and transform them to 
+      params[:project_guid] = params[:project_guid].tr(" ", "-")
      
       
       #no errors,introduce the data in CartoDB
