@@ -79,13 +79,9 @@ class ProjectController < ApplicationController
       #Prepare the date to be inserted in CartoDB
       if (params[:start_date]=="")
         start_date = "null"
-      else
-         start_date = "'" + start_date.to_s() + "'"
       end
       if (params[:end_date] =="")
         end_date = "null"
-      else
-          end_date = "'" + end_date.to_s() + "'"
       end
 
       # prepare the geom
