@@ -44,55 +44,50 @@ class ProjectController < ApplicationController
       end
 
       #Check if the day is not correct
-      
+
       #   for instance when there is an end date but not a start date
       if !(params[:end_date] =="") && (params[:start_date]=="")
          @errors.push("You need to have a start date when you have introduced and end date")
       end
       # End date cant be earlier as the start date
       if params[:end_date].present? && params[:start_date].present?
-        start_date = params[:start_date].split('/').map(&:to_i)
-        end_date = params[:end_date].split('/').map(&:to_i)
-        start_date = Date.new(start_date[2], start_date[0], start_date[1])
-        end_date = Date.new(end_date[2], end_date[0], end_date[1])
+        month, day, year = *params[:start_date].split('/').map(&:to_i)
+        start_date = Date.new(year, month, day)
+        month, day, year = *params[:end_date].split('/').map(&:to_i)
+        end_date = Date.new(year, month, day)
 
         @errors.push("The end date must be later than the start date") if start_date > end_date
       end
 
       #it is a permanent project
       if params[:start_date].present? && (params[:end_date] =="")
-        start_date = params[:start_date].split('/').map(&:to_i)
-        start_date = Date.new(start_date[2], start_date[0], start_date[1])
+        month, day, year = *params[:start_date].split('/').map(&:to_i)
+        start_date = Date.new(year, month, day)
       end
-      
+
         if params[:contact_email].present? && !match_email(params[:contact_email])
         @errors.push("The format of the contact email is wrong")
         end
-         
+
          if @errors.count>0
 
             render :template => '/project/show'
             return
           end
 
-
       #Prepare the date to be inserted in CartoDB
-      if (params[:start_date]=="")
-        start_date = "null"
-      end
-      if (params[:end_date] =="")
-        end_date = "null"
-      end
+      start_date = "null" if params[:start_date].blank?
+      end_date   = "null" if params[:end_date].blank?
 
       # prepare the geom
       if params[:google_markers].blank?
        params[:google_markers] = "MULTIPOINT EMPTY"
       end
       #there has been errors print them on the template AND EXIT
-      
-      #prepare the project id. Take out all possible spaces and transform them to 
+
+      #prepare the project id. Take out all possible spaces and transform them to
       params[:project_guid] = params[:project_guid].tr(" ", "-")
-      
+
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
@@ -134,8 +129,8 @@ class ProjectController < ApplicationController
                                      params[:contact_email])
 
          # Now sectors must be written
-         
-         
+
+
          if params[:sectors]
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
            result = execute_query(sql, session[:organization].cartodb_id)
@@ -321,8 +316,8 @@ class ProjectController < ApplicationController
       result = execute_query(sql, params[:id])
 
       @project_data[:reverse_geo] = result.try(:rows)
-      
-      
+
+
     end
 
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.
