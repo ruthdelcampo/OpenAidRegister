@@ -28,8 +28,10 @@ $(document).ready(function(){
         myOptions);
 
    //Add the listener to add a marker
-	google.maps.event.addListener(map, 'click', addMarker);
+//	google.maps.event.addListener(map, 'click', addMarker);
 
+	//Add the listener to add a marker also when they do a double click
+		google.maps.event.addListener(map, 'dblclick', addMarker);
 	// Remove markers
  	//google.maps.event.addListener(map, 'dblclick', removeMarker)
 
