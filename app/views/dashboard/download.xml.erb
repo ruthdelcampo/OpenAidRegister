@@ -76,15 +76,19 @@
 <% counter = 0 %>
 <% geo_project[:country].each do |country| %>
 <recipient-country code="<%= country %>"></recipient-country>
+<location>
 <location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
+</location>
 <% counter+=1%>
 <%end%>
 <%else%>
 <% counter = 0 %>
 <% geo_project[:country].each do |country| %>
 <recipient-country code="<%= country %>"></recipient-country>
+<location>
 <location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
 <location-type code="ADM2"><%= geo_project[:adm2][counter] %></location-type>
+</location>
 <% counter+=1%>
 <%end%>
 <%end%>
