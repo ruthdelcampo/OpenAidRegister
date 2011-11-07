@@ -152,7 +152,6 @@ function geocodePoint(latLong, marker_id){
 
   geocoder.geocode({location: latLong}, function(results, status){
     var city, region, country;
-
     if (status == 'OK'){
       if (results.length > 0){
         $.each(results[0].address_components, function(index, item){
@@ -163,7 +162,7 @@ function geocodePoint(latLong, marker_id){
             region = item.long_name;
           }
           if (item.types[0] == 'country'){
-            country = item.long_name;
+            country = item.short_name;
           }
         });
         $('#location ul.reverse_geo li.marker_' + marker_id).remove();

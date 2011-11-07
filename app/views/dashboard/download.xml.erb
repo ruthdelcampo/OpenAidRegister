@@ -70,19 +70,19 @@
 <% if geo_project[:project_id] == project.cartodb_id %>
 <% if geo_project[:level_detail] == "country"%>
 <% geo_project[:country].each do |country| %>
-<recipient-country code=""> <%= country %></recipient-country>
+<recipient-country code="<%= country %>"></recipient-country>
 <%end%>
 <% elsif geo_project[:level_detail] == "region"%>
 <% counter = 0 %>
 <% geo_project[:country].each do |country| %>
-<recipient-country code=""><%= country %></recipient-country>
+<recipient-country code="<%= country %>"></recipient-country>
 <location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
 <% counter+=1%>
 <%end%>
 <%else%>
 <% counter = 0 %>
 <% geo_project[:country].each do |country| %>
-<recipient-country code=""><%= country %></recipient-country>
+<recipient-country code="<%= country %>"></recipient-country>
 <location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
 <location-type code="ADM2"><%= geo_project[:adm2][counter] %></location-type>
 <% counter+=1%>
