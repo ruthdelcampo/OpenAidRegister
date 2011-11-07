@@ -137,7 +137,8 @@ class ProjectController < ApplicationController
                                      params[:contact_name],
                                      params[:contact_email])
 
-         # Now sectors must be written       
+         # Now sectors must be written
+         
          
          if params[:sectors]
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
@@ -165,13 +166,12 @@ class ProjectController < ApplicationController
              execute_query(sql, result.rows.first[:cartodb_id], aux_name, aux_role)
            end
           end
-          
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
            result = execute_query(sql, session[:organization].cartodb_id)
-          
+
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
@@ -180,6 +180,7 @@ class ProjectController < ApplicationController
              adm2         = geo[:adm2]
              country      = geo[:country]
              level_detail = geo[:level_detail]
+
              #insert organization
              sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
                ?,
@@ -194,7 +195,6 @@ class ProjectController < ApplicationController
          end
 
       else
-               
         #it is an existing project do whatever
         sql="UPDATE projects SET the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?',
         language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
@@ -227,7 +227,6 @@ class ProjectController < ApplicationController
          #In this case, first delete all sectors and overwrite them
          sql = "DELETE FROM project_sectors where  project_id = '?'"
          execute_query(sql, params[:cartodb_id])
-         
          if params[:sectors]
            params[:sectors].each do |sector|
              sql = "INSERT INTO project_sectors (project_id, sector_id) VALUES (?, ?)"
@@ -240,11 +239,16 @@ class ProjectController < ApplicationController
          execute_query(sql, params[:cartodb_id])
 
          if params[:participating_orgs].present?
+           #Get the new cartodb_id because the project is new
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
+
            other_participating_orgs = params[:participating_orgs]
            other_participating_orgs.each do |participating_org|
              next if participating_org[:name].blank? || participating_org[:role].blank?
              aux_name = participating_org[:name]
              aux_role = participating_org[:role]
+
              #insert organization
              sql = "INSERT INTO project_partnerorganizations (project_id, other_org_name, other_org_role) VALUES (?, '?', '?')"
              execute_query(sql, params[:cartodb_id], aux_name, aux_role)
@@ -254,8 +258,11 @@ class ProjectController < ApplicationController
          #In this case, first delete all geo organizations and overwrite them.
          sql = "DELETE FROM reverse_geo where  project_id = '?'"
          execute_query(sql, params[:cartodb_id])
-         
+
          if params[:reverse_geo].present?
+           #Get the new cartodb_id because the project is new
+           sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+           result = execute_query(sql, session[:organization].cartodb_id)
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
@@ -274,7 +281,7 @@ class ProjectController < ApplicationController
                '?',
                '?'
              )"
-             execute_query(sql, params[:cartodb_id], latlng, adm1, adm2, country, level_detail)
+             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, level_detail)
            end
          end
       end
