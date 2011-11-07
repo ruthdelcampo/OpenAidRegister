@@ -96,7 +96,6 @@ class ProjectController < ApplicationController
       
       #prepare the project id. Take out all possible spaces and transform them to 
       params[:project_guid] = params[:project_guid].tr(" ", "-")
-     
       
       #no errors,introduce the data in CartoDB
       if params[:cartodb_id].blank?
@@ -330,7 +329,9 @@ class ProjectController < ApplicationController
       from reverse_geo where project_id = ?"
       result = execute_query(sql, params[:id])
 
-      @reverse_geo = result.try(:rows)
+      @project_data[:reverse_geo] = result.try(:rows)
+      
+      
     end
 
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.

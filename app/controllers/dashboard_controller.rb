@@ -56,7 +56,7 @@ class DashboardController < ApplicationController
     
      result = AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
       
-    debugger
+    
     #send an email notification to ruth del Campo
     UserMailer.new_file(session[:organization], file_name).deliver
     

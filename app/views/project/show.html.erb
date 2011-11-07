@@ -299,18 +299,19 @@
                      <label>LEVEL OF DETAIL</label>
                       <ul>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'country', current_geo_level?('country'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'country', current_geo_level?('country'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
                           <h6>Country</h6>
                         </li>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'region', current_geo_level?('region'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'region', current_geo_level?('region'), :class => 'geo_detail', :disabled =>  @project_data[:reverse_geo].present? %>
                           <h6>Region</h6>
                         </li>
                         <li>
-                          <%=	radio_button_tag 'geo_detail', 'city', current_geo_level?('city'), :class => 'geo_detail', :disabled => @reverse_geo.present? %>
+                          <%=	radio_button_tag 'geo_detail', 'city', current_geo_level?('city'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
                           <h6> City </h6>
                         </li>
                       </ul>
+
                       <ul class="reverse_geo hidden">
                         <% (@reverse_geo || []).each_with_index do |geo, index| %>
                         <li class="marker_<%= index + 1 %>">
