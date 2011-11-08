@@ -93,10 +93,6 @@ class DashboardController < ApplicationController
 
       #Render XML if it has already projects entered and the organization is validated
 
-      ######ATTENTION!!
-      #Before going to production, change this.
-      #if (@download_organization[:is_validated]) && (!@download_projects.blank?)
-
        if !@download_projects.blank?
 
         # get the se project_sector info
