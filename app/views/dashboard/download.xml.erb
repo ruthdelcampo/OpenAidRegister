@@ -19,11 +19,13 @@
 <%end%>
 
 <% if !project.start_date.blank? %>
-<activity-date type="start-actual"><%= project.start_date %></activity-date>
+<% value = project_status(project.start_date, project.end_date) %>
+<activity-status code="<%=value[0]%>"><%=value[1]%></activity-status>
+<activity-date type="start-actual"><%= format_date_dash(project.start_date)%></activity-date>
 <%end%>
 
 <% if !project.end_date.blank? %>
-<activity-date type="end-planned"><%= project.end_date %></activity-date>
+<activity-date type="end-planned"><%= format_date_dash(project.end_date) %></activity-date>
 <%end%>
 
 <participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>

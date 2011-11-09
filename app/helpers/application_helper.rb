@@ -10,6 +10,7 @@ module ApplicationHelper
     date
   end
 
+  
   def sector_by_id(id)
     sectors_list.select{|sector| sector.last.to_i == id.to_i}.first.first if id.present?
   end
