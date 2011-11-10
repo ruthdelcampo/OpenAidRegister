@@ -1,30 +1,21 @@
 <iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
 <% @download_projects.each do |project| %>
-
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
-
 <reporting-org type="<%= @download_organization.organization_type_id %>" ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
-
 <iati-identifier><%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}"%></iati-identifier>
-
 <title><%= project.title %></title>
-
 <% if !project.description.blank? %>
 <description><%= project.description %></description>
 <%end%>
-
 <% if !project.start_date.blank? %>
 <% value = project_status(project.start_date, project.end_date) %>
 <activity-status code="<%=value[0]%>"><%=value[1]%></activity-status>
 <activity-date type="start-actual"><%= format_date_dash(project.start_date)%></activity-date>
 <%end%>
-
 <% if !project.end_date.blank? %>
 <activity-date type="end-planned"><%= format_date_dash(project.end_date) %></activity-date>
 <%end%>
-
 <participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>
-
 <% @download_other_orgs.each do |other_orgs| %>
 <% if other_orgs[:project_id] == project.cartodb_id %>
 <% counter= 0%>
@@ -34,11 +25,9 @@
 <%end%>
 <%end%>
 <%end%>
-
 <% if !project.website.blank? %>
 <activity-website><%= project.website %></activity-website>
 <%end%>
-
 <% @download_sectors.each do |project_sector| %>
 <% if project_sector[:project_id] == project.cartodb_id %>
 <% project_sector[:sector_id].each do |sector| %>
@@ -51,17 +40,14 @@
 <%end%>
 <%end%>
 <%end%>
-
 <% if !project.program_guid.blank? %>
 <related-activity type="1" ref="<%= project.program_guid %>"></related-activity>
 <%end%>
-
 <% if !project.budget.blank? %>
 <budget>
 <value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget %></value>
 </budget>
 <%end%>
-
 <% @download_geo_projects.each do |geo_project| %>
 <% if geo_project[:project_id] == project.cartodb_id %>
 <% if geo_project[:level_detail] == "country"%>
@@ -88,7 +74,6 @@
 <%end%>
 <%end%>
 <%end%>
-
 <% if !project.result_title.blank? %>
 <result type="output">
 <title><%=project.result_title %></title>
@@ -97,43 +82,32 @@
 <%end%>
 </result>
 <%end%>
-
 <% if !project.contact_name.blank? || !project.contact_email.blank? %>
 <contact-info>
 <organisation><%= @download_organization.organization_name %></organisation>
-
 <% if !project.contact_name.blank? %>
 <person-name><%= project.contact_name %></person-name>
 <%end%>
-
 <% if !project.contact_email.blank? %>
 <email><%= project.contact_email %></email>
 <%end%>
 </contact-info>
 <%end%>
-
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.collaboration_type %>"></collaboration-type>
 <%end%>
-
 <% if !project.aid_type.blank? %>
 <default-aid-type code="<%= project.aid_type %>"></default-aid-type>
 <%end%>
-
 <% if !project.tied_status.blank? %>
 <default-tied-status code="<%= project.tied_status %>"></default-tied-status>
 <%end%>
-
 <% if !project.flow_type.blank? %>
 <default-flow-type code="<%= project.flow_type %>"></default-flow-type>
 <%end%>
-
 <% if !project.finance_type.blank? %>
 <default-finance-type code="<%= project.finance_type %>"></default-finance-type>
 <%end%>
-
 </iati-activity>
-
 <%end%>
 </iati-activities>
-
