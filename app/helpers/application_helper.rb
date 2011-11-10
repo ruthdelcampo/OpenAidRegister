@@ -6,7 +6,7 @@ module ApplicationHelper
   end
   
   def format_date_dash(date)
-    return date.strftime('%m-%d-%Y') if date.present? && date.is_a?(Date)
+    return date.strftime('%Y-%m-%d') if date.present? && date.is_a?(Date)
     date
   end
 

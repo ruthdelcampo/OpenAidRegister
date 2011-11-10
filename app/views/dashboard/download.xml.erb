@@ -1,21 +1,16 @@
-<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.now().to_s.sub(" ", "-").tr(" ", "") %>" version="1.01">
+<iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
 <% @download_projects.each do |project| %>
 
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
 
-<reporting-org type="<%= @download_organization.organization_type_id %>"  ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
+<reporting-org type="<%= @download_organization.organization_type_id %>" ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
 
-<iati-identifier><%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}" %>
-</iati-identifier>
+<iati-identifier><%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}"%></iati-identifier>
 
-<title>
-<%= project.title %>
-</title>
+<title><%= project.title %></title>
 
 <% if !project.description.blank? %>
-<description>
-<%= project.description %>
-</description>
+<description><%= project.description %></description>
 <%end%>
 
 <% if !project.start_date.blank? %>
@@ -34,8 +29,7 @@
 <% if other_orgs[:project_id] == project.cartodb_id %>
 <% counter= 0%>
 <% other_orgs[:other_org_names].each do |other_org_name| %>
-<participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref="">
-<%=other_org_name%></participating-org>
+<participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref=""><%=other_org_name%></participating-org>
 <% counter+=1%>
 <%end%>
 <%end%>
@@ -78,9 +72,7 @@
 <% counter = 0 %>
 <% geo_project[:country].each do |country| %>
 <recipient-country code="<%= country %>"></recipient-country>
-<location>
-<location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
-</location>
+<location><location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type></location>
 <% counter+=1%>
 <%end%>
 <%else%>
@@ -99,10 +91,10 @@
 
 <% if !project.result_title.blank? %>
 <result type="output">
-	<title> <%=project.result_title %> </title>
-	<% if !project.result_description.blank? %>
-	<description><%= project.result_description %></description>
-	<%end%>
+<title><%=project.result_title %></title>
+<% if !project.result_description.blank? %>
+<description><%= project.result_description %></description>
+<%end%>
 </result>
 <%end%>
 
@@ -111,7 +103,7 @@
 <organisation><%= @download_organization.organization_name %></organisation>
 
 <% if !project.contact_name.blank? %>
-<person-name> <%= project.contact_name %></person-name>
+<person-name><%= project.contact_name %></person-name>
 <%end%>
 
 <% if !project.contact_email.blank? %>
