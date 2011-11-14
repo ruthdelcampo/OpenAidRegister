@@ -272,6 +272,13 @@
 .registry_sec .form_section .row .map02 img{float:left;}
 .registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
+/** added new div for the accordion */
+.registry_sec .form_section form .row2{ float:left; width:587px; padding-bottom:16px;}
+.registry_sec .form_section .row2 label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
+.registry_sec .form_section .row2 input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+
+/**/
+
 .registry_sec .form_section .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}
 .registry_sec .form_section .row .inner_row2{ float:right; width:196px;}
 .registry_sec .form_section .row .inner_row2 input.imp01{ float:left; width:174px;}
@@ -297,4 +304,23 @@
 .slide{width:250px; float:left; height:12px; clear:left; background:url(../images/slide_bg.gif) 0 0  no-repeat; position:relative; padding:10px 0px 15px 0px;}
 .slide .slider{position:absolute; top:2px; left:4px;}
 .slide .slider img{float:left;}
+
+.tooltip {
+		display:none;
+		background-color:#666666;
+		border:1px solid #cc9;
+		padding:3px;
+		font-size:13px;
+		-moz-box-shadow: 2px 2px 11px #666;
+		-webkit-box-shadow: 2px 2px 11px #666;
+	}
+
+/* tooltip title element (h3) */
+.tooltip h3 {
+	margin:0;
+	font-size:18px;
+	color:#fff;
+}
+
+
 /***** sign up page ends here *******/

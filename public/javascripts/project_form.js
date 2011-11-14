@@ -8,12 +8,26 @@ var marker;
 var geocoder;
 var map_bounds;
 
-
 $(document).ready(function(){
-
-	$( "#datepicker" ).datepicker();
-
-  $( "#datepicker2" ).datepicker();
+	
+	$("#project_guid").tooltip({
+		// place tooltip on the right edge
+		position: "center right",
+		// a little tweaking of the position
+		offset: [-2, 10],
+		// use the built-in fadeIn/fadeOut effect
+		effect: "fade",
+		// custom opacity setting
+		opacity: 0.7
+	});
+	
+$( "#datepicker" ).datepicker();
+$( "#datepicker2" ).datepicker();
+$( "#accordion" ).accordion({
+	active: false,
+	collapsible: true
+	
+	});
 
 //Initalize
     var latlng = new google.maps.LatLng(14.5, 15.5);
