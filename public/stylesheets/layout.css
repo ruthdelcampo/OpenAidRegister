@@ -273,10 +273,22 @@
 .registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
 /** added new div for the accordion */
-.registry_sec .form_section form .row2{ float:left; width:587px; padding-bottom:16px;}
-.registry_sec .form_section .row2 label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
-.registry_sec .form_section .row2 input.imp01{ border:1px solid #b1b1b1; float:left; width:410px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
-
+.registry_sec .form_section .accordion h3 {float:left; width:100%; font:13px "Helvetica Neue";text-shadow:none}
+.registry_sec .form_section .accord_row {}
+.registry_sec .form_section .accord_row .row2{ float:left; width:587px; padding-bottom:16px;}
+.registry_sec .form_section .accord_row .row2 label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
+.registry_sec .form_section .accord_row .row2 input.imp01{ border:1px solid #b1b1b1; float:left; width:550px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .accord_row .row2 select{float:left; height:42px; margin:0; font:14px/42px "Helvetica Neue"; color:#666666;}
+.registry_sec .form_section .accord_row .row2 select option{}
+.registry_sec .form_section .accord_row .row2 select.wid-205{width:205px}
+.registry_sec .form_section .accord_row .row2 .inner_row{ float:left; width:207px; margin-right:18px; display:inline;}
+.registry_sec .form_section .accord_row .row2 .inner_row .callender{width:185px; float:left; border:1px solid #b1b1b1; padding:5px 10px; height:30px; background:#fff;}
+.registry_sec .form_section .accord_row .row2 .inner_row .callender input{width:148px; background:none; float:left;  line-height:30px; height:30px; border:none; padding-right:10px; border-right:1px solid #b1b1b1; font:bold 13px/42px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .accord_row .row2 .inner_row .callender input.button{width:18px; float:right; margin:8px 0 0 0px; height:16px; display:inline; background:url(../images/callender.gif) 0 0 no-repeat; cursor:pointer; border-right:none;}
+.registry_sec .form_section .accord_row .row2 .inner_row input.imp02{ border:1px solid #b1b1b1; float:left; width:185px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .accord_row .row2 .inner_row.last{ float:left; width:110px; margin-right:18px; display:inline;}
+.registry_sec .form_section .accord_row .row2 .inner_row.last input.imp03{ border:1px solid #b1b1b1; float:left; width:100px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
+.registry_sec .form_section .accord_row .row2  input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 /**/
 
 .registry_sec .form_section .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}

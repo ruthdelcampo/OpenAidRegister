@@ -9,24 +9,22 @@ var geocoder;
 var map_bounds;
 
 $(document).ready(function(){
-	
-	$("#project_guid").tooltip({
-		// place tooltip on the right edge
-		position: "center right",
-		// a little tweaking of the position
-		offset: [-2, 10],
-		// use the built-in fadeIn/fadeOut effect
-		effect: "fade",
-		// custom opacity setting
-		opacity: 0.7
-	});
-	
+
 $( "#datepicker" ).datepicker();
 $( "#datepicker2" ).datepicker();
+$( "#datepicker3" ).datepicker();
+
 $( "#accordion" ).accordion({
-	active: false,
-	collapsible: true
+	active: false, //initites all items collapsed
+	collapsible: true, //all can be collapsed
+	header: 'h3' //this identifies the separator for every collapsible part	
+	});
 	
+$("#project_guid").tooltip({
+	position: "center right",	// place tooltip on the right edge
+	offset: [-2, 10],	// a little tweaking of the position
+	effect: "fade",	// use the built-in fadeIn/fadeOut effect
+	opacity: 0.7	// custom opacity setting
 	});
 
 //Initalize
@@ -41,26 +39,21 @@ $( "#accordion" ).accordion({
     map = new google.maps.Map(document.getElementById("map_canvas"),
         myOptions);
 
-   //Add the listener to add a marker
-//	google.maps.event.addListener(map, 'click', addMarker);
-
 	//Add the listener to add a marker also when they do a double click
 		google.maps.event.addListener(map, 'dblclick', addMarker);
-	// Remove markers
- 	//google.maps.event.addListener(map, 'dblclick', removeMarker)
 
 	//parse possible existing points
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
     parseWkt($("#google_markers").val());
 	}
 
-  map.fitBounds(map_bounds);
-
-  sectors();
-  otherOrganizations();
-  change_contact_info();
-  showErrors();
-  deleteAll()
+  	map.fitBounds(map_bounds);
+  	sectors();
+  	otherOrganizations();
+  	change_contact_info();
+  	showErrors();
+  	deleteAll();
+	transactions();
 
 });
 
@@ -284,4 +277,12 @@ function otherOrganizations(){
       other_org_role.val('');
     }
   });
+
+
+
+function transactions(){
+	
+	
+	
+}
 }
