@@ -129,8 +129,6 @@ class ProjectController < ApplicationController
                                      params[:contact_email])
 
          # Now sectors must be written
-
-
          if params[:sectors]
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
            result = execute_query(sql, session[:organization].cartodb_id)
@@ -140,7 +138,7 @@ class ProjectController < ApplicationController
            end
          end
 
-         # This is not working and should be updated when dynamic organizations are well done
+         # Participating orgs
          if params[:participating_orgs].present?
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
@@ -157,6 +155,10 @@ class ProjectController < ApplicationController
              execute_query(sql, result.rows.first[:cartodb_id], aux_name, aux_role)
            end
           end
+          
+          
+          
+          
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new

@@ -13,13 +13,11 @@ $(document).ready(function(){
 $( "#datepicker" ).datepicker();
 $( "#datepicker2" ).datepicker();
 $( "#datepicker3" ).datepicker();
-
 $( "#accordion" ).accordion({
 	active: false, //initites all items collapsed
 	collapsible: true, //all can be collapsed
 	header: 'h3' //this identifies the separator for every collapsible part	
 	});
-	
 $("#project_guid").tooltip({
 	position: "center right",	// place tooltip on the right edge
 	offset: [-2, 10],	// a little tweaking of the position
@@ -36,17 +34,13 @@ $("#project_guid").tooltip({
       disableDoubleClickZoom: true
     };
 //Paint the map
-    map = new google.maps.Map(document.getElementById("map_canvas"),
-        myOptions);
-
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
 	//Add the listener to add a marker also when they do a double click
 		google.maps.event.addListener(map, 'dblclick', addMarker);
-
 	//parse possible existing points
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
     parseWkt($("#google_markers").val());
 	}
-
   	map.fitBounds(map_bounds);
   	sectors();
   	otherOrganizations();
@@ -93,8 +87,6 @@ function addMarker(event) {
   enableOrDisableGeodetail();
 }
 
-//function removeMarker(evt) {
-	
 function removeMarker() {
 	if (markers) {
     for (i in markers) {
@@ -277,12 +269,43 @@ function otherOrganizations(){
       other_org_role.val('');
     }
   });
-
-
+}
 
 function transactions(){
+	var transaction_list = $('#transaction_list'),
+	transaction_button = $('#add_transaction'),
+	transaction_type = $('#transaction_type'),
+	transaction_value = $('#transaction_value');
 	
+	//deletes the clicked element
+	transaction_list.find('li:not(.add_new) a').live('click', function(evt){
+	    evt.preventDefault();
+	    $(this).closest('li').remove();
+	  });
 	
+	transaction_button.click(function(evt){
+	    evt.preventDefault();
+	    var transaction_type_new = $.trim(transaction_type.find('option:selected').text());
+		var transaction_value_new = $.trim(transaction_value.val());
+		
+	    if (transaction_value_new != '' && transaction_type_new != '') {
+	      var existing_li = transaction_list.find('li:not(.add_new):contains(' + transaction_value_new + '):contains(' + transaction_type_new + ')');
+	      if (existing_li.length > 0){
+	        existing_li.find('div').effect('highlight', {'color': '#FF3300'}, 200);
+	        return;
+	      }
+	      
+		var li = $('<li>' +
+	      '  <div class="health"><a href="#">' + transaction_value_new + '</a><em>AS</em><a href="#" class="last">' + transaction_type_new + 
+			'&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
+	      '  <input type="hidden" name="transacton_list[][name]" value="' + transaction_value_new + '" />' +
+	      '  <input type="hidden" name="transacton_list[][role]" value="' + transaction_type_new + '" />' +
+	      '</li>');
+
+	      transaction_list.find('li.add_new').before(li);
+	      transaction_type.val('');
+	      transaction_value.val('');
 	
-}
+		}
+	});
 }
