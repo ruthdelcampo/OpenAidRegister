@@ -45,13 +45,7 @@
 				<div class="row">
 	                  <label>SECTOR</label>
 					   <ul id="sectors_list">
-              <% ( params[:sectors] || [] ).each do |sector| -%>
-                <li>
-                  <div class="health"><a href="#"><%= sector_by_id(sector[:id]) %>&nbsp;<img src="/images/cross.gif" alt="" /></a></div>
-                  <input type="hidden" name="sectors[][id]" value="<%= sector[:id] %>" />
-                </li>
-              <% end -%>
-              <% ( @sectors || [] ).each do |sector| -%>
+              <% ( @project_data[:sectors] || [] ).each do |sector| -%>
                 <li>
                   <div class="health"><a href="#"><%= sector_by_id(sector[:id]) %>&nbsp;<img src="/images/cross.gif" alt="" /></a></div>
                   <input type="hidden" name="sectors[][id]" value="<%= sector[:id] %>" />
@@ -230,7 +224,6 @@
                     <li>
 						<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1",
 					 :class => "checkbox") %>
-
                       <span>Check this option if you are the contact person</span> </li>
                   </ul>
                   <ul>
@@ -248,27 +241,29 @@
                 </div>
               </div>
 
+			
 				<ul id="transaction_list">
-                  <% ( @transaction_list || [] ).each do |transaction| -%>
-                    <li>
-                      <div class="health">
-                        <a href="#"><%= transaction.transaction_value %></a><em>AS</em>
-                        <a href="#" class="last"><%= transaction.transaction_type %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
-                      </div>
-                      <%= hidden_field_tag :'transacton_list[][transaction_value]', transaction.transaction_value %>
-                      <%= hidden_field_tag :'transacton_list[][transaction_type]', transaction.transaction_type %>
-                    </li>
-                  <% end -%>
-                  <% ( params[:transaction_list] || [] ).each do |transaction| -%>
+                  <% ( @project_data[:transaction_list] || [] ).each do |transaction| -%>
                     <li>
                       <div class="health">
                         <a href="#"><%= transaction[:transaction_value] %></a><em>AS</em>
                         <a href="#" class="last"><%= transaction[:transaction_type] %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
                       </div>
-                      <%= hidden_field_tag :'transaction_list[][transaction_value]', transaction[:transaction_value] %>
-                      <%= hidden_field_tag :'transaction_list[][transaction_type]', transaction[:transaction_type] %>
+					  <%= hidden_field_tag :'transaction_list[][transaction_type]', transaction[:transaction_type] %>
+					  <%= hidden_field_tag :'transaction_list[][transaction_value]', transaction[:transaction_value] %>
+                      <%= hidden_field_tag :'transaction_list[][transaction_currency]', transaction[:transaction_currency] %>
+                      <%= hidden_field_tag :'transaction_list[][transaction_date]', transaction[:transaction_date] %>
+					  <%= hidden_field_tag :'transaction_list[][provider_activity_id]', transaction[:provider_activity_id] %>
+                      <%= hidden_field_tag :'transaction_list[][provider_name]', transaction[:provider_name] %>
+					  <%= hidden_field_tag :'transaction_list[][provider_id]', transaction[:provider_id] %>
+                      <%= hidden_field_tag :'transaction_list[][receiver_activity_id]', transaction[:receiver_activity_id] %>
+					  <%= hidden_field_tag :'transaction_list[][receiver_name]', transaction[:receiver_name] %>
+                      <%= hidden_field_tag :'transaction_list[][receiver_id]', transaction[:receiver_id] %>
+                      <%= hidden_field_tag :'transaction_list[][transaction_description]', transaction[:transaction_description] %>x
+
                     </li>
                   <% end -%>
+
                   <li class="add_new">
 				<div id="accordion">
 			      	<h3><a href="#">TRANSACTION DATA</a></h3>
@@ -288,7 +283,7 @@
 				                        ]), :class => 'wid-205' %>
 						</div>
 					                   <div class="inner_row">
-					                        <label for="transaction_date">TRANSACTION DATE*</label>
+					                        <label>TRANSACTION DATE*</label>
 						                    <div class="callender">
 						                      <input name="transaction_date" type="text" id="datepicker3" value ="<%= format_date(@project_data[:transaction_date]) %>" />
 						                      <input type="button" class="button"/>
@@ -302,44 +297,44 @@
 		                 
 		                </div>
 		                <div class="inner_row">
-		                  	<label>CURRENCY</label>
-							<%= select_tag(:transaction_currency, options_for_select(currency_list, :selected => @project_data[:transaction_currency]), :class => "wid-205" )%>
+		                  	<label for="transaction_currency">CURRENCY</label>
+							<%= select_tag(:transaction_currency, options_for_select(currency_list), :class => "wid-205" )%>
 		                </div>
 		             </div>
 					
 					<div class="row2">
 							<div class="inner_row">		
-						 	<label>PROVIDER ACTIVITY ID</label>
+						 	<label for="provider_activity_id">PROVIDER ACTIVITY ID</label>
 						 <%= text_field_tag :provider_activity_id, nil, :class => 'imp02' %>                 
 						 </div>	
 						<div class="inner_row">		
-					 	<label>PROVIDER NAME</label>
+					 	<label for="provider_name">PROVIDER NAME</label>
 					 <%= text_field_tag :provider_name, nil, :class => 'imp02' %>                 
 					 </div>
 					
 						<div class="inner_row last">		
-					 	<label>PROVIDER ID</label>
+					 	<label for="provider_id">PROVIDER ID</label>
 					 <%= text_field_tag :provider_id, nil, :class => 'imp03' %>                 
 					 </div>
 					</div> 
 					
 					<div class="row2">
 							<div class="inner_row">		
-						 	<label> RECEIVER ACTIVITY ID</label>
+						 	<label for="receiver_activity_id"> RECEIVER ACTIVITY ID</label>
 						 <%= text_field_tag :receiver_activity_id, nil, :class => 'imp02' %>                 
 						 </div>	
 						<div class="inner_row">		
-					 	<label>RECEIVER NAME</label>
+					 	<label for="receiver_name">RECEIVER NAME</label>
 					 <%= text_field_tag :receiver_name, nil, :class => 'imp02' %>                 
 					 </div>
 					
 						<div class="inner_row last">		
-					 	<label>RECEIVER ID</label>
+					 	<label for="receiver_id">RECEIVER ID</label>
 					 <%= text_field_tag :receiver_id, nil, :class => 'imp03' %>                 
 					 </div>
 					</div>
 					<div class="row2">
-						<label> TRANSACTION DESCRIPTION</label>
+						<label for="transaction_description"> TRANSACTION DESCRIPTION</label>
 							 <%= text_field_tag :transaction_description, nil, :class => 'imp01' %>  
 						</div>
 					 <div class="row2">
@@ -350,25 +345,7 @@
 					</li>
 					</ul>  
 							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
+				
 							
 							
 							

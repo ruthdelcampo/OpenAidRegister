@@ -57,7 +57,6 @@ function showErrors(){
   }
 }
 
-
 function deleteAll(){
 	$('#delete_points').click(function() {
 		removeMarker();
@@ -275,37 +274,72 @@ function transactions(){
 	var transaction_list = $('#transaction_list'),
 	transaction_button = $('#add_transaction'),
 	transaction_type = $('#transaction_type'),
-	transaction_value = $('#transaction_value');
-	
+	transaction_value = $('#transaction_value'),
+	transaction_currency = $('#transaction_currency'),
+	transaction_date = $('#datepicker3'),
+	provider_activity_id = $('#provider_activity_id'),
+	provider_name = $('#provider_name'),
+	provider_id = $('#provider_id'),
+	receiver_activity_id = $('#receiver_activity_id'),
+	receiver_name = $('#receiver_name'),
+	receiver_id = $('#receiver_id'),
+	transaction_description = $('#transaction_description');
+
 	//deletes the clicked element
 	transaction_list.find('li:not(.add_new) a').live('click', function(evt){
 	    evt.preventDefault();
 	    $(this).closest('li').remove();
 	  });
 	
-	transaction_button.click(function(evt){
+	//when the add more button is clicked...
+	transaction_button.click(function(evt){ 
 	    evt.preventDefault();
 	    var transaction_type_new = $.trim(transaction_type.find('option:selected').text());
 		var transaction_value_new = $.trim(transaction_value.val());
-		
+		var transaction_currency_new = $.trim(transaction_currency.find('option:selected').text());
+		var transaction_date_new = $.trim(transaction_date.val());
+		var provider_activity_id_new = $.trim(provider_activity_id.val());
+		var provider_name_new = $.trim(provider_name.val());
+		var provider_id_new = $.trim(provider_id.val());
+		var receiver_activity_id_new = $.trim(receiver_activity_id.val());
+		var receiver_name_new = $.trim(receiver_name.val());
+		var receiver_id_new = $.trim(receiver_id.val());
+		var transaction_description_new = $.trim(transaction_description.val());
+	
 	    if (transaction_value_new != '' && transaction_type_new != '') {
-	      var existing_li = transaction_list.find('li:not(.add_new):contains(' + transaction_value_new + '):contains(' + transaction_type_new + ')');
-	      if (existing_li.length > 0){
-	        existing_li.find('div').effect('highlight', {'color': '#FF3300'}, 200);
-	        return;
-	      }
-	      
+
 		var li = $('<li>' +
-	      '  <div class="health"><a href="#">' + transaction_value_new + '</a><em>AS</em><a href="#" class="last">' + transaction_type_new + 
+	      '  <div class="health"><a href="#">' + transaction_value_new + '</a><em> AS </em><a href="#" class="last">' + transaction_type_new + 
 			'&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
-	      '  <input type="hidden" name="transacton_list[][name]" value="' + transaction_value_new + '" />' +
-	      '  <input type="hidden" name="transacton_list[][role]" value="' + transaction_type_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][transaction_value]" value="' + transaction_value_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][transaction_type]" value="' + transaction_type_new + '" />' +
+		  '  <input type="hidden" name="transaction_list[][transaction_currency]" value="' + transaction_currency_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][transaction_date]" value="' + transaction_date_new + '" />' +
+		  '  <input type="hidden" name="transaction_list[][provider_activity_id]" value="' + provider_activity_id_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][provider_name]" value="' + provider_name_new + '" />' +
+		  '  <input type="hidden" name="transaction_list[][provider_id]" value="' + provider_id_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][receiver_activity_id]" value="' + receiver_activity_id_new + '" />' +
+		  '  <input type="hidden" name="transaction_list[][receiver_name]" value="' + receiver_name_new + '" />' +
+		  '  <input type="hidden" name="transaction_list[][receiver_id]" value="' + receiver_id_new + '" />' +
+	      '  <input type="hidden" name="transaction_list[][transaction_description]" value="' + transaction_description_new + '" />' +
 	      '</li>');
+	
+			console.log(li);
 
 	      transaction_list.find('li.add_new').before(li);
 	      transaction_type.val('');
-	      transaction_value.val('');
-	
+	  	  transaction_value.val('');
+	      transaction_currency.val('');
+	  	  transaction_date.val('');
+	      provider_activity_id.val('');
+		  provider_name.val('');
+	      provider_id.val('');
+		  transaction_type.val('');
+	      receiver_activity_id.val('');
+		  receiver_name.val('');
+	      receiver_id.val('');
+		  transaction_description.val('');
+	    
 		}
 	});
 }

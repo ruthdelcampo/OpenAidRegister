@@ -155,10 +155,39 @@ class ProjectController < ApplicationController
              execute_query(sql, result.rows.first[:cartodb_id], aux_name, aux_role)
            end
           end
-          
-          
-          
-          
+           
+           # transaction_list
+           if params[:transaction_list].present?
+             #Get the new cartodb_id because the project is new
+             sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+             result = execute_query(sql, session[:organization].cartodb_id)
+
+             transaction_list = params[:transaction_list]
+             transaction_list.each do |transaction|
+               next if transaction[:transaction_type].blank? || transaction[:transaction_value].blank? || transaction[:transaction_date].blank?
+               
+              aux_transaction_type = transaction[:transaction_type]
+              aux_transaction_value = transaction[:transaction_value]
+              aux_transaction_currency = transaction[:transaction_currency]
+              aux_transaction_date = transaction[:transaction_date]
+              aux_provider_activity_id = transaction[:provider_activity_id]
+              aux_provider_name = transaction[:provider_name]
+              aux_provider_id = transaction[:provider_id]
+              aux_receiver_activity_id = transaction[:receiver_activity_id]
+              aux_receiver_name = transaction[:receiver_name]
+              aux_receiver_id = transaction[:receiver_id]
+              aux_transaction_description = transaction[:transaction_description]
+
+               #insert organization
+               sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value, 
+               transaction_currency, transaction_date, provider_activity_id, 
+               provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description) 
+               VALUES (?, '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')"
+               execute_query(sql, result.rows.first[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency, 
+               aux_transaction_date, aux_provider_activity_id, aux_provider_name, aux_provider_id, aux_receiver_activity_id, aux_receiver_name,
+               aux_receiver_id, aux_transaction_description)
+             end
+            end        
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
@@ -245,6 +274,40 @@ class ProjectController < ApplicationController
              execute_query(sql, params[:cartodb_id], aux_name, aux_role)
            end
           end
+          
+          
+              #In this case, first delete all partner organizations and overwrite them.
+               sql = "DELETE FROM project_transactions where  project_id = '?'"
+               execute_query(sql, params[:cartodb_id])
+
+               if params[:transaction_list].present?
+                 transaction_list = params[:transaction_list]
+                 transaction_list.each do |transaction|
+                   next if transaction[:transaction_type].blank? || transaction[:transaction_value].blank?
+                   aux_transaction_type = transaction[:transaction_type]
+                   aux_transaction_value = transaction[:transaction_value]
+                   aux_transaction_currency = transaction[:transaction_currency]
+                   aux_transaction_date = transaction[:transaction_date]
+                   aux_provider_activity_id = transaction[:provider_activity_id]
+                   aux_provider_name = transaction[:provider_name]
+                   aux_provider_id = transaction[:provider_id]
+                   aux_receiver_activity_id = transaction[:receiver_activity_id]
+                   aux_receiver_name = transaction[:receiver_name]
+                   aux_receiver_id = transaction[:receiver_id]
+                   aux_transaction_description = transaction[:transaction_description]
+
+                   #insert organization
+                   sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value, 
+                    transaction_currency, transaction_date, provider_activity_id, 
+                    provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description) 
+                    VALUES (?, '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')"
+                    execute_query(sql, params[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency, 
+                    aux_transaction_date, aux_provider_activity_id, aux_provider_name, aux_provider_id, aux_receiver_activity_id, aux_receiver_name,
+                    aux_receiver_id, aux_transaction_description)
+                 
+                 end
+                end
+                
 
          #In this case, first delete all geo organizations and overwrite them.
          sql = "DELETE FROM reverse_geo where  project_id = '?'"
@@ -296,29 +359,37 @@ class ProjectController < ApplicationController
       sql = "select array_agg(sector_id) from project_sectors where project_id = ?"
       result = execute_query(sql, params[:id])
 
-     if !result.rows.first[:array_agg].blank?
+      if !result.rows.first[:array_agg].blank?
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
-    end
+      end
+    
+      sql = "select sector_id as id from project_sectors where project_id = ?"
+      result = execute_query(sql, params[:id])
 
-      #This must be fixed when other organizations is done
+      @project_data[:sectors] = result.try(:rows)
+      
       #Select partner organizations and form the array
       sql = "select other_org_name, other_org_role
       from project_partnerorganizations where project_id = ?"
       result = execute_query(sql, params[:id])
 
       @participating_orgs = result.try(:rows)
-
-      sql = "select sector_id as id from project_sectors where project_id = ?"
-      result = execute_query(sql, params[:id])
-
-      @sectors = result.try(:rows)
-
+      
+      #geo data
       sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, level_detail
       from reverse_geo where project_id = ?"
       result = execute_query(sql, params[:id])
 
       @project_data[:reverse_geo] = result.try(:rows)
+      
+      #transactions
+      #Select partner organizations and form the array
+      sql = "select transaction_type, transaction_value, transaction_currency, transaction_date, provider_activity_id, 
+        provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description
+      from project_transactions where project_id = ?"
+      result = execute_query(sql, params[:id])
 
+      @project_data[:transaction_list] = result.try(:rows)    
 
     end
 

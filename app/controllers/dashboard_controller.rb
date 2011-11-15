@@ -121,34 +121,33 @@ class DashboardController < ApplicationController
         from project_partnerorganizations INNER JOIN projects ON project_partnerorganizations.project_id = projects.cartodb_id
         WHERE organization_id = ? GROUP BY project_id"
         result = execute_query(sql, params[:id])
-
         result.rows.each do |row|
           row[:other_org_names] = row[:other_org_names][1..-2].split(",")
           row[:other_org_roles] = row[:other_org_roles][1..-2].split(",")
 
         end
-
-
-
         @download_other_orgs = result.rows
-
-
-
+        
+        
+        #now partner organizations. I need to check if this finally works well
+        sql = "select project_id, transaction_type, transaction_value, transaction_currency, 
+        transaction_date, provider_activity_id, provider_name, provider_id, receiver_activity_id,
+        receiver_name, receiver_id, transaction_description
+        from project_transactions INNER JOIN projects ON project_transactions.project_id = projects.cartodb_id
+        WHERE organization_id = ?"
+        result = execute_query(sql, params[:id])
+        @transaction_list = result.rows
         #get the geo information
-
         sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
         array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
         INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
         WHERE organization_id = ? GROUP BY project_id, level_detail"
         result = execute_query(sql, params[:id])
-
-
          result.rows.each do |row|
             #dont know why country behaves different than the other elements
             row[:adm1] = row[:adm1][1..-2].split(",")
             row[:adm2] = row[:adm2][1..-2].split(",")
           end
-
         @download_geo_projects = result.rows
 
 

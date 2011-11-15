@@ -289,6 +289,12 @@
 .registry_sec .form_section .accord_row .row2 .inner_row.last{ float:left; width:110px; margin-right:18px; display:inline;}
 .registry_sec .form_section .accord_row .row2 .inner_row.last input.imp03{ border:1px solid #b1b1b1; float:left; width:100px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .accord_row .row2  input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+
+.registry_sec .form_section .trans_row ul li .health{float:left; padding:5px 0;}
+.registry_sec .form_section .trans_row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
+.registry_sec .form_section .trans_row ul li .health a.last{background:none; padding-left:0;}
+.registry_sec .form_section .trans_row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}
+
 /**/
 
 .registry_sec .form_section .row .inner_row1{ float:left; width:207px; margin-right:18px; display:inline;}

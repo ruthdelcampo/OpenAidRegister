@@ -93,6 +93,26 @@
 <%end%>
 </contact-info>
 <%end%>
+
+<% @transaction_list.each do |transaction| -%>
+ <% if transaction[:project_id] == project.cartodb_id %>
+<transaction>
+<transaction-type code=""><%= transaction[:transaction_type] %></transaction-type>
+<value currency="<%= transaction[:transaction_currency] %>" value-date="<%= format_date_dash(transaction[:transaction_date]) %>"><%= transaction[:transaction_value] %></value>
+<transaction-date iso-date="<%= format_date_dash(transaction[:transaction_date]) %>"/>
+<% if transaction[:provider_id].present? || transaction[:provider_activity_id].present? || transaction[:provider_name].present?  %>
+<provider-org ref="<%= transaction[:provider_id] %>" provider-activity-id="<%= transaction[:provider_activity_id] %>"><%= transaction[:provider_name] %></provider-org>
+<%end%>
+<% if transaction[:receiver_id].present? || transaction[:receiver_activity_id].present? || transaction[:receiver_name].present?  %>
+<receiver-org ref="<%= transaction[:receiver_id] %>" receiver-activity-id="<%= transaction[:receiver_activity_id] %>"><%= transaction[:receiver_name] %></receiver-org>
+<%end%>
+<% if transaction[:description].present?%>
+<description xml:lang="en"><%= transaction[:transaction_description] %></description>
+<%end%>
+</transaction>
+<% end -%>
+<% end -%>
+
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.collaboration_type %>"></collaboration-type>
 <%end%>
