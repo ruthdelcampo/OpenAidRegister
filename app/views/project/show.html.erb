@@ -36,6 +36,15 @@
                     <input name="project_guid" type="text" class="imp01" id="project_guid" value ="<%=@project_data[:project_guid]%>" title="This is the project's unique identifier and should be consistent."/>
                   </div>
                 </div>
+                <div class="row">
+                  <label>ORGANIZATION ROLE IN THIS PROJECT*</label>
+                  	 <%= select_tag :org_role, options_for_select([
+                    	    ['Implementing', 'Implementing'],
+	                          ['Funding', 'Funding'],
+							['Accountable', 'Accountable'],
+		                          ['Extending', 'Extending']
+                      ], :selected => @project_data[:org_role]), :class => 'wid-205' %>
+                </div>
 
                 <div class="row">
                   <label>PROJECT DESCRIPTION</label>

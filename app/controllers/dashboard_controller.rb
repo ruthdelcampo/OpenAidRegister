@@ -82,7 +82,7 @@ class DashboardController < ApplicationController
     if (!@download_organization.blank?)
 
       #get the project info
-      sql="SELECT  cartodb_id, organization_id, title, description, language, project_guid, start_date,
+      sql="SELECT  cartodb_id, organization_id, title, description, org_role, language, project_guid, start_date,
       end_date, budget, budget_currency, website, program_guid, result_title,
       result_description, collaboration_type, tied_status, aid_type, flow_type,
       finance_type, contact_name, contact_email,
@@ -144,9 +144,7 @@ class DashboardController < ApplicationController
           WHERE organization_id = ?"
           result = execute_query(sql, params[:id])
           @download_related_docs = result.rows
-          
-          debugger
-        
+                  
         #get the geo information
         sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
         array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo

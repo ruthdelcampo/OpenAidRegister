@@ -32,7 +32,12 @@ class ProjectController < ApplicationController
       if params[:project_guid].blank?
        @errors.push("You need to enter a project id")
       end
-
+      
+        if params[:org_role].blank?
+         @errors.push("You need to select what is you organization's role in this project")
+        end
+      
+      
       #check that the project id is unique for this user
       sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '?'"
       result = execute_query(sql, session[:organization].cartodb_id)
@@ -92,10 +97,10 @@ class ProjectController < ApplicationController
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
 
-        sql="INSERT INTO PROJECTS (organization_id, title, description, the_geom, language, project_guid, start_date,
+        sql="INSERT INTO PROJECTS (organization_id, title, description, org_role, the_geom, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
-                 (?, '?', '?',
+                 (?, '?', '?','?',
                 ST_Multi(ST_GeomFromText('?',4326)),
                  '?',
                  '?', ?, ?, '?',
@@ -109,6 +114,7 @@ class ProjectController < ApplicationController
          execute_query(sql, session[:organization].cartodb_id,
                                      params[:title],
                                      params[:description],
+                                     params[:org_role],
                                      params[:google_markers],
                                      params[:language],
                                      params[:project_guid],
@@ -233,7 +239,7 @@ class ProjectController < ApplicationController
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET title='?', the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?',
+        sql="UPDATE projects SET title='?', the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?', org_role ='?',
         language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
          website='?', program_guid = '?', result_title='?',
          result_description='?', collaboration_type='?',tied_status ='?',
@@ -243,6 +249,7 @@ class ProjectController < ApplicationController
          execute_query(sql, params[:title],
                             params[:google_markers],
                             params[:description],
+                            params[:org_role],
                             params[:language],
                             params[:project_guid],
                             start_date,
@@ -373,7 +380,7 @@ class ProjectController < ApplicationController
     #it is a GET method
     if params[:id] # it is an existing project select everything from projects and from project_sectors
       
-      sql='select cartodb_id, organization_id, title, description, language, project_guid, start_date,
+      sql='select cartodb_id, organization_id, title, description, org_role, language, project_guid, start_date,
         end_date, budget, budget_currency, website, program_guid, result_title,
                result_description, collaboration_type, tied_status, aid_type, flow_type,
                finance_type, contact_name, contact_email, ST_ASText(the_geom) AS google_markers

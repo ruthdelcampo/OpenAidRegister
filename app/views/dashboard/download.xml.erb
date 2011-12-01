@@ -16,7 +16,7 @@
 <% if !project.end_date.blank? %>
 <activity-date type="end-planned" iso-date="<%= format_date_dash(project.end_date)%>"><%= format_date_dash(project.end_date) %></activity-date>
 <%end%>
-<participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>
+<participating-org role="<%= project.org_role %>" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>
 <% @download_other_orgs.each do |other_orgs| %>
 <% if other_orgs[:project_id] == project.cartodb_id %>
 <% counter= 0%>
