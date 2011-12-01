@@ -191,6 +191,9 @@ class DashboardController < ApplicationController
     
     sql="delete FROM project_relateddocs where project_id = '?'"
     execute_query(sql, params[:delete_project_id])
+    
+     sql="delete FROM project_transactions where project_id = '?'"
+      execute_query(sql, params[:delete_project_id])
 
     sql="delete FROM reverse_geo where project_id = '?'"
     execute_query(sql, params[:delete_project_id])
