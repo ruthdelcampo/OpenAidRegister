@@ -24,6 +24,7 @@ $("#project_guid").tooltip({
 	effect: "fade",	// use the built-in fadeIn/fadeOut effect
 	opacity: 0.7	// custom opacity setting
 	});
+	
 
 //Initalize
     var latlng = new google.maps.LatLng(14.5, 15.5);
@@ -48,6 +49,7 @@ $("#project_guid").tooltip({
   	showErrors();
   	deleteAll();
 	transactions();
+	relatedDocuments();
 
 });
 
@@ -250,6 +252,7 @@ function otherOrganizations(){
   button.click(function(evt){
     evt.preventDefault();
     var org_name = $.trim(other_org_name.val());
+
     var org_role = $.trim(other_org_role.find('option:selected').text());
     if (org_name != '' && org_role != '') {
       var existing_li = list.find('li:not(.add_new):contains(' + org_name + '):contains(' + org_role + ')');
@@ -266,6 +269,42 @@ function otherOrganizations(){
       list.find('li.add_new').before(li);
       other_org_name.val('');
       other_org_role.val('');
+    }
+  });
+}
+
+function relatedDocuments(){
+  var list = $('#related_docs'),
+      button = $('#add_doc'),
+      doc_url = $('#doc_url'),
+      doc_type = $('#doc_type');
+
+//deleting elements
+  list.find('li:not(.add_new) a').live('click', function(evt){
+    evt.preventDefault();
+    $(this).closest('li').remove();
+  });
+
+
+  button.click(function(evt){
+    evt.preventDefault();
+    var new_doc_url = $.trim(doc_url.val());
+    var new_doc_type = $.trim(doc_type.find('option:selected').text());
+    if (new_doc_url != '' && new_doc_type != '') {
+      var existing_li = list.find('li:not(.add_new):contains(' + new_doc_url + '):contains(' + new_doc_type + ')');
+      if (existing_li.length > 0){
+        existing_li.find('div').effect('highlight', {'color': '#FF3300'}, 200);
+        return;
+      }
+      var li = $('<li>' +
+      '  <div class="health"><a href="#">' + new_doc_url + '</a><em>type</em><a href="#" class="last">' + new_doc_type + '&nbsp;<img src="/images/cross.gif" alt="" /></a></div>' +
+      '  <input type="hidden" name="related_docs[][doc_url]" value="' + new_doc_url + '" />' +
+      '  <input type="hidden" name="related_docs[][doc_type]" value="' + new_doc_type + '" />' +
+      '</li>');
+
+      list.find('li.add_new').before(li);
+      doc_url.val('');
+      doc_type.val('');
     }
   });
 }
@@ -306,7 +345,7 @@ function transactions(){
 		var receiver_id_new = $.trim(receiver_id.val());
 		var transaction_description_new = $.trim(transaction_description.val());
 	
-	    if (transaction_value_new != '' && transaction_type_new != '') {
+	    if (transaction_value_new != '' && transaction_type_new != '' && transaction_date!= '') {
 
 		var li = $('<li>' +
 	      '  <div class="health"><a href="#">' + transaction_value_new + '</a><em> AS </em><a href="#" class="last">' + transaction_type_new + 
@@ -323,8 +362,6 @@ function transactions(){
 		  '  <input type="hidden" name="transaction_list[][receiver_id]" value="' + receiver_id_new + '" />' +
 	      '  <input type="hidden" name="transaction_list[][transaction_description]" value="' + transaction_description_new + '" />' +
 	      '</li>');
-	
-			console.log(li);
 
 	      transaction_list.find('li.add_new').before(li);
 	      transaction_type.val('');
@@ -340,6 +377,10 @@ function transactions(){
 	      receiver_id.val('');
 		  transaction_description.val('');
 	    
+		}
+		else{
+			
+			
 		}
 	});
 }

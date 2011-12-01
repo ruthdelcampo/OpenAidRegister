@@ -206,48 +206,15 @@
                   </ul>
                 </div>
               </div>
-              <div class="colem">
-                <h3>PERFORMANCE</h3>
-                <div class="row">
-                  <label>RESULT TITLE</label>
-                  <input name="result_title" id= "result_title" type="text" class="imp01" value ="<%=@project_data[:result_title]%>"/>
-                </div>
-                <div class="row">
-                  <label>DESCRIPTION / TARGETS</label>
-					<%= text_area_tag(:result_description, @project_data[:result_description]) %>
-                </div>
-              </div>
-              <div class="colem">
-                <h3>CONTACT DATA</h3>
-                <div class="row">
-                  <ul class="patrn02">
-                    <li>
-						<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1",
-					 :class => "checkbox") %>
-                      <span>Check this option if you are the contact person</span> </li>
-                  </ul>
-                  <ul>
-                    <li>
-                      <div class="inner_row wid-402 pad">
-                        <label>CONTACT NAME</label>
-                        <%= text_field_tag :contact_name, @project_data[:contact_name] %>
-                      </div>
-                      <div class="inner_row wid-402">
-                        <label>EMAIL</label>
-                        <%= text_field_tag :contact_email, @project_data[:contact_email] %>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-			
+         
+		<div class="trans_row">
+			<h3>TRANSACTION DATA</h3>
 				<ul id="transaction_list">
                   <% ( @project_data[:transaction_list] || [] ).each do |transaction| -%>
                     <li>
                       <div class="health">
-                        <a href="#"><%= transaction[:transaction_value] %></a><em>AS</em>
-                        <a href="#" class="last"><%= transaction[:transaction_type] %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
+                        <a href="#"><%= transaction[:transaction_value]%></a><em>AS</em>
+                        <a href="#" class="last"><%= transaction[:transaction_type]%>&nbsp;<img src="/images/cross.gif" alt="" /></a>
                       </div>
 					  <%= hidden_field_tag :'transaction_list[][transaction_type]', transaction[:transaction_type] %>
 					  <%= hidden_field_tag :'transaction_list[][transaction_value]', transaction[:transaction_value] %>
@@ -259,20 +226,17 @@
                       <%= hidden_field_tag :'transaction_list[][receiver_activity_id]', transaction[:receiver_activity_id] %>
 					  <%= hidden_field_tag :'transaction_list[][receiver_name]', transaction[:receiver_name] %>
                       <%= hidden_field_tag :'transaction_list[][receiver_id]', transaction[:receiver_id] %>
-                      <%= hidden_field_tag :'transaction_list[][transaction_description]', transaction[:transaction_description] %>x
-
+                      <%= hidden_field_tag :'transaction_list[][transaction_description]', transaction[:transaction_description] %>
                     </li>
-                  <% end -%>
-
-                  <li class="add_new">
+                  <% end -%>	
+                <li class="add_new">
 				<div id="accordion">
-			      	<h3><a href="#">TRANSACTION DATA</a></h3>
+			      	<h3><a href="#">NEW TRANSACTION</a></h3>
 					<div class="accord_row">
 					 <div class="row2">
 						 <div class="inner_row">
 					                <label for="transaction_type">TRANSACTION TYPE*</label>
 									 <%= select_tag :transaction_type, options_for_select([
-										  ['', ''],
 				                          ['Commitment', 'C'],
 				                          ['Disbursement', 'D'],
 				                          ['Expenditure', 'E'],
@@ -344,12 +308,90 @@
 					</div>
 					</li>
 					</ul>  
-							
+	</div>			
 				
+				     <div class="colem">
+		                <h3>PERFORMANCE</h3>
+		                <div class="row">
+		                  <label>RESULT TITLE</label>
+		                  <input name="result_title" id= "result_title" type="text" class="imp01" value ="<%=@project_data[:result_title]%>"/>
+		                </div>
+		                <div class="row">
+		                  <label>DESCRIPTION / TARGETS</label>
+							<%= text_area_tag(:result_description, @project_data[:result_description]) %>
+		                </div>
+		              </div>
+		
+						<div class="colem">
+							 <h3>RELATED DOCUMENTS</h3>
+							<div class="row">
+			                  <ul id="related_docs">
+			                    <% ( @project_data[:related_docs] || [] ).each do |related_doc| -%>
+			                      <li>
+			                        <div class="health">
+			                          <a href="#"><%= related_doc.doc_url %></a><em>type</em>
+			                          <a href="#" class="last"><%= related_doc.doc_type %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
+			                        </div>
+			                        <%= hidden_field_tag :'related_docs[][doc_url]', related_doc.doc_url %>
+			                        <%= hidden_field_tag :'related_docs[][doc_type]', related_doc.doc_type %>
+			                      </li>
+			                    <% end -%>
+			                    
+			                    <li class="add_new">
+			                      <div class="inner_row">
+			                        <label>DOCUMENT URL</label>
+			                        <%= text_field_tag :doc_url, nil, :class => 'imp01' %>
+			                      </div>
+			                      <div class="inner_row">
+			                        <label for="doc_type">TYPE</label>
+			                        <%= select_tag :doc_type, options_for_select([
+			                        	['Pre- and post-project impact appraisal','A01'],
+										['Objectives / Purpose of activity','A02'],
+										['Intended ultimate beneficiaries','A03'],
+										['Conditions','A04'],
+										['Budget','A05'],
+										['Summary information about contract','A06'],
+										['Review of project performance and evaluation','A07'],
+										['Results, outcomes and outputs','A08'],
+										['Memorandum of understanding (If agreed by all parties)','A09'],
+										['Annual report','B01'],
+										['Strategy paper','B02'],
+										['Country strategy paper','B03']
+			                        ]), :class => 'wid-205', :include_blank => true %>
+			                      </div>
+			                      <div class="inner_row last02">
+			                        <%= submit_tag '', :id => 'add_doc', :class => 'button_add' %>
+			                      </div>
+			                    </li>
+			                  </ul>
+			                </div>
 							
-							
-							
-							
+		</div>
+		              <div class="colem">
+		                <h3>CONTACT DATA</h3>
+		                <div class="row">
+		                  <ul class="patrn02">
+		                    <li>
+								<%= check_box_tag(:same_person, 1, @project_data[:same_person] =="1",
+							 :class => "checkbox") %>
+		                      <span>Check this option if you are the contact person</span> </li>
+		                  </ul>
+		                  <ul>
+		                    <li>
+		                      <div class="inner_row wid-402 pad">
+		                        <label>CONTACT NAME</label>
+		                        <%= text_field_tag :contact_name, @project_data[:contact_name] %>
+		                      </div>
+		                      <div class="inner_row wid-402">
+		                        <label>EMAIL</label>
+		                        <%= text_field_tag :contact_email, @project_data[:contact_email] %>
+		                      </div>
+		                    </li>
+		                  </ul>
+		                </div>
+		              </div>
+		
+		
 					<div class="colem">
 		                <h3 class="padd_top">CLASSIFICATION</h3>
 		                <div class="row">

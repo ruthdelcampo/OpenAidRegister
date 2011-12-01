@@ -187,7 +187,22 @@ class ProjectController < ApplicationController
                aux_transaction_date, aux_provider_activity_id, aux_provider_name, aux_provider_id, aux_receiver_activity_id, aux_receiver_name,
                aux_receiver_id, aux_transaction_description)
              end
-            end        
+            end   
+            
+             # Related docs
+             if params[:related_docs].present?
+               #Get the new cartodb_id because the project is new
+               sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
+               result = execute_query(sql, session[:organization].cartodb_id)
+
+               related_docs = params[:related_docs]
+               related_docs.each do |related_doc|
+                 next if related_doc[:doc_url].blank? || related_doc[:doc_type].blank?
+                 
+                 sql = "INSERT INTO project_relateddocs (project_id, doc_url, doc_type) VALUES (?, '?', '?')"
+                 execute_query(sql, result.rows.first[:cartodb_id], related_doc[:doc_url], related_doc[:doc_type])
+               end
+              end 
 
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
@@ -308,6 +323,20 @@ class ProjectController < ApplicationController
                  end
                 end
                 
+                 #In this case, first delete all related docs and overwrite them.
+                 sql = "DELETE FROM project_relateddocs where  project_id = '?'"
+                 execute_query(sql, params[:cartodb_id])
+
+                 if params[:related_docs].present?
+                    related_docs = params[:related_docs]
+                    related_docs.each do |related_doc|
+                      next if related_doc[:doc_url].blank? || related_doc[:doc_type].blank?
+                      #insert organization
+                      sql = "INSERT INTO project_relateddocs (project_id, doc_url, doc_type) VALUES (?, '?', '?')"
+                      execute_query(sql, params[:cartodb_id], related_doc[:doc_url], related_doc[:doc_type])
+                    end
+                   end     
+                   
 
          #In this case, first delete all geo organizations and overwrite them.
          sql = "DELETE FROM reverse_geo where  project_id = '?'"
@@ -343,7 +372,7 @@ class ProjectController < ApplicationController
 
     #it is a GET method
     if params[:id] # it is an existing project select everything from projects and from project_sectors
-
+      
       sql='select cartodb_id, organization_id, title, description, language, project_guid, start_date,
         end_date, budget, budget_currency, website, program_guid, result_title,
                result_description, collaboration_type, tied_status, aid_type, flow_type,
@@ -390,9 +419,16 @@ class ProjectController < ApplicationController
       result = execute_query(sql, params[:id])
 
       @project_data[:transaction_list] = result.try(:rows)    
+      
+      #related docs
+       sql = "select doc_url, doc_type
+        from project_relateddocs where project_id = ?"
+        result = execute_query(sql, params[:id])
+
+        @project_data[:related_docs] = result.try(:rows)      
 
     end
-
+    
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.
     # The visualization tool provides a link to Open Aid Register so that NGO users can introduce additional information when they see their funding program
     if params[:related_activity]

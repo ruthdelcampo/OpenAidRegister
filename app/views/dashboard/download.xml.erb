@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
 <% @download_projects.each do |project| %>
 <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
@@ -10,10 +11,10 @@
 <% if !project.start_date.blank? %>
 <% value = project_status(project.start_date, project.end_date) %>
 <activity-status code="<%=value[0]%>"><%=value[1]%></activity-status>
-<activity-date type="start-actual"><%= format_date_dash(project.start_date)%></activity-date>
+<activity-date type="start-actual" iso-date="<%= format_date_dash(project.start_date)%>"><%= format_date_dash(project.start_date)%></activity-date>
 <%end%>
 <% if !project.end_date.blank? %>
-<activity-date type="end-planned"><%= format_date_dash(project.end_date) %></activity-date>
+<activity-date type="end-planned" iso-date="<%= format_date_dash(project.end_date)%>"><%= format_date_dash(project.end_date) %></activity-date>
 <%end%>
 <participating-org role="Implementing" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>
 <% @download_other_orgs.each do |other_orgs| %>
@@ -23,6 +24,11 @@
 <participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref=""><%=other_org_name%></participating-org>
 <% counter+=1%>
 <%end%>
+<%end%>
+<%end%>
+<% @download_related_docs.each do |related_docs| %>
+<% if related_docs[:project_id] == project.cartodb_id %>
+<document-link url="<%= related_docs[:doc_url] %>" format="" xml:lang=""><category code="<%= related_docs[:doc_type] %>"></category></document-link>
 <%end%>
 <%end%>
 <% if !project.website.blank? %>
@@ -112,7 +118,6 @@
 </transaction>
 <% end -%>
 <% end -%>
-
 <% if !project.collaboration_type.blank? %>
 <collaboration-type code="<%= project.collaboration_type %>"></collaboration-type>
 <%end%>

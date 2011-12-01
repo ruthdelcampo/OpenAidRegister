@@ -232,7 +232,7 @@
 .registry_sec .form_section form .row ul li .health{float:left; padding:5px 0;}
 .registry_sec .form_section form .row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
 .registry_sec .form_section form .row ul li .health a.last{background:none; padding-left:0;}
-.registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}
+.registry_sec .form_section form .row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px 0 10px; position:relative; top:-1px;}
 .registry_sec .form_section form .row select{float:left; height:42px; margin:0; font:14px/42px "Helvetica Neue"; color:#666666;}
 .registry_sec .form_section form .row select option{}
 /**included this new css for sector select to be higher  */
@@ -290,10 +290,14 @@
 .registry_sec .form_section .accord_row .row2 .inner_row.last input.imp03{ border:1px solid #b1b1b1; float:left; width:100px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .accord_row .row2  input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
-.registry_sec .form_section .trans_row ul li .health{float:left; padding:5px 0;}
-.registry_sec .form_section .trans_row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
-.registry_sec .form_section .trans_row ul li .health a.last{background:none; padding-left:0;}
-.registry_sec .form_section .trans_row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 5px 0 14px; position:relative; top:-1px;}
+.registry_sec .form_section form .trans_row{ float:left; width:100%;}
+.registry_sec .form_section form .trans_row ul{width:609px; float:left; padding:10px 19px 30px 19px;  list-style:none; background:url(../images/patter02.gif) repeat;}
+.registry_sec .form_section form .trans_row ul li{width:100%; float:left; list-style-type:none;}
+.registry_sec .form_section form .trans_row ul li.add_new{margin-top: 5px}
+.registry_sec .form_section form .trans_row ul li .health{padding:5px 0;}
+.registry_sec .form_section form .trans_row ul li .health a{padding-left:10px; background:url(../images/bullet.gif) 0 5px no-repeat; color:#666666; text-decoration:none; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif; font-size:13px;}
+.registry_sec .form_section form .trans_row ul li .health a.last{background:none; padding-left:0;}
+.registry_sec .form_section form .trans_row ul li .health em{font-style:normal; font:bold 13px/13px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; color:#8C8C8C; display:inline-block; padding:0 10px 0 10px; position:relative; top:-1px;}
 
 /**/
 

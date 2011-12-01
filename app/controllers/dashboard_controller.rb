@@ -129,7 +129,7 @@ class DashboardController < ApplicationController
         @download_other_orgs = result.rows
         
         
-        #now partner organizations. I need to check if this finally works well
+        #now transactions 
         sql = "select project_id, transaction_type, transaction_value, transaction_currency, 
         transaction_date, provider_activity_id, provider_name, provider_id, receiver_activity_id,
         receiver_name, receiver_id, transaction_description
@@ -137,6 +137,16 @@ class DashboardController < ApplicationController
         WHERE organization_id = ?"
         result = execute_query(sql, params[:id])
         @transaction_list = result.rows
+        
+          #now partner organizations. I need to check if this finally works well
+          sql = "select project_id, doc_url, doc_type
+          from project_relateddocs INNER JOIN projects ON project_relateddocs.project_id = projects.cartodb_id
+          WHERE organization_id = ?"
+          result = execute_query(sql, params[:id])
+          @download_related_docs = result.rows
+          
+          debugger
+        
         #get the geo information
         sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
         array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
@@ -177,6 +187,9 @@ class DashboardController < ApplicationController
     execute_query(sql, params[:delete_project_id])
 
     sql="delete FROM project_partnerorganizations where project_id = '?'"
+    execute_query(sql, params[:delete_project_id])
+    
+    sql="delete FROM project_relateddocs where project_id = '?'"
     execute_query(sql, params[:delete_project_id])
 
     sql="delete FROM reverse_geo where project_id = '?'"
