@@ -54,32 +54,28 @@
 <value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget %></value>
 </budget>
 <%end%>
+
 <% @download_geo_projects.each do |geo_project| %>
 <% if geo_project[:project_id] == project.cartodb_id %>
 <% if geo_project[:level_detail] == "country"%>
-<% geo_project[:country].each do |country| %>
-<recipient-country code="<%= country %>"></recipient-country>
-<%end%>
+<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
 <% elsif geo_project[:level_detail] == "region"%>
-<% counter = 0 %>
-<% geo_project[:country].each do |country| %>
-<recipient-country code="<%= country %>"></recipient-country>
-<location><location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type></location>
-<% counter+=1%>
-<%end%>
-<%else%>
-<% counter = 0 %>
-<% geo_project[:country].each do |country| %>
-<recipient-country code="<%= country %>"></recipient-country>
+<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
+<location><location-type code="ADM1"><%= geo_project[:adm1] %></location-type></location>
+<% elsif geo_project[:level_detail] == "city"%>
+<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
 <location>
-<location-type code="ADM1"><%= geo_project[:adm1][counter] %></location-type>
-<location-type code="ADM2"><%= geo_project[:adm2][counter] %></location-type>
+<location-type code="ADM1"><%= geo_project[:adm1] %></location-type>
+<location-type code="ADM2"><%= geo_project[:adm2] %></location-type>
 </location>
-<% counter+=1%>
+<% else %>
+<location>
+<coordinates latitude="<%= geo_project[:latlng].split(/ /)[0] %>" longitude="<%= geo_project[:latlng].split(/ /)[1] %>" precision="2"/>
+</location>
 <%end%>
 <%end%>
 <%end%>
-<%end%>
+
 <% if !project.result_title.blank? %>
 <result type="output">
 <title><%=project.result_title %></title>

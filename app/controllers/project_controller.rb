@@ -218,22 +218,24 @@ class ProjectController < ApplicationController
            reverse_geo = params[:reverse_geo]
            reverse_geo.each do |geo|
              next if geo[:latlng].blank? || geo[:country].blank? || geo[:level_detail].blank?
-             latlng       = geo[:latlng]
-             adm1         = geo[:adm1]
-             adm2         = geo[:adm2]
-             country      = geo[:country]
+             latlng             = geo[:latlng]
+             adm1               = geo[:adm1]
+             adm2               = geo[:adm2]
+             country            = geo[:country]
+             country_extended     = geo[:country_extended]
              level_detail = geo[:level_detail]
 
              #insert organization
-             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
+             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, country_extended, level_detail) VALUES (
                ?,
                ST_GeomFromText('POINT(?)',4326),
                '?',
                '?',
                '?',
+               '?',
                '?'
              )"
-             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, level_detail)
+             execute_query(sql, result.rows.first[:cartodb_id], latlng, adm1, adm2, country, country_extended, level_detail)
            end
          end
 
@@ -357,18 +359,20 @@ class ProjectController < ApplicationController
              adm1         = geo[:adm1]
              adm2         = geo[:adm2]
              country      = geo[:country]
+             country_extended = geo[:country_extended]
              level_detail = geo[:level_detail]
 
              #insert organization
-             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, level_detail) VALUES (
+             sql = "INSERT INTO reverse_geo (project_id, the_geom, adm1, adm2, country, country_extended, level_detail) VALUES (
                ?,
                ST_GeomFromText('POINT(?)',4326),
                '?',
                '?',
                '?',
+               '?',
                '?'
              )"
-             execute_query(sql, params[:cartodb_id], latlng, adm1, adm2, country, level_detail)
+             execute_query(sql, params[:cartodb_id], latlng, adm1, adm2, country, country_extended, level_detail)
            end
          end
       end

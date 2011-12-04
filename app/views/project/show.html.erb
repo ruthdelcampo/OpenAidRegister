@@ -146,6 +146,10 @@
                           <%=	radio_button_tag 'geo_detail', 'city', current_geo_level?('city'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
                           <h6> City </h6>
                         </li>
+						  <li>
+	                          <%=	radio_button_tag 'geo_detail', 'lat_lng', current_geo_level?('city'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
+	                          <h6>Lat/Long</h6>
+	                        </li>
                       </ul>
 
                       <ul class="reverse_geo hidden">
@@ -155,6 +159,7 @@
                             <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo.adm2 %>" />
                             <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo.adm1 %>" />
                             <input type="hidden" name="reverse_geo[][country]" value="<%= geo.country %>" />
+ 							<input type="hidden" name="reverse_geo[][country_extended]" value="<%= geo.country_extended %>" />
                             <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo.level_detail %>" />
                         </li>
                         <% end -%>

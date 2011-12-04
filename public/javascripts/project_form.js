@@ -165,6 +165,7 @@ function geocodePoint(latLong, marker_id){
           }
           if (item.types[0] == 'country'){
             country = item.short_name;
+			country_extended = item.long_name;
           }
         });
         $('#location ul.reverse_geo li.marker_' + marker_id).remove();
@@ -174,6 +175,7 @@ function geocodePoint(latLong, marker_id){
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
           '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +
+		  '  <input type="hidden" name="reverse_geo[][country_extended]" value="' + country_extended + '" />' +
           '  <input type="hidden" name="reverse_geo[][level_detail]" value="' + $('#location input.geo_detail:checked').val() + '" />' +
           '</li>'
         ));

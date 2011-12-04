@@ -86,7 +86,7 @@ class DashboardController < ApplicationController
       end_date, budget, budget_currency, website, program_guid, result_title,
       result_description, collaboration_type, tied_status, aid_type, flow_type,
       finance_type, contact_name, contact_email,
-      ST_ASText(the_geom) AS google_markers, created_at, updated_at
+      created_at, updated_at
       FROM projects WHERE organization_id = ?"
       result = execute_query(sql, params[:id])
       @download_projects = result.rows
@@ -146,16 +146,11 @@ class DashboardController < ApplicationController
           @download_related_docs = result.rows
                   
         #get the geo information
-        sql = "select project_id, level_detail, array_agg(reverse_geo.country) AS country,
-        array_agg(reverse_geo.adm1) AS adm1, array_agg(reverse_geo.adm2) AS adm2 from reverse_geo
+        sql = "select project_id, level_detail, (ST_X(reverse_geo.the_geom) || ' ' || ST_Y(reverse_geo.the_geom)) AS latlng, country_extended, 
+        country, adm1, adm2 from reverse_geo
         INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
-        WHERE organization_id = ? GROUP BY project_id, level_detail"
+        WHERE organization_id = ? "
         result = execute_query(sql, params[:id])
-         result.rows.each do |row|
-            #dont know why country behaves different than the other elements
-            row[:adm1] = row[:adm1][1..-2].split(",")
-            row[:adm2] = row[:adm2][1..-2].split(",")
-          end
         @download_geo_projects = result.rows
 
 
