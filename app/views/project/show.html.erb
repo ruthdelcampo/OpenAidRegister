@@ -147,7 +147,7 @@
                           <h6> City </h6>
                         </li>
 						  <li>
-	                          <%=	radio_button_tag 'geo_detail', 'lat_lng', current_geo_level?('city'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
+	                          <%=	radio_button_tag 'geo_detail', 'lat_lng', current_geo_level?('lat_lng'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
 	                          <h6>Lat/Long</h6>
 	                        </li>
                       </ul>

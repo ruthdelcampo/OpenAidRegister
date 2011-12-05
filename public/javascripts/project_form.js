@@ -42,7 +42,15 @@ $("#project_guid").tooltip({
 	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
     parseWkt($("#google_markers").val());
 	}
-  	map.fitBounds(map_bounds);
+	
+	if (markers.length === 1) {
+		map.setCenter(map_bounds.getCenter());
+	 map.setZoom(10);
+	} else {
+	  	map.fitBounds(map_bounds);
+	}
+  
+
   	sectors();
   	otherOrganizations();
   	change_contact_info();
@@ -137,7 +145,6 @@ function parseWkt(wkt) {
 
     geocodePoint(marker.getPosition(), marker_index);
     enableOrDisableGeodetail();
-
     // Change an existing marker
     google.maps.event.addListener(marker, 'dragend', function(event){
       $("#google_markers").val(generateWkt());
