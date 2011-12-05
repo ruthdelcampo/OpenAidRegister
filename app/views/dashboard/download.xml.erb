@@ -108,7 +108,7 @@
 <% if transaction[:receiver_id].present? || transaction[:receiver_activity_id].present? || transaction[:receiver_name].present?  %>
 <receiver-org ref="<%= transaction[:receiver_id] %>" receiver-activity-id="<%= transaction[:receiver_activity_id] %>"><%= transaction[:receiver_name] %></receiver-org>
 <%end%>
-<% if transaction[:description].present?%>
+<% if transaction[:transaction_description].present?%>
 <description xml:lang="en"><%= transaction[:transaction_description] %></description>
 <%end%>
 </transaction>
