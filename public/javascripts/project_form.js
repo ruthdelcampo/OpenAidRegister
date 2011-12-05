@@ -43,9 +43,10 @@ $("#project_guid").tooltip({
     parseWkt($("#google_markers").val());
 	}
 	
+	//set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
 	if (markers.length === 1) {
 		map.setCenter(map_bounds.getCenter());
-	 map.setZoom(10);
+	 map.setZoom(8);
 	} else {
 	  	map.fitBounds(map_bounds);
 	}

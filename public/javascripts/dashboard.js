@@ -1,5 +1,5 @@
 var map_bounds;
-
+var all_markers = [];
 $(document).ready(function(){
 	initMap();
 	initUploadForm();
@@ -21,8 +21,15 @@ function initMap(){
 			parseWkt(project);
 		}
 	});
+	
+	//set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
+	if (all_markers.length === 1) {
+		map.setCenter(map_bounds.getCenter());
+	 map.setZoom(6);
+	} else {
+	  	map.fitBounds(map_bounds);
+	}
 
-	map.fitBounds(map_bounds);
 }
 
 function parseWkt(project) {
@@ -46,9 +53,11 @@ function parseWkt(project) {
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
+	all_markers.push(marker);
     createInfowindow(marker, project);
 
     map_bounds.extend(marker.getPosition());
+
 	});
 }
 
