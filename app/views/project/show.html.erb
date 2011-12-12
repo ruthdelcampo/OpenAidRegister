@@ -250,15 +250,7 @@
 					 <div class="row2">
 						 <div class="inner_row">
 					                <label for="transaction_type">TRANSACTION TYPE*</label>
-									 <%= select_tag :transaction_type, options_for_select([
-				                          ['Commitment', 'C'],
-				                          ['Disbursement', 'D'],
-				                          ['Expenditure', 'E'],
-				                          ['Incoming Funds', 'IF'],
-										  ['Interest Repayment', 'IR'],
-				                          ['Loan Repayment', 'LR'],
-				                          ['Reimbursement', 'R']
-				                        ]), :class => 'wid-205' %>
+									 <%= select_tag :transaction_type, options_for_select(transaction_type_list), :class => 'wid-205' %>
 						</div>
 					                   <div class="inner_row">
 					                        <label>TRANSACTION DATE*</label>

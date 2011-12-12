@@ -124,7 +124,6 @@ class DashboardController < ApplicationController
         result.rows.each do |row|
           row[:other_org_names] = row[:other_org_names][1..-2].split(",")
           row[:other_org_roles] = row[:other_org_roles][1..-2].split(",")
-
         end
         @download_other_orgs = result.rows
         

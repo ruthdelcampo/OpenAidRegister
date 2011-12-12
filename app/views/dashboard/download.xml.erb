@@ -51,7 +51,7 @@
 <%end%>
 <% if !project.budget.blank? %>
 <budget>
-<value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget %></value>
+<value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget.to_i %></value>
 </budget>
 <%end%>
 
@@ -99,8 +99,8 @@
 <% @transaction_list.each do |transaction| -%>
  <% if transaction[:project_id] == project.cartodb_id %>
 <transaction>
-<transaction-type code=""><%= transaction[:transaction_type] %></transaction-type>
-<value currency="<%= transaction[:transaction_currency] %>" value-date="<%= format_date_dash(transaction[:transaction_date]) %>"><%= transaction[:transaction_value] %></value>
+<transaction-type code="<%=transaction[:transaction_type]%>"><%=transaction_type_by_name (transaction[:transaction_type])  %></transaction-type>
+<value currency="<%= currency_by_name (transaction[:transaction_currency]) %>" value-date="<%= format_date_dash(transaction[:transaction_date]) %>"><%= transaction[:transaction_value].to_i %></value>
 <transaction-date iso-date="<%= format_date_dash(transaction[:transaction_date]) %>"/>
 <% if transaction[:provider_id].present? || transaction[:provider_activity_id].present? || transaction[:provider_name].present?  %>
 <provider-org ref="<%= transaction[:provider_id] %>" provider-activity-id="<%= transaction[:provider_activity_id] %>"><%= transaction[:provider_name] %></provider-org>
