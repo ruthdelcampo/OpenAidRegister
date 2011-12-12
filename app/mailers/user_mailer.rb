@@ -22,4 +22,6 @@ class UserMailer < ActionMailer::Base
      @new_user[:filename] = filename
       mail(:to => "ruthdelcampo@openaidregister.org", :subject => "New File", :from => "contact@openaidregister.org")
   end
+  
+
 end

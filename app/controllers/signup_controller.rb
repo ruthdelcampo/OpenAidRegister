@@ -147,7 +147,9 @@ class SignupController < ApplicationController
               FROM organizations WHERE email='?'"
               result = execute_query(sql, quote_string(params[:email]))
               session[:organization] = result.rows.first
-
+              #we include the organization type by id
+              session[:organization].organization_type_name =  organization_type_by_id(session[:organization].organization_type_id)
+              debugger
               #send an email
               UserMailer.welcome_email(session[:organization]).deliver
               redirect_to :action => :signup_complete
@@ -158,6 +160,31 @@ class SignupController < ApplicationController
     end
 
 end
+
+  def organization_type_by_id(id)
+    organization_type_list.select{|organization_type| organization_type.last.to_i == id.to_i}.first.first if id.present?
+  end
+
+  def organization_type_by_name (name)
+     organization_type_list.select{|organization_type| organization_type.first == name}.first.last if name.present?
+  end
+  
+ def organization_type_list
+   [
+     ['', ''],
+			['Government','10'],
+			['Other Public Sector','15'],
+			['International NGO','21'],
+			['National NGO','22'],
+			['Regional NGO','23'],
+			['Public Private Partnership','30'],
+			['Multilateral','40'],
+			['Foundation','60'],
+			['Private Sector','70'],
+			['Academic Training and Research','80']
+			] 
+ end
+ 
 
   def signup_complete
 
