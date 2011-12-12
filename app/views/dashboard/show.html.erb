@@ -3,9 +3,9 @@
       src="http://maps.googleapis.com/maps/api/js?sensor=false">
   </script>
   <script>
-    var projects_list = [];
-    <% @projects_list.each do |project| -%>
-      projects_list.push({
+    var ordered_projects_list = [];
+    <% @ordered_projects_list.each do |project| -%>
+      ordered_projects_list.push({
         markers: '<%= project.project_markers %>',
         info: {
           name: '<%= project.title %>',
@@ -37,7 +37,8 @@
                 <div class="edit_sec">
 
 				<%counter= true%>
-				<% @projects_list.each do |project| %>
+			
+				<% @ordered_projects_list.each do |project| %>
                 	<ul>
 					<%if counter%>
                     	<li class="patrn">
@@ -63,7 +64,7 @@
       <div class="dashboard_right">
       		<div class="project_details">
             <h4><img src="/images/text01.gif" alt="" /></h4>
-            <div class="rows"><strong><%= @projects_list.length %></strong> <small>Projects <br />published</small></div>
+            <div class="rows"><strong><%= @ordered_projects_list.length %></strong> <small>Projects <br />published</small></div>
             <div class="rows"><span><em><%= @current_projects %></em> Ongoing projects</span></div>
             <div class="rows"><span><em><%= @past_projects %></em> Past projects</span></div>
             <div class="add_project">

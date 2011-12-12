@@ -30,12 +30,15 @@ class DashboardController < ApplicationController
                p.end_date
     SQL
     result = execute_query(sql, session[:organization][:cartodb_id])
-    @projects_list = result.rows
+    
+    #order projects by start date to be shown in the dashboard. Last projects will be the ones with nil.
+    @ordered_projects_list = result.rows.sort{|a,b|( a.start_date and b.start_date ) ? b.start_date <=> a.start_date : ( a.start_date ? -1 : 1 ) }
+    
     @current_projects = 0
     @past_projects = 0
 
     #check which ones are current and which are past
-    @projects_list.each do |project|
+    @ordered_projects_list.each do |project|
       if (project[:end_date]== nil) || ((project[:end_date]<=> Date.current) ==1)
         @current_projects +=1
       else
