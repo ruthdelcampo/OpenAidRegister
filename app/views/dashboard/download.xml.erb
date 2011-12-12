@@ -115,19 +115,19 @@
 <% end -%>
 <% end -%>
 <% if !project.collaboration_type.blank? %>
-<collaboration-type code="<%= project.collaboration_type %>"></collaboration-type>
+<collaboration-type code="<%= project.collaboration_type %>"><%= collaboration_type_by_id(project.collaboration_type) %></collaboration-type>
 <%end%>
 <% if !project.aid_type.blank? %>
-<default-aid-type code="<%= project.aid_type %>"></default-aid-type>
+<default-aid-type code="<%= project.aid_type %>"><%= aid_type_by_id (project.aid_type) %></default-aid-type>
 <%end%>
 <% if !project.tied_status.blank? %>
-<default-tied-status code="<%= project.tied_status %>"></default-tied-status>
+<default-tied-status code="<%= project.tied_status %>"><%= tied_status_by_id (project.tied_status) %></default-tied-status>
 <%end%>
 <% if !project.flow_type.blank? %>
-<default-flow-type code="<%= project.flow_type %>"></default-flow-type>
+<default-flow-type code="<%= project.flow_type %>"><%= flow_type_by_id (project.flow_type) %></default-flow-type>
 <%end%>
 <% if !project.finance_type.blank? %>
-<default-finance-type code="<%= project.finance_type %>"></default-finance-type>
+<default-finance-type code="<%= project.finance_type %>"><%= finance_type_by_id (project.finance_type) %></default-finance-type>
 <%end%>
 </iati-activity>
 <%end%>

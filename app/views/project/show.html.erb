@@ -403,7 +403,7 @@
 		                <div class="row">
 		                  <div class="inner_row wid-402">
 		                    <label>COLLABORATION TYPE</label>
-		                    	<%= select_tag(:collaboration_type, options_for_select([['', ''],['Aid through NGOs', 5],['Aid to NGOs', 6],['Aid through PPPs', 7]], :selected => @project_data[:collaboration_type]), :class=>"wid-400") %>
+		                    	<%= select_tag(:collaboration_type, options_for_select(collaboration_type_list, :selected => @project_data[:collaboration_type]), :class=>"wid-400") %>
 		                  </div>
 		                  <div class="inner_row">
 		                    <p class="date"> Check out<a hre="http://iatistandard.org/codelists/finance_type"> here</a> to understand all options</p>
@@ -412,93 +412,26 @@
 		                <div class="row">
 		                  <div class="inner_row wid-402">
 		                    <label>TIED STATUS</label>
-		                   <%= select_tag(:tied_status, options_for_select([
-							['', ''],
-							['Partially tied', 3],
-							['Tied', 4],
-							['Untied', 5]], :selected => @project_data[:tied_status]), :class=>"wid-400") %>
+		                   <%= select_tag(:tied_status, options_for_select(tied_status_list, :selected => @project_data[:tied_status]), :class=>"wid-400") %>
 		                  </div>
 		                </div>
 		                <div class="row">
 		                  <div class="inner_row wid-402">
 		                    <label>AID TYPE</label>
-							<%= select_tag(:aid_type, options_for_select([['', ''],
-								['General budget support','A01'],
-									['Sector budget support','A02'],
-									['Core support to NGOs, other private bodies, PPPs and research institutes','B01'],
-									['Core contributions to multilateral institutions','B02'],
-									['Contributions to specific-purpose programmes and funds managed by international organisations','B03'],
-									['Basket funds/pooled funding','B04'],
-									['Project-type interventions','C01'],
-									['Donor country personnel','D01'],
-									['Other technical assistance','D02'],
-									['Scholarships/training in donor country','E01'],
-									['Imputed student costs','E02'],
-									['Debt relief','F01'],
-									['Administrative costs not included elsewhere','G01'],
-									['Development awareness','H01'],
-									['Refugees in donor countries','H02']], :selected => @project_data[:aid_type]), :class=>"wid-400") %>
+							<%= select_tag(:aid_type, options_for_select(aid_type_list, :selected => @project_data[:aid_type]), :class=>"wid-400") %>
 
 		                  </div>
 		                </div>
 		                <div class="row">
 		                  <div class="inner_row wid-402">
 		                    <label>FLOW TYPE</label>
-		                    <%= select_tag(:flow_type, options_for_select([['', ''],
-							['Official development assistance (ODA)','10'],
-									['Other official flows (OOF)','20'],
-									['PRIVATE NGO','30'],
-									['	PRIVATE MARKET','35']], :selected => @project_data[:flow_type]), :class=>"wid-400") %>
+		                    <%= select_tag(:flow_type, options_for_select(flow_type_list, :selected => @project_data[:flow_type]), :class=>"wid-400") %>
 		                  </div>
 		                </div>
 		                <div class="row">
 		                  <div class="inner_row wid-402">
 		                    <label>FIINANCE TYPE</label>
-		                     	<%= select_tag(:finance_type, options_for_select([['', '']	,
-									['Aid grant excluding debt reorganisation','110'],
-									['Subsidies to national private investors','111'],
-									['Interest subsidy grant in AF','210'],
-									['Interest subsidy to national private exporters','211'],
-									['Deposit basis','310'],
-										['Encashment basis','311'],
-										['Aid loan excluding debt reorganisation','410'],
-										['Investment-related loan to developing countries','411'],
-										['Loan in a joint venture with the recipient','412'],
-									['Loan to national private investor','413'],
-									['Loan to national private exporter','414'],
-									['Non-banks guaranteed export credits','451'],
-									['Non-banks non-guaranteed portions of guaranteed export credits','452'],
-									['Bank export credits','453'],
-									['Acquisition of equity as part of a joint venture with the recipient','510'],
-									['Acquisition of equity not part of joint venture in developing countries','511'],
-									['Other acquisition of equity','512'],
-								['Debt forgiveness: ODA claims (P)','610'],
-								['Debt forgiveness: ODA claims (I)','611'],
-								['Debt forgiveness: OOF claims (P)','612'],
-								['Debt forgiveness: OOF claims (I)','613'],
-								['Debt forgiveness: Private claims (P)','614'],
-								['Debt forgiveness: Private claims (I)','615'],
-								['Debt forgiveness: OOF claims (DSR)','616'],
-								['Debt forgiveness: Private claims (DSR)','617'],
-								['Debt forgiveness: Other','618'],
-								['Debt rescheduling: ODA claims (P)','620'],
-								['Debt rescheduling: ODA claims (I)','621'],
-								['Debt rescheduling: OOF claims (P)','622'],
-								['Debt rescheduling: OOF claims (I)','623'],
-								['Debt rescheduling: Private claims (P)','624'],
-								['Debt rescheduling: Private claims (I)','625'],
-								['Debt rescheduling: OOF claims (DSR)','626'],
-								['Debt rescheduling: Private claims (DSR)','627'],
-								['Unicode Encode Error','630'],
-								['Unicode Encode Error','631'],
-								['Unicode Encode Error','632'],
-								['Foreign direct investment','710'],
-								['Other foreign direct investment, including reinvested earnings','711'],
-								['Bank bonds','810'],
-								['Non-bank bonds','811'],
-								['Other bank securities/claims','910'],
-								['Other non-bank securities/claims','911'],
-								['Securities and other instruments issued by multilateral agencies','912']], :selected => @project_data[:finance_type]), :class=>"wid-400") %>
+		                     	<%= select_tag(:finance_type, options_for_select(finance_type_list, :selected => @project_data[:finance_type]), :class=>"wid-400") %>
 		                  </div>
 		                </div>
 		              </div>
