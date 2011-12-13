@@ -16,7 +16,7 @@ function initMap(){
 
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-	$.each(projects_list, function(index, project){
+	$.each(ordered_projects_list, function(index, project){
 		if (!(project.markers == 'POINT EMPTY' || project.markers == 'MULTIPOINT EMPTY' || project.markers == "")) {
 			parseWkt(project);
 		}
