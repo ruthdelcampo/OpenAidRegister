@@ -82,6 +82,10 @@ Cufon.replace('.body_top .body_top_lf h3, .box_list ul li h4', { fontFamily: 'He
             <!--li><a href="#">WHO IS ALREADY USING IT</a></li -->
             <li><a href="http://blog.openaidregister.org">BLOG</a></li>
             <li class="last"><a href="/about">ABOUT</a></li>
+<%if session[:organization] %>
+ <li class="first_right"><a href="/account"><%=session[:organization][:email]%></a></li>
+<li class="last_right"><a href="/logout">(close session)</a></li>
+<%end%>
           </ul>
         </div>
             <%= yield %>

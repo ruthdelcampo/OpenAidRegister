@@ -16,6 +16,9 @@
 #header .top_nav ul li.first{ padding:0 19px 0 0;}
 #header .top_nav ul li.last{background:none; padding:0 0 0 19px;}
 #header .top_nav ul li a{ float:left; color:#818180;}
+#header .top_nav ul li.first_right{ padding:0 0 0 350px;}
+#header .top_nav ul li.last_right{background:none; padding:0 0 0 5px;}
+
 #header .top_nav ul li a:hover, #header .top_nav ul li a.active{ color:#ff3300; text-decoration:none;}
 
 #header .logo{ float:left; width:100%; padding:50px 0 0 0;}
