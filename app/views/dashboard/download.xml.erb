@@ -86,7 +86,6 @@
 <%end%>
 <% if !project.contact_name.blank? || !project.contact_email.blank? %>
 <contact-info>
-<organisation><%= @download_organization.organization_name %></organisation>
 <% if !project.contact_name.blank? %>
 <person-name><%= project.contact_name %></person-name>
 <%end%>
