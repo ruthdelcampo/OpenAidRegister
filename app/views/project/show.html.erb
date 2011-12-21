@@ -14,7 +14,7 @@
       <h1 class="wid"><a href="/project" title="openAid Home">Register new project</a><img src="/images/plus_icon.png" alt="" class="png"/>
     </div>
     <div class="header_text">
-      <p>We need this project information to build the XML dataset. The most accurate data you can fill in, the better donors and general public will know about your project.</p>
+      <p>Fill in your project information so that we can build the XML dataset for your project.  Please be as accurate as possible so that the data released can help donors and the public learn all about your project.</p>
     </div>
   </div>
   <div id="body_container">
@@ -128,11 +128,11 @@
                 <h3>LOCATION</h3>
                 <div class="row">
                   <div class="inner_row wid-440">
-                    <label>WHERE IS THIS ACTIVITY TAKING PLACE? SELECT IN THE MAP</label>
+                    <label>WHERE IS THIS ACTIVITY TAKING PLACE? DOUBLE-CLICK TO SELECT IN MAP</label>
                     <div id="map_canvas" style="width:430px; height:300px;"></div>
                   </div>
                   <div class="inner_row last03">
-                     <label>LEVEL OF DETAIL</label>
+                     <label>LEVEL OF DETAIL<br><br></label>
                       <ul>
                         <li>
                           <%=	radio_button_tag 'geo_detail', 'country', current_geo_level?('country'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
@@ -447,7 +447,7 @@
       <div class="registry_right">
         <div class="top_section">
           <h4><img src="/images/do_help02.gif" alt="" /></h4>
-          <p>If you have doubts of how to fill in this form you can always check an example or <a HREF="mailto:contact@openaidregister.org">contact us </a>with your questions.</p>
+          <p>Click here for an example form or <a HREF="mailto:contact@openaidregister.org">contact us </a>with your questions.</p>
         </div>
         <div class="process">
           <h4> PROCCESS OVERVIEW</h4>
