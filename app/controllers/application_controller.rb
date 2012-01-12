@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   #def deny_access
   #debugger
   #end
+  #test
 
   def show
 
