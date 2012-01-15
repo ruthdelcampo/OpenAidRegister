@@ -1,11 +1,21 @@
-namespace :heroku do
-  task :deploy => :environment do
+namespace :oar do
+
+  desc 'Deploy the application in staging server'
+  task :deploy_staging => :environment do
     puts "Deploying application to heroku..."
 
-    system CartoDB::Settings.inject('heroku config:add'){|command, key_value| command << " #{key_value[0]}=#{key_value[1]}"}
+    system 'git push staging master'
+
+    puts 'Application deployed to staging environment!'
+  end
+
+  desc 'Deploy the application in production server'
+  task :deploy_production => :environment do
+    puts "Deploying application to heroku..."
 
     system 'git push heroku master'
 
-    puts 'Application deployed!'
+    puts 'Application deployed to production environment!'
   end
+
 end
