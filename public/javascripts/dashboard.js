@@ -17,8 +17,9 @@ function initMap(){
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 	$.each(ordered_projects_list, function(index, project){
-		if (!(project.markers == 'POINT EMPTY' || project.markers == 'MULTIPOINT EMPTY' || project.markers == "")) {
+		if (!(project.markers == 'NIL' || project.markers == 'NULL' || project.markers == "")) {
 			parseWkt(project);
+		
 		}
 	});
 	
@@ -33,29 +34,24 @@ function initMap(){
 }
 
 function parseWkt(project) {
+	
   var wkt = project.markers;
 	var procstring;
 	var auxarr;
 
   if (!map_bounds) {
     map_bounds = new google.maps.LatLngBounds();
-  }
-
-	procstring = $.trim(wkt.replace("MULTIPOINT",""));
-	procstring = procstring.slice(0,-1).slice(1);
-	auxarr = procstring.split(",");
-	$.each(auxarr,function(index,value) {
-		//var txt = $.trim(value).slice(0,-1).slice(1);
-		//var coords = txt.split(" ");
-		var coords = value.split(" ");
+  }	
+	$.each(wkt[0],function(index,value) {	
+	var coords = value.split(" ");
 		marker = new google.maps.Marker({
 		    map:map,
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
+		
 	all_markers.push(marker);
     createInfowindow(marker, project);
-
     map_bounds.extend(marker.getPosition());
 
 	});

@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
         param.to_s.sanitize_sql!
       end
     end
-
+    
     CartoDB::Connection.query(prepared_statement)
   end
 

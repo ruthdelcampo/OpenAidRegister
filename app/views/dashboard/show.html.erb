@@ -6,7 +6,7 @@
     var ordered_projects_list = [];
     <% @ordered_projects_list.each do |project| -%>
       ordered_projects_list.push({
-        markers: '<%= project.project_markers %>',
+        markers: <%= project.project_markers.split(',').to_json.html_safe %>,
         info: {
           name: '<%= project.title %>',
           sectors: <%= project.sectors.delete("{NULL}").split(',').map{|s| sector_by_id(s)}.to_json.html_safe %>,

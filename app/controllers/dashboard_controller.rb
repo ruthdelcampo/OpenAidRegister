@@ -11,26 +11,32 @@ class DashboardController < ApplicationController
 
     # Selects markers in all projects
     sql = <<-SQL
-      SELECT p.cartodb_id,
-             ST_ASText(p.the_geom) AS project_markers,
-             p.title,
-             array_agg(ps.sector_id) AS sectors,
-             (p.budget || p.budget_currency) AS budget,
-             p.start_date,
-             p.end_date
-      FROM projects p
-      LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
-      WHERE p.organization_id = ?
-      GROUP BY p.cartodb_id,
-               project_markers,
-               p.title,
-               p.budget,
-               p.budget_currency,
-               p.start_date,
-               p.end_date
+     SELECT * 
+     FROM 
+       (SELECT p.cartodb_id,
+            p.title,
+            array_agg(ps.sector_id) AS sectors,
+            (p.budget || p.budget_currency) AS budget,
+            p.start_date,
+            p.end_date
+       FROM projects p
+       LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
+       WHERE p.organization_id = ?
+       GROUP BY p.cartodb_id,
+              p.title,
+              p.budget,
+              p.budget_currency,
+              p.start_date,
+              p.end_date) as tableA
+     LEFT OUTER JOIN 
+       (SELECT p.cartodb_id, array_agg((ST_X(rg.the_geom) || ' ' || ST_Y(rg.the_geom))) as project_markers
+              FROM projects p
+              LEFT OUTER JOIN reverse_geo rg ON rg.project_id = p.cartodb_id
+              WHERE p.organization_id = ?
+              GROUP BY p.cartodb_id) as tableB
+     ON tableA.cartodb_id = tableB.cartodb_id
     SQL
-    result = execute_query(sql, session[:organization][:cartodb_id])
-    
+    result = execute_query(sql, session[:organization][:cartodb_id], session[:organization][:cartodb_id])
     #order projects by start date to be shown in the dashboard. Last projects will be the ones with nil.
     @ordered_projects_list = result.rows.sort{|a,b|( a.start_date and b.start_date ) ? b.start_date <=> a.start_date : ( a.start_date ? -1 : 1 ) }
     
@@ -44,8 +50,8 @@ class DashboardController < ApplicationController
       else
         @past_projects +=1
       end
+    end   
     end
-  end
 
 
   def import_file #not completely working. Need to add functionallity
