@@ -7,6 +7,7 @@ var markers = [];
 var marker;
 var geocoder;
 var map_bounds;
+var marker_id;
 
 $(document).ready(function(){
 
@@ -34,13 +35,14 @@ $("#project_guid").tooltip({
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDoubleClickZoom: true
     };
-//Paint the map
+
+	//Paint the map
     map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-	//Add the listener to add a marker also when they do a double click
-		google.maps.event.addListener(map, 'dblclick', addMarker);
+	//Add the listener to add a marker
+	google.maps.event.addListener(map, 'dblclick', addMarker);
 	//parse possible existing points
-	if (!($("#google_markers").val()=='POINT EMPTY' || $("#google_markers").val()=='MULTIPOINT EMPTY' || $("#google_markers").val()=="")) {
-    parseWkt($("#google_markers").val());
+	if (!($("#latlng").val()=='' || $("#latlng").val()==="[]" ))	{
+    parseWkt($("#latlng").val());
 	}
 	
 	//set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
@@ -82,19 +84,15 @@ function addMarker(event) {
 	  });
 
 	markers.push(marker);
-
   var marker_index = markers.length;
+  geocodePoints(markers, marker_index);
+  enableOrDisableGeodetail();
 
 	// Change an existing marker
 	google.maps.event.addListener(marker, 'dragend', function(event){
-    $("#google_markers").val(generateWkt());
-    geocodePoint(event.latLng, marker_index);
+    geocodePoints(markers, marker_index);
     enableOrDisableGeodetail();
   });
-
-	$("#google_markers").val(generateWkt());
-  geocodePoint(event.latLng, markers.length);
-  enableOrDisableGeodetail();
 }
 
 function removeMarker() {
@@ -104,66 +102,51 @@ function removeMarker() {
     }
     markers = [];
   }
-  $("#google_markers").val("");
   removeGeocoding();
-}
-
-function generateWkt() {
-	//well known text   POINT(10 40, 12 35, 20 30)
-	var markersAux = [];
-	$.each(markers,function(index, value) {
-		markersAux.push( value.position.lng()+" "+value.position.lat());
-	});
-	return "MULTIPOINT (" + markersAux.join(",") + ")";
 }
 
 
 function parseWkt(wkt) {
 	var procstring;
 	var auxarr;
-
   if (!map_bounds) {
     map_bounds = new google.maps.LatLngBounds();
   }
-
-	procstring = $.trim(wkt.replace("MULTIPOINT",""));
-	procstring = procstring.slice(0,-1).slice(1);
+	procstring = wkt.slice(0,-1).slice(1);
 	auxarr = procstring.split(",");
 	$.each(auxarr,function(index,value) {
-		//var txt = $.trim(value).slice(0,-1).slice(1);
-		//var coords = txt.split(" ");
-		var coords = value.split(" ");
+		var txt = $.trim(value).slice(0,-1).slice(1);
+		var coords = txt.split(" ");
 		marker = new google.maps.Marker({
 		    map:map,
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
 		markers.push(marker);
-
     map_bounds.extend(marker.getPosition());
-
     var marker_index = markers.length;
-
-    geocodePoint(marker.getPosition(), marker_index);
+    geocodePoints(markers, marker_index);
     enableOrDisableGeodetail();
     // Change an existing marker
     google.maps.event.addListener(marker, 'dragend', function(event){
-      $("#google_markers").val(generateWkt());
-      geocodePoint(event.latLng, marker_index);
+    //  $("#google_markers").val(generateWkt());
+      geocodePoints(markers, marker_index);
       enableOrDisableGeodetail();
     });
 	});
 }
-
-function geocodePoint(latLong, marker_id){
+function geocodePoints(markers, marker_length){
   if (!geocoder){
     geocoder = new google.maps.Geocoder();
   }
-
-  geocoder.geocode({location: latLong}, function(results, status){
+//First delete all previous
+ $('#location ul.reverse_geo li').remove();
+ $.each(markers, function(i, value){
+  geocoder.geocode({location: value.position}, function(results, status){
     var city, region, country;
     if (status == 'OK'){
       if (results.length > 0){
+	 	console.log (results);
         $.each(results[0].address_components, function(index, item){
           if (item.types[0] == 'administrative_area_level_2'){
             city = item.long_name;
@@ -175,11 +158,10 @@ function geocodePoint(latLong, marker_id){
             country = item.short_name;
 			country_extended = item.long_name;
           }
-        });
-        $('#location ul.reverse_geo li.marker_' + marker_id).remove();
+        }); 
         $('#location ul.reverse_geo').append($(
-          '<li class="marker_' + marker_id + '">' +
-          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + latLong.lng() + ' ' + latLong.lat()  + '" />' +
+          '<li class="marker_' + ( i*1 + 1) + '">' +
+          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + value.position.Qa + ' ' + value.position.Pa  + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
           '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +
@@ -190,6 +172,7 @@ function geocodePoint(latLong, marker_id){
       }
     }
   });
+});
 }
 
 function removeGeocoding(){

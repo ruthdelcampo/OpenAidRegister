@@ -11,6 +11,8 @@ class ProjectController < ApplicationController
 
     #We need to initialize the hash
     @errors = []
+    @latlng = []
+    
     @project_data = {}
 
     if request.post? #the form comes with the params
@@ -73,7 +75,8 @@ class ProjectController < ApplicationController
         if params[:contact_email].present? && !match_email(params[:contact_email])
         @errors.push("The format of the contact email is wrong")
         end
-
+        
+          #there has been errors print them on the template AND EXIT
          if @errors.count>0
 
             render :template => '/project/show'
@@ -83,13 +86,7 @@ class ProjectController < ApplicationController
       #Prepare the date to be inserted in CartoDB
       start_date = "null" if params[:start_date].blank?
       end_date   = "null" if params[:end_date].blank?
-
-      # prepare the geom
-      if params[:google_markers].blank?
-       params[:google_markers] = "MULTIPOINT EMPTY"
-      end
-      #there has been errors print them on the template AND EXIT
-
+    
       #prepare the project id. Take out all possible spaces and transform them to
       params[:project_guid] = params[:project_guid].tr(" ", "-")
 
@@ -97,11 +94,10 @@ class ProjectController < ApplicationController
       if params[:cartodb_id].blank?
       #It is a new project, save to cartodb
 
-        sql="INSERT INTO PROJECTS (organization_id, title, description, org_role, the_geom, language, project_guid, start_date,
+        sql="INSERT INTO PROJECTS (organization_id, title, description, org_role, language, project_guid, start_date,
           end_date, budget, budget_currency, website, program_guid, result_title,
                  result_description, collaboration_type, tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
                  (?, '?', '?','?',
-                ST_Multi(ST_GeomFromText('?',4326)),
                  '?',
                  '?', ?, ?, '?',
                  '?', '?', '?', '?',
@@ -115,7 +111,6 @@ class ProjectController < ApplicationController
                                      params[:title],
                                      params[:description],
                                      params[:org_role],
-                                     params[:google_markers],
                                      params[:language],
                                      params[:project_guid],
                                      start_date,
@@ -209,7 +204,6 @@ class ProjectController < ApplicationController
                  execute_query(sql, result.rows.first[:cartodb_id], related_doc[:doc_url], related_doc[:doc_type])
                end
               end 
-
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
@@ -241,7 +235,7 @@ class ProjectController < ApplicationController
 
       else
         #it is an existing project do whatever
-        sql="UPDATE projects SET title='?', the_geom=ST_Multi(ST_GeomFromText('?',4326)), description ='?', org_role ='?',
+        sql="UPDATE projects SET title='?', description ='?', org_role ='?',
         language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
          website='?', program_guid = '?', result_title='?',
          result_description='?', collaboration_type='?',tied_status ='?',
@@ -249,7 +243,6 @@ class ProjectController < ApplicationController
          finance_type ='?',contact_name='?', contact_email='?' WHERE cartodb_id='?'"
 
          execute_query(sql, params[:title],
-                            params[:google_markers],
                             params[:description],
                             params[:org_role],
                             params[:language],
@@ -421,6 +414,11 @@ class ProjectController < ApplicationController
       result = execute_query(sql, params[:id])
 
       @project_data[:reverse_geo] = result.try(:rows)
+      #@reverse_geo will be used for painting the points in the map with jquery
+      (@project_data[:reverse_geo] || []).each_with_index do |row, index|     
+      @latlng[index]= row[:latlng]
+      end
+      
       
       #transactions
       #Select partner organizations and form the array
