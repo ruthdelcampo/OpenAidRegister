@@ -129,7 +129,6 @@ function parseWkt(wkt) {
     enableOrDisableGeodetail();
     // Change an existing marker
     google.maps.event.addListener(marker, 'dragend', function(event){
-    //  $("#google_markers").val(generateWkt());
       geocodePoints(markers, marker_index);
       enableOrDisableGeodetail();
     });
