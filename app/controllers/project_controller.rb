@@ -407,7 +407,7 @@ class ProjectController < ApplicationController
       @participating_orgs = result.try(:rows)
 
       #geo data
-      sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, level_detail
+      sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, country_extended, level_detail
       from reverse_geo where project_id = ?"
       result = execute_query(sql, params[:id])
 
