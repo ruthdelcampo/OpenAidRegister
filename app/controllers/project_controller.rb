@@ -12,7 +12,7 @@ class ProjectController < ApplicationController
     #We need to initialize the hash
     @errors = []
     @latlng = []
-    
+
     @project_data = {}
 
     if request.post? #the form comes with the params
@@ -34,12 +34,12 @@ class ProjectController < ApplicationController
       if params[:project_guid].blank?
        @errors.push("You need to enter a project id")
       end
-      
+
         if params[:org_role].blank?
          @errors.push("You need to select what is you organization's role in this project")
         end
-      
-      
+
+
       #check that the project id is unique for this user
       sql = "SELECT cartodb_id, project_guid FROM projects WHERE organization_id = '?'"
       result = execute_query(sql, session[:organization].cartodb_id)
@@ -75,7 +75,7 @@ class ProjectController < ApplicationController
         if params[:contact_email].present? && !match_email(params[:contact_email])
         @errors.push("The format of the contact email is wrong")
         end
-        
+
           #there has been errors print them on the template AND EXIT
          if @errors.count>0
 
@@ -86,7 +86,7 @@ class ProjectController < ApplicationController
       #Prepare the date to be inserted in CartoDB
       start_date = "null" if params[:start_date].blank?
       end_date   = "null" if params[:end_date].blank?
-    
+
       #prepare the project id. Take out all possible spaces and transform them to
       params[:project_guid] = params[:project_guid].tr(" ", "-")
 
@@ -156,7 +156,7 @@ class ProjectController < ApplicationController
              execute_query(sql, result.rows.first[:cartodb_id], aux_name, aux_role)
            end
           end
-           
+
            # transaction_list
            if params[:transaction_list].present?
              #Get the new cartodb_id because the project is new
@@ -166,7 +166,7 @@ class ProjectController < ApplicationController
              transaction_list = params[:transaction_list]
              transaction_list.each do |transaction|
                next if transaction[:transaction_type].blank? || transaction[:transaction_value].blank? || transaction[:transaction_date].blank?
-               
+
               aux_transaction_type = transaction[:transaction_type]
               aux_transaction_value = transaction[:transaction_value]
               aux_transaction_currency = transaction[:transaction_currency]
@@ -180,16 +180,16 @@ class ProjectController < ApplicationController
               aux_transaction_description = transaction[:transaction_description]
 
                #insert organization
-               sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value, 
-               transaction_currency, transaction_date, provider_activity_id, 
-               provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description) 
+               sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value,
+               transaction_currency, transaction_date, provider_activity_id,
+               provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description)
                VALUES (?, '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')"
-               execute_query(sql, result.rows.first[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency, 
+               execute_query(sql, result.rows.first[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency,
                aux_transaction_date, aux_provider_activity_id, aux_provider_name, aux_provider_id, aux_receiver_activity_id, aux_receiver_name,
                aux_receiver_id, aux_transaction_description)
              end
-            end   
-            
+            end
+
              # Related docs
              if params[:related_docs].present?
                #Get the new cartodb_id because the project is new
@@ -199,11 +199,11 @@ class ProjectController < ApplicationController
                related_docs = params[:related_docs]
                related_docs.each do |related_doc|
                  next if related_doc[:doc_url].blank? || related_doc[:doc_type].blank?
-                 
+
                  sql = "INSERT INTO project_relateddocs (project_id, doc_url, doc_type) VALUES (?, '?', '?')"
                  execute_query(sql, result.rows.first[:cartodb_id], related_doc[:doc_url], related_doc[:doc_type])
                end
-              end 
+              end
          if params[:reverse_geo].present?
            #Get the new cartodb_id because the project is new
            sql = "SELECT cartodb_id from PROJECTS WHERE organization_id=? ORDER BY cartodb_id DESC LIMIT 1 "
@@ -291,8 +291,8 @@ class ProjectController < ApplicationController
              execute_query(sql, params[:cartodb_id], aux_name, aux_role)
            end
           end
-          
-          
+
+
               #In this case, first delete all partner organizations and overwrite them.
                sql = "DELETE FROM project_transactions where  project_id = '?'"
                execute_query(sql, params[:cartodb_id])
@@ -314,17 +314,17 @@ class ProjectController < ApplicationController
                    aux_transaction_description = transaction[:transaction_description]
 
                    #insert organization
-                   sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value, 
-                    transaction_currency, transaction_date, provider_activity_id, 
-                    provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description) 
+                   sql = "INSERT INTO project_transactions (project_id, transaction_type, transaction_value,
+                    transaction_currency, transaction_date, provider_activity_id,
+                    provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description)
                     VALUES (?, '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')"
-                    execute_query(sql, params[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency, 
+                    execute_query(sql, params[:cartodb_id], aux_transaction_type, aux_transaction_value, aux_transaction_currency,
                     aux_transaction_date, aux_provider_activity_id, aux_provider_name, aux_provider_id, aux_receiver_activity_id, aux_receiver_name,
                     aux_receiver_id, aux_transaction_description)
-                 
+
                  end
                 end
-                
+
                  #In this case, first delete all related docs and overwrite them.
                  sql = "DELETE FROM project_relateddocs where  project_id = '?'"
                  execute_query(sql, params[:cartodb_id])
@@ -337,8 +337,8 @@ class ProjectController < ApplicationController
                       sql = "INSERT INTO project_relateddocs (project_id, doc_url, doc_type) VALUES (?, '?', '?')"
                       execute_query(sql, params[:cartodb_id], related_doc[:doc_url], related_doc[:doc_type])
                     end
-                   end     
-                   
+                   end
+
 
          #In this case, first delete all geo organizations and overwrite them.
          sql = "DELETE FROM reverse_geo where  project_id = '?'"
@@ -376,7 +376,7 @@ class ProjectController < ApplicationController
 
     #it is a GET method
     if params[:id] # it is an existing project select everything from projects and from project_sectors
-      
+
       sql='select cartodb_id, organization_id, title, description, org_role, language, project_guid, start_date,
         end_date, budget, budget_currency, website, program_guid, result_title,
                result_description, collaboration_type, tied_status, aid_type, flow_type,
@@ -393,19 +393,19 @@ class ProjectController < ApplicationController
       if !result.rows.first[:array_agg].blank?
       @project_data[:sector_id] = eval('['+result.rows.first[:array_agg][1..-2]+']')
       end
-    
+
       sql = "select sector_id as id from project_sectors where project_id = ?"
       result = execute_query(sql, params[:id])
 
       @project_data[:sectors] = result.try(:rows)
-      
+
       #Select partner organizations and form the array
       sql = "select other_org_name, other_org_role
       from project_partnerorganizations where project_id = ?"
       result = execute_query(sql, params[:id])
 
       @participating_orgs = result.try(:rows)
-      
+
       #geo data
       sql = "select (ST_X(the_geom) || ' ' || ST_Y(the_geom)) AS latlng, adm1, adm2, country, level_detail
       from reverse_geo where project_id = ?"
@@ -413,29 +413,29 @@ class ProjectController < ApplicationController
 
       @project_data[:reverse_geo] = result.try(:rows)
       #@reverse_geo will be used for painting the points in the map with jquery
-      (@project_data[:reverse_geo] || []).each_with_index do |row, index|     
+      (@project_data[:reverse_geo] || []).each_with_index do |row, index|
       @latlng[index]= row[:latlng]
       end
-      
-      
+
+
       #transactions
       #Select partner organizations and form the array
-      sql = "select transaction_type, transaction_value, transaction_currency, transaction_date, provider_activity_id, 
+      sql = "select transaction_type, transaction_value, transaction_currency, transaction_date, provider_activity_id,
         provider_name, provider_id, receiver_activity_id, receiver_name, receiver_id, transaction_description
       from project_transactions where project_id = ?"
       result = execute_query(sql, params[:id])
 
-      @project_data[:transaction_list] = result.try(:rows)    
-      
+      @project_data[:transaction_list] = result.try(:rows)
+
       #related docs
        sql = "select doc_url, doc_type
         from project_relateddocs where project_id = ?"
         result = execute_query(sql, params[:id])
 
-        @project_data[:related_docs] = result.try(:rows)      
+        @project_data[:related_docs] = result.try(:rows)
 
     end
-    
+
     # This user comes from IATI Data Explorer. The IATI Data Explorer is an externalvisualization tool for government information in Aid Projects.
     # The visualization tool provides a link to Open Aid Register so that NGO users can introduce additional information when they see their funding program
     if params[:related_activity]
