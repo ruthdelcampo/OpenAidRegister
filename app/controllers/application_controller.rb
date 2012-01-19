@@ -68,8 +68,18 @@ class ApplicationController < ActionController::Base
         param.to_s.sanitize_sql!
       end
     end
-    
+
     CartoDB::Connection.query(prepared_statement)
+  end
+
+private
+
+  def require_login
+    if session[:organization].blank?
+      session[:return_to] = request.request_uri
+      redirect_to '/login'
+      return
+    end
   end
 
 end
