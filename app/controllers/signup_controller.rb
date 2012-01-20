@@ -149,7 +149,6 @@ class SignupController < ApplicationController
               session[:organization] = result.rows.first
               #we include the organization type by id
               session[:organization].organization_type_name =  organization_type_by_id(session[:organization].organization_type_id)
-              debugger
               #send an email
               UserMailer.welcome_email(session[:organization]).deliver
               redirect_to :action => :signup_complete
