@@ -10,6 +10,15 @@ class ReverseGeo
     result.try :rows
   end
 
+  def self.by_organization_id(organization_id)
+    sql = "select project_id, level_detail, (ST_X(reverse_geo.the_geom) || ' ' || ST_Y(reverse_geo.the_geom)) AS latlng, country_extended,
+           country, adm1, adm2 from reverse_geo
+           INNER JOIN projects ON reverse_geo.project_id = projects.cartodb_id
+           WHERE organization_id = ? "
+    result = Oar::execute_query(sql, organization_id)
+    result.rows
+  end
+
   # create one
   #----------------------------------------------------------------------
 

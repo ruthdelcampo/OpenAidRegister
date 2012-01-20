@@ -57,6 +57,26 @@ class ProjectSector
   end
 
 
+  def self.by_organization_id_grouped_by_project(organization_id)
+    sql = "select project_id, array_agg(project_sectors.sector_id)
+           AS sector_id from project_sectors
+           INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id
+           WHERE organization_id =? GROUP BY project_id"
+    result = Oar::execute_query(sql, organization_id)
+
+    result.rows.each do |row|
+      row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
+    end
+    result.rows
+  end
+
+  def self.names
+    sql = "select project_sectors.sector_id, name, sector_code from project_sectors
+           INNER JOIN sectors ON project_sectors.sector_id = sectors.cartodb_id"
+    result = Oar::execute_query(sql)
+    result.rows
+  end
+
   # DELETE!
   #----------------------------------------------------------------------
 
