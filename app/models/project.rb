@@ -8,6 +8,7 @@ class Project
                 "collaboration_type",
                 "contact_email",
                 "contact_name",
+                "created_at",
                 "description",
                 "end_date",
                 "finance_type",
@@ -22,6 +23,7 @@ class Project
                 "start_date",
                 "tied_status",
                 "title",
+                "updated_at",
                 "website",
                ]
 
@@ -39,6 +41,15 @@ class Project
       result = Oar::execute_query(sql, id)
     end
     result.rows.first
+  end
+
+  # find all the projects from the given organization
+  #----------------------------------------------------------------------
+
+  def self.by_organization_id(organization_id)
+    sql = "SELECT #{ATTRS_WITH_KEY.join(',')} FROM projects WHERE organization_id = ?"
+    result = Oar::execute_query(sql, organization_id)
+    result.rows
   end
 
   # find the last project by organization_id

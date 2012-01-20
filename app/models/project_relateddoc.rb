@@ -10,6 +10,15 @@ class ProjectRelateddoc
     result.try :rows
   end
 
+  def self.by_organization_id(organization_id)
+    sql = "select project_id, doc_url, doc_type
+           from project_relateddocs
+           INNER JOIN projects ON project_relateddocs.project_id = projects.cartodb_id
+           WHERE organization_id = ?"
+    result = Oar::execute_query(sql, organization_id)
+    result.rows
+  end
+
   # create one
   #----------------------------------------------------------------------
 
