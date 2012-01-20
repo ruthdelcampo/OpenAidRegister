@@ -1,135 +1,140 @@
 <% content_for :head do %>
 
-<%= javascript_include_tag "signup" %>
+  <%= javascript_include_tag "signup" %>
 
 <% end %>
 
 <div class="logo">
-		<% if session[:organization].blank? %>
-      <h1><a href="/signup" title="openAid Home">Sign up</a><img src="/images/plus_icon.png" alt="" class="rit4 png" />
-	</h1>
- </div>
- <div class="header_text">
-    <p>We need this information about you and your organization to validate your account. We will also use the organization info when publishing your aid data so you won’t need to write this again.</p>
-  </div>
-		<%else%>
-		<h1><a href="/signup" title="openAid Home">Your account</a></h1>
-		</div>
-	 <div class="header_text">
+	<% if session[:organization].blank? %>
+    <h1><a href="/signup" title="openAid Home">Sign up</a><img src="/images/plus_icon.png" alt="" class="rit4 png" /></h1>
+    <div class="header_text">
+      <p>We need this information about you and your organization to validate your account. We will also use the organization info when publishing your aid data so you won’t need to write this again.</p>
+    </div>
+	<% else %>
+	  <h1><a href="/signup" title="openAid Home">Your account</a></h1>
+
+	  <div class="header_text">
 	    <p>Edit your account or complete the information about your organization. This organization information will be used for the IATI XML</p>
 	  </div>
-		<%end%>
-         
+	<% end %>
 </div>
+
+
 <div id="body_container">
   <div class="sign_sec">
     <div class="sign_left">
     	<%= form_tag( :method => "post") do %>
-          	<fieldset>
-              	<div class="colem">
-              	<h3>PERSONAL INFORMATION</h3>
-                  <div class="row">
-                  	<label>your email*</label>
-						<% if session[:organization].blank? %>
-                      <input name="email" type="text" class="imp01" value="<%=@org_data[:email] %>"/>
-						<%else%>
-						<input name="email" type="text" class="imp01" value="<%=@org_data[:email] %>" disabled="disabled"/>
-						<%end%>
-                  </div>
-                  <div class="row">
-                  	<div class="inner_row">
-                      	<label>Password*</label>
-                          <input name="password" type="password" class="imp01" value=""/>
-                      </div>
-                      <div class="inner_row">
-                      	<label>retype Password*</label>
-                          <input name="password_confirm" type="password" class="imp01" value=""/>
-                      </div>
-                  </div>
-                  
-                  <div class="row">
-                  	<div class="inner_row1">
-                      	<label>your name*</label>
-                          <input name="contact_name" type="text" class="imp01" value="<%=@org_data[:contact_name] %>"/>
-                      </div>
-                      <div class="inner_row2">
-                      	<label>phone</label>
-                          <input name="telephone" type="text" class="imp01" value="<%=@org_data[:telephone] %>"/>
-                      </div>
-                  </div>
-                  </div>
-                  <div class="colem">
-              	<h3 class="padd_top">ORGANIZATION INFORMATION</h3>
-                  <div class="row">
-                  	<label>ORGANIZATION's name*</label>
-                      <input name="organization_name" type="text" class="imp02" value="<%= @org_data[:organization_name] %>"/>
-                  </div>
-                  <div class="row">
-                  	<label>ORGANIZATION's website</label>
-                      <input name="organization_web" type="text" class="imp02" value="<%=@org_data[:organization_web] %>"/>
-                  </div>
+        <fieldset>
 
-					<div class="row">
-	                  	<div class="inner_row">
-	                      	<label>ORGANIZATION's type*</label>
-	                          <%= select_tag(:organization_type_id, options_for_select(organization_type_list, :selected => @org_data[:organization_type_id]), :class=>"wid-205") %>
-	                      </div>
-	                      <div class="inner_row">
-	                      	<label>government id</label>
-	                      	<input name="organization_guid" type="text" class="imp01" value="<%=@org_data[:organization_guid] %>"/>
-	                      </div>
-						<div class="inner_row last">
-	                      	 <p class="inform"> In the US this would be the EIN Number </p>
-	                    </div>
-	                  </div>
-				
-				 <div class="row">
-                  	<label>ORGANIZATION's country*</label>
-						<%= select_tag(:organization_country, options_for_select(country_list, :selected => @org_data[:organization_country]))%>
-				</div>
-			
-				<div class="colem">
-              	<h3 class="padd_top">IATI REGISTRY INFORMATION</h3>
-                  <div class="row">
-                  	<label>API KEY</label>
-                      <input name="api_key" type="text" class="imp02" value="<%= @org_data[:api_key] %>"/>
-                  </div>
-                  <div class="row">
-                  	<label>PACKAGE NAME</label>
-                      <input name="package_name" type="text" class="imp02" value="<%=@org_data[:package_name] %>"/>
-                  </div>
-                  </div>
-<%end%>
-                  <div class="colem01">
-	
-	
-	
-			<% if session[:organization].blank? %>
-          	<span><input class="inp" name="" type="submit" value="Sign in"/></span>
-            <p><small><input name="conditions" type="checkbox" value="true" /></small> Yes, I accept the <a href="/conditions">terms and conditions</a></p>
-			<%else%>
-			<span><input class="inp" name="" type="submit" value="Edit"/></span>
-             
-			<%end%> 
-			
-                  </div>
-              </fieldset>
-          </form>  
-    </div>
-    <div class="sign_right">
-    		<span>DO YOU NEED SOME HELP?</span>
-          <p><a HREF="mailto:contact@openaidregister.org">Contact us</a> if you have troubles with this process</p>
-          <strong>We will only contact you once.</strong>
+          <div class="colem">
+            <h3>PERSONAL INFORMATION</h3>
 
-			<% if @errors %>
-			<h4 id="errors">
+            <div class="row">
+              <label>your email*</label>
+						  <% if session[:organization].blank? %>
+                <input name="email" type="text" class="imp01" value="<%=@org_data[:email] %>"/>
+						  <% else %>
+						    <input name="email" type="text" class="imp01" value="<%=@org_data[:email] %>" disabled="disabled"/>
+						  <% end %>
+            </div>
+
+            <div class="row">
+              <div class="inner_row">
+                <label>Password*</label>
+                <input name="password" type="password" class="imp01" value=""/>
+              </div>
+              <div class="inner_row">
+                <label>retype Password*</label>
+                <input name="password_confirm" type="password" class="imp01" value=""/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="inner_row1">
+                <label>your name*</label>
+                <input name="contact_name" type="text" class="imp01" value="<%=@org_data[:contact_name] %>"/>
+              </div>
+              <div class="inner_row2">
+                <label>phone</label>
+                <input name="telephone" type="text" class="imp01" value="<%=@org_data[:telephone] %>"/>
+              </div>
+            </div>
+          </div><!-- /colem -->
+
+          <div class="colem">
+            <h3 class="padd_top">ORGANIZATION INFORMATION</h3>
+
+            <div class="row">
+              <label>ORGANIZATION's name*</label>
+              <input name="organization_name" type="text" class="imp02" value="<%= @org_data[:organization_name] %>"/>
+            </div>
+
+            <div class="row">
+              <label>ORGANIZATION's website</label>
+              <input name="organization_web" type="text" class="imp02" value="<%=@org_data[:organization_web] %>"/>
+            </div>
+
+					  <div class="row">
+	            <div class="inner_row">
+	              <label>ORGANIZATION's type*</label>
+	              <%= select_tag(:organization_type_id, options_for_select(organization_type_list, :selected => @org_data[:organization_type_id]), :class=>"wid-205") %>
+	            </div>
+	            <div class="inner_row">
+	              <label>government id</label>
+	              <input name="organization_guid" type="text" class="imp01" value="<%=@org_data[:organization_guid] %>"/>
+	            </div>
+						  <div class="inner_row last">
+	              <p class="inform"> In the US this would be the EIN Number </p>
+	            </div>
+	          </div>
+
+				    <div class="row">
+              <label>ORGANIZATION's country*</label>
+						  <%= select_tag(:organization_country, options_for_select(country_list, :selected => @org_data[:organization_country])) %>
+				    </div>
+          </div><!-- colem -->
+
+				  <div class="colem">
+            <h3 class="padd_top">IATI REGISTRY INFORMATION</h3>
+
+            <div class="row">
+              <label>API KEY</label>
+              <input name="api_key" type="text" class="imp02" value="<%= @org_data[:api_key] %>"/>
+            </div>
+
+            <div class="row">
+              <label>PACKAGE NAME</label>
+              <input name="package_name" type="text" class="imp02" value="<%=@org_data[:package_name] %>"/>
+            </div>
+
+          </div><!-- colem -->
+
+          <div class="colem01">
+			      <% if session[:organization].blank? %>
+              <span><input class="inp" name="" type="submit" value="Sign in"/></span>
+              <p><small><input name="conditions" type="checkbox" value="true" /></small> Yes, I accept the <a href="/conditions">terms and conditions</a></p>
+			      <% else %>
+			      <span><input class="inp" name="" type="submit" value="Edit"/></span>
+			      <% end %>
+          </div>
+
+        </fieldset>
+      <% end %>
+  </div>
+
+  <div class="sign_right">
+    <span>DO YOU NEED SOME HELP?</span>
+    <p><a HREF="mailto:contact@openaidregister.org">Contact us</a> if you have troubles with this process</p>
+    <strong>We will only contact you once.</strong>
+
+		<% if @errors %>
+		  <h4 id="errors">
 				Errors:<br>
-				<%@errors.each do |error|%>
-				* <%=error%><br>
-				<%end%>
+				<% @errors.each do |error| %>
+				* <%= error %><br>
+				<% end %>
 			</h4>
-			
-			<%end%>			
+    <% end %>
 	</div>
-			 
-	
+
+
