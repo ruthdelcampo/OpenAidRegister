@@ -14,6 +14,13 @@ class OrganizationsController < ApplicationController
   #----------------------------------------------------------------------
 
   def show
+    redirect_to projects_organization_path(params[:id], :format => :xml)
+  end
+
+  # GET /organizations/:id/projects.:format
+  #----------------------------------------------------------------------
+
+  def projects
     # take the organization information. This request can also be done from outside people
     @download_organization = Organization.find(params[:id])
     # we need to check if there is an existing organization, else it will be error 404
@@ -35,7 +42,7 @@ class OrganizationsController < ApplicationController
         #get the geo information
         @download_geo_projects = ReverseGeo.by_organization_id(params[:id])
         #finally render the XML
-        render :template => '/organizations/show.xml.erb', :layout => false
+        render :template => '/organizations/projects.xml.erb', :layout => false
       else #if there are still no projects
         render :template => '/organizations/empty.html.erb', :layout => false
       end

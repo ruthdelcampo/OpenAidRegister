@@ -11,5 +11,4 @@ class Organization
     result.rows.first
   end
 
-
 end
