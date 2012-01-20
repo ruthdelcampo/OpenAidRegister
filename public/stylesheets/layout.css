@@ -34,6 +34,7 @@
 .theam02 #header .logo h1 img.rit3{right:340px;}
 .theam02 #header .logo h1 img.rit4{right:360px;}
 .theam02 #header .logo h1 img.rit5{right:610px;}
+.theam02 #header .logo h1 img.rit6{right:130px;}
 
 
 
@@ -145,6 +146,10 @@
 .sign_sec .sign_left form .row select{float:left; height:42px; margin:0; padding:0;font:14px/42px "Helvetica Neue"; color:#666666;}
 .sign_sec .sign_left form .row select.wid-430{width:430px;}
 .sign_sec .sign_left form .row select.wid-205{width:205px;}
+/**/
+
+/***Added to include a button in signup complete*/
+.sign_sec .sign_left form .add_project a{float:left; width:155px; height:51px; line-height:51px; text-align:center; background:url(../images/add_but.png) 0 0 no-repeat; font-size:21px; font-family:"Helvetica Neue", arial; color:#fff; text-decoration:none;}
 /**/
 
 #body_container .sign_sec .sign_right{ float:right; width:283px; padding-top:44px;}
