@@ -139,11 +139,8 @@ function geocodePoints(markers, marker_length){
 //First delete all previous
  $('#location ul.reverse_geo li').remove();
  $.each(markers, function(i, value){
-	console.log ("lala " + i)
   geocoder.geocode({location: value.position}, function(results, status){
     var city, region, country;
-console.log (status);
-console.log (results);
     if (status == 'OK'){
       if (results.length > 0){
         $.each(results[0].address_components, function(index, item){
