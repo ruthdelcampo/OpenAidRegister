@@ -84,13 +84,12 @@ function addMarker(event) {
 	  });
 
 	markers.push(marker);
-  var marker_index = markers.length;
-  geocodePoints(markers, marker_index);
+  geocodePoints(markers, markers.length);
   enableOrDisableGeodetail();
 
 	// Change an existing marker
 	google.maps.event.addListener(marker, 'dragend', function(event){
-    geocodePoints(markers, marker_index);
+    geocodePoints(markers, markers.length);
     enableOrDisableGeodetail();
   });
 }
@@ -124,15 +123,14 @@ function parseWkt(wkt) {
 		  });
 		markers.push(marker);
     map_bounds.extend(marker.getPosition());
-    var marker_index = markers.length;
-    geocodePoints(markers, marker_index);
     enableOrDisableGeodetail();
     // Change an existing marker
     google.maps.event.addListener(marker, 'dragend', function(event){
-      geocodePoints(markers, marker_index);
+	 geocodePoints(markers, markers.length);
       enableOrDisableGeodetail();
     });
 	});
+	geocodePoints(markers, markers.length);
 }
 function geocodePoints(markers, marker_length){
   if (!geocoder){
@@ -141,11 +139,13 @@ function geocodePoints(markers, marker_length){
 //First delete all previous
  $('#location ul.reverse_geo li').remove();
  $.each(markers, function(i, value){
+	console.log ("lala " + i)
   geocoder.geocode({location: value.position}, function(results, status){
     var city, region, country;
+console.log (status);
+console.log (results);
     if (status == 'OK'){
       if (results.length > 0){
-	 	console.log (results);
         $.each(results[0].address_components, function(index, item){
           if (item.types[0] == 'administrative_area_level_2'){
             city = item.long_name;
@@ -157,9 +157,9 @@ function geocodePoints(markers, marker_length){
             country = item.short_name;
 			country_extended = item.long_name;
           }
-        }); 
+        });
         $('#location ul.reverse_geo').append($(
-          '<li class="marker_' + ( i*1 + 1) + '">' +
+          '<li class="marker_' + ((i*1) + 1) + '">' +
           '  <input type="hidden" name="reverse_geo[][latlng]" value="' + value.position.Qa + ' ' + value.position.Pa  + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
@@ -172,6 +172,7 @@ function geocodePoints(markers, marker_length){
     }
   });
 });
+console.log($('#location ul.reverse_geo'));
 }
 
 function removeGeocoding(){
