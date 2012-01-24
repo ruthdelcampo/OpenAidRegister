@@ -1,17 +1,45 @@
 class ApplicationController < ActionController::Base
- #rescue_from CartoDB::Client::Error :with => :deny_access
+  # rescue_from CartoDB::Client::Error :with => :deny_access
 
   protect_from_forgery
+
+  def quote (str)
+    str.gsub("\\","\\\\\\\\").gsub("'","\\\\'")
+  end
+
+
+  def quote_string(v)
+    v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
+  end
+
+
+  def uri?(string)
+    uri = URI.parse(string)
+    %w( http https ).include?(uri.scheme)
+  rescue URI::BadURIError
+    false
+  end
+
+  def execute_query(sql, *params)
+    prepared_statement = sql.gsub(/\?/) do |match|
+      param = params.shift
+      case param
+      when Date
+        "'#{param.to_s}'"
+      else
+        param.to_s.sanitize_sql!
+      end
+    end
+
+    CartoDB::Connection.query(prepared_statement)
+  end
+
 
   #protected
   #def deny_access
   #debugger
   #end
   #test
-
-  def show
-
-  end
 
   #def cartodb_connect(sql) #It tries 2 times to connect to cartoDB. If no success, goes back to the previous page and sends an alert.
    #  begin
@@ -32,36 +60,6 @@ class ApplicationController < ActionController::Base
      #end
   # end
 
-   def quote (str)
-     str.gsub("\\","\\\\\\\\").gsub("'","\\\\'")
-   end
-
-
-   def quote_string(v)
-      v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
-    end
-
-
-    def uri?(string)
-      uri = URI.parse(string)
-      %w( http https ).include?(uri.scheme)
-    rescue URI::BadURIError
-      false
-    end
-
-  def execute_query(sql, *params)
-    prepared_statement = sql.gsub(/\?/) do |match|
-      param = params.shift
-      case param
-      when Date
-        "'#{param.to_s}'"
-      else
-        param.to_s.sanitize_sql!
-      end
-    end
-
-    CartoDB::Connection.query(prepared_statement)
-  end
 
 private
 
