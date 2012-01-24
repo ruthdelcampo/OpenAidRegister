@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  def quote (str)
+  def quote(str)
     str.gsub("\\","\\\\\\\\").gsub("'","\\\\'")
   end
 
