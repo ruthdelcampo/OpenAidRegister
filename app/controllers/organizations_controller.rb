@@ -14,7 +14,8 @@ class OrganizationsController < ApplicationController
   #----------------------------------------------------------------------
 
   def show
-    redirect_to projects_organization_path(params[:id], :format => :xml)
+    @organization = Organization.find(params[:id])
+    render :template => '/organizations/show.xml.erb', :layout => false
   end
 
   # GET /organizations/:id/projects.:format
@@ -22,25 +23,25 @@ class OrganizationsController < ApplicationController
 
   def projects
     # take the organization information. This request can also be done from outside people
-    @download_organization = Organization.find(params[:id])
+    @organization = Organization.find(params[:id])
     # we need to check if there is an existing organization, else it will be error 404
-    if @download_organization.present?
+    if @organization.present?
       # get the project info
-      @download_projects = Project.by_organization_id(params[:id])
+      @projects = Project.by_organization_id(params[:id])
       # Render XML if it has already projects entered and the organization is validated
-      if @download_projects.present?
+      if @projects.present?
         # get the se project_sector info
-        @download_sectors = ProjectSector.by_organization_id_grouped_by_project(params[:id])
+        @sectors = ProjectSector.by_organization_id_grouped_by_project(params[:id])
         # get the sector names
-        @download_sector_names = ProjectSector.names
+        @sector_names = ProjectSector.names
         # now partner organizations. I need to check if this finally works well
-        @download_other_orgs = ProjectPartnerorganization.by_organization_id_grouped_by_project(params[:id])
+        @other_orgs = ProjectPartnerorganization.by_organization_id_grouped_by_project(params[:id])
         # now transactions
         @transaction_list = ProjectTransaction.by_organization_id(params[:id])
         # now related docs
-        @download_related_docs = ProjectRelateddoc.by_organization_id(params[:id])
+        @related_docs = ProjectRelateddoc.by_organization_id(params[:id])
         #get the geo information
-        @download_geo_projects = ReverseGeo.by_organization_id(params[:id])
+        @geo_projects = ReverseGeo.by_organization_id(params[:id])
         #finally render the XML
         render :template => '/organizations/projects.xml.erb', :layout => false
       else #if there are still no projects

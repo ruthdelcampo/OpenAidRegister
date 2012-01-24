@@ -1,133 +1,196 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iati-activities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
-<% @download_projects.each do |project| %>
-<iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
-<reporting-org type="<%= @download_organization.organization_type_id %>" ref="<%="#{@download_organization.organization_country}-#{@download_organization.organization_guid}"%>"><%= @download_organization.organization_name %></reporting-org>
-<iati-identifier><%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}-#{project.project_guid}"%></iati-identifier>
-<title><%= project.title %></title>
-<% if !project.description.blank? %>
-<description><%= project.description %></description>
-<%end%>
-<% if !project.start_date.blank? %>
-<% value = project_status(project.start_date, project.end_date) %>
-<activity-status code="<%=value[0]%>"><%=value[1]%></activity-status>
-<activity-date type="start-actual" iso-date="<%= format_date_dash(project.start_date)%>"><%= format_date_dash(project.start_date)%></activity-date>
-<%end%>
-<% if !project.end_date.blank? %>
-<activity-date type="end-planned" iso-date="<%= format_date_dash(project.end_date)%>"><%= format_date_dash(project.end_date) %></activity-date>
-<%end%>
-<participating-org role="<%= project.org_role %>" type="<%= @download_organization.organization_type_id %>" ref="<%= "#{@download_organization.organization_country}-#{@download_organization.organization_guid}" %>"><%=@download_organization.organization_name %></participating-org>
-<% @download_other_orgs.each do |other_orgs| %>
-<% if other_orgs[:project_id] == project.cartodb_id %>
-<% counter= 0%>
-<% other_orgs[:other_org_names].each do |other_org_name| %>
-<participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref=""><%=other_org_name%></participating-org>
-<% counter+=1%>
-<%end%>
-<%end%>
-<%end%>
-<% @download_related_docs.each do |related_docs| %>
-<% if related_docs[:project_id] == project.cartodb_id %>
-<document-link url="<%= related_docs[:doc_url] %>" format="" xml:lang=""><category code="<%= related_docs[:doc_type] %>"></category></document-link>
-<%end%>
-<%end%>
-<% if !project.website.blank? %>
-<activity-website><%= project.website %></activity-website>
-<%end%>
-<% @download_sectors.each do |project_sector| %>
-<% if project_sector[:project_id] == project.cartodb_id %>
-<% project_sector[:sector_id].each do |sector| %>
-<% @download_sector_names.each do |sector_name| %>
-<% if sector_name[:sector_id] == sector %>
-<sector vocabulary="DAC" code="<%= sector_name.sector_code %>"><%= sector_name.name %></sector>
-<%break%>
-<%end%>
-<%end%>
-<%end%>
-<%end%>
-<%end%>
-<% if !project.program_guid.blank? %>
-<related-activity type="1" ref="<%= project.program_guid %>"></related-activity>
-<%end%>
-<% if !project.budget.blank? %>
-<budget>
-<value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget.to_i %></value>
-</budget>
-<%end%>
 
-<% @download_geo_projects.each do |geo_project| %>
-<% if geo_project[:project_id] == project.cartodb_id %>
-<% if geo_project[:level_detail] == "country"%>
-<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
-<% elsif geo_project[:level_detail] == "region"%>
-<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
-<location><location-type code="ADM1"><%= geo_project[:adm1] %></location-type></location>
-<% elsif geo_project[:level_detail] == "city"%>
-<recipient-country code="<%= geo_project[:country] %>"><%= geo_project[:country_extended] %></recipient-country>
-<location>
-<location-type code="ADM1"><%= geo_project[:adm1] %></location-type>
-<location-type code="ADM2"><%= geo_project[:adm2] %></location-type>
-</location>
-<% else %>
-<location>
-<coordinates latitude="<%= geo_project[:latlng].split(/ /)[1] %>" longitude="<%= geo_project[:latlng].split(/ /)[0] %>" precision="2"/>
-</location>
-<%end%>
-<%end%>
-<%end%>
+<% @projects.each do |project| %>
+  <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
+  <reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_country}-#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
+  <iati-identifier><%= "#{@organization.organization_country}-#{@organization.organization_guid}-#{project.project_guid}" %></iati-identifier>
+  <title><%= project.title %></title>
 
-<% if !project.result_title.blank? %>
-<result type="output">
-<title><%=project.result_title %></title>
-<% if !project.result_description.blank? %>
-<description><%= project.result_description %></description>
-<%end%>
-</result>
-<%end%>
-<% if !project.contact_name.blank? || !project.contact_email.blank? %>
-<contact-info>
-<% if !project.contact_name.blank? %>
-<person-name><%= project.contact_name %></person-name>
-<%end%>
-<% if !project.contact_email.blank? %>
-<email><%= project.contact_email %></email>
-<%end%>
-</contact-info>
-<%end%>
+  <% if !project.description.blank? %>
+    <description><%= project.description %></description>
+  <% end %>
 
-<% @transaction_list.each do |transaction| -%>
- <% if transaction[:project_id] == project.cartodb_id %>
-<transaction>
-<transaction-type code="<%=transaction[:transaction_type]%>"><%=transaction_type_by_name (transaction[:transaction_type])  %></transaction-type>
-<value currency="<%= currency_by_name (transaction[:transaction_currency]) %>" value-date="<%= format_date_dash(transaction[:transaction_date]) %>"><%= transaction[:transaction_value].to_i %></value>
-<transaction-date iso-date="<%= format_date_dash(transaction[:transaction_date]) %>"/>
-<% if transaction[:provider_id].present? || transaction[:provider_activity_id].present? || transaction[:provider_name].present?  %>
-<provider-org ref="<%= transaction[:provider_id] %>" provider-activity-id="<%= transaction[:provider_activity_id] %>"><%= transaction[:provider_name] %></provider-org>
-<%end%>
-<% if transaction[:receiver_id].present? || transaction[:receiver_activity_id].present? || transaction[:receiver_name].present?  %>
-<receiver-org ref="<%= transaction[:receiver_id] %>" receiver-activity-id="<%= transaction[:receiver_activity_id] %>"><%= transaction[:receiver_name] %></receiver-org>
-<%end%>
-<% if transaction[:transaction_description].present?%>
-<description xml:lang="en"><%= transaction[:transaction_description] %></description>
-<%end%>
-</transaction>
-<% end -%>
-<% end -%>
-<% if !project.collaboration_type.blank? %>
-<collaboration-type code="<%= project.collaboration_type %>"><%= collaboration_type_by_id(project.collaboration_type) %></collaboration-type>
-<%end%>
-<% if !project.aid_type.blank? %>
-<default-aid-type code="<%= project.aid_type %>"><%= aid_type_by_id (project.aid_type) %></default-aid-type>
-<%end%>
-<% if !project.tied_status.blank? %>
-<default-tied-status code="<%= project.tied_status %>"><%= tied_status_by_id (project.tied_status) %></default-tied-status>
-<%end%>
-<% if !project.flow_type.blank? %>
-<default-flow-type code="<%= project.flow_type %>"><%= flow_type_by_id (project.flow_type) %></default-flow-type>
-<%end%>
-<% if !project.finance_type.blank? %>
-<default-finance-type code="<%= project.finance_type %>"><%= finance_type_by_id (project.finance_type) %></default-finance-type>
-<%end%>
-</iati-activity>
-<%end%>
+  <% if !project.start_date.blank? %>
+    <% value = project_status(project.start_date, project.end_date) %>
+    <activity-status code="<%=value[0]%>"><%=value[1]%></activity-status>
+    <activity-date type="start-actual" iso-date="<%= format_date_dash(project.start_date)%>">
+      <%= format_date_dash(project.start_date) %>
+    </activity-date>
+  <% end %>
+
+  <% if !project.end_date.blank? %>
+    <activity-date type="end-planned" iso-date="<%= format_date_dash(project.end_date) %>">
+      <%= format_date_dash(project.end_date) %>
+    </activity-date>
+  <% end %>
+
+  <participating-org role="<%= project.org_role %>" type="<%= @organization.organization_type_id %>" ref="<%= "#{@organization.organization_country}-#{@organization.organization_guid}" %>">
+    <%= @organization.organization_name %>
+  </participating-org>
+
+  <% @other_orgs.each do |other_orgs| %>
+    <% if other_orgs[:project_id] == project.cartodb_id %>
+      <% counter= 0 %>
+      <% other_orgs[:other_org_names].each do |other_org_name| %>
+        <participating-org role="<%= other_orgs[:other_org_roles][counter] %>" type="" ref="">
+          <%= other_org_name %>
+        </participating-org>
+        <% counter += 1 %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% @related_docs.each do |related_docs| %>
+    <% if related_docs[:project_id] == project.cartodb_id %>
+      <document-link url="<%= related_docs[:doc_url] %>" format="" xml:lang="">
+        <category code="<%= related_docs[:doc_type] %>"></category>
+      </document-link>
+    <% end %>
+  <% end %>
+
+  <% if !project.website.blank? %>
+    <activity-website><%= project.website %></activity-website>
+  <% end %>
+
+  <% @sectors.each do |project_sector| %>
+    <% if project_sector[:project_id] == project.cartodb_id %>
+      <% project_sector[:sector_id].each do |sector| %>
+        <% @sector_names.each do |sector_name| %>
+          <% if sector_name[:sector_id] == sector %>
+            <sector vocabulary="DAC" code="<%= sector_name.sector_code %>">
+              <%= sector_name.name %>
+            </sector>
+            <% break %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if !project.program_guid.blank? %>
+    <related-activity type="1" ref="<%= project.program_guid %>"></related-activity>
+  <% end %>
+
+  <% if !project.budget.blank? %>
+    <budget>
+      <value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget.to_i %></value>
+    </budget>
+  <% end %>
+
+  <% @geo_projects.each do |geo_project| %>
+    <% if geo_project[:project_id] == project.cartodb_id %>
+      <% if geo_project[:level_detail] == "country"%>
+        <recipient-country code="<%= geo_project[:country] %>">
+          <%= geo_project[:country_extended] %>
+        </recipient-country>
+
+      <% elsif geo_project[:level_detail] == "region" %>
+        <recipient-country code="<%= geo_project[:country] %>">
+          <%= geo_project[:country_extended] %>
+        </recipient-country>
+        <location><location-type code="ADM1"><%= geo_project[:adm1] %></location-type></location>
+
+      <% elsif geo_project[:level_detail] == "city" %>
+        <recipient-country code="<%= geo_project[:country] %>">
+          <%= geo_project[:country_extended] %>
+        </recipient-country>
+
+        <location>
+          <location-type code="ADM1"><%= geo_project[:adm1] %></location-type>
+          <location-type code="ADM2"><%= geo_project[:adm2] %></location-type>
+        </location>
+
+      <% else %>
+        <location>
+          <coordinates latitude="<%= geo_project[:latlng].split(/ /)[1] %>" longitude="<%= geo_project[:latlng].split(/ /)[0] %>" precision="2"/>
+        </location>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if !project.result_title.blank? %>
+    <result type="output">
+      <title><%=project.result_title %></title>
+      <% if !project.result_description.blank? %>
+        <description><%= project.result_description %></description>
+      <% end %>
+    </result>
+  <% end %>
+
+  <% if !project.contact_name.blank? || !project.contact_email.blank? %>
+    <contact-info>
+      <% if !project.contact_name.blank? %>
+        <person-name><%= project.contact_name %></person-name>
+      <% end %>
+
+      <% if !project.contact_email.blank? %>
+        <email><%= project.contact_email %></email>
+      <% end %>
+    </contact-info>
+  <% end %>
+
+  <% @transaction_list.each do |transaction| -%>
+    <% if transaction[:project_id] == project.cartodb_id %>
+      <transaction>
+        <transaction-type code="<%=transaction[:transaction_type]%>">
+          <%=transaction_type_by_name (transaction[:transaction_type]) %>
+        </transaction-type>
+
+        <value currency="<%= currency_by_name (transaction[:transaction_currency]) %>" value-date="<%= format_date_dash(transaction[:transaction_date]) %>">
+          <%= transaction[:transaction_value].to_i %>
+        </value>
+
+        <transaction-date iso-date="<%= format_date_dash(transaction[:transaction_date]) %>"/>
+          <% if transaction[:provider_id].present? || transaction[:provider_activity_id].present? || transaction[:provider_name].present?  %>
+            <provider-org ref="<%= transaction[:provider_id] %>" provider-activity-id="<%= transaction[:provider_activity_id] %>">
+              <%= transaction[:provider_name] %>
+            </provider-org>
+          <% end %>
+
+          <% if transaction[:receiver_id].present? || transaction[:receiver_activity_id].present? || transaction[:receiver_name].present?  %>
+            <receiver-org ref="<%= transaction[:receiver_id] %>" receiver-activity-id="<%= transaction[:receiver_activity_id] %>">
+              <%= transaction[:receiver_name] %>
+            </receiver-org>
+          <% end %>
+
+          <% if transaction[:transaction_description].present? %>
+            <description xml:lang="en"><%= transaction[:transaction_description] %></description>
+          <% end %>
+        </transaction>
+      <% end -%>
+    <% end -%>
+
+    <% if !project.collaboration_type.blank? %>
+      <collaboration-type code="<%= project.collaboration_type %>">
+        <%= collaboration_type_by_id(project.collaboration_type) %>
+      </collaboration-type>
+    <% end %>
+
+    <% if !project.aid_type.blank? %>
+      <default-aid-type code="<%= project.aid_type %>">
+        <%= aid_type_by_id (project.aid_type) %>
+      </default-aid-type>
+    <% end %>
+
+    <% if !project.tied_status.blank? %>
+      <default-tied-status code="<%= project.tied_status %>">
+        <%= tied_status_by_id (project.tied_status) %>
+      </default-tied-status>
+    <% end %>
+
+    <% if !project.flow_type.blank? %>
+      <default-flow-type code="<%= project.flow_type %>">
+        <%= flow_type_by_id (project.flow_type) %>
+      </default-flow-type>
+    <% end %>
+
+    <% if !project.finance_type.blank? %>
+      <default-finance-type code="<%= project.finance_type %>">
+        <%= finance_type_by_id (project.finance_type) %>
+      </default-finance-type>
+    <% end %>
+
+    </iati-activity>
+  <% end %>
 </iati-activities>
