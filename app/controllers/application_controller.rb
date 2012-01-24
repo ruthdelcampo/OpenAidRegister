@@ -3,13 +3,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  def uri?(string)
-    uri = URI.parse(string)
-    %w( http https ).include?(uri.scheme)
-  rescue URI::BadURIError
-    false
-  end
-
   def execute_query(sql, *params)
     prepared_statement = sql.gsub(/\?/) do |match|
       param = params.shift

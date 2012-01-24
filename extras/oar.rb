@@ -29,5 +29,12 @@ module Oar
     v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
   end
 
+  def self.uri?(string)
+    uri = URI.parse(string)
+    %w( http https ).include?(uri.scheme)
+  rescue URI::BadURIError
+    false
+  end
+
 
 end
