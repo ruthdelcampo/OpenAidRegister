@@ -42,6 +42,7 @@ $("#project_guid").tooltip({
 	google.maps.event.addListener(map, 'dblclick', addMarker);
 	//parse possible existing points
 	if (!($("#latlng").val()=='' || $("#latlng").val()==="[]" ))	{
+		console.log($('#location ul.reverse_geo'));
     parseWkt($("#latlng").val());
 	}
 	
@@ -122,7 +123,7 @@ function parseWkt(wkt) {
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
 		markers.push(marker);
-		geocodePoint(marker);
+	//	geocodePoint(marker);
     map_bounds.extend(marker.getPosition());
     enableOrDisableGeodetail();
   //  // Change an existing marker
@@ -170,7 +171,7 @@ function geocodePoint(marker){
     }
   });
 //});
-//console.log($('#location ul.reverse_geo'));
+console.log($('#location ul.reverse_geo'));
 }
 
 function removeGeocoding(){

@@ -366,11 +366,11 @@
 			            <% ( @project_data[:related_docs] || [] ).each do |related_doc| -%>
 			              <li>
 			                <div class="health">
-			                  <a href="#"><%= related_doc.doc_url %></a><em>type</em>
-			                  <a href="#" class="last"><%= related_doc.doc_type %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
+			                  <a href="#"><%= related_doc[:doc_url] %></a><em>type</em>
+			                  <a href="#" class="last"><%= related_doc[:doc_type] %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
 			                </div>
-			                <%= hidden_field_tag :'related_docs[][doc_url]', related_doc.doc_url %>
-			                <%= hidden_field_tag :'related_docs[][doc_type]', related_doc.doc_type %>
+			                <%= hidden_field_tag :'related_docs[][doc_url]', related_doc[:doc_url] %>
+			                <%= hidden_field_tag :'related_docs[][doc_type]', related_doc[:doc_type] %>
 			              </li>
 			            <% end -%>
 
