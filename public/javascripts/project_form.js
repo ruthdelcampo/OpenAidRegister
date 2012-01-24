@@ -79,19 +79,19 @@ function deleteAll(){
 function addMarker(event) {
 	marker = new google.maps.Marker({
 	    map:map,
-	    draggable:true,
+	    draggable:false,
 	    position: event.latLng
 	  });
 
 	markers.push(marker);
-  geocodePoints(markers, markers.length);
+  geocodePoint(marker);
   enableOrDisableGeodetail();
 
 	// Change an existing marker
-	google.maps.event.addListener(marker, 'dragend', function(event){
-    geocodePoints(markers, markers.length);
-    enableOrDisableGeodetail();
-  });
+//	google.maps.event.addListener(marker, 'dragend', function(event){
+  //  geocodePoints(markers, markers.length);
+//    enableOrDisableGeodetail();
+ // });
 }
 
 function removeMarker() {
@@ -118,28 +118,29 @@ function parseWkt(wkt) {
 		var coords = txt.split(" ");
 		marker = new google.maps.Marker({
 		    map:map,
-		    draggable:true,
+		    draggable:false,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
 		markers.push(marker);
+		geocodePoint(marker);
     map_bounds.extend(marker.getPosition());
     enableOrDisableGeodetail();
-    // Change an existing marker
-    google.maps.event.addListener(marker, 'dragend', function(event){
-	 geocodePoints(markers, markers.length);
-      enableOrDisableGeodetail();
-    });
+  //  // Change an existing marker
+    //google.maps.event.addListener(marker, 'dragend', function(event){
+	 //geocodePoints(markers, markers.length);
+     // enableOrDisableGeodetail();
+    //});
 	});
-	geocodePoints(markers, markers.length);
+	//geocodePoint(marker);
 }
-function geocodePoints(markers, marker_length){
+function geocodePoint(marker){
   if (!geocoder){
     geocoder = new google.maps.Geocoder();
   }
-//First delete all previous
- $('#location ul.reverse_geo li').remove();
- $.each(markers, function(i, value){
-  geocoder.geocode({location: value.position}, function(results, status){
+// //First delete all previous
+ //$('#location ul.reverse_geo li').remove();
+// $.each(markers, function(i, value){
+  geocoder.geocode({location: marker.position}, function(results, status){
     var city, region, country;
     if (status == 'OK'){
       if (results.length > 0){
@@ -156,8 +157,8 @@ function geocodePoints(markers, marker_length){
           }
         });
         $('#location ul.reverse_geo').append($(
-          '<li class="marker_' + ((i*1) + 1) + '">' +
-          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + value.position.Qa + ' ' + value.position.Pa  + '" />' +
+          '<li class="marker_' + (markers.length*1) + '">' +
+          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + marker.position.Qa + ' ' + marker.position.Pa  + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
           '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +
@@ -168,8 +169,8 @@ function geocodePoints(markers, marker_length){
       }
     }
   });
-});
-console.log($('#location ul.reverse_geo'));
+//});
+//console.log($('#location ul.reverse_geo'));
 }
 
 function removeGeocoding(){

@@ -54,9 +54,8 @@ class ProjectsController < ApplicationController
   #----------------------------------------------------------------------
   def edit
     @errors = []
-    @latlng = []
-
     @project_data = Project.find(params[:id])
+    @project_data[:latlng] = []
 
     # select sectors and form the array
     project_sectors_ids = ProjectSector.ids_where_project_id(params[:id])
@@ -71,7 +70,7 @@ class ProjectsController < ApplicationController
     @project_data[:reverse_geo] = ReverseGeo.by_project_id(params[:id])
     # @reverse_geo will be used for painting the points in the map with jquery
     (@project_data[:reverse_geo] || []).each_with_index do |row, index|
-      @latlng[index]= row[:latlng]
+      @project_data[:latlng][index]= row[:latlng]
     end
     # transactions
     # Select partner organizations and form the array
@@ -84,7 +83,7 @@ class ProjectsController < ApplicationController
   #----------------------------------------------------------------------
   def update
     @errors = []
-    @latlng = []
+  #  @latlng = []
     @start_date = "null"
     @end_date   = "null"
     @project_data = params
@@ -92,6 +91,7 @@ class ProjectsController < ApplicationController
     validate_params
     # there has been errors print them on the template AND EXIT
     if @errors.count > 0
+      debugger
       render :edit
     else
       Project.update(params[:cartodb_id], params, @start_date, @end_date)

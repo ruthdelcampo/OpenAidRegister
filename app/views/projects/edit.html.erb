@@ -170,16 +170,16 @@
                   <ul class="reverse_geo hidden">
                     <% (@project_data[:reverse_geo] || []).each_with_index do |geo, index| %>
                       <li class="marker_<%= index + 1 %>">
-                        <input type="hidden"  name="reverse_geo[][latlng]" value="<%= geo.latlng %>" />
-                        <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo.adm2 %>" />
-                        <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo.adm1 %>" />
-                        <input type="hidden" name="reverse_geo[][country]" value="<%= geo.country %>" />
- 							          <input type="hidden" name="reverse_geo[][country_extended]" value="<%= geo.country_extended %>" />
-                        <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo.level_detail %>" />
+                        <input type="hidden"  name="reverse_geo[][latlng]" value="<%= geo[:latlng] %>" />
+                        <input type="hidden" name="reverse_geo[][adm2]" value="<%= geo[:adm2] %>" />
+                        <input type="hidden" name="reverse_geo[][adm1]" value="<%= geo[:adm1] %>" />
+                        <input type="hidden" name="reverse_geo[][country]" value="<%= geo[:country] %>" />
+ 							          <input type="hidden" name="reverse_geo[][country_extended]" value="<%= geo[:country_extended] %>" />
+                        <input type="hidden" name="reverse_geo[][level_detail]" value="<%= geo[:level_detail] %>" />
                       </li>
                     <% end -%>
 
-                    <input type="hidden" id="latlng" name="latlng" value="<%=@latlng%>" />
+                    <input type="hidden" id="latlng" name="latlng" value="<%=@project_data[:latlng]%>" />
                   </ul>
                 </div>
                 <div class="inner_row last03">
@@ -368,8 +368,8 @@
 			                  <a href="#"><%= related_doc.doc_url %></a><em>type</em>
 			                  <a href="#" class="last"><%= related_doc.doc_type %>&nbsp;<img src="/images/cross.gif" alt="" /></a>
 			                </div>
-			                <%= hidden_field_tag :'related_docs[][doc_url]', related_doc.doc_url %>
-			                <%= hidden_field_tag :'related_docs[][doc_type]', related_doc.doc_type %>
+			                <%= hidden_field_tag :'related_docs[][doc_url]', related_doc[:doc_url] %>
+			                <%= hidden_field_tag :'related_docs[][doc_type]', related_doc[:doc_type] %>
 			              </li>
 			            <% end -%>
 
