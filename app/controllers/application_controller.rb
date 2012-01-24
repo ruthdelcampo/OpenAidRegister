@@ -3,16 +3,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  def quote(str)
-    str.gsub("\\","\\\\\\\\").gsub("'","\\\\'")
-  end
-
-
-  def quote_string(v)
-    v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
-  end
-
-
   def uri?(string)
     uri = URI.parse(string)
     %w( http https ).include?(uri.scheme)

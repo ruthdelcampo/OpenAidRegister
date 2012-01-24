@@ -97,7 +97,7 @@ class SignupController < ApplicationController
   def login_validation
     sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country,
     organization_type_id, organization_guid, organization_web FROM organizations WHERE email='?' AND password=md5('?')"
-    result = execute_query(sql, quote_string(params[:email]), quote_string(params[:password]))
+    result = execute_query(sql, Oar::quote_string(params[:email]), Oar::quote_string(params[:password]))
 
     if result.rows.length==0
       @errors = Array.new
