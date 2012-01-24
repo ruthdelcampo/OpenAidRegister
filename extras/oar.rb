@@ -15,4 +15,10 @@ module Oar
   def self.is_a_number?(s)
     s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
   end
+
+  def self.match_email(email)
+    String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
+    email.match(format_email)
+  end
+
 end

@@ -106,7 +106,7 @@ class Project
   end
 
   def self.update(project_id, params, start_date, end_date)
-#it is an existing project do whatever
+    #it is an existing project do whatever
     sql="UPDATE projects SET title='?', description ='?', org_role ='?',
     language= '?', project_guid='?', start_date=?, end_date=?, budget='?', budget_currency='?',
      website='?', program_guid = '?', result_title='?',

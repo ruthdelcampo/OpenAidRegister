@@ -41,15 +41,6 @@ class ApplicationController < ActionController::Base
       v.to_s.gsub(/\\/, '\&\&').gsub(/'/, "''")
     end
 
-    def match_email(email)
-    String format_email = (/^([^\s]+)((?:[-a-z0-9]\.)[a-z]{2,})$/i)
-      if email.match(format_email)
-        return true
-      else
-        return false
-      end
-
-    end
 
     def uri?(string)
       uri = URI.parse(string)

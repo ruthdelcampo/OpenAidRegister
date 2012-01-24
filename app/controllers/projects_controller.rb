@@ -173,7 +173,7 @@ private
       @start_date = Date.new(year, month, day)
     end
 
-    if params[:contact_email].present? && !match_email(params[:contact_email])
+    if params[:contact_email].present? && !Oar::match_email(params[:contact_email])
       @errors.push("The format of the contact email is wrong")
     end
 
