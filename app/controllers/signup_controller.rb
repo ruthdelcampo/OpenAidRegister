@@ -97,7 +97,7 @@ class SignupController < ApplicationController
   def login_validation
     sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country,
     organization_type_id, organization_guid, organization_web FROM organizations WHERE email='?' AND password=md5('?')"
-    result = execute_query(sql, Oar::quote_string(params[:email]), Oar::quote_string(params[:password]))
+    result = Oar::execute_query(sql, Oar::quote_string(params[:email]), Oar::quote_string(params[:password]))
 
     if result.rows.length==0
       @errors = Array.new
@@ -126,7 +126,7 @@ class SignupController < ApplicationController
       if @errors.count==0
         random_token = SecureRandom.urlsafe_base64
         sql="UPDATE organizations SET random_token ='?' WHERE organizations.email = '?'"
-        execute_query(sql, random_token, params[:email])
+        Oar::execute_query(sql, random_token, params[:email])
         UserMailer.password_reset(random_token, params[:email]).deliver
         redirect_to '/', :alert => "Email sent with  password reset instructions."
         return
@@ -165,12 +165,12 @@ class SignupController < ApplicationController
       if @errors.count==0
         #no errors, save the data and redirect to singup_complete
         sql="UPDATE organizations SET password ='?', random_token = null WHERE organizations.random_token = '?'"
-        result = execute_query(sql, params[:password], params[:token])
+        result = Oar::execute_query(sql, params[:password], params[:token])
         redirect_to '/login', :alert => "you can now login"
       end
     else
       sql="select email FROM organizations WHERE random_token = '?'"
-      result = execute_query(sql, params[:id])
+      result = Oar::execute_query(sql, params[:id])
       if result.rows.length==0
         redirect_to '/forgot_password', :alert => "unknown one time password"
       else

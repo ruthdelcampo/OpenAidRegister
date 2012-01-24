@@ -3,21 +3,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  def execute_query(sql, *params)
-    prepared_statement = sql.gsub(/\?/) do |match|
-      param = params.shift
-      case param
-      when Date
-        "'#{param.to_s}'"
-      else
-        param.to_s.sanitize_sql!
-      end
-    end
-
-    CartoDB::Connection.query(prepared_statement)
-  end
-
-
   #protected
   #def deny_access
   #debugger

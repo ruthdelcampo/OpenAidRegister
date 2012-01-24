@@ -36,7 +36,7 @@ class DashboardController < ApplicationController
               GROUP BY p.cartodb_id) as tableB
      ON tableA.cartodb_id = tableB.cartodb_id
     SQL
-    result = execute_query(sql, session[:organization][:cartodb_id], session[:organization][:cartodb_id])
+    result = Oar::execute_query(sql, session[:organization][:cartodb_id], session[:organization][:cartodb_id])
     #order projects by start date to be shown in the dashboard. Last projects will be the ones with nil.
     @ordered_projects_list = result.rows.sort{|a,b|( a.start_date and b.start_date ) ? b.start_date <=> a.start_date : ( a.start_date ? -1 : 1 ) }
 
@@ -78,35 +78,33 @@ class DashboardController < ApplicationController
     return
   end
 
+  # DELETE
+  #----------------------------------------------------------------------
+
   def delete #deletes records in the three tables
     if session[:organization].blank?
       redirect_to '/login'
       return
     end
-
     sql="delete FROM projects where projects.cartodb_id = '?'"
-    execute_query(sql, params[:delete_project_id])
-
+    Oar::execute_query(sql, params[:delete_project_id])
     sql="delete FROM project_sectors where project_id = '?'"
-    execute_query(sql, params[:delete_project_id])
-
+    Oar::execute_query(sql, params[:delete_project_id])
     sql="delete FROM project_partnerorganizations where project_id = '?'"
-    execute_query(sql, params[:delete_project_id])
-
+    Oar::execute_query(sql, params[:delete_project_id])
     sql="delete FROM project_relateddocs where project_id = '?'"
-    execute_query(sql, params[:delete_project_id])
-
-     sql="delete FROM project_transactions where project_id = '?'"
-      execute_query(sql, params[:delete_project_id])
-
+    Oar::execute_query(sql, params[:delete_project_id])
+    sql="delete FROM project_transactions where project_id = '?'"
+    Oar::execute_query(sql, params[:delete_project_id])
     sql="delete FROM reverse_geo where project_id = '?'"
-    execute_query(sql, params[:delete_project_id])
-
+    Oar::execute_query(sql, params[:delete_project_id])
     redirect_to  '/dashboard'
-   end
+  end
 
+  # PUBLISH
+  #----------------------------------------------------------------------
 
-   def publish #not working
+  def publish #not working
       if session[:organization].blank?
         redirect_to '/login'
         return

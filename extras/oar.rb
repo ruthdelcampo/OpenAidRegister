@@ -1,4 +1,5 @@
 module Oar
+
   def self.execute_query(sql, *params)
     prepared_statement = sql.gsub(/\?/) do |match|
       param = params.shift
