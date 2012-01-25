@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iati-organization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
+<iati-organisations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
+<iati-organisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" last-updated-datetime="<%= @organization.updated_at %>" version="1.01" lang="en">
+<reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_country}-#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
+  <iati-identifier><%= "#{@organization.organization_country}-#{@organization.organization_guid}" %></iati-identifier>
+<name><%= @organization.organization_name %></name>
+<organisation-website><%= @organization.organization_web %></organisation-website>
+</iati-organisation>
 
-  <warning>THIS IS A PLACEHOLDER, PLEASE REPLACE IT WITH THE REAL XML</warning>
-
-  <organization>
-    <name><%= @organization.organization_name %></name>
-  </organization>
-
-</iati-organization>
+</iati-organisations>
