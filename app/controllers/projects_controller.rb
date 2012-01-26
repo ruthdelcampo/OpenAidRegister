@@ -17,16 +17,23 @@ class ProjectsController < ApplicationController
   #----------------------------------------------------------------------
   def new
     @errors = []
-    @latlng = []
     @project_data = {}
+    @latlng = []
   end
 
   # POST /projects
   #----------------------------------------------------------------------
   def create
     @errors = []
-    @latlng = []
     @project_data = params
+
+    # @reverse_geo will be used for painting the points in the map with jquery
+    @project_data[:latlng] = []
+    (@project_data[:reverse_geo] || []).each_with_index do |row, index|
+      @project_data[:latlng][index]= row[:latlng]
+    end
+    @latlng = @project_data[:latlng]
+
     @start_date = "null"
     @end_date   = "null"
     validate_params
@@ -77,6 +84,7 @@ class ProjectsController < ApplicationController
     @project_data[:transaction_list] = ProjectTransaction.by_project_id(params[:id])
     # related docs
     @project_data[:related_docs] = ProjectRelateddoc.by_project_id(params[:id])
+    @latlng = @project_data[:latlng]
   end
 
   # PUT /projects/:id
@@ -87,7 +95,7 @@ class ProjectsController < ApplicationController
     @start_date = "null"
     @end_date   = "null"
     @project_data = params
-
+    @latlng = @project_data[:latlng]
     validate_params
     # there has been errors print them on the template AND EXIT
     if @errors.count > 0

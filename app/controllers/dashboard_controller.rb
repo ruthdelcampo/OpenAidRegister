@@ -51,7 +51,7 @@ class DashboardController < ApplicationController
         @past_projects +=1
       end
     end
-    end
+  end
 
 
   def import_file #not completely working. Need to add functionallity
