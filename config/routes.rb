@@ -23,6 +23,8 @@ OpenAidRegister::Application.routes.draw do
   match 'publish' => 'dashboard#publish'
   match 'gather_publish_data' => 'dashboard#gather_publish_data', :via => :post
 
+  match 'browser_not_supported' => 'help#browser_not_supported'
+
   # this route is deprecated and will be removed in the future
   # use /organizations/:id/projects.xml instead
   match 'download/:id' => 'organizations#projects', :via => :get

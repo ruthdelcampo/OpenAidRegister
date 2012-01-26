@@ -50,6 +50,8 @@
 #header .header_boot ul{ float:left; width:100%; list-style:none; padding-top:32px; position:relative; left:-1px;}
 #header .header_boot ul li{ float:left; width:auto; height:auto; color:#ffffff; font:normal 17px/21px "Helvetica Neue"; display:inline;}
 #header .header_boot ul li a{ color:#ff3300;}
+#header .header_boot ul li.browser_choice{ width:297px; height:84px;}
+#header .header_boot ul li.browser_choice_extra{ width:299px; height:84px;margin-left:64px;}
 #header .header_boot ul li.sign_in{ width:297px; height:84px;}
 #header .header_boot ul li.fill_form{ width:299px; height:84px;margin-left:64px;}
 #header .header_boot ul li.you_done{ width:308px; height:85px; margin-left:64px;}
