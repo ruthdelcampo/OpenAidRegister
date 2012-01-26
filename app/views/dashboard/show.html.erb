@@ -17,6 +17,7 @@
       });
     <% end -%>
   </script>
+  <%= javascript_include_tag "list_filter" %>
   <%= javascript_include_tag "dashboard" %>
 <% end %>
 
@@ -40,22 +41,25 @@
         <div class="edit_sec">
 
 				<% counter = true %>
+        <div id="projects_search"></div>
+        <div id="projects_list">
+          <ul class="content">
+				    <% @ordered_projects_list.each do |project| %>
+              <li class="<%= counter ? 'patrn' : '' %>">
 
-        <ul>
-				  <% @ordered_projects_list.each do |project| %>
-            <li class="<%= counter ? 'patrn' : '' %>">
+                <%= link_to project.title, edit_project_path(project.cartodb_id), :class => 'project_title' %>
 
-              <%= link_to project.title, edit_project_path(project.cartodb_id) %>
+                <div class="hide_shows">
+                  <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure?" class="edit delete">delete</a>
+                  <%= link_to "edit", edit_project_path(project.cartodb_id), :class => 'edit' %>
+                </div>
 
-              <div class="hide_shows">
-                <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure?" class="edit delete">delete</a>
-                <%= link_to "edit", edit_project_path(project.cartodb_id), :class => 'edit' %>
-              </div>
-
-					    <% counter = !counter %>
-            </li>
-			    <% end %>
-        </ul>
+				        <% counter = !counter %>
+              </li>
+			      <% end %>
+          </ul>
+          <div class="page_navigation"></div>
+        </div>
 
         <div class="add_project">
           <%= link_to "Add Project", new_project_path, :class => "add" %>

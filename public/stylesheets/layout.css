@@ -357,3 +357,39 @@
 
 /***** sign up page ends here *******/
 
+/** pagination **/
+.page_navigation , .alt_page_navigation{
+	padding-bottom: 10px;
+}
+
+.page_navigation a, .alt_page_navigation a{
+	padding:3px 5px;
+	margin:2px;
+	color:white;
+	text-decoration:none;
+	float: left;
+	font-family: Tahoma;
+	font-size: 12px;
+	background-color:#DB5C04;
+}
+.active_page{
+	background-color:white !important;
+	color:black !important;
+}
+
+/* projects filter */
+#projects_search form {
+  float:none;
+  padding:0;
+  background:none;
+  width:700px;
+}
+#projects_search form input {
+  margin:5px;
+  width:100%;
+  height:30px;
+  border: 1px solid #B1B1B1;
+  font: bold 13px/16px "Helvetica Neue";
+  padding:0 5px;
+  color: #AEAEAE;
+}
