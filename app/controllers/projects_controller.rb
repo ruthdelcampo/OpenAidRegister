@@ -99,7 +99,6 @@ class ProjectsController < ApplicationController
     validate_params
     # there has been errors print them on the template AND EXIT
     if @errors.count > 0
-      debugger
       render :edit
     else
       Project.update(params[:cartodb_id], params, @start_date, @end_date)

@@ -43,7 +43,7 @@ $(document).ready(function(){
 	google.maps.event.addListener(map, 'dblclick', addMarker);
 	//parse possible existing points
 	if (!($("#latlng").val()=='' || $("#latlng").val()==="[]" )) {
-    console.log($('#location ul.reverse_geo'));
+  //  console.log($('#location ul.reverse_geo'));
     parseWkt($("#latlng").val());
 	};
 
