@@ -121,7 +121,7 @@ function parseWkt(wkt) {
 		marker = new google.maps.Marker({
 		  map:map,
 		  draggable:false,
-		  position: new google.maps.LatLng(coords[0], coords[1])
+		  position: new google.maps.LatLng(coords[1], coords[0])
 		});
 		markers.push(marker);
 	  //	geocodePoint(marker);
@@ -161,7 +161,7 @@ function geocodePoint(marker){
         });
         $('#location ul.reverse_geo').append($(
           '<li class="marker_' + (markers.length*1) + '">' +
-          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + marker.position.lat() + ' ' + marker.position.lng()  + '" />' +
+          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + marker.position.lng() + ' ' + marker.position.lat()  + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
           '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
           '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +

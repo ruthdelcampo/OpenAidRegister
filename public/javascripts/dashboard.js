@@ -19,10 +19,10 @@ function initMap(){
 	$.each(ordered_projects_list, function(index, project){
 		if (!(project.markers == 'NIL' || project.markers == 'NULL' || project.markers == "")) {
 			parseWkt(project);
-		
+
 		}
 	});
-	
+
 	//set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
 	if (all_markers.length === 1) {
 		map.setCenter(map_bounds.getCenter());
@@ -34,22 +34,22 @@ function initMap(){
 }
 
 function parseWkt(project) {
-	
+
   var wkt = project.markers;
 	var procstring;
 	var auxarr;
 
   if (!map_bounds) {
     map_bounds = new google.maps.LatLngBounds();
-  }	
-	$.each(wkt[0],function(index,value) {	
+  }
+	$.each(wkt[0],function(index,value) {
 	var coords = value.split(" ");
 		marker = new google.maps.Marker({
 		    map:map,
 		    draggable:true,
 		    position: new google.maps.LatLng(coords[1], coords[0])
 		  });
-		
+
 	all_markers.push(marker);
     createInfowindow(marker, project);
     map_bounds.extend(marker.getPosition());
