@@ -73,8 +73,9 @@ function showErrors(){
 };
 
 function deleteAll(){
-	$('#delete_points').click(function() {
+	$('#delete_points').click(function(event) {
 		removeMarker();
+    event.preventDefault();
   });
 };
 
