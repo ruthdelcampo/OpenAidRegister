@@ -22,7 +22,7 @@
 <div id="body_container">
   <div class="sign_sec">
     <div class="sign_left">
-    	<%= form_tag( :method => "post") do %>
+    	<%= form_tag(:method => "post") do %>
         <fieldset>
 
           <div class="colem">
@@ -80,7 +80,7 @@
 	            </div>
 	            <div class="inner_row">
 	              <label>government id</label>
-	              <input name="organization_guid" type="text" class="imp01" value="<%=@org_data[:organization_guid] %>"/>
+	              <input name="organization_guid" type="text" class="imp01 tip_right" value="<%=@org_data[:organization_guid] %>"  title="this is the government id, please fix this copy."/>
 	            </div>
 						  <div class="inner_row last">
 	              <p class="inform"> In the US this would be the EIN Number </p>
@@ -98,12 +98,12 @@
 
             <div class="row">
               <label>API KEY</label>
-              <input name="api_key" type="text" class="imp02" value="<%= @org_data[:api_key] %>"/>
+              <input name="api_key" type="text" class="imp02 tip_top" value="<%= @org_data[:api_key] %>"  title="this is the api key, please fix this copy."/>
             </div>
 
             <div class="row">
               <label>PACKAGE NAME</label>
-              <input name="package_name" type="text" class="imp02" value="<%=@org_data[:package_name] %>"/>
+              <input name="package_name" id="package_name" type="text" class="imp02 tip_top" value="<%= @org_data[:package_name] %>" title="this is the package name, please fix this copy." />
             </div>
 
           </div><!-- colem -->

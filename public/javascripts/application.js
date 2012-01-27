@@ -3,6 +3,24 @@ $(document).ready(function(){
   if (BrowserDetect.browser == "Explorer" && BrowserDetect.version < 7){
     window.location = "/browser_not_supported";
   };
+
+  // generic tooltips
+  //----------------------------------------------------------------------
+
+  $(".tip_top").tooltip({
+	  position: "top center",
+	  offset: [-2, 10],
+	  effect: "fade",
+	  opacity: 0.7
+	});
+
+  $(".tip_right").tooltip({
+	  position: "center right",
+	  offset: [-2, 10],
+	  effect: "fade",
+	  opacity: 0.7
+	});
+
 });
 
 

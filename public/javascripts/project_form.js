@@ -20,14 +20,6 @@ $(document).ready(function(){
 	  header: 'h3' //this identifies the separator for every collapsible part
   });
 
-  $("#project_guid").tooltip({
-	  position: "center right",	// place tooltip on the right edge
-	  offset: [-2, 10],	// a little tweaking of the position
-	  effect: "fade",	// use the built-in fadeIn/fadeOut effect
-	  opacity: 0.7	// custom opacity setting
-	});
-
-
   //Initalize
   var latlng = new google.maps.LatLng(14.5, 15.5);
   var myOptions = {
