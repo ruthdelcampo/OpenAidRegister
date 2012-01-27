@@ -1,7 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
-//jQuery.noConflict();
-
 var map;
 var markers = [];
 var marker;
@@ -57,6 +53,16 @@ $(document).ready(function(){
 	relatedDocuments();
 
 });
+
+// enable the button if val1 && val2 are both true,
+// disable the button otherwise
+function toogleButton(button_id,val1,val2){
+  if(val1 && val2){
+    $(button_id).removeAttr('disabled');
+  }else{
+    $(button_id).attr('disabled', 'disabled');
+  };
+};
 
 function showErrors(){
   if ($("#errors").length > 0){
@@ -227,9 +233,22 @@ function sectors(){
 
 function otherOrganizations(){
   var list = $('#participating_orgs'),
-  button = $('#add_partipating_org'),
+  button = $('#add_participating_org'),
   other_org_name = $('#other_org_name'),
   other_org_role = $('#other_org_role');
+
+  // disable add related organization button unless the data is present
+  other_org_name.keyup(function(){
+    name = $.trim($(this).val());
+    role = other_org_role.val();
+    toogleButton("#add_participating_org", name, role);
+  });
+
+  other_org_role.change(function(){
+    name = $.trim(other_org_name.val());
+    role = $(this).val();
+    toogleButton("#add_participating_org", name, role);
+  });
 
   list.find('li:not(.add_new) a').live('click', function(evt){
     evt.preventDefault();
@@ -256,6 +275,8 @@ function otherOrganizations(){
       list.find('li.add_new').before(li);
       other_org_name.val('');
       other_org_role.val('');
+      button.attr('disabled','disabled');
+      other_org_name.focus();
     }
   });
 };
@@ -265,6 +286,20 @@ function relatedDocuments(){
   button = $('#add_doc'),
   doc_url = $('#doc_url'),
   doc_type = $('#doc_type');
+
+  // disable add related documents button unless the data is present
+  //----------------------------------------------------------------------
+  doc_url.keyup(function(){
+    url = $.trim($(this).val());
+    type = doc_type.val();
+    toogleButton("#add_doc", url, type);
+  });
+
+  doc_type.change(function(){
+    url = $.trim(doc_url.val());
+    type = $(this).val();
+    toogleButton("#add_doc", url, type);
+  });
 
   //deleting elements
   list.find('li:not(.add_new) a').live('click', function(evt){
@@ -292,6 +327,8 @@ function relatedDocuments(){
       list.find('li.add_new').before(li);
       doc_url.val('');
       doc_type.val('');
+      button.attr('disabled','disabled');
+      doc_url.focus();
     }
   });
 };
@@ -310,6 +347,19 @@ function transactions(){
 	receiver_name = $('#receiver_name'),
 	receiver_id = $('#receiver_id'),
 	transaction_description = $('#transaction_description');
+
+  // disable add transaction button unless the data is present
+  transaction_value.keyup(function(){
+    tvalue = $.trim($(this).val());
+    date = transaction_date.val();
+    toogleButton("#add_transaction", tvalue, date);
+  });
+
+  transaction_date.change(function(){
+    tvalue = $.trim(transaction_value.val());
+    date = $(this).val();
+    toogleButton("#add_transaction", tvalue, date);
+  });
 
 	//deletes the clicked element
 	transaction_list.find('li:not(.add_new) a').live('click', function(evt){
@@ -363,6 +413,7 @@ function transactions(){
 		  receiver_name.val('');
 	    receiver_id.val('');
 		  transaction_description.val('');
+      transaction_button.attr('disabled','disabled');
 
 		} else {
 

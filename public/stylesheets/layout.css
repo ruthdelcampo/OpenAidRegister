@@ -280,7 +280,8 @@
 .registry_sec .form_section .row .inner_row.wid-400{width:400px; margin-right:0;}
 .registry_sec .form_section .row .map02{width:633px; border:1px solid #b1b1b1; background:#fff; padding:5px 6px; float:left;}
 .registry_sec .form_section .row .map02 img{float:left;}
-.registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+.registry_sec .form_section .row .inner_row input.button_add{width:151px; height:40px; background:url(../images/but04.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+.registry_sec .form_section .row .inner_row input.button_add[disabled]{width:151px; height:40px; background:url(../images/but04_disabled.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
 /** added new div for the accordion */
 .registry_sec .form_section #accordion h3 {float:none; width:100%; font:13px "Helvetica Neue";text-shadow:none}
@@ -298,7 +299,8 @@
 .registry_sec .form_section .accord_row .row2 .inner_row input.imp02{ border:1px solid #b1b1b1; float:left; width:185px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
 .registry_sec .form_section .accord_row .row2 .inner_row.last{ float:left; width:110px; margin-right:18px; display:inline;}
 .registry_sec .form_section .accord_row .row2 .inner_row.last input.imp03{ border:1px solid #b1b1b1; float:left; width:100px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}
-.registry_sec .form_section .accord_row .row2  input.button_add{width:151px; height:40px; background:url(../images/but03.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+.registry_sec .form_section .accord_row .row2  input.button_add{width:151px; height:40px; background:url(../images/but04.gif) 0 0 no-repeat; border:none; cursor:pointer;}
+.registry_sec .form_section .accord_row .row2  input.button_add[disabled]{width:151px; height:40px; background:url(../images/but04_disabled.gif) 0 0 no-repeat; border:none; cursor:pointer;}
 
 .registry_sec .form_section form .trans_row{ float:left; width:100%;}
 .registry_sec .form_section form .trans_row ul{width:609px; float:left; padding:10px 19px 30px 19px;  list-style:none; background:url(../images/patter02.gif) repeat;}
