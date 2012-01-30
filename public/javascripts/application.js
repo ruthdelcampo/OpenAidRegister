@@ -23,7 +23,6 @@ $(document).ready(function(){
 
 });
 
-
 function showFlashMessages(){
   var content = ''
   if ($('#notice').length > 0){

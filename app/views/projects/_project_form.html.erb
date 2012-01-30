@@ -42,11 +42,52 @@
         <% end -%>
 
         <li class="add_new">
+          <div id="sectors_filter_container"></div>
 	        <%= select_tag(:sector_id, options_for_select(sectors_list,
 	 		    :selected => @project_data[:sector_id]),
           :multiple => true,
           :class => "wid-425") %>
 	 		  </li>
+      </ul>
+      <ul>
+
+
+        <li id="filter_by_letter">
+        Filter list:
+          <a href="#" class="sector_filter_letter" title="Show all sectors">All</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with A">A</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with B">B</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with C">C</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with D">D</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with E">E</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with F">F</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with G">G</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with H">H</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with I">I</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with J">J</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with K">K</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with L">L</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with M">M</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with N">N</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with O">O</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with P">P</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with Q">Q</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with R">R</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with S">S</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with T">T</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with U">U</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with V">V</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with W">W</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with X">X</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with Y">Y</A>
+          <a href="#" class="sector_filter_letter" title="Show sectors starting with Z">Z</A>
+        </li>
+
+        <li id="filter_by_regexp">
+          Search by sector name:
+          <input name=regexp id="sector_filter_input">
+          <input type=button id="sector_filter_reset" value="Clear">
+        </li>
       </ul>
 	  </div>
 

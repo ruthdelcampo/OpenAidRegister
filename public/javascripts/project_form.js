@@ -1,3 +1,5 @@
+this.oar = (_ref = window.oar) != null ? _ref : {};
+
 var map;
 var markers = [];
 var marker;
@@ -45,6 +47,7 @@ $(document).ready(function(){
 
 
   sectors();
+  sectorsFilter();
   otherOrganizations();
   change_contact_info();
   showErrors();
@@ -228,6 +231,26 @@ function sectors(){
   $('#sectors_list').find('li:not(.add_new) a').live('click', function(evt){
     evt.preventDefault();
     $(this).closest('li').remove();
+  });
+};
+
+function sectorsFilter(){
+  var myfilter = new filterlist(document.getElementById("sector_id"));
+  $(".sector_filter_letter").click(function(event){
+    var value = $(this).html();
+    if(value == "All"){
+      myfilter.reset()
+    }else{
+      myfilter.set("^"+value);
+    }
+    event.preventDefault();
+  });
+  $("#sector_filter_input").keyup(function(){
+    myfilter.set($(this).val());
+  });
+  $("#sector_filter_reset").click(function(){
+    myfilter.reset();
+    $("#sector_filter_input").val = '';
   });
 };
 
