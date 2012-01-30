@@ -40,79 +40,78 @@
 
         <div class="edit_sec">
 
-				<% counter = true %>
-        <div id="projects_search"></div>
-        <div id="projects_list">
-          <ul class="content">
-				    <% @ordered_projects_list.each do |project| %>
-              <li class="<%= counter ? 'patrn' : '' %>">
+				  <% counter = true %>
+          <div id="projects_search"></div>
+          <div id="projects_list">
+            <ul class="content">
+				      <% @ordered_projects_list.each do |project| %>
+                <li class="<%= counter ? 'patrn' : '' %>">
+                  <%= link_to project.title, edit_project_path(project.cartodb_id), :class => 'project_title' %>
 
-                <%= link_to project.title, edit_project_path(project.cartodb_id), :class => 'project_title' %>
+                  <div class="hide_shows">
+                    <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure?" class="edit delete">delete</a>
+                    <%= link_to "edit", edit_project_path(project.cartodb_id), :class => 'edit' %>
+                  </div>
 
-                <div class="hide_shows">
-                  <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure?" class="edit delete">delete</a>
-                  <%= link_to "edit", edit_project_path(project.cartodb_id), :class => 'edit' %>
-                </div>
+				          <% counter = !counter %>
+                </li>
+			        <% end %>
+            </ul>
+            <div class="page_navigation"></div>
+          </div>
 
-				        <% counter = !counter %>
-              </li>
-			      <% end %>
-          </ul>
-          <div class="page_navigation"></div>
-        </div>
-
-        <div class="add_project">
-          <%= link_to "Add Project", new_project_path, :class => "add" %>
+          <div class="add_project">
+            <%= link_to "Add Project", new_project_path, :class => "add" %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="dashboard_right">
-    <div class="project_details">
-      <h4><img src="/images/text01.gif" alt="" /></h4>
-      <div class="rows"><strong><%= @ordered_projects_list.length %></strong> <small>Projects <br />published</small></div>
-      <div class="rows"><span><em><%= @current_projects %></em> Ongoing projects</span></div>
-      <div class="rows"><span><em><%= @past_projects %></em> Past projects</span></div>
-      <div class="add_project">
-        <%= link_to "Add Project", new_project_path, :class => "add" %>
+    <div class="dashboard_right">
+      <div class="project_details">
+        <h4><img src="/images/text01.gif" alt="" /></h4>
+        <div class="rows"><strong><%= @ordered_projects_list.length %></strong> <small>Projects <br />published</small></div>
+        <div class="rows"><span><em><%= @current_projects %></em> Ongoing projects</span></div>
+        <div class="rows"><span><em><%= @past_projects %></em> Past projects</span></div>
+        <div class="add_project">
+          <%= link_to "Add Project", new_project_path, :class => "add" %>
+          <%= form_tag import_file_path, :multipart => true do %>
+            <span>or import <a href="#"><%= file_field_tag :file_upload %>from file</a></span>
+          <% end -%>
+        </div>
 
-        <%= form_tag import_file_path, :multipart => true do %>
-          <span>or import <a href="#"><%= file_field_tag :file_upload %>from file</a></span>
-        <% end -%>
-      </div>
+        <div class="publish">
+          <h3>PUBLISHING TOOLS</h3>
+          <ul>
+            <li>
+              <div class="but_sec">
+                <%= link_to "XML", projects_organization_path(session[:organization][:cartodb_id], :format => :xml) %>
+              </div>
+              <div class="text_sec">
+                <p>Download your IATI XML File and share it with everyone </p>
+              </div>
+            </li>
 
-      <div class="publish">
-        <h3>PUBLISHING TOOLS</h3>
-        <ul>
-          <li>
-            <div class="but_sec">
-              <%= link_to "XML", projects_organization_path(session[:organization][:cartodb_id], :format => :xml) %></div>
-            <div class="text_sec">
-              <p>Download your IATI XML File and share it with everyone </p>
-            </div>
-          </li>
+            <li>
+              <div class="but_sec"><a href="/publish">Publish</a></div>
+              <div class="text_sec">
+                <p>Make your projects available at the IATI Registry</p>
+              </div>
+            </li>
+          </ul>
+        </div>
 
-          <li>
-            <div class="but_sec"><a href="/publish">Publish</a></div>
-            <div class="text_sec">
-              <p>Make your projects available at the IATI Registry</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-			<div class="account">
-        <h3>ACCOUNT</h3>
-        <ul>
-          <li>
-            <div class="but_sec"><a href="/account">Profile</a></div>
-
-            <div class="text_sec">
-              <p>Edit your account details </p>
-            </div>
-          </li>
-        </ul>
+			  <div class="account">
+          <h3>ACCOUNT</h3>
+          <ul>
+            <li>
+              <div class="but_sec"><a href="/account">Profile</a></div>
+              <div class="text_sec">
+                <p>Edit your account details </p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

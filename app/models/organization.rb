@@ -11,6 +11,8 @@ class Organization
                 "organization_type_id",
                 "organization_web",
                 "package_name",
+                "created_at",
+                "updated_at",
                 "api_key",
                ]
   ATTRS_WITH_KEY = ATTRIBUTES.push PRIMARY_KEY

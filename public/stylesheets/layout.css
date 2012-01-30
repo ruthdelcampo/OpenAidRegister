@@ -65,7 +65,7 @@
 #header .nav ul li.first{ padding:0 19px 0 0;}
 #header .nav ul li.last{background:none; padding:0 0 0 19px;}
 
-#body_container{ float:left; width:100%; padding:49px 0 0 0;}
+#body_container{ float:left; width:100%; padding:42px 0 0 0;}
 .body_top{ float:left; width:100%;}
 
 .body_top .body_top_lf{ float:left; width:310px; padding-top:24px;}
@@ -161,7 +161,7 @@
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
-#body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:100px;}
+#body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:90px; height:170px;}
 .sign_sec .sign_down{ float:right; width:283px; padding-top:270px;}
 .sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
 /**/
@@ -395,3 +395,14 @@
   padding:0 5px;
   color: #AEAEAE;
 }
+
+/* tools right */
+#body_container .sign_sec .tools_right{ float:right; width:283px; padding-top:42px;}
+.sign_right .publish{width:100%; float:left; padding-top:100px;}
+.sign_right .publish h3{font-size:16px; font-family:"Helvetica Neue", arial; padding-bottom:25px; color:#000;}
+.sign_right .publish ul{width:100%; float:left; list-style:none;}
+.sign_right .publish ul li{width:100%; float:left; padding-bottom:10px;}
+.sign_right .publish .but_sec{width:170px; float:left;}
+.sign_right .publish .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
+#body_container .sign_right .publish .text_sec{width:113px; float:right;}
+#body_container .sign_right .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
