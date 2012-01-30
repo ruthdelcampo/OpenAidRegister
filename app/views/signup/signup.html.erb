@@ -42,6 +42,7 @@
           <% end %>
 			  </h4>
 
+	    <% if session[:organization].present? %>
         <div class="publish">
           <h3>PUBLISHING TOOLS</h3>
           <ul>
@@ -55,6 +56,7 @@
             </li>
           </ul>
         </div>
+      <% end %>
 
 	  </div>
 
