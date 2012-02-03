@@ -55,7 +55,7 @@
 	    </div>
 	    <div class="inner_row">
 	      <label>government id</label>
-	      <input name="organization_guid" type="text" class="imp01 tip_right" value="<%=@org_data[:organization_guid] %>"  title="this is the government id, please fix this copy."/>
+	      <input name="organization_guid" type="text" class="imp01" value="<%=@org_data[:organization_guid] %>"/>
 	    </div>
 			<div class="inner_row last">
 	      <p class="inform"> In the US this would be the EIN Number </p>
@@ -73,12 +73,12 @@
 
     <div class="row">
       <label>API KEY</label>
-      <input name="api_key" type="text" class="imp02 tip_top" value="<%= @org_data[:api_key] %>"  title="this is the api key, please fix this copy."/>
+      <input name="api_key" type="text" class="imp02 tip_top" value="<%= @org_data[:api_key] %>"  title="This information can be introduced later, once you register at the www.iatiregistry.org"/>
     </div>
 
     <div class="row">
       <label>PACKAGE NAME</label>
-      <input name="package_name" id="package_name" type="text" class="imp02 tip_top" value="<%= @org_data[:package_name] %>" title="this is the package name, please fix this copy." />
+      <input name="package_name" id="package_name" type="text" class="imp02 tip_top" value="<%= @org_data[:package_name] %>" title="This information can be introduced later, once you register at the www.iatiregistry.org" />
     </div>
 
   </div><!-- colem -->
