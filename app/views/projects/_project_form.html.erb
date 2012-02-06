@@ -164,7 +164,11 @@
       <h3>LOCATION</h3>
       <div class="row">
         <div class="inner_row wid-440">
-          <label>WHERE IS THIS ACTIVITY TAKING PLACE? DOUBLE-CLICK TO SELECT IN MAP</label>
+          <label>WHERE IS THIS ACTIVITY TAKING PLACE?</label>
+
+          <div id="address_finder_container"><input id="project_address"  placeholder="Type here to find a Location or double click on the map below..." type="text" style="padding:5px;border:1px solid #ccc;margin-bottom:5px;width:100%;" /></div>
+          <input id="project_latitude" type="text" class="hidden" />
+          <input id="project_longitude" type="text" class="hidden" />
           <div id="map_canvas" style="width:430px; height:300px;"></div>
         </div>
 

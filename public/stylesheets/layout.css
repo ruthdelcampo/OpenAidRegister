@@ -555,3 +555,7 @@ a.hl{ text-decoration: underline;}
   background: url(/images/organization-logos/worldbank.png) no-repeat 0px 0;
 }
 #organizations_list ul li a:hover { background-position: 0px -110px; }
+
+/* address search */
+#address_finder_container { width: 420px;}
+

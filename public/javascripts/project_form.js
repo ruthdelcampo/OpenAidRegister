@@ -3,11 +3,20 @@ this.oar = (_ref = window.oar) != null ? _ref : {};
 var map;
 var markers = [];
 var marker;
-var geocoder;
-var map_bounds;
-var marker_id;
+var geocoder = new google.maps.Geocoder();
+var map_bounds = new google.maps.LatLngBounds();
+var defaultLatLng = new google.maps.LatLng(14.5, 15.5);
+var mapOptions = {
+  zoom: 3,
+  center: defaultLatLng,
+  mapTypeId: google.maps.MapTypeId.ROADMAP,
+  disableDoubleClickZoom: true
+};
 
 $(document).ready(function(){
+
+  // the datepicker
+  //----------------------------------------------------------------------
 
   $( "#datepicker" ).datepicker();
   $( "#datepicker2" ).datepicker();
@@ -18,34 +27,23 @@ $(document).ready(function(){
 	  header: 'h3' //this identifies the separator for every collapsible part
   });
 
-  //Initalize
-  var latlng = new google.maps.LatLng(14.5, 15.5);
-  var myOptions = {
-    zoom: 3,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    disableDoubleClickZoom: true
-  };
+  // projects location map
+  //----------------------------------------------------------------------
 
-	//Paint the map
-  map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
-	//Add the listener to add a marker
+	// Paint the map
+  map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
+	// Add the listener to add a marker
 	google.maps.event.addListener(map, 'dblclick', addMarker);
-	//parse possible existing points
+	// parse possible existing points
 	if (!($("#latlng").val()=='' || $("#latlng").val()==="[]" )) {
-  //  console.log($('#location ul.reverse_geo'));
+  // console.log($('#location ul.reverse_geo'));
     parseWkt($("#latlng").val());
 	};
+  // set the map viewport and prepare the address search form
+  setMapViewport();
+  autocompleteAddress();
 
-	//set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
-	if (markers.length === 1) {
-		map.setCenter(map_bounds.getCenter());
-	  map.setZoom(8);
-	} else {
-	  map.fitBounds(map_bounds);
-	};
-
-
+  // init everything
   sectors();
   sectorsFilter();
   otherOrganizations();
@@ -56,6 +54,24 @@ $(document).ready(function(){
 	relatedDocuments();
 
 });
+
+function resetMapViewport(){
+  map.setCenter(mapOptions.center);
+  map.setZoom(mapOptions.zoom);
+}
+
+function setMapViewport(){
+	// set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
+  if (markers.length === 0) {
+    resetMapViewport();
+  } else if (markers.length === 1) {
+		map.setCenter(map_bounds.getCenter());
+	  map.setZoom(8);
+	} else {
+	  map.fitBounds(map_bounds);
+	};
+
+};
 
 // enable the button if val1 && val2 are both true,
 // disable the button otherwise
@@ -76,6 +92,7 @@ function showErrors(){
 function deleteAll(){
 	$('#delete_points').click(function(event) {
 		removeMarker();
+    resetMapViewport();
     event.preventDefault();
   });
 };
@@ -86,7 +103,7 @@ function addMarker(event) {
 	  draggable:false,
 	  position: event.latLng
 	});
-
+  console.log("adding");
 	markers.push(marker);
   geocodePoint(marker);
   enableOrDisableGeodetail();
@@ -112,9 +129,6 @@ function removeMarker() {
 function parseWkt(wkt) {
 	var procstring;
 	var auxarr;
-  if (!map_bounds) {
-    map_bounds = new google.maps.LatLngBounds();
-  }
 	procstring = wkt.slice(0,-1).slice(1);
 	auxarr = procstring.split(",");
 	$.each(auxarr,function(index,value) {
@@ -138,16 +152,66 @@ function parseWkt(wkt) {
 	//geocodePoint(marker);
 };
 
-function geocodePoint(marker){
-  if (!geocoder){
-    geocoder = new google.maps.Geocoder();
+function disableEnter(event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    return false;
   }
+};
+
+function autocompleteAddress(){
+  if ($.browser.mozilla) {
+    $("#project_address").keypress(disableEnter);
+  } else {
+    $("#project_address").keydown(disableEnter);
+  };
+
+  $("#project_address").autocomplete({
+    source: function(request, response) {
+      geocoder.geocode( {'address': request.term }, function(results, status) {
+        response($.map(results, function(item) {
+          return {
+            label:  item.formatted_address,
+            value: item.formatted_address,
+            latitude: item.geometry.location.lat(),
+            longitude: item.geometry.location.lng()
+          }
+        }));
+      })
+    },
+    select: function(event, ui) {
+      $("#project_latitude").val(ui.item.latitude);
+      $("#project_longitude").val(ui.item.longitude);
+      var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+      console.log(location);
+      window.lll = location;
+      marker = new google.maps.Marker({
+	      map:map,
+	      draggable:false,
+	      position: location
+	    });
+	    markers.push(marker);
+      geocodePoint(marker);
+      map_bounds.extend(marker.getPosition());
+      setMapViewport();
+      enableOrDisableGeodetail();
+      event.preventDefault();
+      $("#project_address").val('');
+      $("#project_latitude").val('');
+      $("#project_longitude").val('');
+    }
+  });
+};
+
+function geocodePoint(marker){
   //First delete all previous
   //$('#location ul.reverse_geo li').remove();
   // $.each(markers, function(i, value){
   geocoder.geocode({location: marker.position}, function(results, status){
     var city, region, country;
+    console.log(1);
     if (status == 'OK'){
+      console.log(2);
       if (results.length > 0){
         $.each(results[0].address_components, function(index, item){
           if (item.types[0] == 'administrative_area_level_2'){
