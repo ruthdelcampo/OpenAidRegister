@@ -414,3 +414,5 @@
 #body_container .sign_right .publish .text_sec{width:113px; float:right;}
 #body_container .sign_right .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
 
+/* address search */
+#address_finder_container { width: 420px;}
