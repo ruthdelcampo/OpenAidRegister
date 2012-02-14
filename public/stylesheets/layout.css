@@ -161,7 +161,11 @@
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
-#body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:90px; height:170px;}
+#body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:90px;}
+#body_container .sign_sec .sign_right #errors{
+  color:#FF3300; font:normal 15px/18px "Helvetica Neue";
+}
+
 .sign_sec .sign_down{ float:right; width:283px; padding-top:270px;}
 .sign_sec .sign_down small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:15px 0 0 9px;}
 /**/
