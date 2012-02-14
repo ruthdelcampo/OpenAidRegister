@@ -32,15 +32,18 @@
 	      <strong>We will only contact you once.</strong>
 	    <% end %>
 
-
-		    <h4 id="errors">
-		      <% if @errors %>
-  				  Errors:<br>
+		  <% if @errors %>
+        <div id="errors">
+          <h4>Errors:</h4>
+          <div class="clear"></div>
+		      <ul>
             <% @errors.each do |error| %>
-				    * <%= error %><br>
+				      <li><%= error %></li>
 				    <% end %>
-          <% end %>
-			  </h4>
+          </ul>
+        </div>
+      <% end %>
+
 
 	    <% if session[:organization].present? %>
         <div class="publish">
