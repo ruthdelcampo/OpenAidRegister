@@ -30,7 +30,21 @@ function initMap(){
 	        map.addLayer(new wax.leaf.connector(tilejson));
 	});
 
+	$.each(ordered_projects_list, function(index, project){
+		if (!(project.markers == 'NIL' || project.markers == 'NULL' || project.markers == "")) {
+			parseWkt(project);
+		}
+	});
 
+/*	var latlng = new google.maps.LatLng(14.5, 15.5);
+	var myOptions = {
+		zoom: 3,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		disableDoubleClickZoom: true
+	};
+
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
 	$.each(ordered_projects_list, function(index, project){
 		if (!(project.markers == 'NIL' || project.markers == 'NULL' || project.markers == "")) {
@@ -40,12 +54,14 @@ function initMap(){
 
 	// set zoom and center when there is only one location...
   // if not, the zoom is at top level and the visualization is weird
-	/*if (all_markers.length === 1) {
-		map.setView(map_bounds.getCenter(),6);
+	if (all_markers.length === 1) {
+		map.setCenter(map_bounds.getCenter());
+	  map.setZoom(6);
 	} else {
-		map.fitBounds(map_bounds);
+	  map.fitBounds(map_bounds);
 	}*/
-	
+
+
 }
 
 // parseWkt

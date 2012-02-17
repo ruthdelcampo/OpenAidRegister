@@ -6,6 +6,7 @@ OpenAidRegister::Application.routes.draw do
   #----------------------------------------------------------------------
 
   match 'about' => 'pages#about'
+  match 'explore' => 'explore#show'
   match 'conditions' => 'pages#conditions'
   match 'faq' => 'pages#faq'
   match 'browser_not_supported' => 'pages#browser_not_supported'
