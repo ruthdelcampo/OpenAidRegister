@@ -73,6 +73,41 @@ class Organization
     Organization.by_email(params[:email])
   end
 
+
+  # return all the projects and markers for a given organization
+  #----------------------------------------------------------------------
+
+  def self.dashboard_projects(organization_id)
+    sql = <<-SQL
+     SELECT *
+     FROM
+       (SELECT p.cartodb_id,
+            p.title,
+            array_agg(ps.sector_id) AS sectors,
+            (p.budget || p.budget_currency) AS budget,
+            p.start_date,
+            p.end_date
+       FROM projects p
+       LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
+       WHERE p.organization_id = ?
+       GROUP BY p.cartodb_id,
+              p.title,
+              p.budget,
+              p.budget_currency,
+              p.start_date,
+              p.end_date) as tableA
+     LEFT OUTER JOIN
+       (SELECT p.cartodb_id, array_agg((ST_X(rg.the_geom) || ' ' || ST_Y(rg.the_geom))) as project_markers
+              FROM projects p
+              LEFT OUTER JOIN reverse_geo rg ON rg.project_id = p.cartodb_id
+              WHERE p.organization_id = ?
+              GROUP BY p.cartodb_id) as tableB
+     ON tableA.cartodb_id = tableB.cartodb_id
+    SQL
+
+    Oar::execute_query(sql, organization_id, organization_id)
+  end
+
   # VALIDATE SOME PARAMS
   # and return the errors array
   #======================================================================

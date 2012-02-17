@@ -1,49 +1,23 @@
 class DashboardController < ApplicationController
 
+  before_filter :require_login
+
+  # SHOW
+  #----------------------------------------------------------------------
+
   def show
+    # We need to initialize the errors array to be shown when there is aproblem with import file
+    @errors = Array.new
 
-    if session[:organization].blank?
-      session[:return_to] = request.request_uri
-      redirect_to '/login'
-      return
-    end
-    @errors = Array.new  # We need to initialize the errors array to be shown when there is aproblem with import file
-
-    # Selects markers in all projects
-    sql = <<-SQL
-     SELECT *
-     FROM
-       (SELECT p.cartodb_id,
-            p.title,
-            array_agg(ps.sector_id) AS sectors,
-            (p.budget || p.budget_currency) AS budget,
-            p.start_date,
-            p.end_date
-       FROM projects p
-       LEFT OUTER JOIN project_sectors ps ON ps.project_id = p.cartodb_id
-       WHERE p.organization_id = ?
-       GROUP BY p.cartodb_id,
-              p.title,
-              p.budget,
-              p.budget_currency,
-              p.start_date,
-              p.end_date) as tableA
-     LEFT OUTER JOIN
-       (SELECT p.cartodb_id, array_agg((ST_X(rg.the_geom) || ' ' || ST_Y(rg.the_geom))) as project_markers
-              FROM projects p
-              LEFT OUTER JOIN reverse_geo rg ON rg.project_id = p.cartodb_id
-              WHERE p.organization_id = ?
-              GROUP BY p.cartodb_id) as tableB
-     ON tableA.cartodb_id = tableB.cartodb_id
-    SQL
-    result = Oar::execute_query(sql, session[:organization][:cartodb_id], session[:organization][:cartodb_id])
-    #order projects by start date to be shown in the dashboard. Last projects will be the ones with nil.
-    @ordered_projects_list = result.rows.sort{|a,b|( a.start_date and b.start_date ) ? b.start_date <=> a.start_date : ( a.start_date ? -1 : 1 ) }
+    result = Organization.dashboard_projects(session[:organization][:cartodb_id])
+    # order projects by start date to be shown in the dashboard.
+    # Last projects will be the ones with nil.
+    @ordered_projects_list = result.rows.sort{|a,b| ( a.start_date and b.start_date ) ? b.start_date <=> a.start_date : ( a.start_date ? -1 : 1 ) }
 
     @current_projects = 0
     @past_projects = 0
 
-    #check which ones are current and which are past
+    # check which ones are current and which are past
     @ordered_projects_list.each do |project|
       if (project[:end_date]== nil) || ((project[:end_date]<=> Date.current) ==1)
         @current_projects +=1
@@ -53,6 +27,8 @@ class DashboardController < ApplicationController
     end
   end
 
+  # IMPORT_FILE
+  #----------------------------------------------------------------------
 
   def import_file #not completely working. Need to add functionallity
 
