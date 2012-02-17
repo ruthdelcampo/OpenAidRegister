@@ -3,11 +3,18 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  #protected
-  #def deny_access
-  #debugger
-  #end
-  #test
+private
+
+  def require_login
+    if session[:organization].blank?
+      session[:return_to] = request.request_uri
+      redirect_to '/login'
+      return
+    end
+  end
+
+end
+
 
   #def cartodb_connect(sql) #It tries 2 times to connect to cartoDB. If no success, goes back to the previous page and sends an alert.
    #  begin
@@ -28,15 +35,3 @@ class ApplicationController < ActionController::Base
      #end
   # end
 
-
-private
-
-  def require_login
-    if session[:organization].blank?
-      session[:return_to] = request.request_uri
-      redirect_to '/login'
-      return
-    end
-  end
-
-end

@@ -60,7 +60,7 @@ class Project
     result.rows.first
   end
 
-  # CREATE A PROGRAM
+  # CREATE A PROJECT
   #----------------------------------------------------------------------
 
   def self.create(params, organization_id, start_date, end_date)
@@ -105,6 +105,9 @@ class Project
     Project.last_by_organization_id(organization_id)
   end
 
+  # UPDATE A PROJECT
+  #----------------------------------------------------------------------
+
   def self.update(project_id, params, start_date, end_date)
     #it is an existing project do whatever
     sql="UPDATE projects SET title='?', description ='?', org_role ='?',
@@ -138,4 +141,24 @@ class Project
                   project_id)
 
   end
+
+
+  # DELETE A PROJECT AND ALL THE RELATED DATA
+  #----------------------------------------------------------------------
+
+  def self.destroy(project_id)
+    sql = "delete FROM projects where projects.cartodb_id = '?'"
+    Oar::execute_query(sql, project_id)
+    sql = "delete FROM project_sectors where project_id = '?'"
+    Oar::execute_query(sql, project_id)
+    sql = "delete FROM project_partnerorganizations where project_id = '?'"
+    Oar::execute_query(sql, project_id)
+    sql = "delete FROM project_relateddocs where project_id = '?'"
+    Oar::execute_query(sql, project_id)
+    sql = "delete FROM project_transactions where project_id = '?'"
+    Oar::execute_query(sql, project_id)
+    sql = "delete FROM reverse_geo where project_id = '?'"
+    Oar::execute_query(sql, project_id)
+  end
+
 end

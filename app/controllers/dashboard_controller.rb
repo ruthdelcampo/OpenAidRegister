@@ -28,21 +28,20 @@ class DashboardController < ApplicationController
   end
 
   # IMPORT_FILE
+  # TODO: not completely working. Need to add functionallity
   #----------------------------------------------------------------------
 
-  def import_file #not completely working. Need to add functionallity
-
-    redirect_to '/login' and return if session[:organization].blank?
+  def import_file
 
     redirect_to '/dashboard', :alert => "You need to choose a file first" and return if params[:file_upload].blank?
 
     file_name = params[:file_upload].original_filename
     file      = params[:file_upload].tempfile
 
-     result = AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
+    result = AWS::S3::S3Object.store("#{session[:organization][:cartodb_id]}_#{file_name}", file, 'openaidregister_uploads')
 
 
-    #send an email notification to ruth del Campo
+    # send an email notification to ruth del Campo
     UserMailer.new_file(session[:organization], file_name).deliver
 
     redirect_to '/dashboard', :notice => <<-EOF
@@ -55,60 +54,48 @@ class DashboardController < ApplicationController
   end
 
   # DELETE
+  # deletes a project and all the related data
   #----------------------------------------------------------------------
 
-  def delete #deletes records in the three tables
-    if session[:organization].blank?
-      redirect_to '/login'
-      return
+  def delete
+    # check if the project belongs to the organization before deleting it
+    project = Project.find(params[:delete_project_id], session[:organization][:cartodb_id])
+    if project # yay! the project belongs to the org, so we can delete it
+      Project.destroy(params[:delete_project_id])
+    else
+      flash[:notice] = "You can't delete the selected project"
     end
-    sql="delete FROM projects where projects.cartodb_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
-    sql="delete FROM project_sectors where project_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
-    sql="delete FROM project_partnerorganizations where project_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
-    sql="delete FROM project_relateddocs where project_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
-    sql="delete FROM project_transactions where project_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
-    sql="delete FROM reverse_geo where project_id = '?'"
-    Oar::execute_query(sql, params[:delete_project_id])
     redirect_to  '/dashboard'
   end
 
   # PUBLISH
+  # TODO: not working
   #----------------------------------------------------------------------
 
-  def publish #not working
-      if session[:organization].blank?
-        redirect_to '/login'
-        return
-      end
-       redirect_to "/dashboard", :notice=>"Sorry, this functionality is not yet implemented but you can always contact us for help"
+  def publish
+    redirect_to "/dashboard", :notice => "Sorry, this functionality is not yet implemented but you can always contact us for help"
 
-      #if session[:organization][:is_valid_publish]
-      #   #send to IATI REgistry
-      #     if # no_success
-      #        #email to contact@openaidregister to check what happened
-      #        render :text => 'There was an error while inserting the data in IATI Registry. Please try again later or contact us'
-      #      else #if success
-      #        #sql insert new data since it was succesful
-      #          api_key = params[:api_key]
-      #          name_package = params[:name_package]
-      #        render :text => "Succesfully updated"
-      #       end
-      #elsif session[:organization][:api_key].present? && session[:organization][:package_name].present?
-      #    if #no success
-      #      #email to contact@openaidregister to check what happened
-      #      render :text => 'There was an error while inserting the data in IATI Registry. Please check your IATI Details are correct'
-      #    else #if success
-      #      session[:organization][:is_valid_publish]
-      #    end
-      #else
-      #    redirect_to '/dashboard', :alert => "Please, introduce your IATI Registry (api key and the name package) details in your account. We need this information to be able to publish your data in the Registry.  For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
-      #end
-
+    #if session[:organization][:is_valid_publish]
+    #   #send to IATI REgistry
+    #     if # no_success
+    #        #email to contact@openaidregister to check what happened
+    #        render :text => 'There was an error while inserting the data in IATI Registry. Please try again later or contact us'
+    #      else #if success
+    #        #sql insert new data since it was succesful
+    #          api_key = params[:api_key]
+    #          name_package = params[:name_package]
+    #        render :text => "Succesfully updated"
+    #       end
+    #elsif session[:organization][:api_key].present? && session[:organization][:package_name].present?
+    #    if #no success
+    #      #email to contact@openaidregister to check what happened
+    #      render :text => 'There was an error while inserting the data in IATI Registry. Please check your IATI Details are correct'
+    #    else #if success
+    #      session[:organization][:is_valid_publish]
+    #    end
+    #else
+    #    redirect_to '/dashboard', :alert => "Please, introduce your IATI Registry (api key and the name package) details in your account. We need this information to be able to publish your data in the Registry.  For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
+    #end
   end
 
 end
