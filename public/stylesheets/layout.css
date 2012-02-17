@@ -415,6 +415,19 @@
 .sign_right .publish ul li{width:100%; float:left; padding-bottom:10px;}
 .sign_right .publish .but_sec{width:170px; float:left;}
 .sign_right .publish .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
+
 #body_container .sign_right .publish .text_sec{width:113px; float:right;}
 #body_container .sign_right .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
+
+.sign_right{ height:255px; }
+.sign_right_secondary { float:right; }
+.sign_right_secondary .publish{width:100%; float:left; padding-top:100px;}
+.sign_right_secondary .publish h3{font-size:16px; font-family:"Helvetica Neue", arial; padding-bottom:25px; color:#000;}
+.sign_right_secondary .publish ul{width:100%; float:left; list-style:none;}
+.sign_right_secondary .publish ul li{width:100%; float:left; padding-bottom:10px;}
+.sign_right_secondary .publish .but_sec{width:170px; float:left;}
+.sign_right_secondary .publish .but_sec a{width:155px; height:51px; line-height:51px; font-size:21px; color:#fff; text-decoration:none; float:left; text-align:center; background:url(../images/but02.gif) 0 0 no-repeat; font-family:"Helvetica Neue", arial;}
+
+#body_container .sign_right_secondary .publish .text_sec{width:113px; float:right;}
+#body_container .sign_right_secondary .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
 
