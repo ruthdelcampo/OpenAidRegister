@@ -13,7 +13,7 @@ $(document).ready(function(){
 //----------------------------------------------------------------------
 
 function initMap(){
-	var latlng = new google.maps.LatLng(14.5, 15.5);
+/*	var latlng = new google.maps.LatLng(14.5, 15.5);
 	var myOptions = {
 		zoom: 3,
 		center: latlng,
@@ -36,7 +36,7 @@ function initMap(){
 	  map.setZoom(6);
 	} else {
 	  map.fitBounds(map_bounds);
-	}
+	}*/
 }
 
 // parseWkt

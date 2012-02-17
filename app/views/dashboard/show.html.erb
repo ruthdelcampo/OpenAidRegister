@@ -36,7 +36,8 @@
     <div class="sign_left">
       <div class="dashboard">
 
-        <div id="map_canvas" class="map"></div>
+        <div id="map_canvas" class="map"><iframe border="0" width="720" height="350" src='https://ruth.cartodb.com/tables/projects/embed_map?sql=SELECT%20p.cartodb_id,p.title,g.the_geom_webmercator%20FROM%20projects%20as%20p%20inner%20join%20reverse_geo%20as%20g%20on%20p.cartodb_id=g.project_id%20inner%20join%20organizations%20as%20o%20on%20p.organization_id=o.cartodb_id%20WHERE%20o.is_validated=false and o.cartodb_id=<%=session[:organization].cartodb_id %>'></iframe></div>
+
 
         <div class="edit_sec">
 
