@@ -51,7 +51,7 @@
 		<div class="row">
 	    <div class="inner_row">
 	      <label>ORGANIZATION's type*</label>
-	      <%= select_tag(:organization_type_id, options_for_select(organization_type_list, :selected => @org_data[:organization_type_id]), :class=>"wid-205") %>
+	      <%= select_tag(:organization_type_id, options_for_select(ORGANIZATION_TYPE_LIST, :selected => @org_data[:organization_type_id]), :class=>"wid-205") %>
 	    </div>
 	    <div class="inner_row">
 	      <label>government id</label>
@@ -64,7 +64,7 @@
 
 		<div class="row">
       <label>ORGANIZATION's country*</label>
-			<%= select_tag(:organization_country, options_for_select(country_list, :selected => @org_data[:organization_country])) %>
+			<%= select_tag(:organization_country, options_for_select(COUNTRY_LIST, :selected => @org_data[:organization_country])) %>
 		</div>
   </div>
 

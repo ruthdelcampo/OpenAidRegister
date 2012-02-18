@@ -43,7 +43,7 @@
 
         <li class="add_new">
           <div id="sectors_filter_container"></div>
-	        <%= select_tag(:sector_id, options_for_select(sectors_list,
+	        <%= select_tag(:sector_id, options_for_select(SECTORS_LIST,
 	 		    :selected => @project_data[:sector_id]),
           :multiple => true,
           :class => "wid-425") %>
@@ -129,7 +129,7 @@
 
       <div class="inner_row">
 	      <label>CURRENCY</label>
-	      <%= select_tag(:budget_currency, options_for_select(currency_list, :selected => @project_data[:budget_currency]), :class => "wid-205" )%>
+	      <%= select_tag(:budget_currency, options_for_select(CURRENCY_LIST, :selected => @project_data[:budget_currency]), :class => "wid-205" )%>
 	      </div>
 	    </div>
 
@@ -290,7 +290,7 @@
 	            <div class="row2">
 	              <div class="inner_row">
 	                <label for="transaction_type">TRANSACTION TYPE*</label>
-	 		            <%= select_tag :transaction_type, options_for_select(transaction_type_list), :class => 'wid-205' %>
+	 		            <%= select_tag :transaction_type, options_for_select(TRANSACTION_TYPE_LIST), :class => 'wid-205' %>
 	              </div>
 	              <div class="inner_row">
 	                <label>TRANSACTION DATE*</label>
@@ -308,7 +308,7 @@
 	              </div>
 	              <div class="inner_row">
 	            	  <label for="transaction_currency">CURRENCY</label>
-	                <%= select_tag(:transaction_currency, options_for_select(currency_list), :class => "wid-205" )%>
+	                <%= select_tag(:transaction_currency, options_for_select(CURRENCY_LIST), :class => "wid-205" )%>
 	              </div>
 	            </div>
 
@@ -447,7 +447,7 @@
       <div class="row">
 	      <div class="inner_row wid-402">
 	        <label>COLLABORATION TYPE</label>
-	        <%= select_tag(:collaboration_type, options_for_select(collaboration_type_list, :selected => @project_data[:collaboration_type]), :class=>"wid-400") %>
+	        <%= select_tag(:collaboration_type, options_for_select(COLLABORATION_TYPE_LIST, :selected => @project_data[:collaboration_type]), :class=>"wid-400") %>
 	      </div>
 	      <div class="inner_row">
 	        <p class="date"> Check out<a href="http://iatistandard.org/codelists/collaboration_type"> here</a> to understand all options</p>
@@ -457,28 +457,28 @@
       <div class="row">
 	      <div class="inner_row wid-402">
 	        <label>TIED STATUS</label>
-	        <%= select_tag(:tied_status, options_for_select(tied_status_list, :selected => @project_data[:tied_status]), :class=>"wid-400") %>
+	        <%= select_tag(:tied_status, options_for_select(TIED_STATUS_LIST, :selected => @project_data[:tied_status]), :class=>"wid-400") %>
 	      </div>
 	    </div>
 
       <div class="row">
 	      <div class="inner_row wid-402">
 	        <label>AID TYPE</label>
-	        <%= select_tag(:aid_type, options_for_select(aid_type_list, :selected => @project_data[:aid_type]), :class=>"wid-400") %>
+	        <%= select_tag(:aid_type, options_for_select(AID_TYPE_LIST, :selected => @project_data[:aid_type]), :class=>"wid-400") %>
 	      </div>
 	    </div>
 
       <div class="row">
 	      <div class="inner_row wid-402">
 	        <label>FLOW TYPE</label>
-	        <%= select_tag(:flow_type, options_for_select(flow_type_list, :selected => @project_data[:flow_type]), :class=>"wid-400") %>
+	        <%= select_tag(:flow_type, options_for_select(FLOW_TYPE_LIST, :selected => @project_data[:flow_type]), :class=>"wid-400") %>
 	      </div>
 	    </div>
 
       <div class="row">
 	      <div class="inner_row wid-402">
 	        <label>FIINANCE TYPE</label>
-	        <%= select_tag(:finance_type, options_for_select(finance_type_list, :selected => @project_data[:finance_type]), :class=>"wid-400") %>
+	        <%= select_tag(:finance_type, options_for_select(FINANCE_TYPE_LIST, :selected => @project_data[:finance_type]), :class=>"wid-400") %>
 	      </div>
 	    </div>
 	  </div>

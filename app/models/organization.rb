@@ -34,6 +34,13 @@ class Organization
     result.rows.first
   end
 
+  def self.by_email_and_password(email, password)
+    sql="SELECT #{ATTRS_WITH_KEY.join(',')}
+         FROM organizations WHERE email='?' AND password=md5('?')"
+    result = Oar::execute_query(sql, Oar::quote_string(email), Oar::quote_string(password))
+    result.rows.first
+  end
+
   def self.update(id, params)
     sql="UPDATE organizations SET organization_guid ='?',
           password = md5('?'), contact_name= '?', telephone = '?',

@@ -54,31 +54,6 @@ class SignupController < ApplicationController
     end
   end
 
-  def organization_type_by_id(id)
-    organization_type_list.select{|organization_type| organization_type.last.to_i == id.to_i}.first.first if id.present?
-  end
-
-  def organization_type_by_name (name)
-    organization_type_list.select{|organization_type| organization_type.first == name}.first.last if name.present?
-  end
-
-  def organization_type_list
-    [
-     ['', ''],
-     ['Government','10'],
-     ['Other Public Sector','15'],
-     ['International NGO','21'],
-     ['National NGO','22'],
-     ['Regional NGO','23'],
-     ['Public Private Partnership','30'],
-     ['Multilateral','40'],
-     ['Foundation','60'],
-     ['Private Sector','70'],
-     ['Academic Training and Research','80']
-    ]
-  end
-
-
   def signup_complete
     if session[:organization]
     else
@@ -95,24 +70,18 @@ class SignupController < ApplicationController
   end
 
   def login_validation
-    sql="SELECT cartodb_id, contact_name, email, telephone, organization_name, organization_country,
-    organization_type_id, organization_guid, organization_web FROM organizations WHERE email='?' AND password=md5('?')"
-    result = Oar::execute_query(sql, Oar::quote_string(params[:email]), Oar::quote_string(params[:password]))
-
-    if result.rows.length==0
-      @errors = Array.new
-      @errors.push("Login incorrect")
-      render :template => 'signup/login'
-    else
-      session[:organization] = result.rows.first
+    organization = Organization.by_email_and_password(params[:email], params[:password])
+    if organization
+      session[:organization] = organization
       redirect_to session[:return_to] || request.referer
-      #redirect_to(:back)
-      #redirect_to '/dashboard'
+    else
+      @errors = ["Login incorrect"]
+      render :template => 'signup/login'
     end
   end
 
 
-  #Not used in the current version
+  # Not used in the current version
   def forgot_password
     if params[:method]=="post"
       @errors = Array.new
@@ -178,6 +147,16 @@ class SignupController < ApplicationController
         render :template => 'signup/password_reset'
       end
     end
+  end
+
+private
+
+  def organization_type_by_id(id)
+    ORGANIZATION_TYPE_LIST.select{|organization_type| organization_type.last.to_i == id.to_i}.first.first if id.present?
+  end
+
+  def organization_type_by_name(name)
+    ORGANIZATION_TYPE_LIST.select{|organization_type| organization_type.first == name}.first.last if name.present?
   end
 
 end
