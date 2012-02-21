@@ -7,6 +7,14 @@ $(document).ready(function(){
 	initMap();
 	initUploadForm();
   oar.listFilter($("#projects_search"), $(".content"));
+
+  $("#publish_link").click(function(e){
+    if( $(this).html() == "Publish"){
+      $(this).html("Please wait...");
+    }else{
+      e.preventDefault();
+    }
+  });
 });
 
 // initMap

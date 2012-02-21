@@ -56,7 +56,7 @@ class Organization
                        params[:organization_type_id],
                        params[:organization_country],
                        params[:organization_web],
-                       params[:api_key],
+                       params[:api_key].strip,
                        params[:package_name],
                        id)
   end
@@ -75,7 +75,9 @@ class Organization
                   params[:organization_name],
                   params[:organization_type_id],
                   params[:organization_country],
-                  params[:organization_web])
+                  params[:organization_web],
+                  params[:api_key].strip,
+                  params[:package_name])
     # return the recently created organization
     Organization.by_email(params[:email])
   end
@@ -113,6 +115,98 @@ class Organization
     SQL
 
     Oar::execute_query(sql, organization_id, organization_id)
+  end
+
+  # IATI REGISTRY
+  #======================================================================
+
+  def self.iati_connection
+    Faraday.new(:url => 'http://iati.test.ckan.net') do |builder|
+      builder.use Faraday::Request::UrlEncoded
+      builder.use Faraday::Response::Logger
+      builder.use Faraday::Adapter::NetHttp
+    end
+  end
+
+  # get details of a dataset
+  # if the response.status == 404 the response.body is "Not found"
+  # if the response.status == 200 the response body is a hash with the data
+  def self.iati_get(dataset_name)
+    conn = Organization.iati_connection
+    conn.get "/api/rest/dataset/#{dataset_name}"
+  end
+
+  # publish the organization datasets
+  # organization == hash with all the organization data
+  def self.iati_publish(organization)
+    # the dataset name is automatically generated based on the publisher name
+    # dataset_name = "#{organization[:package_name]}-activity"
+    # TODO: TEMPORAL
+    dataset_name = organization[:package_name]
+    # check if the dataset is already published
+    resp1 = Organization.iati_get dataset_name
+    if resp1.status == 200
+      # already published, update the dataset
+      response = Organization.iati_dataset_update(organization, "activity")
+    else
+      # not published, create the dataset
+      response = Organization.iati_dataset_create(organization, "activity")
+    end
+    response
+  end
+
+  def self.iati_dataset_create(organization, filetype)
+    conn = Organization.iati_connection
+    conn.post do |req|
+      req.url '/api/rest/dataset'
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['Authorization'] = organization[:api_key]
+      req.body = self.iati_json(organization, filetype)
+    end
+  end
+
+  def self.iati_dataset_update(organization, filetype)
+    conn = Organization.iati_connection
+    # dataset_name = "#{organization[:package_name]}-#{filetype}"
+    # TODO: TEMP
+    dataset_name = organization[:package_name]
+    conn.post do |req|
+      req.url "/api/rest/dataset/#{dataset_name}"
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['Authorization'] = organization[:api_key]
+      req.body = self.iati_json(organization, filetype)
+    end
+  end
+
+  def self.iati_json(organization, filetype)
+    {
+      name: organization[:package_name],
+      title: "#{organization[:package_name]} #{filetype}",
+      author_email: organization[:email],
+      resources: [ {
+                     url: "http://openaidregister.org/organizations/#{organization[:cartodb_id]}/projects.xml",
+                     format: "IATI-XML"
+                   } ],
+      extras: {
+        filetype: filetype
+      },
+      # groups: [ organization[:package_name] ]
+      # TODO:
+      groups: [ "openaidregister" ]
+    }.to_json
+  end
+
+  def self.iati_status_message(status)
+    case status
+    when 200
+      "Your data was sucesfully published in IATI Registry."
+    when 201
+      "Your data was sucesfully published in IATI Registry."
+    when 403
+      "There was an error while inserting the data in IATI Registry. Please check your IATI Details are correct."
+    else
+      "There was an error while inserting the data in IATI Registry. Please try again later or contact us"
+    end
   end
 
   # VALIDATE SOME PARAMS
@@ -163,6 +257,11 @@ class Organization
     # Organization's country Validation.
     if params[:organization_country].eql?("")
       errors.push("Please select your organization's country")
+    end
+
+    # api_key validation
+    if params[:api_key].strip.present? && !params[:api_key].strip.match(/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/)
+      errors.push("The format of your IATI api key is invalid")
     end
 
     errors
