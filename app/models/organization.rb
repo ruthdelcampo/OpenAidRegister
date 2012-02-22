@@ -198,14 +198,14 @@ class Organization
 
   def self.iati_status_message(status)
     case status
-    when 200
-      "Your data was sucesfully published in IATI Registry."
-    when 201
-      "Your data was sucesfully published in IATI Registry."
-    when 403
-      "There was an error while inserting the data in IATI Registry. Please check your IATI Details are correct."
-    else
-      "There was an error while inserting the data in IATI Registry. Please try again later or contact us"
+    when 200 #File created the first time
+      "Congrats! Your data was sucesfully published in the IATI Registry."
+    when 201 #File updated
+      "Congrats! Your data was sucesfully updated in IATI Registry."
+    when 403 #Authentication error
+      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your API-Key and the Publisher ID are correct? If this error exists, send us an email"
+    else #Any other error
+      "Ooops! There was an error while inserting the data in IATI Registry. Try it again or contact us if this error continues"
     end
   end
 
