@@ -93,7 +93,9 @@
             </li>
 
             <li>
-              <div class="but_sec"><a href="/publish" id="publish_link">Publish</a></div>
+              <div class="but_sec">
+                <%= link_to "Publish", "/publish", :confirm => "Are you sure?" %>
+              </div>
               <div class="text_sec">
                 <p>Make your projects available at the IATI Registry</p>
               </div>
