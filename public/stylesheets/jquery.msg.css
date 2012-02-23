@@ -32,10 +32,13 @@
   behavior: url(PIE.htc);
 }
 .black-on-white .jquery-msg-content p{
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.2em;
-  font-weight: bold;
+  font-weight: normal;
+  font-family: "Helvetica Neue",Arial, Helvetica, sans-serif;
+  width:500px;
 }
+
 
 .white-on-black .jquery-msg-content {
   -moz-opacity: 0.5;

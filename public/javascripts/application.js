@@ -1,5 +1,6 @@
 $(document).ready(function(){
   showFlashMessages();
+
   if (BrowserDetect.browser == "Explorer" && BrowserDetect.version < 7){
     window.location = "/browser_not_supported";
   };
