@@ -1,5 +1,7 @@
 class Organization
+
   PRIMARY_KEY = "cartodb_id"
+
   ATTRIBUTES = [
                 "contact_name",
                 "email",
@@ -57,7 +59,7 @@ class Organization
                        params[:organization_country],
                        params[:organization_web],
                        params[:api_key].strip,
-                       params[:package_name],
+                       params[:package_name].strip,
                        id)
   end
 
@@ -77,7 +79,7 @@ class Organization
                   params[:organization_country],
                   params[:organization_web],
                   params[:api_key].strip,
-                  params[:package_name])
+                  params[:package_name].strip)
     # return the recently created organization
     Organization.by_email(params[:email])
   end
@@ -121,7 +123,9 @@ class Organization
   #======================================================================
 
   def self.iati_connection
-    Faraday.new(:url => 'http://iati.test.ckan.net') do |builder|
+    # if the app is running in development mode, it connects to the
+    # iati's test server
+    Faraday.new(:url => IATI_API_BASE_URL) do |builder|
       builder.use Faraday::Request::UrlEncoded
       builder.use Faraday::Response::Logger
       builder.use Faraday::Adapter::NetHttp
@@ -140,9 +144,7 @@ class Organization
   # organization == hash with all the organization data
   def self.iati_publish(organization)
     # the dataset name is automatically generated based on the publisher name
-    # dataset_name = "#{organization[:package_name]}-activity"
-    # TODO: TEMPORAL
-    dataset_name = organization[:package_name]
+    dataset_name = "#{organization[:package_name]}-activity"
     # check if the dataset is already published
     resp1 = Organization.iati_get dataset_name
     if resp1.status == 200
@@ -167,9 +169,7 @@ class Organization
 
   def self.iati_dataset_update(organization, filetype)
     conn = Organization.iati_connection
-    # dataset_name = "#{organization[:package_name]}-#{filetype}"
-    # TODO: TEMP
-    dataset_name = organization[:package_name]
+    dataset_name = "#{organization[:package_name]}-#{filetype}"
     conn.post do |req|
       req.url "/api/rest/dataset/#{dataset_name}"
       req.headers['Content-Type'] = 'application/json'
@@ -180,7 +180,7 @@ class Organization
 
   def self.iati_json(organization, filetype)
     {
-      name: organization[:package_name],
+      name: "#{organization[:package_name]}-#{filetype}",
       title: "#{organization[:package_name]} #{filetype}",
       author_email: organization[:email],
       resources: [ {
@@ -190,21 +190,21 @@ class Organization
       extras: {
         filetype: filetype
       },
-      # groups: [ organization[:package_name] ]
-      # TODO:
-      groups: [ "openaidregister" ]
+      groups: [ organization[:package_name] ]
     }.to_json
   end
 
   def self.iati_status_message(status)
     case status
-    when 200 #File created the first time
+    when 200 # File created the first time
       "Congrats! Your data was sucesfully published in the IATI Registry."
-    when 201 #File updated
+    when 201 # File updated
       "Congrats! Your data was sucesfully updated in IATI Registry."
-    when 403 #Authentication error
-      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your API-Key and the Publisher ID are correct? If this error persists, send us an email"
-    else #Any other error
+    when 403 # Authentication error
+      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your API-Key is correct? If this error persists, send us an email"
+    when 404 # returned when the publisher is wrong)
+      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your Publisher ID is correct? If this error persists, send us an email"
+    else # Any other error
       "Ooops! There was an error while inserting the data in IATI Registry. Try it again or contact us if this error persists"
     end
   end
@@ -262,6 +262,11 @@ class Organization
     # api_key validation
     if params[:api_key].strip.present? && !params[:api_key].strip.match(/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/)
       errors.push("The format of your IATI api key is invalid")
+    end
+
+    # publisher name
+    if params[:package_name].strip.present? && !params[:package_name].strip.match(/^\w*$/)
+      errors.push("The format of your publisher id is invalid")
     end
 
     errors
