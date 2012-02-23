@@ -49,7 +49,7 @@
                   <%= link_to project.title, edit_project_path(project.cartodb_id), :class => 'project_title' %>
 
                   <div class="hide_shows">
-                    <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure?" class="edit delete">delete</a>
+                    <a href="/delete?delete_project_id=<%= project[:cartodb_id] %>" data-confirm="Are you sure you want to delete this project?" class="edit delete">delete</a>
                     <%= link_to "edit", edit_project_path(project.cartodb_id), :class => 'edit' %>
                   </div>
 
@@ -94,7 +94,7 @@
 
             <li>
               <div class="but_sec">
-                <%= link_to "Publish", "/publish", :confirm => "Are you sure?" %>
+                <%= link_to "Publish", "/publish", :confirm => "Are you sure you want to publish your IATI information? By accepting this, your IATI data will be linked to the IATI Registry" %>
               </div>
               <div class="text_sec">
                 <p>Make your projects available at the IATI Registry</p>

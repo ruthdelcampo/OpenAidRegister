@@ -201,9 +201,9 @@ class Organization
     when 201 # File updated
       "Congrats! Your data was sucesfully updated in IATI Registry."
     when 403 # Authentication error
-      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your API-Key is correct? If this error persists, send us an email"
+      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your API-Key is correct? If this error persists, contact us"
     when 404 # returned when the publisher is wrong)
-      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your Publisher ID is correct? If this error persists, send us an email"
+      "Ooops! It seems there was an error while inserting the data in IATI Registry. Can you check if your Publisher ID is correct? If this error persists, contact us"
     else # Any other error
       "Ooops! There was an error while inserting the data in IATI Registry. Try it again or contact us if this error persists"
     end
