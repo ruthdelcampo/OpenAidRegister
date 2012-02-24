@@ -142,17 +142,27 @@ class Organization
 
   # publish the organization datasets
   # organization == hash with all the organization data
-  def self.iati_publish(organization)
+  def self.iati_publish_all(organization)
+    activity_response = Organization.iati_publish(organization, "activity")
+    organization_response = Organization.iati_publish(organization, "organization")
+    response = {
+      activity_response: activity_response,
+      organization_response: organization_response
+    }
+    response
+  end
+
+  def self.iati_publish(organization, filetype)
     # the dataset name is automatically generated based on the publisher name
-    dataset_name = "#{organization[:package_name]}-activity"
+    dataset_name = "#{organization[:package_name]}-#{filetype}"
     # check if the dataset is already published
     resp1 = Organization.iati_get dataset_name
     if resp1.status == 200
       # already published, update the dataset
-      response = Organization.iati_dataset_update(organization, "activity")
+      response = Organization.iati_dataset_update(organization, filetype)
     else
       # not published, create the dataset
-      response = Organization.iati_dataset_create(organization, "activity")
+      response = Organization.iati_dataset_create(organization, filetype)
     end
     response
   end
@@ -179,12 +189,17 @@ class Organization
   end
 
   def self.iati_json(organization, filetype)
+    if filetype == "activity"
+      url = "http://openaidregister.org/organizations/#{organization[:cartodb_id]}/projects.xml"
+    else # organization
+      url = "http://openaidregister.org/organizations/#{organization[:cartodb_id]}.xml"
+    end
     {
       name: "#{organization[:package_name]}-#{filetype}",
       title: "#{organization[:package_name]} #{filetype}",
       author_email: organization[:email],
       resources: [ {
-                     url: "http://openaidregister.org/organizations/#{organization[:cartodb_id]}/projects.xml",
+                     url: url,
                      format: "IATI-XML"
                    } ],
       extras: {
@@ -192,6 +207,12 @@ class Organization
       },
       groups: [ organization[:package_name] ]
     }.to_json
+  end
+
+  # response == the response returned in iati_publish_all
+  def self.iati_combined_response_message(response)
+    status = response.values.collect{|v| v.status }.max
+    Organization.iati_status_message(status)
   end
 
   def self.iati_status_message(status)

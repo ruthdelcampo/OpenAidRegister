@@ -74,10 +74,12 @@ class DashboardController < ApplicationController
 
   def publish
     if session[:organization][:api_key].present? && session[:organization][:package_name].present?
-      response = Organization.iati_publish session[:organization]
-      message = Organization.iati_status_message response.status
+      response = Organization.iati_publish_all session[:organization]
+      message = Organization.iati_combined_response_message(response)
+      # message = Organization.iati_status_message response.status
       logger.info session[:organization]
-      logger.info response.status
+      logger.info "activity response status: #{response[:activity_response].status}"
+      logger.info "organization response status: #{response[:organization_response].status}"
       flash[:alert] = message
     else
       flash[:alert] = "Please, introduce your IATI Registry (api key and the name package) details in your account. We need this information to be able to publish your data in the Registry.  For more information or if you dont know how to do this step, please send us an email to contact@openaidregister.org"
