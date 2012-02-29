@@ -1,38 +1,44 @@
 <div class="logo">
-          <h1><a href="/signup" title="openAid Home">Sign up</a><img src="/images/plus_icon.png" alt="" class="rit4 png" /></h1>
-        </div>
-<div class="header_text">
-		    <p>We need this information about you and your organization to validate your account. We will also use the organization info when publishing your aid data so you won’t need to write this again.</p>
-		</div>
+  <h1><a href="/signup" title="openAid Home">Sign up</a><img src="/images/plus_icon.png" alt="" class="rit4 png" /></h1>
 </div>
+
+<div class="header_text">
+	<p>We need this information about you and your organization to validate your account. We will also use the organization info when publishing your aid data so you won’t need to write this again.</p>
+</div>
+
+
 <div id="body_container">
 	<div class="sign_sec">
-		    <div class="sign_left">
-		    		<form action="" method="post">
-			
+		<div class="sign_left">
 
-				<p style="font-size:16px;color:black;font-weight:normal">
-				Thanks for signing up! 	In a few minutes, you will get an email from us confirming your account. Why don't you go to  <a href="/"> your dashboard</a> and enter a<a href="/"> new project</a>?  <br><br>
-				Not ready yet? No problem, you can always access the<a href="/"> about</a> section where there is more introductory information. You can also take a look our <a href="http://blog.openaidregister.org"> blog</a> which contains explanatory videos.<br><br> 
-				 Be aware we are a team prepared to assist you.<a HREF="mailto:contact@openaidregister.org"> Drop us a line</a> if you have questions.
-		</p>
-			<div class="add_project">
-	          <%= link_to "Start", dashboard_path, :class => "add" %>
-	        </div>
-				
-				</div>
-		    <div class="sign_right">
+      <form>
+        <p style="font-size:16px;color:black;font-weight:normal">
+				  Thanks for signing up! In a few minutes, you will get an email from us confirming your account.
+          Why don't you go to <a href="/">your dashboard</a> and enter a <a href="/projects/new">new project</a>?
+          <br><br>
+				  Not ready yet? No problem, you can always access the <a href="/about"> about</a> section where there is more introductory information. You can also take a look our <a href="http://blog.openaidregister.org">blog</a> which contains explanatory videos.<br><br>
+				  Be aware we are a team prepared to assist you.<a HREF="mailto:contact@openaidregister.org"> Drop us a line</a> if you have questions.
+		    </p>
 
+        <div class="add_project">
+	        <%= link_to "Start", dashboard_path, :class => "add" %>
+	      </div>
 
-		    		<span>DO YOU NEED SOME HELP?</span>
-		          <p>You can always <a HREF="mailto:contact@openaidregister.org">contact us</a> if you have troubles on this step</p>
-		          
-		    </div>
-
-		  </div>
-		
-	
+      </form>
 		</div>
+
+    <div class="sign_right">
+
+
+		  <span>DO YOU NEED SOME HELP?</span>
+		  <p>You can always <a HREF="mailto:contact@openaidregister.org">contact us</a> if you have troubles on this step</p>
+
+		</div>
+
+	</div>
+
+
+</div>
 
 
 
