@@ -1,3 +1,5 @@
+IATI_API_BASE_URL = Rails.env == "production" ? "iatiregistry.org" : "http://iati.test.ckan.net"
+
 ORGANIZATION_TYPE_LIST = [
      ['', ''],
      ['Government','10'],

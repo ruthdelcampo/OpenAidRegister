@@ -12,14 +12,16 @@ gem 'heroku'
 
 gem 'aws-s3', :require => 'aws/s3'
 
+gem 'faraday'
+
 #gem 'jquery-rails'
 
 
 
-unless $heroku 
+unless $heroku
 	group :development, :test do
 	 	gem 'ruby-debug19'
-	  	gem "rspec", ">= 2.0.0" 
+	  	gem "rspec", ">= 2.0.0"
 	   	gem "rspec-rails", ">= 2.0.0"
 
 	   	gem "autotest"
