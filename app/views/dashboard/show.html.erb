@@ -97,6 +97,17 @@
                 <p>Make your projects available at the IATI Registry</p>
               </div>
             </li>
+
+            <li>
+              <div class="but_sec">
+                <%= link_to "Embed", "#", :class => "embed_button" %>
+              </div>
+              <div class="text_sec">
+                <p>Display a map of your projects in your own site</p>
+              </div>
+              <%= render :partial => 'shared/projects_widget' %>
+            </li>
+
           </ul>
         </div>
 

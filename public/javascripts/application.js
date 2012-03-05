@@ -1,5 +1,6 @@
 $(document).ready(function(){
   showFlashMessages();
+  enableEmbedWidgetButtons();
 
   if (BrowserDetect.browser == "Explorer" && BrowserDetect.version < 7){
     window.location = "/browser_not_supported";
@@ -23,6 +24,28 @@ $(document).ready(function(){
 	});
 
 });
+
+function enableEmbedWidgetButtons(){
+  var widgetCode = $("#projects_widget_code").html();
+  $(".embed_button").click(function(event){
+    if (widgetCode.length > 0){
+      $.msg({
+	      bgPath : '/images/',
+        autoUnblock : false,
+        css : {
+          border : '1px solid #ff3300'
+        },
+        content : widgetCode,
+        afterBlock : function(){
+          $("#jquery-msg-overlay textarea").focus();
+          $("#jquery-msg-overlay textarea").select();
+        }
+      });
+    }
+
+    event.preventDefault();
+  });
+}
 
 function showFlashMessages(){
   var content = ''

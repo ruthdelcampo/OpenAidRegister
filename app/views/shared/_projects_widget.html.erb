@@ -1,0 +1,7 @@
+<div id="projects_widget_code" style="display:none;">
+<p>Copy and paste this code in your website:</p>
+<textarea rows="10" cols="80" style="">
+&lt;iframe border=&quot;0&quot; width=&quot;720&quot; height=&quot;350&quot; src='<%= CartoDB::Settings["host"] %>/tables/projects/embed_map?sql=SELECT%20projects.cartodb_id%2C%20title%2C%20description%2C%20start_date%2C%20end_date%2C%20budget%2C%20budget_currency%2C%20adm1%2C%20adm2%2C%20country%2C%20reverse_geo.the_geom_webmercator%20FROM%20projects%20inner%20join%20reverse_geo%20on%20reverse_geo.project_id%3Dprojects.cartodb_id%20inner%20join%20organizations%20on%20organizations.cartodb_id%20%3D%20projects.organization_id%20where%20organizations.cartodb_id=<%=session[:organization].cartodb_id %>'&gt;&lt;/iframe&gt;
+</textarea>
+</div>
+
