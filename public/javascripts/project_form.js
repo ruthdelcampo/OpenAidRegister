@@ -1,11 +1,13 @@
 this.oar = (_ref = window.oar) != null ? _ref : {};
 
+var lastLocation;
 var map;
 var markers = [];
 var marker;
 var geocoder = new google.maps.Geocoder();
 var map_bounds = new google.maps.LatLngBounds();
 var defaultLatLng = new google.maps.LatLng(14.5, 15.5);
+
 var mapOptions = {
   zoom: 3,
   center: defaultLatLng,
@@ -32,24 +34,23 @@ $(document).ready(function(){
 
 	// Paint the map
   map = new google.maps.Map(document.getElementById("map_canvas"),mapOptions);
-	// Add the listener to add a marker
-	google.maps.event.addListener(map, 'dblclick', addMarker);
+
 	// parse possible existing points
 	if (!($("#latlng").val()=='' || $("#latlng").val()==="[]" )) {
-  // console.log($('#location ul.reverse_geo'));
     parseWkt($("#latlng").val());
 	};
+
   // set the map viewport and prepare the address search form
   setMapViewport();
-  autocompleteAddress();
+  initAutocompleteAddress();
 
   // init everything
   sectors();
   sectorsFilter();
   otherOrganizations();
-  change_contact_info();
+  changeContactInfo();
   showErrors();
-  deleteAll();
+  initDeleteAllMarkersButton();
 	transactions();
 	relatedDocuments();
 
@@ -61,11 +62,11 @@ function resetMapViewport(){
 }
 
 function setMapViewport(){
-	// set zoom and center when there is only one location...ifnot, the zoom is at top level and the visualization is weird
+
   if (markers.length === 0) {
     resetMapViewport();
   } else if (markers.length === 1) {
-		map.setCenter(map_bounds.getCenter());
+		map.setCenter(lastLocation);
 	  map.setZoom(8);
 	} else {
 	  map.fitBounds(map_bounds);
@@ -89,9 +90,9 @@ function showErrors(){
   }
 };
 
-function deleteAll(){
+function initDeleteAllMarkersButton(){
 	$('#delete_points').click(function(event) {
-		removeMarker();
+		removeMarkers();
     resetMapViewport();
     event.preventDefault();
   });
@@ -103,19 +104,11 @@ function addMarker(event) {
 	  draggable:false,
 	  position: event.latLng
 	});
-  console.log("adding");
 	markers.push(marker);
   geocodePoint(marker);
-  enableOrDisableGeodetail();
-
-	// Change an existing marker
-  //	google.maps.event.addListener(marker, 'dragend', function(event){
-  //  geocodePoints(markers, markers.length);
-  //    enableOrDisableGeodetail();
-  // });
 };
 
-function removeMarker() {
+function removeMarkers() {
 	if (markers) {
     for (i in markers) {
       markers[i].setMap(null);
@@ -134,22 +127,16 @@ function parseWkt(wkt) {
 	$.each(auxarr,function(index,value) {
 		var txt = $.trim(value).slice(0,-1).slice(1);
 		var coords = txt.split(" ");
+    var location = new google.maps.LatLng(coords[1], coords[0]);
+    lastLocation = location;
 		marker = new google.maps.Marker({
 		  map:map,
 		  draggable:false,
-		  position: new google.maps.LatLng(coords[1], coords[0])
+		  position: location
 		});
 		markers.push(marker);
-	  //	geocodePoint(marker);
     map_bounds.extend(marker.getPosition());
-    enableOrDisableGeodetail();
-    // Change an existing marker
-    //google.maps.event.addListener(marker, 'dragend', function(event){
-	  //geocodePoints(markers, markers.length);
-    // enableOrDisableGeodetail();
-    //});
 	});
-	//geocodePoint(marker);
 };
 
 function disableEnter(event) {
@@ -159,7 +146,7 @@ function disableEnter(event) {
   }
 };
 
-function autocompleteAddress(){
+function initAutocompleteAddress(){
   if ($.browser.mozilla) {
     $("#project_address").keypress(disableEnter);
   } else {
@@ -183,18 +170,16 @@ function autocompleteAddress(){
       $("#project_latitude").val(ui.item.latitude);
       $("#project_longitude").val(ui.item.longitude);
       var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
-      console.log(location);
-      window.lll = location;
+      lastLocation = location;
       marker = new google.maps.Marker({
 	      map:map,
 	      draggable:false,
 	      position: location
 	    });
 	    markers.push(marker);
-      geocodePoint(marker);
+      geocodeString(ui.item.value);
       map_bounds.extend(marker.getPosition());
       setMapViewport();
-      enableOrDisableGeodetail();
       event.preventDefault();
       $("#project_address").val('');
       $("#project_latitude").val('');
@@ -203,15 +188,48 @@ function autocompleteAddress(){
   });
 };
 
+function geocodeString(address){
+  geocoder.geocode({address: address}, function(results, status){
+    var city, region, country, level_detail;
+    if (status == 'OK'){
+      if (results.length > 0){
+        $.each(results[0].address_components, function(index, item){
+          if (item.types[0] == 'administrative_area_level_2' || item.types[0] == 'locality'){
+            city = item.long_name;
+            if(!level_detail){ level_detail = 'city' };
+          }
+          else if (item.types[0] == 'administrative_area_level_1'){
+            region = item.long_name;
+            if(!level_detail){ level_detail = 'region' };
+          }
+          else if (item.types[0] == 'country'){
+            country = item.short_name;
+			      country_extended = item.long_name;
+            if(!level_detail){ level_detail = 'country' };
+          }
+          else {
+            if(!level_detail){ level_detail = 'lat_lng' };
+          }
+        });
+        $('#location ul.reverse_geo').append($(
+          '<li class="marker_' + (markers.length*1) + '">' +
+          '  <input type="hidden" name="reverse_geo[][latlng]" value="' + marker.position.lng() + ' ' + marker.position.lat()  + '" />' +
+          '  <input type="hidden" name="reverse_geo[][adm2]" value="' + city + '" />' +
+          '  <input type="hidden" name="reverse_geo[][adm1]" value="' + region + '" />' +
+          '  <input type="hidden" name="reverse_geo[][country]" value="' + country + '" />' +
+		  '  <input type="hidden" name="reverse_geo[][country_extended]" value="' + country_extended + '" />' +
+          '  <input type="hidden" name="reverse_geo[][level_detail]" value="' + level_detail + '" />' +
+          '</li>'
+        ));
+      }
+    }
+  });
+};
+
 function geocodePoint(marker){
-  //First delete all previous
-  //$('#location ul.reverse_geo li').remove();
-  // $.each(markers, function(i, value){
   geocoder.geocode({location: marker.position}, function(results, status){
     var city, region, country;
-    console.log(1);
     if (status == 'OK'){
-      console.log(2);
       if (results.length > 0){
         $.each(results[0].address_components, function(index, item){
           if (item.types[0] == 'administrative_area_level_2'){
@@ -238,25 +256,14 @@ function geocodePoint(marker){
       }
     }
   });
-//});
-  console.log($('#location ul.reverse_geo'));
 };
 
 function removeGeocoding(){
   $('#location ul.reverse_geo li').remove();
-  enableOrDisableGeodetail();
-};
-
-function enableOrDisableGeodetail(){
-  if (markers.length > 0){
-    $('#location input.geo_detail').attr('disabled', true);
-  }else{
-    $('#location input.geo_detail').attr('disabled', false);
-  }
 };
 
 // for the checkbox same person in project show
-function change_contact_info() {
+function changeContactInfo() {
   $('#same_person').change(function(){
     if ($(this).is(':checked')){
       $("#contact_name").val(contact_name);
