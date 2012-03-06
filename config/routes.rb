@@ -4,8 +4,7 @@ OpenAidRegister::Application.routes.draw do
 
   match 'about' => 'pages#about'
   match 'faq' => 'pages#faq'
-
-  match 'conditions' => 'conditions#show'
+  match 'conditions' => 'pages#conditions'
 
   match 'signup' => 'signup#signup', :via => :get
   match 'signup' => 'signup#signup_validation', :via => :post
