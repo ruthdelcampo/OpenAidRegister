@@ -431,3 +431,21 @@
 #body_container .sign_right_secondary .publish .text_sec{width:113px; float:right;}
 #body_container .sign_right_secondary .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
 
+/* FAQ */
+
+#faq h2{
+  color:#000;
+  margin-bottom:20px;
+}
+
+#faq ul {
+  list-style-position: inside;
+  color: #000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom:1px solid #ccc;
+}
+#faq ul li{
+  margin-bottom:5px;
+  font-size:1.2em;
+}

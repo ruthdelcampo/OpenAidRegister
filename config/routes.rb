@@ -3,6 +3,8 @@ OpenAidRegister::Application.routes.draw do
   root :to => "home#show"
 
   match 'about' => 'about#show'
+  match 'faq' => 'pages#faq'
+
   match 'conditions' => 'conditions#show'
 
   match 'signup' => 'signup#signup', :via => :get
