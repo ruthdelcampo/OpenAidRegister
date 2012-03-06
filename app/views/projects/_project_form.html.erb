@@ -173,25 +173,6 @@
         </div>
 
         <div class="inner_row last03">
-          <label>LEVEL OF DETAIL<br><br></label>
-          <ul>
-            <li>
-              <%=	radio_button_tag 'geo_detail', 'country', current_geo_level?('country'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
-              <h6>Country</h6>
-            </li>
-            <li>
-              <%=	radio_button_tag 'geo_detail', 'region', current_geo_level?('region'), :class => 'geo_detail', :disabled =>  @project_data[:reverse_geo].present? %>
-              <h6>Region</h6>
-            </li>
-            <li>
-              <%=	radio_button_tag 'geo_detail', 'city', current_geo_level?('city'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
-              <h6>City</h6>
-            </li>
-	          <li>
-	            <%=	radio_button_tag 'geo_detail', 'lat_lng', current_geo_level?('lat_lng'), :class => 'geo_detail', :disabled => @project_data[:reverse_geo].present? %>
-	            <h6>Lat/Long</h6>
-	          </li>
-          </ul>
 
           <ul class="reverse_geo hidden">
             <% (@project_data[:reverse_geo] || []).each_with_index do |geo, index| %>
@@ -207,9 +188,6 @@
 
             <input type="hidden" id="latlng" name="latlng" value="<%= @latlng %>" />
           </ul>
-        </div>
-        <div class="inner_row last03">
-          <p class="date"> Which level of detail do your geo markers refer to?</p>
         </div>
 
         <div class="inner_row last03">
