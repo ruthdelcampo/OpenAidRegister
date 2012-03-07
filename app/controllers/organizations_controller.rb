@@ -5,7 +5,7 @@ class OrganizationsController < ApplicationController
   #----------------------------------------------------------------------
 
   def index
-    redirect_to root_path # for now
+    # @organizations = ...
   end
 
   # the public organization page, this one can render html or xml in the

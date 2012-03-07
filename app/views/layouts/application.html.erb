@@ -75,17 +75,21 @@
 
         <div id="header">
           <div class="top_nav">
-            <ul>
+            <ul id="primary_nav">
               <li class="first"><a href="/">HOME</a></li>
               <li><a href="/login">LOGIN</a></li>
               <!--li><a href="#">WHO IS ALREADY USING IT</a></li -->
               <li><a href="http://blog.openaidregister.org">BLOG</a></li>
+              <li><a href="/organizations">ORGANIZATIONS</a></li>
               <li class="last"><a href="/about">ABOUT</a></li>
+            </ul>
+
+            <ul id="secondary_nav">
               <% if session[:organization] %>
+                <li class="last_right"><a href="/logout">(close session)</a></li>
                 <li class="first_right">
                   <a href="/account"><%= session[:organization][:email] %></a>
                 </li>
-                <li class="last_right"><a href="/logout">(close session)</a></li>
               <% end %>
             </ul>
           </div>
