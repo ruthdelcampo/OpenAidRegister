@@ -1,12 +1,15 @@
 class PagesController < ApplicationController
 
-  def faq
-  end
-
   def about
   end
 
+  def browser_not_supported
+  end
+
   def conditions
+  end
+
+  def faq
   end
 
 end
