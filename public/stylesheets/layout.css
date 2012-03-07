@@ -20,7 +20,7 @@
 #header .top_nav ul#primary_nav { width:550px;}
 #header .top_nav ul#secondary_nav { float:right; width:400px;}
 #header .top_nav ul#secondary_nav li{ float:right;}
-#header .top_nav ul#secondary_nav li.last_right{background:none; padding:0 0 0 15px;}
+#header .top_nav ul#secondary_nav li{background:none; padding:0 0 0 5px;}
 
 #header .top_nav ul li a:hover, #header .top_nav ul li a.active{ color:#ff3300; text-decoration:none;}
 
