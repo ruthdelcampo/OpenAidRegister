@@ -72,6 +72,10 @@
     <related-activity type="1" ref="<%= project.program_guid %>"></related-activity>
   <% end %>
 
+<% if !project.other_iati_project_identifier.blank? %>
+<other-identifier owner-ref="" owner-name=""><%= project.other_iati_project_identifier %></other-identifier>
+ <% end %>
+
   <% if !project.budget.blank? %>
     <budget>
       <value currency="<%= project.budget_currency %>" value-date="<%= format_date_dash(project.start_date) %>"><%= project.budget.to_i %></value>

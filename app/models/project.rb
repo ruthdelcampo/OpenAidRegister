@@ -79,7 +79,7 @@ class Project
                  '?',
                  '?','?',
                  '?',
-                 '?')"
+                 '?','?')"
     Oar::execute_query(sql, organization_id,
                        params[:title],
                        params[:description],
