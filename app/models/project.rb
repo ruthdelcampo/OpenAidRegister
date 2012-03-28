@@ -66,11 +66,17 @@ class Project
 
   def self.create(params, organization_id, start_date, end_date)
     # create the project
-    sql="INSERT INTO PROJECTS (organization_id, title, description, org_role, language,
-         project_guid, start_date, end_date, budget, budget_currency, website,
-         program_guid, result_title, result_description, collaboration_type,
-         tied_status, aid_type, flow_type, finance_type, contact_name, contact_email, other_iati_project_identifier) VALUES
-                 (?, '?', '?','?',
+    sql="INSERT INTO PROJECTS (organization_id, title, description, org_role,
+         language,
+         project_guid, start_date, end_date, budget,
+         budget_currency, website, program_guid, result_title,
+         result_description,
+         collaboration_type, tied_status,
+         aid_type,
+         flow_type, finance_type,
+         contact_name,
+         contact_email, other_iati_project_identifier) VALUES
+                 (?, '?', '?', '?',
                  '?',
                  '?', ?, ?, '?',
                  '?', '?', '?', '?',
