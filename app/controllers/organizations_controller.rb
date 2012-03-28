@@ -5,6 +5,7 @@ class OrganizationsController < ApplicationController
   #----------------------------------------------------------------------
 
   def index
+    # just a list of selected organizations using openaid
     # @organizations = ...
   end
 
