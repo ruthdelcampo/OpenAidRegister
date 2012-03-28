@@ -16,6 +16,7 @@ class Project
                 "language",
                 "org_role",
                 "organization_id",
+                "other_iati_project_identifier",
                 "program_guid",
                 "project_guid",
                 "result_description",
@@ -65,11 +66,17 @@ class Project
 
   def self.create(params, organization_id, start_date, end_date)
     # create the project
-    sql="INSERT INTO PROJECTS (organization_id, title, description, org_role, language,
-         project_guid, start_date, end_date, budget, budget_currency, website,
-         program_guid, result_title, result_description, collaboration_type,
-         tied_status, aid_type, flow_type, finance_type, contact_name, contact_email) VALUES
-                 (?, '?', '?','?',
+    sql="INSERT INTO PROJECTS (organization_id, title, description, org_role,
+         language,
+         project_guid, start_date, end_date, budget,
+         budget_currency, website, program_guid, result_title,
+         result_description,
+         collaboration_type, tied_status,
+         aid_type,
+         flow_type, finance_type,
+         contact_name,
+         contact_email, other_iati_project_identifier) VALUES
+                 (?, '?', '?', '?',
                  '?',
                  '?', ?, ?, '?',
                  '?', '?', '?', '?',
@@ -78,7 +85,7 @@ class Project
                  '?',
                  '?','?',
                  '?',
-                 '?')"
+                 '?','?')"
     Oar::execute_query(sql, organization_id,
                        params[:title],
                        params[:description],
@@ -99,7 +106,8 @@ class Project
                        params[:flow_type],
                        params[:finance_type],
                        params[:contact_name],
-                       params[:contact_email])
+                       params[:contact_email],
+                       params[:other_iati_project_identifier])
 
     # return the new project
     Project.last_by_organization_id(organization_id)
@@ -115,7 +123,8 @@ class Project
      website='?', program_guid = '?', result_title='?',
      result_description='?', collaboration_type='?',tied_status ='?',
      aid_type ='?', flow_type ='?',
-     finance_type ='?',contact_name='?', contact_email='?' WHERE cartodb_id='?'"
+     finance_type ='?',contact_name='?', contact_email='?',
+     other_iati_project_identifier='?' WHERE cartodb_id='?'"
 
     Oar::execute_query(sql,
                   params[:title],
@@ -138,6 +147,7 @@ class Project
                   params[:finance_type],
                   params[:contact_name],
                   params[:contact_email],
+                  params[:other_iati_project_identifier],
                   project_id)
 
   end
