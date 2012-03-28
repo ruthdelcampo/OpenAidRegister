@@ -20,7 +20,7 @@
 #header .top_nav ul#primary_nav { width:550px;}
 #header .top_nav ul#secondary_nav { float:right; width:400px;}
 #header .top_nav ul#secondary_nav li{ float:right;}
-#header .top_nav ul#secondary_nav li.last_right{background:none; padding:0 0 0 15px;}
+#header .top_nav ul#secondary_nav li{background:none; padding:0 0 0 5px;}
 
 #header .top_nav ul li a:hover, #header .top_nav ul li a.active{ color:#ff3300; text-decoration:none;}
 
@@ -453,3 +453,78 @@
   font-size:1.2em;
 }
 a.hl{ text-decoration: underline;}
+
+/* organizations list */
+/*--------------------*/
+
+#organizations_list ul li {
+  float: left;
+  display: block;
+  width: 110px;
+  height: 110px;
+  padding: 0;
+  margin: 0px 17px 17px 0;
+  border: 1px solid #cfcfcf;
+}
+
+#organizations_list ul li a {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#organizations_list ul li a.adra {
+  background: url(/images/organization-logos/adrauk.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.adb {
+  background: url(/images/organization-logos/adb.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.alliance {
+  background: url(/images/organization-logos/alliance.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.hewlett {
+  background: url(/images/organization-logos/hewlett.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.unops {
+  background: url(/images/organization-logos/unops.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.undp {
+  background: url(/images/organization-logos/undp.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.spark {
+  background: url(/images/organization-logos/spark.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.rem {
+  background: url(/images/organization-logos/rem.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.progressio {
+  background: url(/images/organization-logos/progressio.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.oxfam {
+  background: url(/images/organization-logos/oxfam.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.publish {
+  background: url(/images/organization-logos/publish.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.indigo {
+  background: url(/images/organization-logos/indigo.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.globalfund {
+  background: url(/images/organization-logos/globalfund.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.engineerswithoutborders {
+  background: url(/images/organization-logos/engineerswithoutborders.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.developmentinitiatives {
+  background: url(/images/organization-logos/developmentinitiatives.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.cafod {
+  background: url(/images/organization-logos/cafod.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a:hover { background-position: 0px -110px; }
