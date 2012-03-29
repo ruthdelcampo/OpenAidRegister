@@ -526,5 +526,25 @@ a.hl{ text-decoration: underline;}
 #organizations_list ul li a.cafod {
   background: url(/images/organization-logos/cafod.png) no-repeat 0px 0;
 }
-
+#organizations_list ul li a.uk {
+  background: url(/images/organization-logos/uk.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.sweden {
+  background: url(/images/organization-logos/sweden.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.spain {
+  background: url(/images/organization-logos/spain.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.netherlands {
+  background: url(/images/organization-logos/netherlands.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.australia {
+  background: url(/images/organization-logos/australia.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.finland {
+  background: url(/images/organization-logos/finland.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.eu {
+  background: url(/images/organization-logos/eu.png) no-repeat 0px 0;
+}
 #organizations_list ul li a:hover { background-position: 0px -110px; }
