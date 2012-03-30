@@ -164,6 +164,7 @@
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
+#body_container .sign_sec .sign_right h3.sidebar_header_text{ color:#FF3300; font:bold 0.98em "Helvetica Neue"; letter-spacing: 0.1em;margin-top:-4px;margin-left:8px;}
 #body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:90px;}
 #body_container .sign_sec .sign_right #errors{
   color:#FF3300; font:normal 15px/18px "Helvetica Neue";
@@ -463,7 +464,7 @@ a.hl{ text-decoration: underline;}
   width: 110px;
   height: 110px;
   padding: 0;
-  margin: 0px 17px 17px 0;
+  margin: 0px 25px 25px 0;
   border: 1px solid #cfcfcf;
 }
 
@@ -546,5 +547,8 @@ a.hl{ text-decoration: underline;}
 }
 #organizations_list ul li a.eu {
   background: url(/images/organization-logos/eu.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.worldbank {
+  background: url(/images/organization-logos/worldbank.png) no-repeat 0px 0;
 }
 #organizations_list ul li a:hover { background-position: 0px -110px; }
