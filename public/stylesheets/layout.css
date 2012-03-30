@@ -16,8 +16,11 @@
 #header .top_nav ul li.first{ padding:0 19px 0 0;}
 #header .top_nav ul li.last{background:none; padding:0 0 0 19px;}
 #header .top_nav ul li a{ float:left; color:#818180;}
-#header .top_nav ul li.first_right{ padding:0 0 0 350px;}
-#header .top_nav ul li.last_right{background:none; padding:0 0 0 5px;}
+
+#header .top_nav ul#primary_nav { width:550px;}
+#header .top_nav ul#secondary_nav { float:right; width:400px;}
+#header .top_nav ul#secondary_nav li{ float:right;}
+#header .top_nav ul#secondary_nav li{background:none; padding:0 0 0 5px;}
 
 #header .top_nav ul li a:hover, #header .top_nav ul li a.active{ color:#ff3300; text-decoration:none;}
 
@@ -161,6 +164,7 @@
 #body_container .sign_sec .sign_right strong{ float:left; width:274px; color:#fff; font:normal 15px/18px "Helvetica Neue"; padding:160px 0 0 9px;}
 #body_container .sign_sec .sign_right small{ float:left; width:274px; color:#999999; font:normal 15px/18px "Helvetica Neue"; padding:360px 0 0 9px;}
 /***changing the sign right so that errors can be seen*/
+#body_container .sign_sec .sign_right h3.sidebar_header_text{ color:#FF3300; font:bold 0.98em "Helvetica Neue"; letter-spacing: 0.1em;margin-top:-4px;margin-left:8px;}
 #body_container .sign_sec .sign_right h4{ float:left; width:274px; color:#FF3300; font:normal 15px/18px "Helvetica Neue"; padding-top:90px;}
 #body_container .sign_sec .sign_right #errors{
   color:#FF3300; font:normal 15px/18px "Helvetica Neue";
@@ -431,3 +435,120 @@
 #body_container .sign_right_secondary .publish .text_sec{width:113px; float:right;}
 #body_container .sign_right_secondary .publish .text_sec p{font-family:"Helvetica Neue", arial; font-size:15px; color:#999999; line-height:17px;float:none;width:100%;margin:0;padding:0;}
 
+/* FAQ */
+
+#faq h2{
+  color:#000;
+  margin-bottom:20px;
+}
+
+#faq ul {
+  list-style-position: inside;
+  color: #000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom:1px solid #ccc;
+}
+#faq ul li{
+  margin-bottom:5px;
+  font-size:1.2em;
+}
+a.hl{ text-decoration: underline;}
+
+/* organizations list */
+/*--------------------*/
+
+#organizations_list ul li {
+  float: left;
+  display: block;
+  width: 110px;
+  height: 110px;
+  padding: 0;
+  margin: 0px 25px 25px 0;
+  border: 1px solid #cfcfcf;
+}
+
+#organizations_list ul li a {
+  float: left;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#organizations_list ul li a.adra {
+  background: url(/images/organization-logos/adrauk.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.adb {
+  background: url(/images/organization-logos/adb.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.alliance {
+  background: url(/images/organization-logos/alliance.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.hewlett {
+  background: url(/images/organization-logos/hewlett.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.unops {
+  background: url(/images/organization-logos/unops.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.undp {
+  background: url(/images/organization-logos/undp.png) no-repeat 0px 0;
+}
+
+#organizations_list ul li a.spark {
+  background: url(/images/organization-logos/spark.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.rem {
+  background: url(/images/organization-logos/rem.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.progressio {
+  background: url(/images/organization-logos/progressio.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.oxfam {
+  background: url(/images/organization-logos/oxfam.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.publish {
+  background: url(/images/organization-logos/publish.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.indigo {
+  background: url(/images/organization-logos/indigo.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.globalfund {
+  background: url(/images/organization-logos/globalfund.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.engineerswithoutborders {
+  background: url(/images/organization-logos/engineerswithoutborders.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.developmentinitiatives {
+  background: url(/images/organization-logos/developmentinitiatives.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.cafod {
+  background: url(/images/organization-logos/cafod.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.uk {
+  background: url(/images/organization-logos/uk.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.sweden {
+  background: url(/images/organization-logos/sweden.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.spain {
+  background: url(/images/organization-logos/spain.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.netherlands {
+  background: url(/images/organization-logos/netherlands.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.australia {
+  background: url(/images/organization-logos/australia.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.finland {
+  background: url(/images/organization-logos/finland.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.eu {
+  background: url(/images/organization-logos/eu.png) no-repeat 0px 0;
+}
+#organizations_list ul li a.worldbank {
+  background: url(/images/organization-logos/worldbank.png) no-repeat 0px 0;
+}
+#organizations_list ul li a:hover { background-position: 0px -110px; }

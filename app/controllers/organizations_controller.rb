@@ -5,7 +5,8 @@ class OrganizationsController < ApplicationController
   #----------------------------------------------------------------------
 
   def index
-    redirect_to root_path # for now
+    # just a list of selected organizations using openaid
+    # @organizations = ...
   end
 
   # the public organization page, this one can render html or xml in the
