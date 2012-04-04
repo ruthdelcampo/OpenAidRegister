@@ -94,7 +94,7 @@ class Project
                        params[:project_guid],
                        start_date,
                        end_date,
-                       params[:budget],
+                       params[:budget].gsub(',',''),
                        params[:budget_currency],
                        params[:website],
                        params[:program_guid],
