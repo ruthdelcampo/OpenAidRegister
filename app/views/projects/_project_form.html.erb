@@ -130,14 +130,19 @@
       <div class="inner_row">
 	      <label>CURRENCY</label>
 	      <%= select_tag(:budget_currency, options_for_select(CURRENCY_LIST, :selected => @project_data[:budget_currency]), :class => "wid-205" )%>
-	      </div>
 	    </div>
 
-      <div class="row">
-        <label>PROJECT WEBSITE</label>
-        <input name="website" type="text" class="imp01" value ="<%= @project_data[:website] %>"/>
+      <div class="inner_row last">
+        <p class="date">Use a dot for decimal numbers</p>
       </div>
+
+	  </div>
+
+    <div class="row">
+      <label>PROJECT WEBSITE</label>
+      <input name="website" type="text" class="imp01" value ="<%= @project_data[:website] %>"/>
     </div>
+  </div>
 
     <div class="row">
       <div class="inner_row">

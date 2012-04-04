@@ -296,7 +296,7 @@ body {
 
 /** added new div for the accordion */
 .registry_sec .form_section #accordion h3 {float:none; width:100%; font:13px "Helvetica Neue";text-shadow:none}
-.registry_sec .form_section .accord_row { padding:1em 1em; }
+.registry_sec .form_section .accord_row { padding:1em 1em; height:450px; }
 .registry_sec .form_section .accord_row .row2{ float:left; width:587px; padding-bottom:16px;}
 .registry_sec .form_section .accord_row .row2 label{ float:left; width:100%; color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; text-shadow:1px 1px 0 #fff; text-transform:uppercase; padding-bottom:6px; text-indent:3px;}
 .registry_sec .form_section .accord_row .row2 input.imp01{ border:1px solid #b1b1b1; float:left; width:550px; height:20px; padding:10px; font:bold 13px/16px "Helvetica Neue"; color:#aeaeae;}

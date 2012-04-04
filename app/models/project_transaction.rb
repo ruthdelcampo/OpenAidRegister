@@ -48,7 +48,8 @@ class ProjectTransaction
         next if transaction[:transaction_type].blank? ||
           transaction[:transaction_value].blank? ||
           transaction[:transaction_date].blank?
-
+        # remove comma
+        transaction[:transaction_value].gsub!(',','')
         ProjectTransaction.create(project_id, transaction)
       end
     end

@@ -141,7 +141,7 @@ private
     end
 
     if params[:budget].present?
-      if !Oar::is_a_number?(params[:budget])
+      if !Oar::is_a_number?(params[:budget].gsub(',',''))
         @errors.push("Budget must be written in numbers")
       end
       if params[:budget_currency].eql?("1")
