@@ -276,9 +276,9 @@ class Organization
     end
 
     # Organization's country Validation.
-    if params[:organization_country].eql?("")
-      errors.push("Please select your organization's country")
-    end
+    #if params[:organization_country].eql?("")
+     # errors.push("Please select your organization's country")
+    #end
 
     # api_key validation
     if params[:api_key].strip.present? && !params[:api_key].strip.match(/\A[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}\z/)
