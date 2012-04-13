@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iati-organisations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" generated-datetime="<%= Time.zone.now.to_datetime %>" version="1.01">
 <iati-organisation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" last-updated-datetime="<%= @organization.updated_at %>" version="1.01" lang="en">
+
+<%if @organization.organization_country.blank? %>
+<reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
+  <iati-identifier><%= "#{@organization.organization_guid}" %></iati-identifier>
+<%else%>
 <reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_country}-#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
   <iati-identifier><%= "#{@organization.organization_country}-#{@organization.organization_guid}" %></iati-identifier>
+<%end%>
+
 <name><%= @organization.organization_name %></name>
 <organisation-website><%= @organization.organization_web %></organisation-website>
 </iati-organisation>

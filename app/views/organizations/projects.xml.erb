@@ -3,8 +3,15 @@
 
 <% @projects.each do |project| %>
   <iati-activity last-updated-datetime="<%= project.updated_at %>" default-currency="<%= project.budget_currency%>" xml:lang="<%=project.language%>">
-  <reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_country}-#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
+
+<%if @organization.organization_country.blank? %>
+  <reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
+  <iati-identifier><%= "#{@organization.organization_guid}-#{project.project_guid}" %></iati-identifier>
+<%else%>
+<reporting-org type="<%= @organization.organization_type_id %>" ref="<%="#{@organization.organization_country}-#{@organization.organization_guid}"%>"><%= @organization.organization_name %></reporting-org>
   <iati-identifier><%= "#{@organization.organization_country}-#{@organization.organization_guid}-#{project.project_guid}" %></iati-identifier>
+<%end%>
+
   <title><%= project.title %></title>
 
   <% if !project.description.blank? %>
@@ -25,9 +32,15 @@
     </activity-date>
   <% end %>
 
-  <participating-org role="<%= project.org_role %>" type="<%= @organization.organization_type_id %>" ref="<%= "#{@organization.organization_country}-#{@organization.organization_guid}" %>">
+<%if @organization.organization_country.blank? %>
+  <participating-org role="<%= project.org_role %>" type="<%= @organization.organization_type_id %>" ref="<%= "#{@organization.organization_guid}" %>">
     <%= @organization.organization_name %>
   </participating-org>
+<%else%>
+<participating-org role="<%= project.org_role %>" type="<%= @organization.organization_type_id %>" ref="<%= "#{@organization.organization_country}-#{@organization.organization_guid}" %>">
+   <%= @organization.organization_name %>
+ </participating-org>
+<%end%>
 
   <% @other_orgs.each do |other_orgs| %>
     <% if other_orgs[:project_id] == project.cartodb_id %>
