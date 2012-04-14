@@ -63,7 +63,7 @@ class ProjectSector
            INNER JOIN projects ON project_sectors.project_id = projects.cartodb_id
            WHERE organization_id =? GROUP BY project_id"
     result = Oar::execute_query(sql, organization_id)
-    debugger
+    
     #result.rows.each do |row|
     #  row[:sector_id] = eval('['+row[:sector_id][1..-2]+']')
     #end
