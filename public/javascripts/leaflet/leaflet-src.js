@@ -4861,7 +4861,7 @@ L.Control.Zoom = L.Class.extend({
 
 L.Control.Attribution = L.Class.extend({
 	initialize: function (prefix) {
-		this._prefix = prefix || 'Powered by <a href="http://leaflet.cloudmade.com">Leaflet</a>';
+		this._prefix = prefix || 'Powered by <a href="http://leaflet.cloudmade.com">Leaflet</a> and <a href="http://cartodb.com">CartoDB</a>';
 		this._attributions = {};
 	},
 
