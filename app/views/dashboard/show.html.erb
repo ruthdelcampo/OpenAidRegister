@@ -6,6 +6,7 @@
         markers: <%= project.project_markers.split(',').to_json.html_safe %>,
         info: {
           name: '<%= project.title %>',
+          id: '<%= project.cartodb_id %>',
           sectors: <%= project.sectors.map{|s| sector_by_id(s)}.to_json.html_safe %>,
           budget: '<%= project.budget %>',
           start_date: '<%= format_date(project.start_date) %>',
