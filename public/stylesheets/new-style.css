@@ -1,0 +1,120 @@
+body { background:url(../images/body_bg.jpg) 0 0}
+#outer_wrapper_1 { background:url(../images/header_bg01.jpg) repeat-x 0 0}
+#outer_wrapper_2{ background:url(../images/openAidHome3.jpg) repeat-x 0 0}
+#notice, #alert{ display: none; }
+a {text-decoration: none}
+.color {  background: green; }
+.hidden { display: none; }
+.pad_10_h {padding-right:10px; padding-left:10px;}
+.pad_15_h {padding-right:15px; padding-left:15px;}
+#above{ height: 580px; }
+/* header navigation */
+
+#header {padding-top: 45px;}
+#header ul{ float:left; width:100%; list-style:none;}
+#header ul li{ float:left; color:#818180; font:bold 13px/16px "Helvetica Neue"; text-transform:uppercase; background:url(../images/doot.gif) no-repeat right center; padding:0 19px;}
+#header ul li.first{ padding:0 19px 0 0;}
+#header ul li.last{background:none; padding:0 0 0 19px;}
+#header ul li a{ float:left; color:#818180; text-decoration: none;}
+
+#header ul#secondary_nav { float:right; }
+#header ul#secondary_nav li { float:right;}
+#header ul#secondary_nav li { background:none; padding:0 0 0 5px; }
+
+#header ul li a:hover, #header ul li a.active{ color:#ff3300; text-decoration:none;}
+
+/* huge main headline */
+
+#main_headline h1 { margin-top: 50px; position:relative; margin-bottom: 15px; }
+#main_headline h1 a{ color:#fff; font:normal 101px/121px Georgia, "Times New Roman", Times, serif;}
+#main_headline h1 a span{ color:#ff3300;}
+#main_headline h1 a:hover{ text-decoration:none;}
+#main_headline h1 img{ position:absolute; top:-15px; right:0px; }
+
+/* secondary headline */
+
+.main_secondary_headline p{ color: #fff; font:normal 23px/28px "Helvetica Neue";}
+
+/* main content top */
+
+#main_content .top_content { padding-top:94px;}
+#main_content .top_content2 p { height:11px; color:#ff3300; font:bold 13px/16px "Helvetica Neue"; text-indent:-9999px; background:url(../images/do_work.jpg) no-repeat 0 0; position:relative; left:-13px; top:3px;}
+#main_content .top_content p { height:11px; color:#ff3300; font:normal 13px/16px "Helvetica Neue"; position:relative;}
+#main_content .top_content h2{ float:left; width:100%; color:#fff; font:normal 25px/30px Georgia, "Times New Roman", Times, serif; padding-top:16px;}
+
+#main_content .top_content ul{ float:left; width:100%; list-style:none; padding-top:32px; position:relative; left:-1px;}
+#main_content .top_content ul li{ float:left; width:auto; height:auto; color:#ffffff; font:normal 17px/21px "Helvetica Neue"; display:inline;}
+#main_content .top_content ul li a{ color:#ff3300;}
+#main_content .top_content ul li.browser_choice{ width:297px; height:84px;}
+#main_content .top_content ul li.browser_choice_extra{ width:299px; height:84px;margin-left:64px;}
+#main_content .top_content ul li.sign_in{ width:297px; height:84px;}
+#main_content .top_content ul li.fill_form{ width:299px; height:84px;margin-left:64px;}
+#main_content .top_content ul li.you_done{ width:308px; height:85px; margin-left:64px;}
+#main_content .top_content ul li img{ float:left;}
+#main_content .top_content ul li span{ padding-top:17px; display:block; width:201px; float:right}
+
+/* main content nav */
+#main_content .nav{ height:40px;}
+#main_content .nav ul{ float:left; width:100%; }
+#main_content .nav ul li{ float:left; color:#000000; font:bold 13px/16px "Helvetica Neue"; text-transform:uppercase; background:url(../images/orange_doot.gif) no-repeat right center; padding:0 19px;}
+#main_content .nav ul li a { color:#000;}
+#main_content .nav ul li.first { padding:0 19px 0 0;}
+#main_content .nav ul li.last {background:none; padding:0 0 0 19px;}
+
+/* body container */
+
+#body_container { margin-top: 40px; }
+#body_container h3.muted{ color:#aeaeae; font:bold 13px/16px "Helvetica Neue"; padding-bottom:16px; text-transform:uppercase; text-shadow:1px 1px 0 #fff; }
+#body_container p{ color:#000000; font:normal 17px/21px "Helvetica Neue";padding-bottom:21px; }
+#body_container span.big_button{ height:51px;padding-top: 11px}
+#body_container span.big_button a{ display:block; width:218px; padding-left:50px; height:51px; background:url(../images/spread_world.gif) no-repeat 0 0; color:#fff;font:normal 17px/51px "Helvetica Neue";}
+
+/* home video */
+
+.video iframe { border: 10px solid #ececec; }
+#home_video { float: right;}
+
+/* info_item */
+
+#body_container .info_item { margin-top:50px; }
+#body_container .info_item h3{ color:#aeaeae; font:bold 13px/16px "Helvetica Neue";padding-bottom:10px; text-transform:uppercase; text-shadow:1px 1px 0 #fff; height:16px;}
+.box_list ul li span{ float:left; width:228px; height:100px; padding-top:0px}
+#body_container .info_item p { color:#000; font:normal 17px/21px "Helvetica Neue";padding:26px 0 0 0;}
+#body_container .info_item p.blockquoto{ padding:19px 0 26px 0; background:url(../images/blockquoto.gif) no-repeat right bottom;}
+
+
+#body_container .info_item h5 { color:#ff3300; font:bold 20px/26px "Helvetica";padding-bottom:7px; text-transform:uppercase; text-shadow:1px 1px 0 #fff;}
+#body_container .info_item small{ color:#666666; font:normal 15px/15px "Helvetica";}
+#body_container .info_item small strong{ padding-left:10px; font-weight:normal; background:url(../images/dot.gif) no-repeat left center; margin-left:6px; display:inline;}
+
+#body_container .info_item .date_sec{ padding-top:13px;}
+#body_container .info_item .date_sec ul{ float:left; width:100%; }
+#body_container .info_item .date_sec ul li{ float:left; width:150px; padding:0; }
+#body_container .info_item .date_sec ul li span{ display:block; color:#adadad; font:bold 11px/14px "Helvetica Neue"; height:auto; padding:0}
+#body_container .info_item .date_sec ul li strong{ color:#666666; font:normal 15px/15px Helvetica, Arial, sans-serif;}
+
+/* footer */
+
+#footer_wrapper{ margin-top: 80px;
+                 background:#121212;
+                 border-top:4px solid #ff3300;
+                 height:206px; }
+
+#footer { background:url(../images/footer_bg.jpg) no-repeat right top;
+          position:relative; top:-4px; }
+#footer_left{ padding-top:50px;}
+#footer_left p{ font:normal 17px/21px "Helvetica Neue"; color:#fff; }
+#footer_left p a{ color:#ff3300; }
+
+#footer_left ul{ float:left; list-style:none; padding-top:45px;}
+#footer_left ul li{ float:left;
+                    color:#898989;
+                    font:normal 17px/21px "Helvetica Neue";
+                    background:url(../images/seprator.gif) no-repeat left center;
+                    padding:0 5px;}
+#footer_left ul li.first{background:none; padding:0 5px 0 0;}
+#footer_left ul li a{color:#898989;}
+
+#footer_right{ padding-top:53px;}
+#footer_right .newyork_logo{ width:165px; height:34px;}
+#footer_right .international{ width:118px; height:37px; padding-left:28px;}

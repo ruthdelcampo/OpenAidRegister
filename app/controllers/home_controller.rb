@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
 
+  layout 'new-layout'
 
   def show
 

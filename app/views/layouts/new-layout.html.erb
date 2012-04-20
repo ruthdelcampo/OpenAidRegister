@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>openAid</title>
+
+  <%= stylesheet_link_tag "new-reset" %>
+  <%= stylesheet_link_tag "new-layout" %>
+  <%= stylesheet_link_tag "new-style" %>
+  <%= stylesheet_link_tag "jquery-ui-1.8.16.custom" %>
+  <%= stylesheet_link_tag "jquery.msg" %>
+  <%= stylesheet_link_tag "leaflet" %>
+<!--[if lte IE 8]><link rel="stylesheet" href="/stylesheets/leaflet.ie.css" /><![endif]-->
+
+  <script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>
+  <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
+  <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js" %>
+  <%= javascript_include_tag "http://www.google.com/jsapi" %>
+  <%= javascript_include_tag "rails" %>
+
+  <%= javascript_include_tag "leaflet/leaflet-src" %>
+  <%= javascript_include_tag "wax/wax.leaf.min" %>
+
+  <%= javascript_include_tag "jquery.center" %>
+  <%= javascript_include_tag "jquery.msg" %>
+  <%= javascript_include_tag "cufon-yui.js" %>
+  <%= javascript_include_tag "Helvetica_Neue_700-Helvetica_Neue_300-Helvetica_Neue_400.font" %>
+
+  <% if controller.action_name != 'browser_not_supported' %>
+    <%= javascript_include_tag "application" %>
+  <% end %>
+
+  <%= yield :head %>
+
+  <meta name="description" content="Open Aid Register is an initiative to speed up getting the global picture of who is doing what, where in terms of aid." />
+
+  <%= csrf_meta_tag %>
+
+
+  <script type="text/javascript">
+    Cufon.replace(['.main_secondary_headline p, #main_content .top_content ul li span' ], {fontFamily: 'Helvetica Neue Light',hover: true});
+    Cufon.replace(['#header ul li a, #header ul li, .body_top .body_top_lf h3, .box_list ul li h4, .box_list ul li .date_sec ul li span' ], {fontFamily: 'Helvetica Neue Bold',hover: true});
+    Cufon.replace('#body_container h3.muted, .box_list ul li h4', { fontFamily: 'Helvetica Neue Bold',hover: true, textShadow: '1px 1px 0px #fff'});
+  </script>
+
+  <!--[if gte IE 9]><script type="text/javascript">Cufon.set('engine', 'canvas');</script><![endif]-->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-25742651-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  <script type="text/javascript">
+    var uvOptions = {};
+    (function() {
+      var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+      uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/d4bC75v92oE9UhqIkqXMbg.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+    })();
+  </script>
+</head>
+
+<body>
+
+  <% if flash[:notice] -%>
+    <div id="notice"><%= simple_format flash[:notice] %></div>
+  <% end -%>
+
+  <% if flash[:alert] -%>
+    <div id="alert"><%= simple_format flash[:alert] %></div>
+  <% end -%>
+
+  <div id="outer_wrapper_1"><div id="outer_wrapper_2">
+    <div id="header" class="container_24">
+
+      <div class="grid_12">
+        <ul id="primary_nav">
+          <li class="first"><a href="/">HOME</a></li>
+          <li><a href="/login">LOGIN</a></li>
+          <!--li><a href="#">WHO IS ALREADY USING IT</a></li -->
+          <li><a href="http://blog.openaidregister.org">BLOG</a></li>
+          <li><a href="/organizations">ORGANIZATIONS</a></li>
+          <li class="last"><a href="/about">ABOUT</a></li>
+        </ul>
+      </div>
+
+      <div class="grid_12">
+        <ul id="secondary_nav">
+          <% if session[:organization] %>
+            <li class="last_right"><a href="/logout">(close session)</a></li>
+            <li class="first_right">
+              <a href="/account"><%= session[:organization][:email] %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div><!-- top_nav -->
+      <div class="clear"></div>
+    </div><!-- header -->
+
+
+    <div id="main_content" class="container_24">
+        <%= yield %>
+    </div>
+
+  </div></div><!-- outer_wrapper_1 & outer_wrapper_2 -->
+
+  <div id="footer_wrapper">
+    <div id="footer" class="container_24">
+
+        <div class="grid_15 suffix_1" id="footer_left">
+          <p>Open Aid Register is an initiative to speed up the process of making aid data open. It is part of the global effort to understand who is doing what and where, in terms of aid. <a href="/about">Learn more about this here</a>
+          </p>
+          <ul>
+            <li class="first"><a href="mailto:contact@openaidregister.org">Contact</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/conditions">Terms and conditions</a></li>
+          </ul>
+        </div>
+
+        <div class="grid_8" id="footer_right">
+          <span class="newyork_logo">
+            <a href="http://www.nyls.edu">
+              <img src="/images/newyork_school.gif" alt=""/>
+            </a>
+          </span>
+          <span class="international">
+            <a href="http://www.iatistandard.org">
+              <img src="/images/international_logo.gif" alt=""/>
+            </a>
+          </span>
+        </div><!-- grid_8 -->
+      </div><!-- grid_16 -->
+
+    </div><!-- footer container_24 -->
+  </div><!-- footer_wrapper -->
+  <script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

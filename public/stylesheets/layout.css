@@ -1,3 +1,6 @@
+body {
+  min-width: 1100px;
+}
 #notice, #alert{ display: none; }
 
 #outer_layout{ float:left; width:100%; background:url(../images/header_bg01.jpg) repeat-x 0 0}
