@@ -1,16 +1,19 @@
 
 $(document).ready(function() {
-	var counter = true
+	
+	var refreshId = setInterval( showItems, 5000);
+    
+	var counter = 0,
+        divs = $('#body_container #info_item_1, #body_container #info_item_2, #body_container #info_item_3');
 
-	var refreshId = setInterval(function(){
-		if (counter){
-		  $("#body_container #info_item_1").hide();
-		  $("#body_container #info_item_2").show();
-		}else{
-		  $("#body_container #info_item_2").hide();
-		  $("#body_container #info_item_1").show();
-		}
-		counter = !counter
-	}, 6000);
+    function showItems () {
+        divs.hide() // hide all divs
+            .filter(function (index) { return index == counter % 3; }) // figure out correct div to show
+            .show(); // and show it
+
+        counter++;
+    }; // function to loop through divs and show correct div
+ 
+
 
 });
