@@ -14,6 +14,7 @@ $(document).ready(function(){
 //----------------------------------------------------------------------
 
 function initMap(){
+
 	map = new L.Map('map_canvas').setView(new L.LatLng(33, 0), 1);
 	
 	OARIcon = L.Icon.extend({
@@ -35,6 +36,7 @@ function initMap(){
 			parseWkt(project);
 		}
 	});
+
 
 /*	var latlng = new google.maps.LatLng(14.5, 15.5);
 	var myOptions = {
@@ -60,7 +62,6 @@ function initMap(){
 	} else {
 	  map.fitBounds(map_bounds);
 	}*/
-
 
 }
 
